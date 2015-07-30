@@ -1,0 +1,1356 @@
+git clone https://github.com/lighttpd/lighttpd1.4.git
+
+git clone https://github.com/lighttpd/lighttpd2.git
+
+
+-- OVERFLOWS
+
+d793237e3664d1ae17c059265ff7a58cb68c0bae : Stefan Bühler <stbuehler@web.de> : Fri Apr 24 19
+commit d793237e3664d1ae17c059265ff7a58cb68c0bae
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Apr 24 19:22:16 2009 +0000
+
+    Fix bug with FastCGI request id overflow under high load; just use always id 1 as we don't use multiplexing. (thx jgray)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2477 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e7b0528e9eba33bed1e9963a8507bf45ec6c1eba : Stefan Bühler <stbuehler@web.de> : Fri Apr 24 19
+commit e7b0528e9eba33bed1e9963a8507bf45ec6c1eba
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Apr 24 19:22:16 2009 +0000
+
+    Fix bug with FastCGI request id overflow under high load; just use always id 1 as we don't use multiplexing. (thx jgray)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2477 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+22a8f934defc664ad65b6b765a1f56354b0ab8a0 : Jan Kneschke <jan@kneschke.de> : Sat Aug 18 09
+commit 22a8f934defc664ad65b6b765a1f56354b0ab8a0
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Aug 18 09:44:08 2007 +0000
+
+    fixed possible overflow in unix-socket path checks on BSD (#713)
+    
+    - use sizeof(sun_path) instead of UNIX_PATH_MAX which might not be
+      defined
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1944 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c4e3150283f81fc4a87c600f2d19634c39934a7b : Jan Kneschke <jan@kneschke.de> : Sat Aug 18 09
+commit c4e3150283f81fc4a87c600f2d19634c39934a7b
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Aug 18 09:44:08 2007 +0000
+
+    fixed possible overflow in unix-socket path checks on BSD (#713)
+    
+    - use sizeof(sun_path) instead of UNIX_PATH_MAX which might not be
+      defined
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1944 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+657f796b87e256cdff095c8631cbd7a4e32a8d8e : Jan Kneschke <jan@kneschke.de> : Mon Nov 21 15
+commit 657f796b87e256cdff095c8631cbd7a4e32a8d8e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Nov 21 15:04:28 2005 +0000
+
+    fixed possible overflow in password-salt handling
+    (reported on slashdot by james-web@and.org)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@871 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+ad7d85b7f56cbf059d884df6c63b10d993d12dd9 : Jan Kneschke <jan@kneschke.de> : Mon Nov 21 15
+commit ad7d85b7f56cbf059d884df6c63b10d993d12dd9
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Nov 21 15:04:28 2005 +0000
+
+    fixed possible overflow in password-salt handling
+    (reported on slashdot by james-web@and.org)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@871 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+-- UNINIT VARS
+
+def17b2925f5e8db74a7dbd93448726adac41e0c : Stefan Bühler <stbuehler@web.de> : Sun Jul 19 10
+commit def17b2925f5e8db74a7dbd93448726adac41e0c
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 19 10:03:12 2015 +0000
+
+    [configfile] fix reading uninitialized variable (found by Willian B.)
+    
+    - stream_open()-ing an empty file shouldn't return an error (and didn't on my
+      system)
+    - don't try to handle empty file as non-error in config_parse_file;
+      this fixes the read of an potentially unitialized variable
+    - stream_open()-ing an empty file doesn't try to map the file anymore
+      and should not result in any errors; return an empty stream instead.
+    - stream_open(): make sure the returned stream is always initialized
+      correctly, and can always be used with stream_close(), whether opening
+      was successful or not
+    - stream_close(): also reset the size member
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@3003 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+807e907008bbda94121c7ba62aa037cf4dafcd47 : Stefan Bühler <stbuehler@web.de> : Sun Jul 27 15
+commit 807e907008bbda94121c7ba62aa037cf4dafcd47
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 27 15:04:02 2008 +0000
+
+    Fix lemon "uninitialized" warning by making variable global.
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2205 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+bac9212c8fba39295dd7460986da252eb695d2cc : Jan Kneschke <jan@kneschke.de> : Tue Aug 16 13
+commit bac9212c8fba39295dd7460986da252eb695d2cc
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Aug 16 13:07:46 2005 +0000
+
+    fixed possible uninit variables of the config-parser fails (merged [183])
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@551 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6fa6969b21866551d4c5354b236579d0ed6049d8 : Jan Kneschke <jan@kneschke.de> : Tue Aug 16 13
+commit 6fa6969b21866551d4c5354b236579d0ed6049d8
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Aug 16 13:07:46 2005 +0000
+
+    fixed possible uninit variables of the config-parser fails (merged [183])
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@551 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a27f30b19c2d2b593f5a58bdb6228111ece82260 : Jan Kneschke <jan@kneschke.de> : Sat Mar 19 00
+commit a27f30b19c2d2b593f5a58bdb6228111ece82260
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Mar 19 00:09:41 2005 +0000
+
+    fixed possible uninit variables of the config-parser fails
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@183 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+--SEGFAULTS
+
+2bd89370fcefdb509bad729a4a26074841528360 : Stefan Bühler <stbuehler@web.de> : Sun Jul 5 22
+commit 2bd89370fcefdb509bad729a4a26074841528360
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 5 22:00:17 2015 +0000
+
+    fix segfault when temp file for upload couldn't be created (found by coverity)
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2999 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c5737093db9e7d8db75c7d6b32ae4c3886b7903a : Stefan Bühler <stbuehler@web.de> : Sun Jul 5 22
+commit c5737093db9e7d8db75c7d6b32ae4c3886b7903a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 5 22:00:14 2015 +0000
+
+    [mod_magnet] fix segfault when accessing not existing lighty.req_env[] entry (found by coverity)
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2998 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+33cebeb0f778d437e1a6070504f588b2531fa291 : Stefan Bühler <stbuehler@web.de> : Thu May 14 09
+commit 33cebeb0f778d437e1a6070504f588b2531fa291
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Thu May 14 09:38:33 2015 +0000
+
+    fix segfaults in many plugins if they failed configuration
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2988 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+d194c09da94e310a3ca6659367ffe468303135d5 : Stefan Bühler <stbuehler@web.de> : Fri Dec 23 10
+commit d194c09da94e310a3ca6659367ffe468303135d5
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Dec 23 10:31:57 2011 +0000
+
+    [ssl] fix segfault in counting renegotiations for openssl versions without TLSEXT/SNI
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2822 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7bdb75fb476238d401ddfdb25b7d0a10029f3059 : Stefan Bühler <stbuehler@web.de> : Tue Dec 6 20
+commit 7bdb75fb476238d401ddfdb25b7d0a10029f3059
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Dec 6 20:03:42 2011 +0000
+
+    [ssl] fix segfault on "ssl.honor-cipher-order" option while parsing the config
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2815 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+42ad681f668fb3a70e92478492894b7f3b0e3592 : Stefan Bühler <stbuehler@web.de> : Sun Aug 22 11
+commit 42ad681f668fb3a70e92478492894b7f3b0e3592
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Aug 22 11:44:49 2010 +0000
+
+    Add ticket number in NEWS for segfault fix
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2767 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+494ce8e3b03124b4c9fe445464edab15250141f3 : Stefan Bühler <stbuehler@web.de> : Wed Apr 28 13
+commit 494ce8e3b03124b4c9fe445464edab15250141f3
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Apr 28 13:35:25 2010 +0000
+
+    [mod_compress] Fix segfault when etags are disabled (fixes #2169)
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2723 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+f2cd823b40db351e3d9371e8665e2c19b534072a : Stefan Bühler <stbuehler@web.de> : Sat Jan 30 21
+commit f2cd823b40db351e3d9371e8665e2c19b534072a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Jan 30 21:23:29 2010 +0000
+
+    Fix segfault with broken rewrite/redirect patterns (fixes #2140, found by crypt)
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2707 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+0c12e03aaf56d76a1f5b46ca5120289d10fa9251 : Stefan Bühler <stbuehler@web.de> : Fri Oct 16 18
+commit 0c12e03aaf56d76a1f5b46ca5120289d10fa9251
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Oct 16 18:56:04 2009 +0000
+
+    Fix accesslog escape segfault (#1551)
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2664 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6ecb86159c63796a9263b2c7bb336dd03198d0b6 : Stefan Bühler <stbuehler@web.de> : Fri Oct 16 18
+commit 6ecb86159c63796a9263b2c7bb336dd03198d0b6
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Oct 16 18:56:04 2009 +0000
+
+    Fix accesslog escape segfault (#1551)
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2664 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+454243c7eb52ec9dc18af766fdfe2f1f793581c6 : Stefan Bühler <stbuehler@web.de> : Fri Oct 16 18
+commit 454243c7eb52ec9dc18af766fdfe2f1f793581c6
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Oct 16 18:54:02 2009 +0000
+
+    Fix accesslog escape segfault (#1551)
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2662 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7f2d4224066176c2a2e78926116eff701cfe6b39 : Stefan Bühler <stbuehler@web.de> : Mon Oct 12 08
+commit 7f2d4224066176c2a2e78926116eff701cfe6b39
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Mon Oct 12 08:48:08 2009 +0000
+
+    Fix segfault on invalid config "duplicate else conditions" (fixes #2065)
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2640 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+0bd06a962901576fe8ab21dc50fb06d01c0195ec : Stefan Bühler <stbuehler@web.de> : Mon Oct 12 08
+commit 0bd06a962901576fe8ab21dc50fb06d01c0195ec
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Mon Oct 12 08:48:08 2009 +0000
+
+    Fix segfault on invalid config "duplicate else conditions" (fixes #2065)
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2640 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+06fe39a851ca55e5fd42f7fb6b5759216d9f3ef9 : Stefan Bühler <stbuehler@web.de> : Wed Jun 17 10
+commit 06fe39a851ca55e5fd42f7fb6b5759216d9f3ef9
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Jun 17 10:03:13 2009 +0000
+
+    Fix segfault if there is no mimetype for the error documents
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2541 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a19e02bd159346e513087a11265a8031d7263105 : Stefan Bühler <stbuehler@web.de> : Wed Jun 10 14
+commit a19e02bd159346e513087a11265a8031d7263105
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Jun 10 14:32:46 2009 +0000
+
+    Fix segfault in mod_expire after failed config parsing (fixes #1992)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2518 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+ea260808d08ccf9b71087509794e40c81692b8c5 : Stefan Bühler <stbuehler@web.de> : Wed Jun 10 14
+commit ea260808d08ccf9b71087509794e40c81692b8c5
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Jun 10 14:31:06 2009 +0000
+
+    Fix segfault in mod_expire after failed config parsing (fixes #1992)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2517 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+2f4120b37babb453c4f412388f96436ce071647a : Stefan Bühler <stbuehler@web.de> : Wed Jun 10 14
+commit 2f4120b37babb453c4f412388f96436ce071647a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Jun 10 14:31:06 2009 +0000
+
+    Fix segfault in mod_expire after failed config parsing (fixes #1992)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2517 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+da9b0635d19fa7ba30100099873ef1be45da2822 : Stefan Bühler <stbuehler@web.de> : Wed Jun 10 06
+commit da9b0635d19fa7ba30100099873ef1be45da2822
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Jun 10 06:28:37 2009 +0000
+
+    Fix segfault with openssl (DoS, fixes #2003)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2513 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+272abd84dbd160e494d4f9e9f22c5f0c2ce7dcf6 : Stefan Bühler <stbuehler@web.de> : Sat Apr 18 20
+commit 272abd84dbd160e494d4f9e9f22c5f0c2ce7dcf6
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Apr 18 20:55:22 2009 +0000
+
+    merge: Fix segfault for appending matched parts if there was no regex matching (just give empty strings) (#1601)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2476 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e7db8beefc001bfd620cde7264c2f5b4c82c5e05 : Stefan Bühler <stbuehler@web.de> : Thu Apr 9 21
+commit e7db8beefc001bfd620cde7264c2f5b4c82c5e05
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Thu Apr 9 21:10:29 2009 +0000
+
+    merge: Fix segfault if siginfo_t* is NULL in sigaction handler (#1926)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2456 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+2fe3de8e5b085be2e2e0df614c5d3f78798aa6da : Stefan Bühler <stbuehler@web.de> : Thu Apr 9 19
+commit 2fe3de8e5b085be2e2e0df614c5d3f78798aa6da
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Thu Apr 9 19:41:51 2009 +0000
+
+    Fix segfault in mod_proxy_backend_http (fixes #1154)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2443 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+ed4c3115cfd524cc1b2d523e4458edc843ff495e : Stefan Bühler <stbuehler@web.de> : Sat Mar 7 13
+commit ed4c3115cfd524cc1b2d523e4458edc843ff495e
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Mar 7 13:58:25 2009 +0000
+
+    Fix segfault if siginfo_t* is NULL in sigaction handler (fixes #1926)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2409 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+4533af76682ac7c136e6ddd294365038a5f5449c : Stefan Bühler <stbuehler@web.de> : Sat Mar 7 13
+commit 4533af76682ac7c136e6ddd294365038a5f5449c
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Mar 7 13:58:25 2009 +0000
+
+    Fix segfault if siginfo_t* is NULL in sigaction handler (fixes #1926)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2409 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+67ef3719fecc6102fe346d8cf31a5d69083f053b : Stefan Bühler <stbuehler@web.de> : Sat Feb 28 20
+commit 67ef3719fecc6102fe346d8cf31a5d69083f053b
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Feb 28 20:54:10 2009 +0000
+
+    Fix segfault in mod_scgi (fixes #1911)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2404 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a7ecb6b93a26256fffe1dce5e3a7b5a5d9220187 : Stefan Bühler <stbuehler@web.de> : Sat Feb 28 20
+commit a7ecb6b93a26256fffe1dce5e3a7b5a5d9220187
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Feb 28 20:54:10 2009 +0000
+
+    Fix segfault in mod_scgi (fixes #1911)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2404 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+48894ebc3daa0371a48a75b7ee3a8ef5533ef005 : Stefan Bühler <stbuehler@web.de> : Tue Sep 30 14
+commit 48894ebc3daa0371a48a75b7ee3a8ef5533ef005
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Sep 30 14:20:59 2008 +0000
+
+    Fix mod_cgi segfault when bound to unix domain socket (#653)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2316 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+90bfe20bf5f2ff19bcf3d3237098a57e51620647 : Stefan Bühler <stbuehler@web.de> : Tue Sep 30 14
+commit 90bfe20bf5f2ff19bcf3d3237098a57e51620647
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Sep 30 14:20:59 2008 +0000
+
+    Fix mod_cgi segfault when bound to unix domain socket (#653)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2316 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c22cd136c5af59208deb8c6f3131c587705aaacc : Stefan Bühler <stbuehler@web.de> : Wed Aug 27 15
+commit c22cd136c5af59208deb8c6f3131c587705aaacc
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Aug 27 15:59:50 2008 +0000
+
+    fix segfault for stat_cache(fam) calls with relative path (without '/', can be triggered by x-sendfile) (#1750)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2299 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7a64f2f888c9e36f95ac032cfa6c9e488fdaf11a : Stefan Bühler <stbuehler@web.de> : Wed Aug 27 15
+commit 7a64f2f888c9e36f95ac032cfa6c9e488fdaf11a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Aug 27 15:59:50 2008 +0000
+
+    fix segfault for stat_cache(fam) calls with relative path (without '/', can be triggered by x-sendfile) (#1750)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2299 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+262a97ec9b25a309cb13c759f6704d50edfbcdf4 : Stefan Bühler <stbuehler@web.de> : Wed Mar 26 14
+commit 262a97ec9b25a309cb13c759f6704d50edfbcdf4
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Mar 26 14:23:05 2008 +0000
+
+    Fix segfault for appending matched parts if there was no regex matching (just give empty strings) (#1601)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2138 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+2cf3927ef526ebf35426fededfbfa427e3b73be6 : Stefan Bühler <stbuehler@web.de> : Wed Mar 26 14
+commit 2cf3927ef526ebf35426fededfbfa427e3b73be6
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Mar 26 14:23:05 2008 +0000
+
+    Fix segfault for appending matched parts if there was no regex matching (just give empty strings) (#1601)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2138 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+ffabce17b8e237e7f2860eb2bb3a6a70d0376a7d : Jan Kneschke <jan@kneschke.de> : Tue Nov 14 08
+commit ffabce17b8e237e7f2860eb2bb3a6a70d0376a7d
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Nov 14 08:45:55 2006 +0000
+
+    fixed possible seg-fault
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1436 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7d2dd4e68b7fe2524f0af7ba9b0f2ea5c4803cf5 : Jan Kneschke <jan@kneschke.de> : Wed Sep 20 14
+commit 7d2dd4e68b7fe2524f0af7ba9b0f2ea5c4803cf5
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 20 14:40:28 2006 +0000
+
+    reverted [1312] as it led to seg-faults
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.11-ssl-fixes@1319 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a34a3ae17360b6baa88d5c386cc066e0c1f33309 : Jan Kneschke <jan@kneschke.de> : Wed Sep 20 14
+commit a34a3ae17360b6baa88d5c386cc066e0c1f33309
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 20 14:40:28 2006 +0000
+
+    reverted [1312] as it led to seg-faults
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.11-ssl-fixes@1319 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6a0b737789132617ee46dd35e0dace3e5a0cfc6e : Jan Kneschke <jan@kneschke.de> : Thu Sep 29 13
+commit 6a0b737789132617ee46dd35e0dace3e5a0cfc6e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Thu Sep 29 13:04:20 2005 +0000
+
+    ported to request_content_queue and fixed segfault of sqlite is compiled in but not used
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@750 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7f28c66f2f5b09302d9e0805c67c1b5da9b2ce3f : Jan Kneschke <jan@kneschke.de> : Thu Sep 29 13
+commit 7f28c66f2f5b09302d9e0805c67c1b5da9b2ce3f
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Thu Sep 29 13:04:20 2005 +0000
+
+    ported to request_content_queue and fixed segfault of sqlite is compiled in but not used
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@750 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+eacec21ab550dd449787e1578a4d4315214192b5 : Jan Kneschke <jan@kneschke.de> : Wed Sep 21 16
+commit eacec21ab550dd449787e1578a4d4315214192b5
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 21 16:50:27 2005 +0000
+
+    replace i by j to fix a segfault in the error-msg and improved the error-msg (fixed #281)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@724 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+d2ce40f80b50f39d4e84c58d8ed1ef87e0762e1e : Jan Kneschke <jan@kneschke.de> : Wed Sep 21 16
+commit d2ce40f80b50f39d4e84c58d8ed1ef87e0762e1e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 21 16:50:27 2005 +0000
+
+    replace i by j to fix a segfault in the error-msg and improved the error-msg (fixed #281)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@724 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+09a26806f421226478b5f2b85d0bdda83411e726 : Jan Kneschke <jan@kneschke.de> : Wed Sep 21 11
+commit 09a26806f421226478b5f2b85d0bdda83411e726
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 21 11:14:42 2005 +0000
+
+    fixed segfault if no global mysql-vhost-config was set (fixes #268)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@722 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c93f7b6b02edf19c33a5ef443e5d7af61205c43c : Jan Kneschke <jan@kneschke.de> : Wed Sep 21 11
+commit c93f7b6b02edf19c33a5ef443e5d7af61205c43c
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Sep 21 11:14:42 2005 +0000
+
+    fixed segfault if no global mysql-vhost-config was set (fixes #268)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@722 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+326fa408752cccdd75305929ee12f2740ddd52f8 : Jan Kneschke <jan@kneschke.de> : Fri Sep 2 17
+commit 326fa408752cccdd75305929ee12f2740ddd52f8
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Fri Sep 2 17:07:00 2005 +0000
+
+    compail about the right plugin and don't segfault
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@680 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7ec76e9a835b33cc41488740d7fe3877eeb064b2 : Jan Kneschke <jan@kneschke.de> : Fri Sep 2 17
+commit 7ec76e9a835b33cc41488740d7fe3877eeb064b2
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Fri Sep 2 17:07:00 2005 +0000
+
+    compail about the right plugin and don't segfault
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@680 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+718e97b68bcafa27c1884c3defb7bbf2ee3264cf : Jan Kneschke <jan@kneschke.de> : Tue Aug 16 14
+commit 718e97b68bcafa27c1884c3defb7bbf2ee3264cf
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Aug 16 14:22:03 2005 +0000
+
+    don't segfault on stat-failed
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@552 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+5ea268ac94483f1ef89f2195cf89c208f91c13eb : Jan Kneschke <jan@kneschke.de> : Tue Aug 16 14
+commit 5ea268ac94483f1ef89f2195cf89c208f91c13eb
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Aug 16 14:22:03 2005 +0000
+
+    don't segfault on stat-failed
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@552 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7e71b5c8802d591e2f4a4929f00e60d530302a2e : Jan Kneschke <jan@kneschke.de> : Mon Aug 15 09
+commit 7e71b5c8802d591e2f4a4929f00e60d530302a2e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Aug 15 09:50:43 2005 +0000
+
+    don't segfault on configfile error
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@538 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+263d0a5c45320dceedabdbd010b94cf9241f4fd6 : Jan Kneschke <jan@kneschke.de> : Mon Aug 15 09
+commit 263d0a5c45320dceedabdbd010b94cf9241f4fd6
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Aug 15 09:50:43 2005 +0000
+
+    don't segfault on configfile error
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@538 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6d60bcb0400d5952719782cba88b0462adf4cc17 : Jan Kneschke <jan@kneschke.de> : Thu Jul 7 22
+commit 6d60bcb0400d5952719782cba88b0462adf4cc17
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Thu Jul 7 22:39:14 2005 +0000
+
+    use log_* functions for debugging and don't segfault on evaluation
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@428 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7fd68f3c1fbef54bd048361be7c6f05b93503a4b : Jan Kneschke <jan@kneschke.de> : Thu Jul 7 22
+commit 7fd68f3c1fbef54bd048361be7c6f05b93503a4b
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Thu Jul 7 22:39:14 2005 +0000
+
+    use log_* functions for debugging and don't segfault on evaluation
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@428 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+288b0b51e7cb9f68d3c20605b2a05978fe42dee2 : Jan Kneschke <jan@kneschke.de> : Wed Jun 29 15
+commit 288b0b51e7cb9f68d3c20605b2a05978fe42dee2
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jun 29 15:31:54 2005 +0000
+
+    removed segfault if parsing config fails
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@413 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+09487b571155b8eeddf715971855b83441843c6f : Jan Kneschke <jan@kneschke.de> : Wed Jun 29 15
+commit 09487b571155b8eeddf715971855b83441843c6f
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jun 29 15:31:54 2005 +0000
+
+    removed segfault if parsing config fails
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@413 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+ba95434c94a0722f08e372638080148e04694a7e : Jan Kneschke <jan@kneschke.de> : Mon Jun 27 19
+commit ba95434c94a0722f08e372638080148e04694a7e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Jun 27 19:34:18 2005 +0000
+
+    merged [410], don't segfault in error-msg if syslog() should be used
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@411 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+cdffac9fa6561848c84165c7e37b5c8eb587ab92 : Jan Kneschke <jan@kneschke.de> : Mon Jun 27 19
+commit cdffac9fa6561848c84165c7e37b5c8eb587ab92
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Jun 27 19:25:55 2005 +0000
+
+    fixed segfaults in error-msgs if syslog() is failing
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@410 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+878705f84dc45e532829956427f5b8548940b697 : Jan Kneschke <jan@kneschke.de> : Mon Jun 27 19
+commit 878705f84dc45e532829956427f5b8548940b697
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Jun 27 19:25:55 2005 +0000
+
+    fixed segfaults in error-msgs if syslog() is failing
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@410 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+01afa1ca5be15711891d6a1593c95dc1ed3cadfe : Jan Kneschke <jan@kneschke.de> : Wed Jun 15 09
+commit 01afa1ca5be15711891d6a1593c95dc1ed3cadfe
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jun 15 09:27:04 2005 +0000
+
+    don't segfault on cleanup if the startup failed
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@384 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+69a1bc0d629c19692c504380c564334d26bf146b : Jan Kneschke <jan@kneschke.de> : Wed Jun 15 09
+commit 69a1bc0d629c19692c504380c564334d26bf146b
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jun 15 09:27:04 2005 +0000
+
+    don't segfault on cleanup if the startup failed
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.3.x@384 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+f523ed0aa4a130ec54364ae592b7b56fcffe2801 : Jan Kneschke <jan@kneschke.de> : Sat Apr 2 13
+commit f523ed0aa4a130ec54364ae592b7b56fcffe2801
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Apr 2 13:35:25 2005 +0000
+
+    if the startup fails don't segfault on cleanup
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@247 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a32bbafa9dec767093457dfead1e82fc8048dedc : Jan Kneschke <jan@kneschke.de> : Fri Mar 25 16
+commit a32bbafa9dec767093457dfead1e82fc8048dedc
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Fri Mar 25 16:57:47 2005 +0000
+
+    added a mtime_ts cache and don't segfault if fce is empty in fce_release_entry
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@200 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+25d4c43bdca0aa89b91be65e312913d13face599 : Jan Kneschke <jan@kneschke.de> : Wed Mar 9 16
+commit 25d4c43bdca0aa89b91be65e312913d13face599
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Mar 9 16:35:35 2005 +0000
+
+    fixed segfault in cleanup if mod_proxy is loaded but not used
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@108 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+44997909b1bd8490eda4106fcf247868ec95c485 : Jan Kneschke <jan@kneschke.de> : Tue Feb 22 00
+commit 44997909b1bd8490eda4106fcf247868ec95c485
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Feb 22 00:17:11 2005 +0000
+
+    fix segfault in log_error_write if host is empty
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@38 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+3e88e04e9a5002083b161d094418c8d7bc17f612 : Jan Kneschke <jan@kneschke.de> : Tue Feb 22 00
+commit 3e88e04e9a5002083b161d094418c8d7bc17f612
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Feb 22 00:17:11 2005 +0000
+
+    fix segfault in log_error_write if host is empty
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/trunk@38 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+-- RESOURCE LEAK
+
+fba7dd6f4320701e158e46d2fbbb9eeadb9de33f : Stefan Bühler <stbuehler@web.de> : Fri Feb 14 21
+commit fba7dd6f4320701e158e46d2fbbb9eeadb9de33f
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Feb 14 21:06:19 2014 +0000
+
+    fix resource leaks in error cases on config parsing and other initializations
+    
+      None of this matters - lighttpd will terminate anyway. Still helps the
+      code to get cleaner, and makes reviewing output of static analyzers
+      easier.
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2947 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+b461e031f54db7541b2f5095f2b6adabe83dab12 : Stefan Bühler <stbuehler@web.de> : Fri Feb 14 21
+commit b461e031f54db7541b2f5095f2b6adabe83dab12
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Feb 14 21:06:07 2014 +0000
+
+    [mod_fastcgi,mod_scgi] fix resource leaks on spawning backends
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2942 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+-- MEM LEAK
+
+c31bf21f972f50dc7cc1f3fe265af9f7e22de9db : Stefan Bühler <stbuehler@web.de> : Sun Jul 5 21
+commit c31bf21f972f50dc7cc1f3fe265af9f7e22de9db
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 5 21:34:07 2015 +0000
+
+    fix memory leak in mod_status when no counters are set (found by coverity)
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2996 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+b239e7734a456aa527172bf7d8755b7dad1247e4 : Stefan Bühler <stbuehler@web.de> : Fri Feb 14 21
+commit b239e7734a456aa527172bf7d8755b7dad1247e4
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Feb 14 21:06:10 2014 +0000
+
+    [mod_magnet] fix memory leak
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2943 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+d59c910d6aac53b819143e1d8c5b0576e8317ddb : Stefan Bühler <stbuehler@web.de> : Fri Feb 14 21
+commit d59c910d6aac53b819143e1d8c5b0576e8317ddb
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Feb 14 21:06:05 2014 +0000
+
+    [mod_dirlisting] fix memory leak if pcre fails
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2941 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+657566828ee5879d3fa77d4c076b98ffa8b508e6 : Stefan Bühler <stbuehler@web.de> : Fri Jan 10 12
+commit 657566828ee5879d3fa77d4c076b98ffa8b508e6
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Jan 10 12:05:04 2014 +0000
+
+    [mod_mysql_vhost] fix memory leak on config init (#2530)
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2929 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6f208cfde145fa392add2fd97cfe3b2152d279b0 : Stefan Bühler <stbuehler@web.de> : Wed Nov 13 11
+commit 6f208cfde145fa392add2fd97cfe3b2152d279b0
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Wed Nov 13 11:43:26 2013 +0000
+
+    fix/silence bugs reported by ccc-analyzer (clang)
+    
+    These should all be non critical:
+     * memory leaks on startup in error cases (which lead to
+       immediate shutdowns anyway)
+     * http_auth/ldap: passing uninitialized "ret" to ldap_err2string
+     * sizeof(T) not matching the target pointer in malloc/calloc calls;
+       those cases were either:
+       * T being the wrong pointer type - shouldn't matter as long as all
+         pointers have same size
+       * T being larger than the type needed
+     * mod_accesslog: direct use after free in cleanup (server shutdown);
+       could crash before "clean" shutdown
+     * some false positives (mod_compress, mod_expire)
+     * assert(srv->config_context->used > 0); - this is always the case,
+       as there is always a global config block
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2920 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+33ed0420a9305daa391d00fdffdc95d6c5aea7ad : Stefan Bühler <stbuehler@web.de> : Fri Sep 13 11
+commit 33ed0420a9305daa391d00fdffdc95d6c5aea7ad
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Sep 13 11:17:47 2013 +0000
+
+    fix memleak in mod_auth (fixes #2457, thx brarcher)
+    
+    From: Stefan Bühler <stbuehler@web.de>
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2904 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c3a9948c75db3ca0899dd3b6c1438647f1d153f7 : Stefan Bühler <stbuehler@web.de> : Fri Nov 9 14
+commit c3a9948c75db3ca0899dd3b6c1438647f1d153f7
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Fri Nov 9 14:23:22 2012 +0000
+
+    network_server_init: fix double free and memleak on error (fixes #2440, thx kyprizel)
+    
+    this is not really critical - lighty will terminate anyway after hitting
+    this, and this is before connections are accepted.
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2855 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+12f375f3b186a6abd38874a96ec0f80fc8e7805b : Stefan Bühler <stbuehler@web.de> : Thu Aug 5 21
+commit 12f375f3b186a6abd38874a96ec0f80fc8e7805b
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Thu Aug 5 21:08:23 2010 +0000
+
+    array.c: improve array_get_unused_element to check data type; fix mem leak if unused_element didn't find a matching entry (fixes #2145)
+    
+     - the "mem leak" could only be triggered if you use different entry
+       types in the same array (this wasn't supported by
+       array_get_unused_element) or didn't call array_get_unused_element
+       before creating new entries.
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2750 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+203775595a73ffa0e96fcf302f8464edeaac877a : Stefan Bühler <stbuehler@web.de> : Sun Aug 30 16
+commit 203775595a73ffa0e96fcf302f8464edeaac877a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Aug 30 16:15:55 2009 +0000
+
+    Fix some mem leaks found by cppcheck
+    
+     * only the one in sys-files.c is "critical" (and only on windows)
+    
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2617 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+b62ead1e21bb9d63e5e9092d2a4796dd2e287850 : Stefan Bühler <stbuehler@web.de> : Sun Oct 26 20
+commit b62ead1e21bb9d63e5e9092d2a4796dd2e287850
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Oct 26 20:28:17 2008 +0000
+
+    Fix memory leak in stat-cache (closes #1693), patch by peto
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2356 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+bb787cee54953913a990471b05bc1230ab5afa58 : Stefan Bühler <stbuehler@web.de> : Sun Sep 21 15
+commit bb787cee54953913a990471b05bc1230ab5afa58
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Sep 21 15:33:52 2008 +0000
+
+    Fix mod_rewrite memleak/endless loop detection (#1775, thx phy - again!)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2306 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c8bce9b4a54a5841721a71889dc3a39bde78f5eb : Stefan Bühler <stbuehler@web.de> : Sun Sep 21 15
+commit c8bce9b4a54a5841721a71889dc3a39bde78f5eb
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Sep 21 15:33:52 2008 +0000
+
+    Fix mod_rewrite memleak/endless loop detection (#1775, thx phy - again!)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2306 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a28f5cf2caef12261beabdd36eeb8d1ac073783e : Stefan Bühler <stbuehler@web.de> : Sat Sep 20 13
+commit a28f5cf2caef12261beabdd36eeb8d1ac073783e
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Sep 20 13:42:14 2008 +0000
+
+    Fix memleak in request header parsing (#1774, thx qhy)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2305 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+3decb2647bebf9df9965c33c9e69eb7705dffe61 : Stefan Bühler <stbuehler@web.de> : Sat Sep 20 13
+commit 3decb2647bebf9df9965c33c9e69eb7705dffe61
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Sep 20 13:42:14 2008 +0000
+
+    Fix memleak in request header parsing (#1774, thx qhy)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2305 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+0b6faef1c73205556abca1e08f2f5a349d6cf441 : Stefan Bühler <stbuehler@web.de> : Tue Aug 19 16
+commit 0b6faef1c73205556abca1e08f2f5a349d6cf441
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Aug 19 16:58:40 2008 +0000
+
+    Fix mem leak in ssi expression parser (#1753), thx Take5k
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2290 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+151e10e65038cd93de1b2d4d2251cf5055f97c4c : Stefan Bühler <stbuehler@web.de> : Tue Aug 19 16
+commit 151e10e65038cd93de1b2d4d2251cf5055f97c4c
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Aug 19 16:42:01 2008 +0000
+
+    Fix mem leak in ssi expression parser (#1753), thx Take5k
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2289 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+438626667ce7bab80445681470aa342018e68d0b : Stefan Bühler <stbuehler@web.de> : Tue Aug 19 16
+commit 438626667ce7bab80445681470aa342018e68d0b
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Aug 19 16:42:01 2008 +0000
+
+    Fix mem leak in ssi expression parser (#1753), thx Take5k
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2289 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e6e51f759a62ac011449c41200dbe62a5c82fc87 : Stefan Bühler <stbuehler@web.de> : Sun Jul 27 21
+commit e6e51f759a62ac011449c41200dbe62a5c82fc87
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sun Jul 27 21:01:36 2008 +0000
+
+    Fix memory leak on windows (#1371)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@2218 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6f7761e1a9ff735f6687bcab1e82a736032b8973 : Stefan Bühler <stbuehler@web.de> : Sat Apr 5 20
+commit 6f7761e1a9ff735f6687bcab1e82a736032b8973
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Apr 5 20:00:21 2008 +0000
+
+    Use data_response_init in mod_fastcgi x-sendfile handling for response.headers, fix a small "memleak" (#1628)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2143 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+bcb3310a62264ce03eb9ff3787ba427c7c48ab6e : Stefan Bühler <stbuehler@web.de> : Sat Apr 5 20
+commit bcb3310a62264ce03eb9ff3787ba427c7c48ab6e
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Sat Apr 5 20:00:21 2008 +0000
+
+    Use data_response_init in mod_fastcgi x-sendfile handling for response.headers, fix a small "memleak" (#1628)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2143 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+1682c1b9241ab0a0428cce227fd541233317502a : Stefan Bühler <stbuehler@web.de> : Tue Feb 26 16
+commit 1682c1b9241ab0a0428cce227fd541233317502a
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Feb 26 16:20:58 2008 +0000
+
+     r2092@chromobil:  stefan | 2008-02-26 17:08:48 +0100
+     Fix #1347: memory leak on windows
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2087 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+03f515165f09b210905125d2ed6eb5e26384cc3e : Stefan Bühler <stbuehler@web.de> : Tue Feb 26 16
+commit 03f515165f09b210905125d2ed6eb5e26384cc3e
+Author: Stefan Bühler <stbuehler@web.de>
+Date:   Tue Feb 26 16:20:58 2008 +0000
+
+     r2092@chromobil:  stefan | 2008-02-26 17:08:48 +0100
+     Fix #1347: memory leak on windows
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@2087 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e0a5a46a60b0a773e80734a7ac433474516def69 : Jan Kneschke <jan@kneschke.de> : Thu Sep 6 21
+commit e0a5a46a60b0a773e80734a7ac433474516def69
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Thu Sep 6 21:41:29 2007 +0000
+
+    merged [1875] from 1.4.x
+    
+      * fixed mem-leak in mod_auth (reported by Stefan Esser)
+      * fixed crash with md5-sess and cnonce not set in mod_auth (reported
+      * by Stefan Esser)
+      * fixed missing check for base64 encoded string in mod_auth and Basic
+      * auth
+        (reported by Stefan Esser)
+      * fixed possible crash in Auth-Digest header parser on trailing WS in
+        mod_auth (reported by Stefan Esser)
+    
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1990 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+9bde799c98b889e9cfbf2b6c92c142a4794037f0 : Jan Kneschke <jan@kneschke.de> : Sun Aug 12 22
+commit 9bde799c98b889e9cfbf2b6c92c142a4794037f0
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sun Aug 12 22:02:07 2007 +0000
+
+    - added parsing of X-Progress-ID=... from the query-string
+    - fixed memory-leak
+    - cleaned up the connection-map
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1896 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+6836f84fc1309f0ab83e3022df0392141f449cd3 : Jan Kneschke <jan@kneschke.de> : Fri Jun 15 16
+commit 6836f84fc1309f0ab83e3022df0392141f449cd3
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Fri Jun 15 16:22:30 2007 +0000
+
+    * fixed mem-leak in mod_auth (reported by Stefan Esser)
+    * fixed crash with md5-sess and cnonce not set in mod_auth (reported
+      by Stefan Esser)
+    * fixed missing check for base64 encoded string in mod_auth and Basic
+      auth (reported by Stefan Esser)
+    * fixed possible crash in Auth-Digest header parser on trailing WS in
+      mod_auth (reported by Stefan Esser)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1875 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+15e260c28b10e7626b460a83711d0957bd98755b : Jan Kneschke <jan@kneschke.de> : Fri Jun 15 16
+commit 15e260c28b10e7626b460a83711d0957bd98755b
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Fri Jun 15 16:22:30 2007 +0000
+
+    * fixed mem-leak in mod_auth (reported by Stefan Esser)
+    * fixed crash with md5-sess and cnonce not set in mod_auth (reported
+      by Stefan Esser)
+    * fixed missing check for base64 encoded string in mod_auth and Basic
+      auth (reported by Stefan Esser)
+    * fixed possible crash in Auth-Digest header parser on trailing WS in
+      mod_auth (reported by Stefan Esser)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1875 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+95cd830990421f023248ce84061da60c285b4315 : Jan Kneschke <jan@kneschke.de> : Tue Apr 17 18
+commit 95cd830990421f023248ce84061da60c285b4315
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Apr 17 18:23:58 2007 +0000
+
+    - handle broken url.rewrite config-options as error
+    - fixed memleak if url.rewrite-repeat is used (fixes #874)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1785 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c2f95da48325f0a1e926291748cc820ccc2d1315 : Jan Kneschke <jan@kneschke.de> : Tue Apr 17 12
+commit c2f95da48325f0a1e926291748cc820ccc2d1315
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Tue Apr 17 12:25:52 2007 +0000
+
+    fixed minor mem-leak before shutdown
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1780 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+8027abd6fa252b03c7f0f6721f115b26c432bc15 : Jan Kneschke <jan@kneschke.de> : Mon Apr 9 16
+commit 8027abd6fa252b03c7f0f6721f115b26c432bc15
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Apr 9 16:58:13 2007 +0000
+
+    fixed small mem-leak if auth failed
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1721 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+c3476ada45eb56e419a6d9d9b646c7bb0e1d97db : Jan Kneschke <jan@kneschke.de> : Mon Apr 9 16
+commit c3476ada45eb56e419a6d9d9b646c7bb0e1d97db
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Apr 9 16:58:13 2007 +0000
+
+    fixed small mem-leak if auth failed
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-1.4.x@1721 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+0f937b4e16ac6664676bb4e8cf6001ac2b012485 : Robert Jakabosky <bobby@neoawareness.com> : Sat Feb 17 02
+commit 0f937b4e16ac6664676bb4e8cf6001ac2b012485
+Author: Robert Jakabosky <bobby@neoawareness.com>
+Date:   Sat Feb 17 02:40:19 2007 +0000
+
+    fixed memory leaks
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@1651 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+8719421392f49acbb0e408f29bc64b6ffef3e193 : Jan Kneschke <jan@kneschke.de> : Sat Mar 4 14
+commit 8719421392f49acbb0e408f29bc64b6ffef3e193
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Mar 4 14:57:35 2006 +0000
+
+    fixed end of life memleaks (fixes #524)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@1020 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+2882cdea8e69938427960f27220c574b7ea2345b : Jan Kneschke <jan@kneschke.de> : Sat Mar 4 14
+commit 2882cdea8e69938427960f27220c574b7ea2345b
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Mar 4 14:57:35 2006 +0000
+
+    fixed end of life memleaks (fixes #524)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@1020 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e0642ec7d3f871d6f8ea2113abdf2a1b57c69480 : Jan Kneschke <jan@kneschke.de> : Wed Jan 11 10
+commit e0642ec7d3f871d6f8ea2113abdf2a1b57c69480
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jan 11 10:18:30 2006 +0000
+
+    fixed mem-leak (fixes #450)
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@934 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+fc813b7d35f31dcf3ed3dc9446c5225c9faf8efd : Jan Kneschke <jan@kneschke.de> : Wed Jan 11 10
+commit fc813b7d35f31dcf3ed3dc9446c5225c9faf8efd
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Wed Jan 11 10:18:30 2006 +0000
+
+    fixed mem-leak (fixes #450)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@934 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a3e25bf8ed4cfa496ac8839ab932bd38abbfec3e : Jan Kneschke <jan@kneschke.de> : Mon Aug 29 10
+commit a3e25bf8ed4cfa496ac8839ab932bd38abbfec3e
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Aug 29 10:43:29 2005 +0000
+
+    closed memleaks at shutdown
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@636 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+3ef91ffe8b760ef27aa5bbf388daa6a8da1cca59 : Jan Kneschke <jan@kneschke.de> : Mon Aug 29 10
+commit 3ef91ffe8b760ef27aa5bbf388daa6a8da1cca59
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Aug 29 10:43:29 2005 +0000
+
+    closed memleaks at shutdown
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@636 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e2fc3e86d0f87d8ed33017d4c42e3e233df17384 : Jan Kneschke <jan@kneschke.de> : Sat Aug 27 14
+commit e2fc3e86d0f87d8ed33017d4c42e3e233df17384
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Aug 27 14:34:40 2005 +0000
+
+    closed mem-leaks on shutdown
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@628 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+e41c5fe1ae4f59f3f849c36e98dcd59e0b46f948 : Jan Kneschke <jan@kneschke.de> : Sat Aug 27 14
+commit e41c5fe1ae4f59f3f849c36e98dcd59e0b46f948
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Sat Aug 27 14:34:40 2005 +0000
+
+    closed mem-leaks on shutdown
+    
+    
+    git-svn-id: svn+ssh://svn.lighttpd.net/lighttpd/branches/lighttpd-merge-1.4.x@628 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+a5772f3601f0fd212bd1b5738c06eca891a29cdd : mOo <moo.lighttpd@gmail.com> : Tue May 3 13
+commit a5772f3601f0fd212bd1b5738c06eca891a29cdd
+Author: mOo <moo.lighttpd@gmail.com>
+Date:   Tue May 3 13:14:56 2005 +0000
+
+    fix memory leak for du->copy(du)
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@326 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+7c996c743d87068e5ac711d18e8be5217eb46dc3 : mOo <moo.lighttpd@gmail.com> : Tue May 3 13
+commit 7c996c743d87068e5ac711d18e8be5217eb46dc3
+Author: mOo <moo.lighttpd@gmail.com>
+Date:   Tue May 3 13:13:15 2005 +0000
+
+    fix memleak parsing on config error.
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@325 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+321a453b2976cd6b7e32bdebf6c34851f4cd2497 : Jan Kneschke <jan@kneschke.de> : Mon Mar 28 12
+commit 321a453b2976cd6b7e32bdebf6c34851f4cd2497
+Author: Jan Kneschke <jan@kneschke.de>
+Date:   Mon Mar 28 12:39:16 2005 +0000
+
+    fixed some mem-leaks be shutdown
+    
+    
+    git-svn-id: svn://svn.lighttpd.net/lighttpd/trunk@233 152afb58-edef-0310-8abb-c4023f1b3aa9
+
+
+

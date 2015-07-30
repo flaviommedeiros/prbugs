@@ -1,0 +1,62 @@
+git clone git://git.savannah.gnu.org/gawk.git
+
+-- MEMLEAK
+
+dfc4b219457bc6180abfa7ea8575af3c450c9477 : Andrew J. Schorr <aschorr@telemetry-investments.com> : Fri May 15 09
+commit dfc4b219457bc6180abfa7ea8575af3c450c9477
+Author: Andrew J. Schorr <aschorr@telemetry-investments.com>
+Date:   Fri May 15 09:53:34 2015 -0400
+
+    Fix minor memory leak during creation of PROCINFO["identifiers"] array.
+
+
+54146e27c8fd7756a944d0e168aa969624567b55 : Arnold D. Robbins <arnold@skeeve.com> : Thu Jul 31 19
+commit 54146e27c8fd7756a944d0e168aa969624567b55
+Author: Arnold D. Robbins <arnold@skeeve.com>
+Date:   Thu Jul 31 19:50:06 2014 +0300
+
+    Fix memory leak in do_mpfr_div.
+
+
+7cdd5a510d45228574c34b066b2ddac833fef118 : Arnold D. Robbins <arnold@skeeve.com> : Sun Jun 22 22
+commit 7cdd5a510d45228574c34b066b2ddac833fef118
+Author: Arnold D. Robbins <arnold@skeeve.com>
+Date:   Sun Jun 22 22:06:12 2014 +0300
+
+    Fix memory leak in regcomp.c.
+
+
+12857707435f1d4bf9adf33b6fbfd57ff91529a7 : Arnold D. Robbins <arnold@skeeve.com> : Fri May 9 11
+commit 12857707435f1d4bf9adf33b6fbfd57ff91529a7
+Author: Arnold D. Robbins <arnold@skeeve.com>
+Date:   Fri May 9 11:42:52 2014 +0300
+
+    Fix memory leak in do_eval.
+
+
+577c3fc31a2718461fba2e599d162de96fe838fa : Andrew J. Schorr <aschorr@telemetry-investments.com> : Thu May 24 15
+commit 577c3fc31a2718461fba2e599d162de96fe838fa
+Author: Andrew J. Schorr <aschorr@telemetry-investments.com>
+Date:   Thu May 24 15:34:17 2012 -0400
+
+    First working version of new API mechanism (probably has memory leaks).
+
+
+28436897d3289b4fe1b7e84e63c9cffecfcb17f6 : Arnold D. Robbins <arnold@skeeve.com> : Fri Nov 26 12
+commit 28436897d3289b4fe1b7e84e63c9cffecfcb17f6
+Author: Arnold D. Robbins <arnold@skeeve.com>
+Date:   Fri Nov 26 12:37:45 2010 +0200
+
+    Fix memory leaks - patch from John.
+
+
+-- UNINIT VAR
+
+a5711befb70980b837b548fb9653a708119fe9bf : Arnold D. Robbins <arnold@skeeve.com> : Mon May 9 17
+commit a5711befb70980b837b548fb9653a708119fe9bf
+Author: Arnold D. Robbins <arnold@skeeve.com>
+Date:   Mon May 9 17:29:55 2011 +0300
+
+    Fixes for uninitialized variables.
+
+

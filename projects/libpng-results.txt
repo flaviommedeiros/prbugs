@@ -1,0 +1,409 @@
+commit a5bf4e3767ac7ce7980115f727f8974fe77c557d
+Type: uninitialized variable
+File: pngread.c
+PC: PNG_SIMPLIFIED_READ_SUPPORTED
+
+commit cc085343ec7074fad4f0d125c29beda5d824b2c8
+Type: memory leak
+File: pngset.c
+PC: STORE_UNKNOWN_CHUNKS
+
+
+commit 217d38cdeac95e069e34ae2e7359f0b6e75cd365
+Type: memory leak
+File: pngset.c
+PC: PNG_STORE_UNKNOWN_CHUNKS_SUPPORTED
+
+
+commit f87df31c8c9f115da9c139777ae5a0765b10f099
+Type: memory leak
+File: contrib/libtests/pngimage.c
+PC: PNG_WRITE_SUPPORTED
+
+
+
+commit fe18c0d9ea95a495f20af97ac747464418451b71
+Type: memory leak
+File: contrib/gregbook/readpng.c
+PC: true
+
+
+commit 590fb8c481e5a36b7a0826b157cbe8415d1b33a9
+Type: memory leak
+File: png.c
+PC: PNG_sCAL_SUPPORTED
+
+
+commit 9101d753162778f5da56766ef3a206d3cb8d91dd
+Type: memory leak
+File: pngpread.c
+PC: true
+
+
+-- OVERFLOWS
+
+f6e7551f06a1c2447ad0737ff72cb5ddd2a310e4 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed Jun 10 07
+commit f6e7551f06a1c2447ad0737ff72cb5ddd2a310e4
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed Jun 10 07:05:18 2015 -0500
+
+    [libpng16] Eliminated the final two Coverity defects (insecure temporary file
+    
+    handling in contrib/libtests/pngstest.c; possible overflow of
+    unsigned char in contrib/tools/png-fix-itxt.c). To use the "secure"
+    file handling, define PNG_USE_MKSTEMP, otherwise "tmpfile()" will
+    continue to be used.
+
+
+24382d838c0b12db206c1bcf6e832b60c6ab6480 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed Jun 10 06
+commit 24382d838c0b12db206c1bcf6e832b60c6ab6480
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed Jun 10 06:59:18 2015 -0500
+
+    [libpng17] Eliminated the final two Coverity defects (insecure temporary file
+    
+    handling in contrib/libtests/pngstest.c; possible overflow of
+    unsigned char in contrib/tools/png-fix-itxt.c). To use the "secure"
+    file handling, define PNG_USE_MKSTEMP, otherwise "tmpfile()" will
+    be used.
+
+
+2cd7404743c06053f6e2f40e5796fa566a777fdd : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu May 21 15
+commit 2cd7404743c06053f6e2f40e5796fa566a777fdd
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu May 21 15:20:52 2015 -0500
+
+    [libpng15] Avoid a harmless potential integer overflow in png_XYZ_from_xy() (Bug
+    
+    report from Christopher Ferris).
+
+
+d46b570919c942f7897678f58bd29cedca7eeb59 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed May 20 13
+commit d46b570919c942f7897678f58bd29cedca7eeb59
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed May 20 13:21:53 2015 -0500
+
+    [libpng16] Avoid a harmless potential integer overflow in png_XYZ_from_xy().
+
+
+689b9c58fecce9efbf365a792b5853f7eb76d4d3 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed May 20 13
+commit 689b9c58fecce9efbf365a792b5853f7eb76d4d3
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed May 20 13:18:54 2015 -0500
+
+    [libpng17] Avoid a harmless potential integer overflow in png_XYZ_from_xy().
+
+
+53097f5bbb2e2b42f128375870042294caff4e0d : John Bowler <jbowler@acm.org> : Sun Mar 22 20
+commit 53097f5bbb2e2b42f128375870042294caff4e0d
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Mar 22 20:26:13 2015 -0500
+
+    [libpng17] Check (png_uint_16) casts for overflow. Also removed png_muldiv_warn,
+    
+    added RELEASE/!RELEASE convenience macros. png_muldiv_warn was used in
+    only one place, and the overflow condition is a genuine warning not
+    an internal error.  Four macros allow code or function parameters to be
+    condition on RELEASE (or not) builds and tidy up the #ifdef handling of
+    functions.
+
+
+36562c1032a6325b9db6f468ae5a6f74800e6800 : John Bowler <jbowler@acm.org> : Sun Mar 22 16
+commit 36562c1032a6325b9db6f468ae5a6f74800e6800
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Mar 22 16:05:56 2015 -0500
+
+    [libpng17] Improved some overflow handling. PNG_RELEASE_BUILD replaces tests
+    
+    where the code depended on the build base type and can be defined on
+    the command line, allowing testing in beta builds.  Overflows previously
+    handled by png_warning in png.c have been changed to use new
+    macros/affirm functions so that beta builds will abort on overflow and
+    release builds will quietly ignore it.  This avoids release builds
+    producing warnings that are of no use to end users.
+
+
+82fa6aed0e93e2e4e3652d501ddcf06ffde6b240 : John Bowler <jbowler@acm.org> : Sun Mar 22 15
+commit 82fa6aed0e93e2e4e3652d501ddcf06ffde6b240
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Mar 22 15:57:53 2015 -0500
+
+    [libpng17] Added byte, short and other overflow checking
+    
+    Added 'assert' based overflow checking for debug builds for char
+    and short assignments. Simply ignore the error in release builds
+    (a truncated value will be used without warning). Controlled by
+    PNG_RANGE_CHECK_SUPPORTED.
+
+
+8a6253ed6fe8c60cae2a19346110ce23fef7221b : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Mon Feb 16 22
+commit 8a6253ed6fe8c60cae2a19346110ce23fef7221b
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Mon Feb 16 22:56:30 2015 -0600
+
+    [libpng15] Merged pngtest.c with libpng-1.6.17/pngtest.c
+    
+    Display user limits in the output from pngtest.
+    Eliminated the PNG_SAFE_LIMITS macro and restored the 1-million-column
+      and 1-million-row default limits in pnglibconf.dfa, that can be reset
+      by the user at build time or run time.  This provides a more robust
+      defense against DOS and as-yet undiscovered overflows.
+
+
+4b65a89cf4303d64762ed4cad4ca469adab794ce : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Mon Feb 16 22
+commit 4b65a89cf4303d64762ed4cad4ca469adab794ce
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Mon Feb 16 22:52:07 2015 -0600
+
+    [libpng16] Eliminated PNG_SAFE_LIMITS macro and restored the 1-million-column
+    
+    and 1-million-row default limits in pnglibconf.dfa, that can be reset
+    by the user at build time or run time.  This provides a more robust
+    defense against DOS and as-yet undiscovered overflows.
+    
+    Display user limits in the output from pngtest.
+
+
+1d3a1e36a7c0cbd01c5b9e9c84862796972a96c0 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Mon Feb 16 22
+commit 1d3a1e36a7c0cbd01c5b9e9c84862796972a96c0
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Mon Feb 16 22:43:52 2015 -0600
+
+    [libpng17] Revised overflow detection in pngwutil.c
+
+
+9c9009ec7d950d52586dc6b9f02e65839adc24b7 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed Feb 11 06
+commit 9c9009ec7d950d52586dc6b9f02e65839adc24b7
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed Feb 11 06:05:23 2015 -0600
+
+    [libpng17] Deal with integer overflow of sum in pngwutil.c
+
+
+eeab1cfefca012a3caa34bdee58e49615d891458 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Tue Dec 23 22
+commit eeab1cfefca012a3caa34bdee58e49615d891458
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Tue Dec 23 22:13:40 2014 -0600
+
+    [libpng17] Eliminated the PNG_SAFE_LIMITS macro and set default limits in
+    
+    pnglibconf.dfa, that can be reset by the user at build time or run time.
+    This provides a more robust defense against DOS and as-yet undiscovered
+    overflows.
+
+
+c026b075296e0d06fda5b20ad625450039a03b05 : John Bowler <jbowler@acm.org> : Sun Dec 21 18
+commit c026b075296e0d06fda5b20ad625450039a03b05
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Dec 21 18:42:37 2014 -0600
+
+    [libpng17] Restored a test on width that was removed from png.c at libpng-1.6.9
+    
+    (Bug report by Alex Eubanks).
+    Fixed an overflow in png_combine_row with very wide interlaced images.
+
+
+dc294204b641373bc6eb603075a8b98f51a75dd8 : John Bowler <jbowler@acm.org> : Sun Dec 21 17
+commit dc294204b641373bc6eb603075a8b98f51a75dd8
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Dec 21 17:11:33 2014 -0600
+
+    [libpng16] Fixed an overflow in png_combine_row with very wide interlaced
+    
+    images.
+
+
+7a6bbfd649fb35645a3b1c5f6428dadba86b1fc9 : John Bowler <jbowler@acm.org> : Sun Dec 21 16
+commit 7a6bbfd649fb35645a3b1c5f6428dadba86b1fc9
+Author: John Bowler <jbowler@acm.org>
+Date:   Sun Dec 21 16:40:33 2014 -0600
+
+    [libpng15] Fixed an overflow in png_combine_row with very wide interlaced
+    
+    images.
+
+
+441de8f4fd338f2085a8d50e965971b8ad356ba2 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu Jan 9 10
+commit 441de8f4fd338f2085a8d50e965971b8ad356ba2
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu Jan 9 10:54:52 2014 -0600
+
+    [libpng17] Revised png_check_IHDR() to use PNG_SIZE_MAX instead of
+    
+    PNG_UINT_32_MAX in the test for potential overflow in PNG_ROWBYTES.
+
+
+4ea97d8bc7849cde9658d21a945705656cf36112 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu Jan 9 11
+commit 4ea97d8bc7849cde9658d21a945705656cf36112
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu Jan 9 11:48:23 2014 -0600
+
+    [libpng16]Revised png_check_IHDR() to use PNG_SIZE_MAX instead of
+    
+    PNG_UINT_32_MAX in the test for potential overflow in PNG_ROWBYTES.
+
+
+a951c329bd637372ac1316dd5d80a950263f77f5 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu Jan 9 19
+commit a951c329bd637372ac1316dd5d80a950263f77f5
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu Jan 9 19:20:11 2014 -0600
+
+    [libpng15] Revised png_check_IHDR() to use PNG_SIZE_MAX instead of
+    
+    PNG_UINT_32_MAX in the test for potential overflow in PNG_ROWBYTES.
+
+
+cb7e08875a8bcbf9acc99886f132820b6fd4c616 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu Jan 9 20
+commit cb7e08875a8bcbf9acc99886f132820b6fd4c616
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu Jan 9 20:02:23 2014 -0600
+
+    [libpng14] Revised png_check_IHDR() to use PNG_SIZE_MAX instead of
+    
+    PNG_UINT_32_MAX in the test for potential overflow in PNG_ROWBYTES.
+
+
+5e8ba1cbbfaf97b60461c4393e6efb218dc1f43b : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Mon Jan 21 16
+commit 5e8ba1cbbfaf97b60461c4393e6efb218dc1f43b
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Mon Jan 21 16:37:54 2013 -0600
+
+    [libpng17] Set counter to prevent additional attempts to cache a chunk
+    
+    after running out of memory or reaching a potential overflow condition.
+
+
+2414bd99d8c76f92ca9272f1b1b1eff55709298a : John Bowler <jbowler@acm.org> : Sat Jan 19 23
+commit 2414bd99d8c76f92ca9272f1b1b1eff55709298a
+Author: John Bowler <jbowler@acm.org>
+Date:   Sat Jan 19 23:18:59 2013 -0600
+
+    [libpng16] Use consistent handling of overflows in text, sPLT and unknown
+    
+    png_set_* APIs
+
+
+590c8b0987f192ae588f6d952bfff5b398c4cb8b : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Sat Jan 19 08
+commit 590c8b0987f192ae588f6d952bfff5b398c4cb8b
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Sat Jan 19 08:49:12 2013 -0600
+
+    [libpng16] Added overflow detection in png_set_sPLT() and png_set_text_2().
+
+
+8ec8e8fcd5542aa40b361983f285d6a8e954aab8 : John Bowler <jbowler@acm.org> : Thu Jan 17 13
+commit 8ec8e8fcd5542aa40b361983f285d6a8e954aab8
+Author: John Bowler <jbowler@acm.org>
+Date:   Thu Jan 17 13:42:42 2013 -0600
+
+    [libpng17] Corrected previous attempt at overflow detection in
+    
+    png_set_unknown_chunks().
+
+
+9dd2bfafe50de0e3204be81a90303760d26a697c : John Bowler <jbowler@acm.org> : Thu Jan 17 13
+commit 9dd2bfafe50de0e3204be81a90303760d26a697c
+Author: John Bowler <jbowler@acm.org>
+Date:   Thu Jan 17 13:24:05 2013 -0600
+
+    [libpng16] Corrected previous attempt at overflow detection in
+    
+    png_set_unknown_chunks().
+
+
+4accd423c283f95fbd6672c2baa4df034a8afdef : John Bowler <jbowler@acm.org> : Thu Jan 10 11
+commit 4accd423c283f95fbd6672c2baa4df034a8afdef
+Author: John Bowler <jbowler@acm.org>
+Date:   Thu Jan 10 11:01:00 2013 -0600
+
+    [libpng17]Fixed conceivable but difficult to repro overflow. Also added
+    
+    two test programs to generate and test a PNG which should have the problem.
+
+
+1c6e22a360afc5362d8ac1480ef50afca9fc552a : John Bowler <jbowler@acm.org> : Thu Jan 10 10
+commit 1c6e22a360afc5362d8ac1480ef50afca9fc552a
+Author: John Bowler <jbowler@acm.org>
+Date:   Thu Jan 10 10:55:34 2013 -0600
+
+    [libpng16] Fixed conceivable but difficult to repro overflow. Also added
+    
+    two test programs to generate and test a PNG which should have the problem.
+
+
+0ae4f7b70532cd209d9e957d36fb742f520ed5f2 : John Bowler <jbowler@acm.org> : Sat Mar 3 21
+commit 0ae4f7b70532cd209d9e957d36fb742f520ed5f2
+Author: John Bowler <jbowler@acm.org>
+Date:   Sat Mar 3 21:10:26 2012 -0600
+
+    [libpng16] Changed png_inflate() and calling routines to avoid overflow
+    
+    problems.  This is an intermediate check-in that solves the immediate problems
+    and introduces one performance improvement (avoiding a copy via png_ptr->zbuf.)
+    Further changes will be made to make ICC profile handling more secure.
+
+
+d572394c2a018ef22e9685ac189f5f05c08ea6f5 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Tue Jun 7 15
+commit d572394c2a018ef22e9685ac189f5f05c08ea6f5
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Tue Jun 7 15:56:02 2011 -0500
+
+    [legacy] Check for integer overflow in png_set_rgb_to_gray().
+
+
+cc1d4d0dbc727f60b7ae5320776c05e668fd40e3 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Sun Jun 5 23
+commit cc1d4d0dbc727f60b7ae5320776c05e668fd40e3
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Sun Jun 5 23:26:14 2011 -0500
+
+    [master] Check for integer overflow in png_set_rgb_to_gray().
+
+
+c508081afc6ae045def733ac4c540b9964debed8 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Sat Oct 23 08
+commit c508081afc6ae045def733ac4c540b9964debed8
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Sat Oct 23 08:26:26 2010 -0500
+
+    [devel] Require 48 bytes, not 64 bytes, for big_row_buf in overflow checks.
+    
+    Also removed two obsolete comments from png.c
+
+
+31aee0d0c073f396e972e4fae61c910250934b4e : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Thu Jul 29 17
+commit 31aee0d0c073f396e972e4fae61c910250934b4e
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Thu Jul 29 17:39:14 2010 -0500
+
+    [devel]
+      Fixed point APIs are now supported throughout (no missing APIs).
+      Internal fixed point arithmetic support exists for all internal floating
+        point operations.
+      sCAL validates the floating point strings it is passed.
+      Safe, albeit rudimentary, Watcom support is provided by PNG_API_RULE==2
+      Two new APIs exist to get the number of passes without turning on the
+        PNG_INTERLACE transform and to get the number of rows in the current
+        pass.
+      A new test program, pngvalid.c, validates the gamma code.
+      Errors in the 16 bit gamma correction (overflows) have been corrected.
+      cHRM chunk testing is done consistently (previously the floating point
+        API bypassed it, because the test really didn't work on FP, now the test
+        is performed on the actual values to be stored in the PNG file so it
+        works in the FP case too.)
+      Most floating point APIs now simply call the fixed point APIs after
+        converting the values to the fixed point form used in the PNG file.
+      The standard headers no longer include zlib.h, which is currently only
+        required for pngstruct.h and can therefore be internal.
+      (Patches by John Bowler)
+
+
+dd66f3ed20fed95f787e6a7b81a7355eb3278388 : Glenn Randers-Pehrson <glennrp at users.sourceforge.net> : Wed Sep 30 14
+commit dd66f3ed20fed95f787e6a7b81a7355eb3278388
+Author: Glenn Randers-Pehrson <glennrp at users.sourceforge.net>
+Date:   Wed Sep 30 14:58:28 2009 -0500
+
+    [devel] Revised png_check_IHDR()
+    
+    to add a test for user passing a 16-bit height varible to png_get_IHDR()
+    which causes an overflow into the high bytes of the width variable.
+
+

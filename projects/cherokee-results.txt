@@ -1,0 +1,335 @@
+commit 4863422680bc4252eb06c3acbf6560a191d62ed5
+Type: memory leak
+File: balancer.c
+PC: true
+
+commit 4863422680bc4252eb06c3acbf6560a191d62ed5
+Type: memory leak
+File: encoder.c
+PC: true
+
+commit 231ccdc36cac1f2abddbf6e448bc2517c0252a1b
+Type: memory leak
+File: cherokee/proxy_hosts.c
+PC: true
+
+commit 5dc59862d021fccfe8e295c0462b6f04674a92ad
+Type: memory leak
+File: cherokee_show.c
+PC: true
+
+
+commit 3b69229bce4e46c0488a5dc04c4b5f351199bc54
+Type: memory leak
+File: hander_proxy.c
+PC: true
+
+commit 93fc150917701af9901015ab1a81755d31057331
+Type: memory leak
+File: server.c
+PC: true
+
+
+commit a2b8abc5dc6f6295e5489428bdfd45aafe3cdca8
+Type: memory leak
+File: avi_ficache.c
+PC: true
+
+
+commit 5cf3c4797d82a4df9722fb51489437c1d9a9b747
+Type: memory leak
+File: handler_cgi_base.c
+PC: true
+
+commit 073419645a1a70b15238701f5bdc378ff6aeaeb6
+Type: memory leak
+File: handler_error_edir.c
+PC: true
+
+commit fe773bc2ad8f54cd96fd86542b279fa53795fff5
+Type: memory leak
+File: nonce.c
+PC: true
+
+
+commit f6c226e143ac77b95bdb766267ef347b47eb4a27
+Type: memory leak
+File: handler_ssi.c
+PC: true
+
+
+commit 2a5e11553b9f5f599f88c39fddf1d5fe31de9258
+Type: memory leak
+File: virtual_server.c
+PC: true
+
+
+commit 3aa2eba3f5672469a8b6ef0fc996fa264a2f6db4
+Type: memory leak
+File: validator_ldap.c
+PC: true
+
+commit 3aa2eba3f5672469a8b6ef0fc996fa264a2f6db4
+Type: memory leak
+File: validator_mysql.c
+PC: true
+
+commit 011e11e26c355b5280fa0c19892ad13ce69785e6
+Type: memory leak
+File: validator_authlist.c
+PC: true
+
+
+
+commit 7f63dc991535ad04fd250bb605b8b546f6c6e6c0
+Type: memory leak
+File: server.c
+PC: true
+
+
+commit c3262f8221a027ffb4c93bd91ba9a57dbc1d84ce
+Type: memory leak
+File: post_track.c
+PC: true
+
+
+
+commit 37d54988cba9e45ac41b54d3604bf90fe2f83445
+Type: memory leak
+File: main_worker.c
+PC: true
+
+
+commit 5863c626b27c07cb449bf45cf180f4ef2a6e83b1
+Type: memory leak
+File: main_admin.c
+PC: true
+
+
+commit 67023504f187fb324fe5891a99d295a236193e30
+Type: memory leak
+File: main.c
+PC: HAVE_POSIX_SHM
+
+
+commit 075491eaa41f8e5c179af81e53bc8cdc545e1649
+Type: memory leak
+File: logger_ncsa.c
+PC: true
+
+commit 2e1e6937662b0ad45585f44dccceaa3e41cfa914
+Type: memory leak
+File: logger_custom.c
+PC: true
+
+
+commit 369cfd20a01528ef9ffd6d8d2f5d1b6739b3a569
+Type: memory leak
+File: logger_combined.c
+PC: true
+
+
+
+commit cd3d92208e3f9c954bbcb4e21f908aa2e6a11af5
+Type: memory leak
+File: handler_server_info.c
+PC: true
+
+
+commit 1418874ca52ec3dba632250ab842c7bddc8e76bc
+Type: memory leak
+File: handler_render_rd.c
+PC: true
+
+
+commit 1884e632dd446b3b19a6e4cbf70a582ae3121092
+Type: memory leak
+File: handler_proxy.c
+PC: true
+
+
+commit ece48a569b88333d2db901d3fa36c65666d8bc72
+Type: memory leak
+File: handler_dirlist.c
+PC: true
+
+commit 12254107c2c13d294ea39f64322bfb8eb42f23d8
+Type: memory leak
+File: logger_writer.c
+PC: true
+
+commit f8d0bf0302fb2ece40541d98aed3563b886c01b1
+Type: memory leak
+File: encoder_deflate.c
+PC: true
+
+
+commit 5044c671ae99ffcf7d66dd2a3cda2cc58ed79f6a
+Type: memory leak
+File: crypto_libssh.c
+PC: OPENSSL_NO_TLSEXT
+
+
+
+commit 9c55e1c6bf82d0be113b0d78251ca0dad57b22fd
+Type: memory leak
+File: config_reader.c
+PC: true
+
+
+commit b68e990d94cf152ba0209f1653a4c0252cee49ae
+Type: memory leak
+File: proxy_hosts.c
+PC: true
+
+
+commit dcd45f001152ef4b6421d36476d1430f5a04fdba
+Type: memory leak
+File: thread.c
+PC: HAVE_PTHREAD
+
+
+commit 10751ffde9d790cd17cc00ecd29df5a1315af562
+Type: memory leak
+File: config_entry.c
+PC: true
+
+
+commit 0f2dd5cd999a87fd38476960a410f1f9fd592f7c
+Type: memory leak
+File: logger_writer.c
+PC: HAVE_FORK
+
+
+commit 6abfe8818ac47e0c6520ddfb82023ce90c756505
+Type: memory leak
+File: handler_dirlist.c
+PC: true
+
+
+commit 3dd7cf1f6450013d85e4d9e14e94ac08ab984b3d
+Type: memory leak
+File: thread.c
+PC: true
+
+
+
+
+commit 911d6cb05700bc8f5693aa95fdb88ee1b8e2710a
+Type: segmentation fault
+File: virtual_server.c
+PC: true
+
+commit 3f20a713bb24a92f61edd0896b97bae95f7faa48
+Type: segmentation fault
+File: validator_htpasswd.c
+PC: true
+
+
+commit fb10eaa64037813860561732a3deb15eed536bf2
+Type: uninitialized variable
+File: common-internal.h
+PC: HAVE_PTHREAD
+
+commit 6b8a5135a68e9cc4bb89623ffde0ff608cbc89c7
+Type: uninitialized variable
+File: handler_ssi.c
+PC: true
+
+commit dd9313791ba7b32836de7385b46cc99819da41d7
+Type: uninitialized variable
+File: validator.c
+PC: true
+
+commit dd9313791ba7b32836de7385b46cc99819da41d7
+Type: uninitialized variable
+File: validator_htdigest.c
+PC: true
+
+
+commit d9b5858749f3661b577e9384db1093301fd4c5e3
+Type: uninitialized variable
+File: util.c
+PC: true
+
+
+commit a6cd52d6341a713a47fb4c0a148700329b7051f4
+Type: uninitialized variable
+File: main.c
+PC: HAVE_POSIX_SHM
+
+
+commit 6a18e5197a25e4e4ec452a552ff60ffa3e5873fd
+Type: uninitialized variable
+File: ficache.c
+PC: true
+
+
+commit 76d368bb1620cf7f4d0837716755e3bf214b9316
+Type: uninitialized variable
+File: balancer_failover.c
+PC: true
+
+commit 8814b7c1d103567289fbf9d92269f2a4506b5819
+Type: uninitialized variable
+File: rule_extensions.c
+PC: true
+
+
+
+-- OVERFLOWS
+
+c4dff38dff6e6c79236367809c576cb845d865d8 : alobbs <alvaro@alobbs.com> : Sun May 22 21
+commit c4dff38dff6e6c79236367809c576cb845d865d8
+Author: alobbs <alvaro@alobbs.com>
+Date:   Sun May 22 21:59:46 2011 +0000
+
+    "Buffer overflow of 'interpreter' due to non null terminated string
+    'interpreter'" (klocwork.com Issue #68)
+    
+    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6688 5dc97367-97f1-0310-9951-d761b3857238
+
+
+da1fab1b44b9a2ccd7e2006a246e1771977c3366 : alobbs <alvaro@alobbs.com> : Sat May 21 14
+commit da1fab1b44b9a2ccd7e2006a246e1771977c3366
+Author: alobbs <alvaro@alobbs.com>
+Date:   Sat May 21 14:27:37 2011 +0000
+
+    "Buffer overflow, array index of 'd_name' may be out of bounds. Array
+    'd_name' of size 256 may use index value(s) -1" (klocwork.com Issue
+    
+    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6654 5dc97367-97f1-0310-9951-d761b3857238
+
+
+7dc811dc3392215ad226143a89e8cd2a9bdd9f14 : alobbs <alvaro@alobbs.com> : Sat Feb 12 21
+commit 7dc811dc3392215ad226143a89e8cd2a9bdd9f14
+Author: alobbs <alvaro@alobbs.com>
+Date:   Sat Feb 12 21:23:49 2011 +0000
+
+    Milliseconds calculations overflowed on 32bit architectures. Thanks to
+    wimschuermann for the findings and patch! It fixes bug #1132:
+    http://bugs.cherokee-project.com/1132
+    
+    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6287 5dc97367-97f1-0310-9951-d761b3857238
+
+
+d5c1ca309b4df3fb3f8d5f0c7647e4d29f049057 : taher <taher@shihadeh.net> : Fri Dec 11 10
+commit d5c1ca309b4df3fb3f8d5f0c7647e4d29f049057
+Author: taher <taher@shihadeh.net>
+Date:   Fri Dec 11 10:20:22 2009 +0000
+
+    Minor change to prevent overflow of tab titles
+    
+    git-svn-id: svn://cherokee-project.com/cherokee/trunk@3971 5dc97367-97f1-0310-9951-d761b3857238
+
+
+59a473aee329f594fa68061aaacaffc2c8b9b05f : ADF <adefacc@tin.it> : Mon Jul 30 17
+commit 59a473aee329f594fa68061aaacaffc2c8b9b05f
+Author: ADF <adefacc@tin.it>
+Date:   Mon Jul 30 17:27:04 2007 +0000
+
+    fixed possible buffer overflows around cherokee_strfsize()
+    
+    git-svn-id: svn://cherokee-project.com/cherokee/trunk@865 5dc97367-97f1-0310-9951-d761b3857238
+
+

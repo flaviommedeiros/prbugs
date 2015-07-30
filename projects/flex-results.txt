@@ -1,0 +1,109 @@
+-- OVERFLOWS
+
+7b20a02398135c4cda181592108a83c70a18eb79 : john43 <john43> : Thu Feb 16 22
+commit 7b20a02398135c4cda181592108a83c70a18eb79
+Author: john43 <john43>
+Date:   Thu Feb 16 22:20:43 2006 +0000
+
+    Fixed buffer overflow in reject state buffer.
+    Corrected documentation on the state buffer.
+
+
+1815152539af424442210df350d5f547bbc05f71 : vern <vern> : Sat Dec 3 11
+commit 1815152539af424442210df350d5f547bbc05f71
+Author: vern <vern>
+Date:   Sat Dec 3 11:26:51 1994 +0000
+
+    Increase slowly if realloc double overflows
+
+
+8c2f4c18d56683fd9ba771a6868126c172429154 : vern <vern> : Sun May 8 20
+commit 8c2f4c18d56683fd9ba771a6868126c172429154
+Author: vern <vern>
+Date:   Sun May 8 20:04:47 1988 +0000
+
+    RCS header
+    check before malloc()'ing for 16 bit overflow
+    MS_DOS, VMS ifdef's
+    removed commented-out \^ code
+    removed FTLSOURCE code
+    added readable_form()
+
+
+-- SEGFAULTS
+
+4c0a9e65b146a74735588fd62c6ece439c0919d3 : wlestes <wlestes> : Thu Sep 5 13
+commit 4c0a9e65b146a74735588fd62c6ece439c0919d3
+Author: wlestes <wlestes>
+Date:   Thu Sep 5 13:11:17 2002 +0000
+
+    prevent segfault on input lines which are longer than the allocated space (problem report from Manoj Srivastava <srivasta@golden-gryphon.com>)
+
+
+94b690646ac32b1a9a9fb7f8ee0e5c225a556cb9 : millaway <millaway> : Thu Aug 15 21
+commit 94b690646ac32b1a9a9fb7f8ee0e5c225a556cb9
+Author: millaway <millaway>
+Date:   Thu Aug 15 21:23:18 2002 +0000
+
+    Fixed seg fault bug in ecs.
+
+
+-- MEMLEAK
+
+23de2edd3185afd9041e967c721408df36c4b154 : wlestes <wlestes> : Wed Apr 25 18
+commit 23de2edd3185afd9041e967c721408df36c4b154
+Author: wlestes <wlestes>
+Date:   Wed Apr 25 18:16:34 2007 +0000
+
+    c++ memory leak plug
+
+
+8f0d5ad151833985bf78d4bbddc2ccd9672f5de5 : wlestes <wlestes> : Mon Apr 23 12
+commit 8f0d5ad151833985bf78d4bbddc2ccd9672f5de5
+Author: wlestes <wlestes>
+Date:   Mon Apr 23 12:37:38 2007 +0000
+
+    fix c++ memory leak (from Manoj Srivastava from Debian patchset)
+
+
+da4e9a1295147f20bce9d9124c395f5fda8c7041 : wlestes <wlestes> : Fri Oct 20 19
+commit da4e9a1295147f20bce9d9124c395f5fda8c7041
+Author: wlestes <wlestes>
+Date:   Fri Oct 20 19:16:06 2006 +0000
+
+    memory leak issues in c++ scanner
+
+
+858fd709443b72a6ee3696d6408195f262f02e8d : wlestes <wlestes> : Mon Jun 18 12
+commit 858fd709443b72a6ee3696d6408195f262f02e8d
+Author: wlestes <wlestes>
+Date:   Mon Jun 18 12:49:03 2001 +0000
+
+    patch memory leak as per millaway
+
+
+183a2d3c1ad1faf75486c27e9c3342b2423118f4 : vern <vern> : Mon Jun 23 19
+commit 183a2d3c1ad1faf75486c27e9c3342b2423118f4
+Author: vern <vern>
+Date:   Mon Jun 23 19:48:53 1997 +0000
+
+    fixed memory leak
+
+
+2d289d9b2d831e6023c678d51ac58d5971b5dbb7 : vern <vern> : Fri Oct 11 15
+commit 2d289d9b2d831e6023c678d51ac58d5971b5dbb7
+Author: vern <vern>
+Date:   Fri Oct 11 15:13:58 1996 +0000
+
+    fixed memory leak
+
+
+1caf6ece50a7c21d6d96af007bdb949436307e93 : vern <vern> : Sat Dec 11 10
+commit 1caf6ece50a7c21d6d96af007bdb949436307e93
+Author: vern <vern>
+Date:   Sat Dec 11 10:30:20 1993 +0000
+
+    Initialize dfaacc[0] for -CF representation
+    Fixed minor memory leak
+
+

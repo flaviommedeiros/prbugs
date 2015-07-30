@@ -1,0 +1,792 @@
+commit 4da7e2c52cf4478cd44889b8aaf6b1a404f47437
+Type: memory leak
+File: src/m4.c
+PC: true
+
+
+commit b4a3bec5f9cfec145db6f4cb281ba1673ca6bfc6
+Type: memory leak
+File: m4/input.c
+PC: true
+
+
+commit daa2edf98ccd6a23cdc04ad1d5ca75026a2ee5a7
+Type: memory leak
+File: m4/hash.c
+PC: NDEBUG
+
+
+f86dce2eef61a240ca3d3cbdd357391fbe54dbda : Eric Blake <ebb9@byu.net> : Wed Aug 30 04
+commit f86dce2eef61a240ca3d3cbdd357391fbe54dbda
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Aug 30 04:25:42 2006 +0000
+
+    * doc/m4.texinfo (Quoting Arguments, Definitions, Define)
+    (Arguments, Pseudo Arguments): More doc merges from the branch.
+    (Macro expansion): Turn example into test.
+    (Pseudo Arguments): Add example of avoiding argument.
+    * modules/m4.c (undefine, popdef): Accept multiple arguments.
+    (define, pushdef): Warn on non-text macro name.
+    (ifelse, m4_dump_symbols, defn, traceon, traceoff): Tweak
+    warning/error messages.
+    (ifdef): Ignore extra arguments.
+    * m4/symtab.c (m4_symbol_value_copy): Avoid memory leak.
+    (m4__symtab_remove_module_references): Check that there is no leak.
+    * tests/macros.at (pushdef/popdef): Update to new message.
+    * tests/builtins.at (define): Likewise.
+    * tests/freeze.at (loading format 1): Likewise.
+    * tests/modules.at (AT_CHECK_M4_MODTEST): Likewise.
+
+
+98c3bc603d27ae511346ec22036095019b870da8 : Eric Blake <ebb9@byu.net> : Mon Aug 21 00
+commit 98c3bc603d27ae511346ec22036095019b870da8
+Author: Eric Blake <ebb9@byu.net>
+Date:   Mon Aug 21 00:14:54 2006 +0000
+
+    * modules/gnu.c (includes): Assume stdlib.h, errno.
+    (m4_regexp_compile): Add no_sub parameter, avoid memory leaks.
+    (substitute): Add caller parameter, avoid out-of-bounds memory
+    references.
+    (m4_regexp_substitute, patsubst, regexp, renamesyms): Adjust
+    callers.
+
+
+2c9149360ee50d4cafab78667835ee11efd6ebfa : Eric Blake <ebb9@byu.net> : Fri Jul 28 16
+commit 2c9149360ee50d4cafab78667835ee11efd6ebfa
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri Jul 28 16:41:28 2006 +0000
+
+    * src/freeze.c (reload_frozen_state): Copy string when creating
+    placeholder, to avoid memory corruption.
+    * m4/symtab.c (symbol_popval): Avoid memory leak.
+    (m4_symbol_rename): Avoid shadowing rename function.
+    (dump_symbol_CB, symtab_dump) [DEBUG_SYM]: Fix compilation.
+    * tests/freeze.at (reloading unknown builtin): Add test.
+    * tests/generate.awk: Capture m4.texinfo line number in
+    testsuite.log, not just generated.at.
+
+
+10d9ad5159858ad9b530a0b3c8773806354400ba : Eric Blake <ebb9@byu.net> : Thu Jun 22 15
+commit 10d9ad5159858ad9b530a0b3c8773806354400ba
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Jun 22 15:41:12 2006 +0000
+
+    * m4/module.c (m4__module_exit): Avoid ltdl memory leak.
+
+
+f8a2482e5d923aef2935407199ebb98e396e04aa : Gary V. Vaughan <gary@gnu.org> : Tue Jun 17 15
+commit f8a2482e5d923aef2935407199ebb98e396e04aa
+Author: Gary V. Vaughan <gary@gnu.org>
+Date:   Tue Jun 17 15:17:45 2003 +0000
+
+    Still refactoring furiously.  This delta represents a change in
+    semantics to symtab.c.  Instead of building temporary m4_tokens
+    in the caller, and copying fields in the methods, we now create
+    the actual m4_token for hashing in the caller so the methods just
+    slot them in directly.  Also, this means that we don't lookup a
+    symbol and get back an allocated but VOID token to copy fields
+    into, we create the token we want to push and pass that to
+    m4_symbol_define or m4_symbol_pushdef.  And that's it.  There are
+    a few other small changes to stop knowledge of the implementation
+    of symtab.c leaking out into other files.
+    
+    * m4/macro.c (expand_argument): Comment typo corrected.
+    * m4/symtab.c (symtab_fetch): New function to fetch the address of
+    an interned symbol.
+    (m4_symbol_pushdef): Take an extra value parameter and use this
+    directly as the new top of the value stack.  All callers changed
+    to build a token and pass responsibility for memory in, rather
+    than copying as we used to.
+    (m4_symbol_define): Also use the new value parameter directly as a
+    replacement for the top of the value stack.  All callers changed
+    to build a token as above.
+    (m4_set_symbol_traced): New function to set the traced bit on the
+    named symbol, creating it if necessary.
+    (symbol_popval): The guts of the old m4_symbol_popdef.
+    (m4_symbol_popdef): Use it.
+    * m4/builtin.c (m4_symbol_set_token): Removed,
+    (m4__symbol_set_builtin, m4__symbol_set_macro): Removed and
+    replaced...
+    * m4/module.c (m4_set_module_builtin_table)
+    (m4_set_module_macro_table): ...with these more orthogonal
+    functions.
+    * m4/m4module.h (m4_macro_pushdef, m4_macro_define)
+    (m4_builtin_pushdef, m4_builtin_define): Removed.  No longer
+    required.
+    * m4/builtin.c (M4_ARG_SIGNATURE_DEFAULT_SIZE)
+    (m4_arg_signature_parse): Moved...
+    * m4/symtab.c: ...to here.
+    * m4/input.c (m4_token_copy): Arghh... I'm amazed this didn't
+    screw something up. Moved...
+    * m4/symtab.c (m4_token_copy): ...to here, and fixed so that it
+    actually does a proper deep copy of source to dest.
+
+
+64fc3407b9b88f6ccf9d5737b1af7df141b0eae6 : Gary V. Vaughan <gary@gnu.org> : Thu Sep 20 03
+commit 64fc3407b9b88f6ccf9d5737b1af7df141b0eae6
+Author: Gary V. Vaughan <gary@gnu.org>
+Date:   Thu Sep 20 03:48:05 2001 +0000
+
+    More cleanup.  After the last patch, m4_symbol holds nothing but
+    the head of a chain of m4_token_data.  So I have removed the old
+    m4_symbol, so that m4_token_data chains are stored directly in the
+    value cell of a hash table node.  But there's more... m4_symbol
+    was a more natural name for the symbol value cell, and now that it
+    is gone I have renamed the former m4_token_data structure to
+    m4_symbol.  This change turned out to be a pig to get right, since
+    the original code didn't need to modify the value cell itself,
+    since changing the chain happened inside the m4_symbol that used
+    to be returned -- I had to pass the address of the value cell
+    across various function calls, incase the head value changed.  I
+    also tightened up the memory management to help me find a nasty
+    memory corruption bug that took me all night to track down...
+    
+    * m4/m4private.h (struct m4_symbol): Removed.
+    (struct m4_token_data): Renamed to `struct m4_symbol'.  Updated
+    all references.
+    * m4/hash.c (m4_hash_iterator_value): Return the address of the
+    value cell.  Updated all callers.
+    * m4/symtab.c: Took advantage of the simplification in the data
+    structures to rewrite a lot of this file more simply.  There is
+    still some room for optimisation here, but we should tackle that
+    systematically closer to the release.
+    
+    * m4/ltdl.c: Added dmalloc support, and fixed some memory leaks it
+    revealed.  This version is ahead of CVS libtool until I get chance
+    to flush my changes.
+    * m4/module.c (m4_module_remove): New function that holds the core
+    of the old m4_module_unload.
+    (m4_module_unload): Use it.
+    (m4_module_unload_all): When we know the modules will never be
+    used again (i.e. on exit), free up as much module memory as
+    possible.  There are still some artifacts from resident modules
+    living inside ltdl.c, but everything else is freed.
+    * m4/debug.c (m4_debug_exit): Free memory allocated in
+    m4_debug_init().
+    * m4/input.c (m4_input_exit): Ditto wrt m4_input_init().
+    * m4/output.c (m4_output_exit): Ditto wrt m4_output_init ().
+    * src/stackovf.c (stackovf_exit): Ditto wrt setup_stackovf_trap ().
+    * m4/m4module.h: Updated prototypes.
+    * m4/hash.c (m4_hash_exit): Free the nodes on the free list.
+    * m4/hash.h: Updated prototypes.
+    * src/main.c (main): Use all these new functions to clean up as
+    much memory as possible before exit.
+
+
+b4925d1d03d740be6e518d2851034357739645c9 : Gary V. Vaughan <gary@gnu.org> : Wed Nov 29 00
+commit b4925d1d03d740be6e518d2851034357739645c9
+Author: Gary V. Vaughan <gary@gnu.org>
+Date:   Wed Nov 29 00:18:03 2000 +0000
+
+    * src/main.c (main): Fixed a particularly nasty bug is
+    user_search_path setting -- the -M flag processing must be
+    extremely careful with search path ordering, or else the default
+    installed module directory (possibly containing modules from a
+    previous release) is placed earlier in the search path than any -M
+    arguments (which are relied upon to load uninstalled modules with
+    most of the tests in the regresion suite).
+    
+    * modules/load.c (builtin_load):  Nasty hack to prevent adding
+    symbols to symtab again if a module is loaded more than once.
+    * modules/m4.c (builtin_ifelse): removed unused variable argv0.
+    
+    * m4/symtab.c (m4_remove_table_reference_symbols):  Fixed a
+    possible NULL pointer dereference.
+    
+    * m4/module.c (m4_module_find_by_modname): Renamed from
+    m4_module_modname_find.   Fixed all references.
+    (m4_module_find_by_builtin):  New function.
+    
+    * modules/modfreeze.test: load the `load' module with each
+    invocation.
+    * src/freeze.c (produce_frozen_state): Simplified in light of
+    module field in m4_symbol.  Allow a third argument for text macros
+    to name the originating module.
+    (reload_frozen_state): ditto.
+    * m4/m4module.h:  Fixup prototypes.
+    * m4/builtin.h (m4_builtin_define): Add a module argument so
+    that symbols can be registered against the defining module.
+    (m4_macro_define): ditto.
+    * m4/m4private.h (m4_symbol): Make the module field const to save
+    on casting in the rest of the code.
+    (SYMBOL_MODULE): New macro.
+    
+    * m4/symtab.c (m4_remove_table_reference_symbols): Fixed stupid
+    symbol reference maintenance bugs when removing a symbol from the
+    symtab.
+    
+    * src/stackovf.c (setup_stackovf_trap): Fixed some memory leaks.
+    
+    * configure.in (m4_cv_func_obstack): A better check for whether
+    libc has an obstack implementation.
+    * m4/Makefile.am (EXTRA_libm4_la_SOURCES): add gnu-obstack.h.
+
+
+f55b438e39efaab122bc657b7a42e0a9c894f0e7 : Eric Blake <ebb9@byu.net> : Wed Nov 15 00
+commit f55b438e39efaab122bc657b7a42e0a9c894f0e7
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Nov 15 00:44:08 2006 +0000
+
+    * src/output.c (cleanup_tmpfile, freeze_diversions): Clean up
+    spent iterators.
+    (m4_tmpname): Avoid memory leak.
+
+
+4508dbfe9bba540f1a9be8ef5d620755f0fe964b : Eric Blake <ebb9@byu.net> : Wed Nov 8 05
+commit 4508dbfe9bba540f1a9be8ef5d620755f0fe964b
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Nov 8 05:08:26 2006 +0000
+
+    * src/m4.h (output_exit): New prototype.
+    * src/m4.c (main): Use it.
+    * src/output.c (cleanup_tmpfile): Close files before removing
+    directory.
+    (insert_diversion): Check for failure.
+    (output_exit): Avoid memory leak.
+    * doc/m4.texinfo (Diversions): Test this bug.
+
+
+fcbb24a231da3b8b9c58e93f1a65d2a89ddc3694 : Eric Blake <ebb9@byu.net> : Fri Aug 18 16
+commit fcbb24a231da3b8b9c58e93f1a65d2a89ddc3694
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri Aug 18 16:28:22 2006 +0000
+
+    Regular expressions were leaking memory.
+    * src/builtin.c (init_pattern_buffer, free_pattern_buffer): New
+    helper methods.
+    (m4_regexp, m4_patsubst): Avoid memory leak.
+    * src/input.c (init_pattern_buffer) [ENABLE_CHANGEWORD]: Make
+    static.
+    (set_word_regexp) [ENABLE_CHANGEWORD]: Avoid memory leak.  Change
+    from O(n^2) to O(n) for calculating word_start.
+    (next_token, peek_token) [ENABLE_CHANGEWORD]: Treat word_start as
+    O(1) bitmap, not O(n) search string.
+    * NEWS: Document this fix.
+
+
+commit ff19b729c274364fc4883b338379ee84e33ff2f7
+Type: uninitialized variable
+File: m4/output.c
+PC: true
+
+
+commit 16c904433b7f50524181b8c7a49b8204571ceef7
+Type: uninitialized variable
+File: src/freeze.c
+PC: true
+
+commit 93ad4c046fe5cf126950258da9d99cc9767c7859
+Type: uninitialized variable
+File: src/symtab.c
+PC: true
+
+
+-- OVERFLOWS
+
+1029ee26629b5d4c44e80e1f318dc2508e0699e6 : Eric Blake <eblake@redhat.com> : Tue Mar 1 10
+commit 1029ee26629b5d4c44e80e1f318dc2508e0699e6
+Author: Eric Blake <eblake@redhat.com>
+Date:   Tue Mar 1 10:35:09 2011 -0700
+
+    Release Version 1.4.16.
+    
+    * gnulib: Update to latest.
+    * NEWS: Mention the release.
+    * src/builtin.c (m4_defn): Silence spurious -Wstrict-overflow
+    warnings from gcc 4.5.1 at -O2.
+    
+    Signed-off-by: Eric Blake <eblake@redhat.com>
+
+
+52b195a5edbd9b534c40493d58a3f203d6271fbc : Eric Blake <ebb9@byu.net> : Thu Nov 26 07
+commit 52b195a5edbd9b534c40493d58a3f203d6271fbc
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Nov 26 07:11:11 2009 -0700
+
+    Ignore write failures before stack overflow exit.
+    
+    * m4/gnulib-cache.m4: Import ignore-value module.
+    * src/m4.h (includes): Use it.
+    (xfwrite): New wrapper.
+    * src/builtin.c (compile_pattern, m4_dumpdef, m4_errprint)
+    (m4_regexp, m4_patsubst, m4_errprint): Use it.
+    * src/debug.c (trace_flush): Likewise.
+    * src/freeze.c (dump_symbol_CB, produce_frozen_state): Likewise.
+    * src/stackovf.c (process_sigsegv): Ignore write failures prior to
+    a non-zero exit.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+    (cherry picked from commit 30cd2068dcb8b51f9fe29741732027bb00b522a5)
+
+
+30cd2068dcb8b51f9fe29741732027bb00b522a5 : Eric Blake <ebb9@byu.net> : Thu Nov 26 06
+commit 30cd2068dcb8b51f9fe29741732027bb00b522a5
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Nov 26 06:29:06 2009 -0700
+
+    Ignore write failures before stack overflow exit.
+    
+    * m4/gnulib-cache.m4: Import ignore-value module.
+    * src/m4.c (fault_handler): Use it to avoid compiler warning.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+4cd6b69ea7747052d12c0f2c4c28be082b030b00 : Eric Blake <ebb9@byu.net> : Wed Feb 18 12
+commit 4cd6b69ea7747052d12c0f2c4c28be082b030b00
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Feb 18 12:03:03 2009 -0700
+
+    Avoid risk of stack overflow.
+    
+    * m4/output.c (insert_file): Avoid stack allocation of large
+    buffer.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+    (cherry picked from commit 01f216c3c98d41db7878b18c93d23e8dc38d8643)
+
+
+0cec2254cb5d48cad751bb588cd93c40c006dc27 : Eric Blake <ebb9@byu.net> : Wed Feb 18 12
+commit 0cec2254cb5d48cad751bb588cd93c40c006dc27
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Feb 18 12:03:03 2009 -0700
+
+    Avoid risk of stack overflow.
+    
+    * src/output.c (insert_file): Avoid stack allocation of large
+    buffer.
+    (freeze_diversions): Avoid spurious semicolon.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+    (cherry picked from commit 01f216c3c98d41db7878b18c93d23e8dc38d8643)
+
+
+01f216c3c98d41db7878b18c93d23e8dc38d8643 : Eric Blake <ebb9@byu.net> : Wed Feb 18 11
+commit 01f216c3c98d41db7878b18c93d23e8dc38d8643
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Feb 18 11:25:01 2009 -0700
+
+    Avoid risk of stack overflow.
+    
+    * src/output.c (insert_file): Avoid stack allocation of large
+    buffer.
+    (freeze_diversions): Avoid spurious semicolon.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+b9ec07d5798eef41d68c4fa29d4fb9349f7c619d : Eric Blake <ebb9@byu.net> : Fri Jun 6 16
+commit b9ec07d5798eef41d68c4fa29d4fb9349f7c619d
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri Jun 6 16:37:21 2008 -0600
+
+    Inform users what to do in case of programmer error.
+    
+    * src/m4.h (EXIT_INTERNAL_ERROR): New macro.
+    * configure.ac (AC_TYPE_SIGNAL): Delete, now that we assume C89.
+    * src/m4.c (fault_handler): New method.
+    (program_error_message): New variable, for async-safety.
+    (main): Print bug reporting address rather than dump core on any
+    failed assertions or detected non-stack-overflow faults.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+07eba241aeaf090c0f2e8248ee8a6fe65d84795c : Eric Blake <ebb9@byu.net> : Thu Jun 5 07
+commit 07eba241aeaf090c0f2e8248ee8a6fe65d84795c
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Jun 5 07:08:58 2008 -0600
+
+    Replace stackovf with gnulib c-stack.
+    
+    * m4/gnulib.cache.m4: Import c-stack module.
+    * configure.ac (AC_CHECK_HEADERS_ONCE): Remove check for
+    siginfo.h, sys/wait.h.
+    (AC_CHECK_TYPES): Likewise for siginfo_t.
+    (AC_CHECK_MEMBERS): Likewise for sa_sigaction, ss_sp.
+    (AC_CHECK_FUNCS_ONCE): Likewise for sigaction, sigaltstack,
+    sigstack, sigvec, strerror.
+    (M4_cv_use_stackovf): Likewise for stack overflow detection.
+    * src/Makefile.am (m4_SOURCES): Don't build stackovf.c.
+    * src/stackovf.c: Delete.
+    * src/m4.h (setup_stackovf_trap): Delete.
+    * src/m4.c (stackovf_handler): Delete.
+    (main): Use c_stack_action instead of setup_stackovf_trap.  If
+    stack overflow is detectable, don't limit -L artificially.
+    (usage): Document unlimited default on supported systems.
+    * doc/m4.texinfo (Limits control): Document new default nesting
+    limit.
+    * NEWS: Document this change.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+028ad7d2219f899ca0526d3220aae4dc80ff4416 : Eric Blake <ebb9@byu.net> : Fri May 9 07
+commit 028ad7d2219f899ca0526d3220aae4dc80ff4416
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri May 9 07:59:51 2008 -0600
+
+    Detect integer overflow when loading frozen file.
+    
+    * src/m4.h (includes): Add limits.h.
+    (_): Define as a no-op placeholder for now.
+    * src/freeze.c (reload_frozen_state) [GET_NUMBER]: Rewrite to fail
+    immediately on overflow.
+    Reported by Jim Meyering.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+    (cherry picked from commit b5fe50a4ef3e20912ee835888c9effda8a290721)
+
+
+0b2dea68c4f3e2f6cca84291536b80b3c4eac058 : Eric Blake <ebb9@byu.net> : Fri Jun 6 16
+commit 0b2dea68c4f3e2f6cca84291536b80b3c4eac058
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri Jun 6 16:37:21 2008 -0600
+
+    Inform users what to do in case of programmer error.
+    
+    * src/m4.h (EXIT_INTERNAL_ERROR): New macro.
+    * configure.ac (AC_TYPE_SIGNAL): Delete, now that we assume C89.
+    * src/m4.c (fault_handler): New method.
+    (program_error_message): New variable, for async-safety.
+    (main): Print bug reporting address rather than dump core on any
+    failed assertions or detected non-stack-overflow faults.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+15ddfa0680afac65c54f5fe87fa01b7b7b0f85b3 : Eric Blake <ebb9@byu.net> : Thu Jun 5 07
+commit 15ddfa0680afac65c54f5fe87fa01b7b7b0f85b3
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Jun 5 07:08:58 2008 -0600
+
+    Replace stackovf with gnulib c-stack.
+    
+    * m4/gnulib.cache.m4: Import c-stack module.
+    * configure.ac (AC_CHECK_HEADERS_ONCE): Remove check for
+    siginfo.h, sys/wait.h.
+    (AC_CHECK_TYPES): Likewise for siginfo_t.
+    (AC_CHECK_MEMBERS): Likewise for sa_sigaction, ss_sp.
+    (AC_CHECK_FUNCS_ONCE): Likewise for sigaction, sigaltstack,
+    sigstack, sigvec, strerror.
+    (M4_cv_use_stackovf): Likewise for stack overflow detection.
+    * src/Makefile.am (m4_SOURCES): Don't build stackovf.c.
+    * src/stackovf.c: Delete.
+    * src/m4.h (setup_stackovf_trap): Delete.
+    * src/m4.c (stackovf_handler): Delete.
+    (main): Use c_stack_action instead of setup_stackovf_trap.  If
+    stack overflow is detectable, don't limit -L artificially.
+    (usage): Document unlimited default on supported systems.
+    * doc/m4.texinfo (Limits control): Document new default nesting
+    limit.
+    * NEWS: Document this change.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+43173c1ade54a595a488e750dfba700c89b9fdb8 : Eric Blake <ebb9@byu.net> : Sat May 10 09
+commit 43173c1ade54a595a488e750dfba700c89b9fdb8
+Author: Eric Blake <ebb9@byu.net>
+Date:   Sat May 10 09:16:04 2008 -0600
+
+    Detect integer overflow when loading frozen file.
+    
+    * src/freeze.c (reload_frozen_state) [GET_NUMBER]: Rewrite to fail
+    immediately on overflow.
+    * tests/freeze.at (loading format 2): Test this.
+    Reported by Jim Meyering.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+b5fe50a4ef3e20912ee835888c9effda8a290721 : Eric Blake <ebb9@byu.net> : Fri May 9 07
+commit b5fe50a4ef3e20912ee835888c9effda8a290721
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri May 9 07:59:51 2008 -0600
+
+    Detect integer overflow when loading frozen file.
+    
+    * src/freeze.c (reload_frozen_state) [GET_NUMBER]: Rewrite to fail
+    immediately on overflow.
+    Reported by Jim Meyering.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+782e3ac755755787d87a5057a6631329661be3ed : Eric Blake <ebb9@byu.net> : Wed Jan 16 07
+commit 782e3ac755755787d87a5057a6631329661be3ed
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Jan 16 07:28:32 2008 -0700
+
+    Stage 10: avoid extra copying of strings and comments.
+    
+    * ltdl/m4/gnulib-cache.m4: Import intprops and vasnprintf-posix
+    modules.
+    * m4/m4private.h (m4__token_type): Adjust prototype.
+    * m4/input.c (m4__next_token): Support new parameter.
+    * m4/macro.c (m4_macro_expand_input, expand_token)
+    (expand_argument, collect_arguments): Adjust callers.
+    * modules/m4.c (ntoa): Tighten buffer size.
+    * m4/output.c (m4_tmpname): Guarantee no buffer overflow.
+    * modules/format.c (arg_int, arg_long, arg_double): New helper
+    functions, to detect overflow or unparsed characters.
+    (ARG_INT, ARG_LONG, ARG_STR, ARG_DOUBLE): Adjust to check for
+    missing or excess arguments.
+    (format): Likewise, and also output directly into obstack if there
+    is room.
+    * doc/m4.texinfo (History): Update for new year.
+    (Format): Test for new warnings.
+    
+    Signed-off-by: Eric Blake <ebb9@byu.net>
+
+
+541074d3261d85fd29b6ef0fe94f51548746a878 : Eric Blake <ebb9@byu.net> : Tue Jan 16 20
+commit 541074d3261d85fd29b6ef0fe94f51548746a878
+Author: Eric Blake <ebb9@byu.net>
+Date:   Tue Jan 16 20:23:32 2007 +0000
+
+    Port patch from branch for stack overflow detection on BSD/OS.
+    * ltdl/m4/stackovf.m4 (M4_SYS_STACKOVF): Check for stack_t.ss_sp.
+    * src/stackovf.c (setup_stackovf_trap) [HAVE_SIGALTSTACK &&
+    ! HAVE_STACK_T_SS_SP]: Use this check.
+    Reported by Chris McGuire.
+
+
+0b0f9b371728717b30e2c846978441f085000a09 : Eric Blake <ebb9@byu.net> : Thu Oct 26 23
+commit 0b0f9b371728717b30e2c846978441f085000a09
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Oct 26 23:11:41 2006 +0000
+
+    Convert diversions to list instead of sparse array, part 1.
+    * m4/m4module.h (m4_shipout_text, m4_shipout_string): Use size_t
+    for length.
+    * m4/output.c (diversion, total_buffer_size, output_unused):
+    Track size in size_t.  All users changed.
+    (struct diversion): Reduce size now, to compensate for part 2.
+    (m4_make_diversion, make_room_for): Avoid malloc overflow.
+    (m4_output_exit): Fix typo in assert.
+    (m4_output_init, make_room_for, m4_make_diversion)
+    (m4_insert_diversion, m4_freeze_diversions): Adjust users of
+    struct m4_diversion to disambiguate the new union.
+    * tests/builtins.at (divert): Detect this failure.
+
+
+3883a86295b7f664cdc91e0b39f768b045474ae5 : Eric Blake <ebb9@byu.net> : Wed Oct 25 23
+commit 3883a86295b7f664cdc91e0b39f768b045474ae5
+Author: Eric Blake <ebb9@byu.net>
+Date:   Wed Oct 25 23:19:19 2006 +0000
+
+    * m4/m4module.h (m4_push_builtin): Add parameter.
+    * modules/m4.c (defn): Update caller.
+    * m4/input.c (file_read_init, string_read_init): No longer
+    needed.
+    (input_funcs): Change signature of read_func, all callers
+    updated.
+    (composite_peek, composite_read, composite_unget),
+    (composite_print, composite_funcs): New input type.  Not yet
+    fully utilized, but one step closer to fixing defn.
+    (m4_input_block): Make every input block track current file and
+    line.  Rename some members.  Remove unused out_line.  Add support
+    for composite input block.
+    (input_change): New flag.
+    (file_peek, file_read, file_clean, file_unget, file_print):
+    Update callers.
+    (m4_push_file, m4_push_builtin, m4_push_string_init)
+    (m4_push_string_finish, m4_push_wrapup, m4_pop_wrapup)
+    (m4_skip_line, pop_input): Track input block changes.
+    (m4_pop_wrapup): Avoid overflow.
+    (init_builtin_token): Handle composite input.
+    (next_char): Handle input block changes.
+    * doc/m4.texinfo (Location): Remerge from branch.
+
+
+95e9095e3f500d947198d5e9a8e66222c5951d2c : Eric Blake <ebb9@byu.net> : Sat Jul 22 22
+commit 95e9095e3f500d947198d5e9a8e66222c5951d2c
+Author: Eric Blake <ebb9@byu.net>
+Date:   Sat Jul 22 22:38:14 2006 +0000
+
+    * src/main.c (stackovf_handler): Document the problems in our
+    overflow handler.
+    * src/stackovf.c: Forward port changes in branch to use POSIX
+    sa_sigaction when available.
+    (process_sigsegv): Avoid buffer overrun when error string is
+    translated, although the fact that we translate in a signal
+    handler is still a bug.
+    * ltdl/m4/stackovf.m4 (M4_SYS_STACKOVF): Forward port changes
+    from branch to modernize checks.
+
+
+306ef6b90e323997276e13788feec4b6dfe2c4d2 : Eric Blake <ebb9@byu.net> : Mon Jul 17 13
+commit 306ef6b90e323997276e13788feec4b6dfe2c4d2
+Author: Eric Blake <ebb9@byu.net>
+Date:   Mon Jul 17 13:26:08 2006 +0000
+
+    * ltdl/m4/gnulib-cache.m4: Augment with `gnulib-tool --import
+    xvasprintf'.
+    * modules/format.c (includes): Use xvasprintf.h.
+    (format): Make static.  Avoid buffer overflow, that can lead to
+    arbitrary code execution exploit.  Only pass unsigned char to
+    is*().  Support F, g, and G specifiers.
+    * doc/m4.texinfo (Format): Expose buffer overrun bug.  Document
+    new specifiers.
+
+
+1fad880daf644d343ffb8e5820f7ff00cc2a4b58 : Gary V. Vaughan <gary@gnu.org> : Thu Nov 13 12
+commit 1fad880daf644d343ffb8e5820f7ff00cc2a4b58
+Author: Gary V. Vaughan <gary@gnu.org>
+Date:   Thu Nov 13 12:05:57 2003 +0000
+
+    The import script was not written properly, and the last gnulib
+    import was incomplete.  Fixed that problem, and reimport our
+    gnulib dependencies, which picks up the address calculation
+    overflow checks described by Paul below.  Also tweak the clients
+    of the gnulib xalloc module not to use deprecated macros:
+    
+    * gnulib/import: Recurse through module dependencies rather than
+    naively descending only one level.
+    * configure.ac: Add calls to gnulib's strnlen and extension module
+    macros.
+    * gnulib/m4/Makefile.am: Add snippets from gnulib's strnlen and
+    extension modules.
+    * gnulib/acm4/extensions.m4, gnulib/acm4/xalloc.m4,
+    gnulib/m4/alloca.c, gnulib/m4/obstack.c, gnulib/m4/obstack.h,
+    gnulib/m4/stdbool_.h, gnulib/m4/unlocked-io.h, gnulib/m4/xalloc.h,
+    gnulib/m4/xmalloc.c, gnulib/m4/xstrdup.c: Updated from CVS
+    gnulib.
+    * gnulib/acm4/libtool.m4: Updated from CVS libtool.
+    * m4/hash.c (m4_get_hash_iterator_next): Use `xzalloc (S)' in
+    place of `xcalloc (1, S)'.
+    * m4/m4.c (m4_create): Likewise.
+    * m4/m4private.h (m4_symbol_value_create): Likewise.
+    * m4/symtab.c (symtab_fetch): Likewise.
+    * m4/syntax.c (m4_syntax_create): Likewise.
+    * src/freeze.c (reload_frozen_state): Likewise.
+    * m4/path.c (search_path_add): Eliminate use of deprecated NEW
+    macro.
+    * m4/symtab.c (m4_symtab_create): Likewise.
+
+
+8e17f654bc81ce3bce46e598d1bf31202a7ac4ea : Gary V. Vaughan <gary@gnu.org> : Wed Oct 8 14
+commit 8e17f654bc81ce3bce46e598d1bf31202a7ac4ea
+Author: Gary V. Vaughan <gary@gnu.org>
+Date:   Wed Oct 8 14:46:10 2003 +0000
+
+    Don't use XMALLOC and XCALLOC.  Once we install the
+    corresponding patch into gnulib, this will fix some
+    address-calculation overflow bugs on hosts where calloc (A, B)
+    returns garbage when A*B overflows.
+    
+    * m4/hash.c (m4_hash_new, node_new, m4_hash_resize,
+    maybe_grow, m4_get_hash_iterator_next): Replace XMALLOC with
+    xmalloc, XCALLOC with xcalloc.
+    * m4/m4.c (m4_create): Likewise.
+    * m4/m4private.h (m4_symbol_value_create): Likewise.
+    * m4/output.c (m4_output_init): Likewise.
+    * m4/symtab.c (symtab_fetch, m4_set_symbol_traced): Likewise.
+    * m4/syntax.c (remove_syntax_attribute): Likewise.
+    * src/freeze.c (reload_frozen_state): Likewise.
+    * src/main.c (main): Likewise.
+
+
+28521991f23e4a45433b11e43eaf5fa5ca2beeed : Eric Blake <ebb9@byu.net> : Thu Oct 26 21
+commit 28521991f23e4a45433b11e43eaf5fa5ca2beeed
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Oct 26 21:11:56 2006 +0000
+
+    Silence -Wwrite-strings -Wpointer-arith warnings.
+    * src/builtin.c (define_user_macro): Allow NULL argument.
+    (m4_builtin, m4_indir): Cast away const of "".
+    * src/format.c (format): Likewise.
+    * src/macro.c (collect_arguments): Likewise.
+    (expand_macro): Avoid math on void*.
+    * src/m4.c (main): Adjust caller.
+    * src/output.c (freeze_diversions): Detect off_t overflow.
+
+
+ed312b56396c3e7356d0360da05ef5ced1d12d4d : Eric Blake <ebb9@byu.net> : Thu Oct 26 04
+commit ed312b56396c3e7356d0360da05ef5ced1d12d4d
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Oct 26 04:56:32 2006 +0000
+
+    * src/symtab.c (symtab_init): Avoid size_t overflow.
+    * src/output.c (make_diversion): Avoid size_t overflow.
+    * doc/m4.texinfo (Diversions): Test this fix.
+    * src/input.c (input_block): Remove unused member.  Reduce size
+    of struct.
+    (push_file, pop_input): Avoid useless assignment.
+    * NEWS: Document the bug fix.
+
+
+3a0fd1f43378739b510d8b31126eeb28f8a8b315 : Eric Blake <ebb9@byu.net> : Thu Oct 26 04
+commit 3a0fd1f43378739b510d8b31126eeb28f8a8b315
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Oct 26 04:55:20 2006 +0000
+
+    * src/symtab.c (symtab_init): Avoid size_t overflow.
+
+
+939dcc1642f4b6222149f98ec81303c40a995343 : Eric Blake <ebb9@byu.net> : Thu Oct 26 04
+commit 939dcc1642f4b6222149f98ec81303c40a995343
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Oct 26 04:45:30 2006 +0000
+
+    * src/output.c (make_diversion): Avoid size_t overflow.
+    * doc/m4.texinfo (Diversions): Test this fix.
+    * src/input.c (input_block): Remove unused member.  Reduce size
+    of struct.
+    (push_file, pop_input): Avoid useless assignment.
+    * NEWS: Document the bug fix.
+
+
+a5624fbb3b3a9f16b4e6459194347f362a1f2682 : Eric Blake <ebb9@byu.net> : Thu Aug 3 12
+commit a5624fbb3b3a9f16b4e6459194347f362a1f2682
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Aug 3 12:21:34 2006 +0000
+
+    * src/stackovf.c (setup_stackovf_trap): Gracefully avoid stack
+    overflow detection when sigstack exists but is not implemented.
+    Fixes debian bug 154053.
+    Reported by David Perlin.
+
+
+fc8c3407fa619dddff995f32b662680f9919892b : Eric Blake <ebb9@byu.net> : Thu Jul 13 13
+commit fc8c3407fa619dddff995f32b662680f9919892b
+Author: Eric Blake <ebb9@byu.net>
+Date:   Thu Jul 13 13:38:19 2006 +0000
+
+    * src/builtin.c (numeric_arg): Treat empty string as 0, with a
+    warning.  Detect quoted leading space and overflow as warnings.
+    (m4_eval): Treat empty radix as 10, and allow output in radix 1.
+    Treat width as minimum number of digits, as required by POSIX.
+    (m4_ifdef, m4_divert, m4_m4exit, m4_translit): Ignore extra
+    arguments.
+    (m4_substr): Likewise.  Silently treat empty start as 0.
+    (m4_undivert): Treat ` 1a' as file, not diversion 1.
+    * src/eval.c (eval_lex): Parse radix 1 numbers.
+    * doc/m4.texinfo (Invoking m4): Fix wording; there is more than
+    one type of warning.
+    (Manual): Document behavior of numeric parsing of empty string.
+    (Divert, Incr): Document error handling.
+    (Eval): Document radices better.
+    (Incompatibilities): Document translit incompatibility.
+    * NEWS: Document these changes.
+
+
+f277be5b9dad6db1a743370f691d176fea80d90f : Eric Blake <ebb9@byu.net> : Fri Jun 30 03
+commit f277be5b9dad6db1a743370f691d176fea80d90f
+Author: Eric Blake <ebb9@byu.net>
+Date:   Fri Jun 30 03:38:48 2006 +0000
+
+    Fix buffer overrun bug.
+    * m4/gnulib-cache.m4: Augment with gnulib-tool --import
+    xvasprintf.
+    * src/format.c [HAVE_EFGCVT]: Delete this code, and use *printf
+    variant instead, since [efg]cvt are obsolete and our use of them
+    was buggy (savannah sr #104303).
+    (format): Fix buffer overflow by using xasprintf.
+    * doc/m4.texinfo (Format): Expand format test to catch both bugs.
+    * NEWS: Document this fix.
+
+
+
+

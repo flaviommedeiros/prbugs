@@ -1,0 +1,220 @@
+git clone git://git.savannah.gnu.org/gzip.git
+
+commit a3db5806d012082b9e25cc36d09f19cd736a468f
+Type: integer overflow
+File: unlzw.c
+PC: true
+
+commit f17cbd13a1d0a7dcf067a1cdba89e9f668ce7d15
+Type: uninitialized variable
+File: gzip.c
+PC: true
+
+
+-- OVERFLOWS
+
+a3db5806d012082b9e25cc36d09f19cd736a468f : Jim Meyering <meyering@redhat.com> : Sun Jan 10 17
+commit a3db5806d012082b9e25cc36d09f19cd736a468f
+Author: Jim Meyering <meyering@redhat.com>
+Date:   Sun Jan 10 17:13:01 2010 +0100
+
+    gzip -d: do not clobber stack for valid input on x86_64
+    
+    * unlzw.c (unlzw): Avoid integer overflow.
+    Aki Helin reported the segfault along with an input to trigger the bug.
+    * NEWS (Bug fixes): Mention it.
+
+
+957725f33b57664dc7cacd5d419e4b8538c74fe4 : Jim Meyering <meyering@redhat.com> : Sun Dec 20 17
+commit 957725f33b57664dc7cacd5d419e4b8538c74fe4
+Author: Jim Meyering <meyering@redhat.com>
+Date:   Sun Dec 20 17:40:15 2009 +0100
+
+    build: quiet warnings from util.c
+    
+    * configure.ac (warnings): Add -Wno-overflow and -Wno-type-limits.
+
+
+03167e0cea52f915ea63566a76d76e68659542e8 : Paul Eggert <eggert@cs.ucla.edu> : Mon Nov 20 08
+commit 03167e0cea52f915ea63566a76d76e68659542e8
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Nov 20 08:40:33 2006 +0000
+
+    * NEWS, configure.ac (AC_INIT):
+    Version 1.3.6 released.
+    
+    * NEWS: Describe 1.3.6's changes.
+    * NEWS, README, README-alpha, TODO: Change from GPL to FDL.
+    * .cvsignore, README-cvs, bootstrap, bootstrap.conf: New files.
+    * doc/Makefile.am, lib/Makefile.am: New files.
+    * THANKS: Change own email address to cs.ucla.edu.  Add Sverre Jarp.
+    * TODO: Add new tasks to remove porting cruft and
+    all those buggy scripts.
+    
+    * configure.ac: Renamed from configure.in.
+    (AC_PREREQ): Bump to 2.60.
+    (AC_INIT): Bump version to 1.3.6.
+    (AC_CONFIG_AUX_DIR): New.
+    (AC_CONFIG_HEADERS): Move config.h to lib.
+    Input is now lib/config.hin.
+    (AM_INIT_AUTOMAKE): Add gnits, dist-shar.
+    (AC_PROG_CC_STDC): New, replacing AC_PROG_CC.
+    (AM_PROG_CC_C_O, AC_PROG_RANLIB): New.
+    (AC_AIX, AC_GNU_SOURCE, AC_MINIX): Remove; gnulib does them now.
+    (gl_EARLY, gl_INIT): New.
+    match.c was moved to lib/match.c.
+    (AC_CHECK_HEADERS_ONCE): Replace AC_CHECK_HEADERS.  Don't check
+    for sys/utime.h or utime.h.
+    (AC_CHECK_FUNCS_ONCE): Replace AC_CHECK_FUNCS.  Check for fchmod
+    and fchown, not utime.
+    (AC_REPLACE_FUNCS): Remove; rpmatch is now done by gnulib.
+    (AC_CONFIG_FILES): Add doc/Makefile, lib/Makefile.
+    
+    * bits.c: Use the more-usual form for copyright notices in source code.
+    * deflate.c: Likewise.
+    * gzip.c: Likewise.
+    * gzip.h: Likewise.
+    * inflate.c: Likewise.
+    * lzw.h: Likewise.
+    * revision.h: Likewise.
+    * tailor.h: Likewise.
+    * trees.c: Likewise.
+    * unpack.c: Likewise.
+    * unzip.c: Likewise.
+    * util.c: Likewise.
+    * crypt.c (dummy): Add decl so that pedantic compilers won't
+    complain about an empty file.
+    * gzip.c (license_msg): Use more-modern wording.
+    Include fcntl-safer.h, openat.h, stat-macros.h, stat-time.h.
+    Simply include <dirent.h> if !NO_DIR, removing a rats-nest of
+    #ifdefs.
+    Simply include <utimens.h> if !defined NO_UTIME, removing a
+    another rats-nest of #ifdefs.
+    (DIR_OPT, TIME_OPT): Remove.
+    (_D_EXACT_NAMLEN): Renamed from NAMLEN.  All uses changed.
+    (S_ISDIR, S_ISREG, O_BINARY, O_CREAT, O_EXCL, S_IRUSR, S_IWUSR):
+    Remove; gnulib now does this.
+    (RETSIGTYPE): Remove; Autoconf does this.
+    (program_name): Renamed from progname, for compatibility with gnulib.
+    All uses changed.
+    (time_stamp): Now struct timespec, not time_t.  All uses changd.
+    (remove_oftime): Now volatile.
+    (reset_times): Remove; now done by futimens.
+    (usage): Remove.
+    (try_help): New function.
+    (help, license): Don't output date as part of version.
+    A version number suffices.
+    (help): Redo help message to match style of coreutils etc.
+    (version): Don't bother printing compile-time configuration info
+    like STDC_HEADERS.
+    (main): Don't assume strlen (argv[0]) < INT_MAX (!).
+    On usage errors, suggest --help without outputting all the help.
+    (main, do_list): Remove unnecessary casts.
+    (treat_stdin, treat_file, get_method, copy_stat):
+    Support sub-second time stamp resolution.
+    (treat_file, copy_istat): Close some race conditions if files are
+    renamed as we read or write them.
+    (treat_file): Do not attempt to reset the access times of
+    directories that we read.
+    (open_and_stat, open_input_file): New functions.
+    (do_stat, get_istat): Remove; most of the contents went to these new
+    functions.
+    (make_ofname): Don't use WARN, as it affects exit status.
+    (get_method): When the original file name was truncated,
+    restore from its base name, not from its full name.
+    (do_list): Avoid undefined behavior with out-of-range time stamps.
+    ctime, for example, cannot be invoked on arbitrary time stamps safely,
+    since it might overrun an internal buffer.  Do not assume that
+    localtime succeeds.
+    (copy_stat): Do not remove input file; that's now the caller's
+    responsibility.  This avoids a problem if there is a write error
+    when the caller closes the output file.
+    (treat_dir): New arg FD, to avoid a race condition.  All uses changed.
+    (remove_output_file): New function.
+    (abort_gzip): Use it.
+    (abort_gzip_signal): New function, which is async-signal-safe.
+    Exit with the signal that we got.
+    * gzip.h (program_name, time_stamp, abort_gzip): Adjust decls to
+    match gzip.c changes.
+    * inflate.c (huft_build): Return 2 if null input.
+    * tailor.h (HAVE_UTIME): Do not define; gnulib does this now.
+    (OPEN): Use open_safer, not plain open.
+    * unlzh.c (NPT): Set to 1<<TBIT, not to the maximum of NT and NP.
+    (make_table): Report an error if 1<<tablebits < nextcode.
+    (read_pt_len): Report an error if 16 < c.
+    * unpack.c (read_tree): Report an error if the tree has too many
+    leaves while reading it.  Fix off-by-one error in final check.
+    * util.c: Include <xalloc.h>, for xalloc_die decl.
+    (gzip_base_name): Renamed from base_name, so we don't collide
+    with gnulib.  All uses changed.
+    (add_envopt): Use xstrdup instead of xmalloc+strcpy.
+    Use xcalloc rather than calloc + check.
+    (gzip_error): Renamed from error, so we don't collide with gnulib.
+    All uses changed.
+    (xalloc_die): New function.
+    (xmalloc): Remove; no longer needed.
+    * zip.c (zip): Watch for time stamp overflow; the old code
+    mishandled negative time stamps.
+    
+    * gzexe.in: Add support for --help, --version, --.
+    Don't call basename or sed if we can avoid it.
+    * zdiff.in: Likewise.
+    * zforce.in: Likewise.
+    * zgrep.in: Likewise.
+    * zless.in: Likewise.
+    * zmore.in: Likewise.
+    * znew.in: Likewise.
+    * zdiff.in: Protect against file names beginning with "-".
+    * zmore.in: Likewise.
+    * zgrep.in: Use printf rather than echo, to avoid problems with
+    leading "-" and backslash.  Return status of subsidiary grep.
+    * zless.in: Add copyright notice.
+    
+    * zless.1: We now pass "--" to LESSOPEN.
+    (BUGS): Mention that input file arguments are required.
+    Add copyright notice.
+    
+    * COPYING: Update to current version.
+    
+    * Makefile.am (SUBDIRS): New macro.
+    (AUTOMAKE_OPTIONS): Remove; now done in configure.ac.
+    (M4DIR, ACINCLUDE_INPUTS): Remove.
+    (EXTRA_DIST): Remove getopt.h.
+    (gzip_SOURCES): Remove getopt.c, getopt1.c, yesno.c.
+    (gzip_LDADD): Change from @LIBOBJS@ to lib/libgzip.a.
+    (AM_MAKEINFOFLAGS, info_TEXINFOS, gzip_TEXINFOS, ASCPP, LN_S):
+    (match.$(OBJEXT)): Move to subdirectory makefiles.
+    (.in): Substitute @VERSION@, too.
+    (check-local): New rule.
+    (MOSTLYCLEANFILES): Add _match.S.
+    
+    * doc/gzip.texi: Renamed from gzip.texi.  Change to GNU FDL
+    without invariant sections or cover texts.  Don't put
+    version number or date into sample gzip -h output.
+    * lib/match.c: Renamed from match.c.  Add ia64 version
+    written by Sverre Jarp (HP Labs).
+    
+    * INSTALL: Remove from CVS; now created automatically by
+    the bootstrap script.
+    * Makefile.in: Likewise.
+    * aclocal.m4: Likewise.
+    * config.h.in: Likewise.
+    * configure: Likewise.
+    * depcomp: Likewise.
+    * fdl.texi: Likewise.
+    * getopt.c: Likewise.
+    * getopt.h: Likewise.
+    * getopt1.c: Likewise.
+    * gzip.doc: Likewise.
+    * gzip.info: Likewise.
+    * install-sh: Likewise.
+    * mdate-sh: Likewise.
+    * missing: Likewise.
+    * mkinstalldirs: Likewise.
+    * rpmatch.c: Likewise.
+    * stamp-vti: Likewise.
+    * texinfo.tex: Likewise.
+    * version.texi: Likewise.
+    * yesno.c: Likewise.
+
+

@@ -1,0 +1,205 @@
+git clone https://github.com/jan0sch/sylpheed.git
+
+commit 55ea74176a5340af7f3b26bb30ab447ee8930237
+Type: memory leak
+File: libsylph/procmime.c
+PC: true
+
+
+commit 5db303f0aaec06b596e1ded7e9eb31be33337a0a
+File: src/rfc2015.c
+Type: memory leak
+PC: true
+
+commit 5db303f0aaec06b596e1ded7e9eb31be33337a0a
+File: src/jpilot.c
+Type: resource leak
+PC: true
+
+commit 3f1456ba4e11b6b73b0d03ee0483f290e75af9ef
+Type: memory leak
+File: src/mimeview.c
+PC: true
+
+commit 95a034f258f5e3fe7b9e67883cacecdd642c157a
+Type: memory leak
+File: libsylph/utils.c
+PC: G_OS_WIN32
+
+commit 67d1a938fe769fd855956ad316b58f0ff9414562
+Type: memory leak
+File: src/colorlabel.c
+PC: true
+
+commit 4777e97dfdd462898b81de219cb56989aabc1dde
+Type: memory leak
+File: libsylph/mh.c
+PC: true
+
+
+commit e2ee1f18254547d68f84674440a412d773947dd0
+Type: memory leak
+File: src/syldap.c
+PC: true
+
+
+e92a37518f4932a64bff7540b44d136cb8cdeca9 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Jul 20 06
+commit e92a37518f4932a64bff7540b44d136cb8cdeca9
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Jul 20 06:52:59 2007 +0000
+
+    fixed a memory leak, and made 2.4.4 release.
+
+
+e2270b5da68f782bd11b0a01e17458268ddf3487 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Wed Feb 7 08
+commit e2270b5da68f782bd11b0a01e17458268ddf3487
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Wed Feb 7 08:54:07 2007 +0000
+
+    fixed a memory leak. made 2.4.0beta3 release.
+
+
+8edea80808e3e41d5833ae80d4ed1e391702dbd2 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Thu Dec 28 02
+commit 8edea80808e3e41d5833ae80d4ed1e391702dbd2
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Thu Dec 28 02:46:11 2006 +0000
+
+    compose_exec_ext_editor(): display verbose error message. Fixed a memory leak.
+
+
+22145ca8bb35d76b61f9af32650c655b3dac0096 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Thu Jul 27 01
+commit 22145ca8bb35d76b61f9af32650c655b3dac0096
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Thu Jul 27 01:47:28 2006 +0000
+
+    fixed a memory leak.
+
+
+389b2d75aca41cbce5b85454a8661b007871ff72 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Thu Jan 12 10
+commit 389b2d75aca41cbce5b85454a8661b007871ff72
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Thu Jan 12 10:15:27 2006 +0000
+
+    fixed a memory leak where threading is off.
+
+
+220b5e7941f9c5606bab2b2e896829080e171f72 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Tue Dec 20 06
+commit 220b5e7941f9c5606bab2b2e896829080e171f72
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Tue Dec 20 06:10:09 2005 +0000
+
+    summary_set_row(): fixed a memory leak.
+
+
+ea48b04e9431ebcbea818d8fe76da195457f158d : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Dec 2 08
+commit ea48b04e9431ebcbea818d8fe76da195457f158d
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Dec 2 08:24:46 2005 +0000
+
+    fixed crash bug when an address in a group was modified. Fixed memory leaks.
+
+
+fa6ce6747f012d817dad558391c86bf8ce2dec0c : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Mon Mar 14 16
+commit fa6ce6747f012d817dad558391c86bf8ce2dec0c
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Mon Mar 14 16:59:17 2005 +0000
+
+    fixed a memory leak.
+
+
+0939df3b4da8e175b4dc828edf6dd11405ba73c2 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Wed Feb 9 08
+commit 0939df3b4da8e175b4dc828edf6dd11405ba73c2
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Wed Feb 9 08:34:09 2005 +0000
+
+    src/textview.c: fixed a memory leak.
+
+
+b590b08c000fa693eab1b8369374172776fbd9d8 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Jan 28 07
+commit b590b08c000fa693eab1b8369374172776fbd9d8
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Jan 28 07:41:17 2005 +0000
+
+    template.c: fixed a memory leak.
+
+
+5db303f0aaec06b596e1ded7e9eb31be33337a0a : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Tue Nov 26 09
+commit 5db303f0aaec06b596e1ded7e9eb31be33337a0a
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Tue Nov 26 09:06:38 2013 +0000
+
+    fixed resource/memory leaks.
+
+
+4da7cb11fbee7a77f8c796ddc70c9855cc7e8cc5 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Aug 26 08
+commit 4da7cb11fbee7a77f8c796ddc70c9855cc7e8cc5
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Aug 26 08:18:12 2005 +0000
+
+    fixed socket resource leak on Win32.
+
+
+commit e2a38eb3585ebc668e50043b3a486209a4d36d1c
+Type: uninitialized variable
+File: src/jpilot.c
+PC: USE_JPILOT
+
+
+-- OVERFLOWS
+
+55656884ccedd54e8fc2a5ea0c83c542859447a2 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Wed May 17 11
+commit 55656884ccedd54e8fc2a5ea0c83c542859447a2
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Wed May 17 11:27:39 2006 +0000
+
+    fixed execution failure when using accessibility module, and character corruption and buffer overflow on sending when using half-width kana.
+
+
+7c62e7242a963ec248e5f5a7846d301d1e48a0d8 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Jan 13 06
+commit 7c62e7242a963ec248e5f5a7846d301d1e48a0d8
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Jan 13 06:12:30 2006 +0000
+
+    fixed 32-bit integer overflow where the total size of POP3 messages is greater than 2GB.
+
+
+5e7035bbcd08d56522ff5ca33df6e3a0b2041955 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Mon Nov 14 08
+commit 5e7035bbcd08d56522ff5ca33df6e3a0b2041955
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Mon Nov 14 08:07:48 2005 +0000
+
+    prevent integer overflow on summary status.
+
+
+5655ddff730e35b787a1c35b1a140abf6900f8d1 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Tue Nov 8 05
+commit 5655ddff730e35b787a1c35b1a140abf6900f8d1
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Tue Nov 8 05:37:49 2005 +0000
+
+    src/ldif.c: ldif_get_line(): fixed buffer overflow.
+
+
+22e65dc09364144e0d8b01115191bb1c31c19a1b : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Tue Nov 8 04
+commit 22e65dc09364144e0d8b01115191bb1c31c19a1b
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Tue Nov 8 04:25:24 2005 +0000
+
+    src/ldif.c: ldif_get_line(): fixed buffer overflow.
+
+
+e7d600e613fbbfdbcbb6e5c33013fa24425361a9 : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Wed Mar 23 10
+commit e7d600e613fbbfdbcbb6e5c33013fa24425361a9
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Wed Mar 23 10:23:49 2005 +0000
+
+    fixed buffer overflow in conv_jistoeuc().
+
+
+4485e6923b7b2a277f1280151178c4f619ca53bb : Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> : Fri Mar 4 07
+commit 4485e6923b7b2a277f1280151178c4f619ca53bb
+Author: Hiroyuki Yamamoto <hiro-y@kcn.ne.jp>
+Date:   Fri Mar 4 07:05:52 2005 +0000
+
+    fixed a buffer overflow bug.
+
+

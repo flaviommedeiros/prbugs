@@ -1,0 +1,48 @@
+-- MEMLEAK
+
+35e432dd3af2c56c00fc64ca340d1e615030f0a3 : Elliott Hughes <enh@google.com> : Sun Sep 9 14
+commit 35e432dd3af2c56c00fc64ca340d1e615030f0a3
+Author: Elliott Hughes <enh@google.com>
+Date:   Sun Sep 9 14:23:38 2012 -0700
+
+    Upgrade to expat 2.1.0.
+    
+    From http://www.libexpat.org/:
+    
+    Release 2.1.0 includes security & other bug fixes, new features, and updated build support.
+    
+    Security fixes
+    
+    * Memory leak in poolGrow (CVE-2012-1148)
+    * Resource leak in readfilemap.c (CVE-2012-1147)
+    * Hash DOS attack (CVE-2012-0876)
+    * Buffer over-read and crash in big2_toUtf8 (CVE-2009-3560)
+    * Parser crash with special UTF-8 sequences (CVE-2009-3270)
+    
+    New features
+    
+    * Added function XML_SetHashSalt that allows setting an initial value (salt) for hash calculations (part of the fix for bug 3496608).
+    * When compiled with XML_ATTR_INFO defined, adds new API member XML_GetAttributeInfo() that allows retrieving the byte offsets for attribute names and values (patch 3446384).
+    * Added CMake build system (bug 2990652, patch 3312568).
+    * Added run-benchmark target to Makefile.in - relies on testdata module present in the same relative location as in the repository.
+    
+    Bug fixes
+    
+    * Harmful XML_ParserCreateNS suggestion (1742315)
+    * CVE-2012-1147 - Resource leak in readfilemap.c (2895533)
+    * Expat build fails on linux-amd64 with gcc version>=4.1 -O3 (1785430)
+    * Build modifications using autoreconf instead of buildconf.sh (1983953, 2517952, 2517962, 2649838)
+    * OBJEXT and EXEEXT support while building (2815947, 2884086)
+    * CVE-2009-3720 - Parser crash with special UTF-8 sequences (1990430)
+    * xmlwf should return non-zero exit status if not well-formed (2517938)
+    * Wrong statement about XMLDecl in xmlwf.1 and xmlwf.sgml (2517946)
+    * Dangling positionPtr after error (2855609)
+    * CVE-2009-3560 - Buffer over-read and crash in big2_toUtf8() (2894085)
+    * CVE-2012-1148 - Memory leak in poolGrow (2958794)
+    * UNEXPECTED_STATE with a trailing "%" in entity value (3010819)
+    * Unitialized memory returned from XML_Parse (3206497)
+    * make check fails on mingw-w64 (87849)
+    
+    Change-Id: Ieb663fdfea82119918e245a714af533b58e0f7f5
+
+

@@ -1,0 +1,1102 @@
+commit c0efa83c0b6727bf9f96d2503cd61d1c3cd41684
+Type: memory leak
+File: src/print-xml.c
+PC: true
+
+
+commit 06ec0105b12cdfa2994283e345154e6720354808
+Type: memory leak
+File: src/graphviz.c
+PC: true
+
+commit c547693afdacf4b865027d3bb8c53f601eadb5ae
+Type: memory leak
+File: src/getargs.c
+PC: true
+
+commit 71431084d157c1a15adbab5403246cdce670875a
+Type: memory leak
+File: src/output.c
+PC: true
+
+commit 1e20ad112fc43f3d6adb3cc26be69ebffb14e9f6
+Type: memory leak
+File: src/named-ref.c 
+PC: true
+
+commit 1e20ad112fc43f3d6adb3cc26be69ebffb14e9f6
+Type: memory leak
+File: src/symlist.c
+PC: true
+
+commit eb1b07409f0ccad9970c8a60ded9f2a56d205b9c
+Type: memory leak
+File: data/push.c
+PC: yyoverflow
+
+commit 580b892607e7709b316003f31c825231b7dc6d62
+Type: memory leak
+File: src/flex-scanner.h 
+PC: !YY_FLEX_MAJOR_VERSION || YY_FLEX_MAJOR_VERSION < 2 || YY_FLEX_MAJOR_VERSION == 2....
+
+commit eb095650011f68858e877e3590f6901bc79ba668
+Type: memory leak
+File: src/files.c
+PC: true
+
+commit eb095650011f68858e877e3590f6901bc79ba668
+Type: memory leak
+File: src/main.c
+PC: true
+
+commit eb095650011f68858e877e3590f6901bc79ba668
+Type: memory leak
+File: src/muscle_tab.c
+PC: true
+
+commit 96a1981a778d4c72d6fc2f6e9f6be6ce2f6e9fd6
+Type: memory leak
+File: data/push.c 
+PC: YYERROR_VERBOSE
+
+commit 35ee866a326351fe074945f67f4801fd6b829def
+Type: memory leak
+File: data/glr.c 
+PC: true
+
+commit b4c1f9d2b647df6b70732d76bbf5bc9b21372e9a
+Type: memory leak
+File: yacc.c
+PC: YYERROR_VERBOSE
+
+commit 8b752b00fdaaa3802e4ab05a468f6cda4a9fa500
+Type: memory leak
+File: conflicts.c
+PC: true
+
+commit 8b752b00fdaaa3802e4ab05a468f6cda4a9fa500
+Type: memory leak
+File: state.c
+PC: true
+
+commit 091e20bbee87fc6e5b1e9e2938767c6e89b19035
+Type: memory leak
+File: src/output.c
+PC: true
+
+commit ba7560e26bfa2f5a340545830d46e0437fcb701a
+Type: segmentation fault
+File: src/getargs.c
+PC: true
+
+commit 9138c575d80fea7f2ca5106b55932e3f25d7be92
+Type: segmentation fault
+File: data/glr.c 
+PC: YYDEBUG
+
+commit 18d9185cae4c43684e4a2a134dd3090b55307586
+Type: segmentation fault
+File: data/glr.c 
+PC: YYSTACKEXPANDABLE
+
+commit 8e03724b11043943af86cb8213d90ce7a87f6e22
+Type: segmentation fault
+File: src/reader.c 
+PC: true
+
+commit d3ae5af6ec7dbcfa2c7dce1a175e35934b85b274
+Type: uninitialized variable
+File: yacc.c
+PC: true
+
+commit d741bd1bfd186e7ce7f74377a01f5eeb206324e0
+Type: uninitialized variable
+File: data/glr.c 
+PC: true
+
+
+
+
+-- OVERFLOW
+
+658b189348746aa79fba777f021bd7dc13eeabd7 : Akim Demaille <akim@lrde.epita.fr> : Wed Jan 21 18
+commit 658b189348746aa79fba777f021bd7dc13eeabd7
+Author: Akim Demaille <akim@lrde.epita.fr>
+Date:   Wed Jan 21 18:34:01 2015 +0100
+
+    tests: c++: fix a C++03 conformance issue
+    
+    This fixes test 241 on xLC:
+    
+    "input.y", line 42.11: 1540-0274 (S) The name lookup for "report" did not find a declaration.
+    "input.y", line 42.11: 1540-1292 (I) Static declarations are not considered for a function call if the function is not qualified.
+    
+    where report is:
+    
+      static void
+      report (std::ostream& yyo, int ival, float fval)
+      {
+        yyo << "ival: " << ival << ", fval: " <<  fval;
+      }
+    
+    and line 42 is:
+    
+      %printer { report (yyo, $$,       $<fval>$); } <ival>;
+    
+    It turns out that indeed this function must not be declared static,
+    <http://stackoverflow.com/a/17662745/1353549>.  Let's put it into an
+    anonymous namespace.
+    
+    Reported by Thomas Jahns.
+    http://lists.gnu.org/archive/html/bug-bison/2015-01/msg00059.html
+    
+    * tests/actions.at (Qualified $$ in actions): Don't use "static",
+    prefer anonymous namespace.
+
+
+071863b3d88c232c10348b7c38378c47d363857c : Akim Demaille <akim@lrde.epita.fr> : Wed Oct 16 15
+commit 071863b3d88c232c10348b7c38378c47d363857c
+Author: Akim Demaille <akim@lrde.epita.fr>
+Date:   Wed Oct 16 15:19:44 2013 +0200
+
+    glr: allow spaces between "%?" and "{" in predicates
+    
+    Reported by Rici Lake.
+    http://lists.gnu.org/archive/html/bug-bison/2013-10/msg00004.html
+    http://stackoverflow.com/questions/19330171/
+    
+    * src/scan-gram.l: Do not try to be too smart when diagnosing invalid
+    directives.
+    * tests/glr-regression.at (Predicates): New test.
+
+
+7ba01e111c878291d8677db124eb4d7aef7c9541 : Akim Demaille <akim@lrde.epita.fr> : Fri Apr 19 17
+commit 7ba01e111c878291d8677db124eb4d7aef7c9541
+Author: Akim Demaille <akim@lrde.epita.fr>
+Date:   Fri Apr 19 17:13:07 2013 +0200
+
+    tests: enable -Wsign-compare and fix corresponding warnings
+    
+    -Wsign-compare was disabled for bison's own code, following gnulib's
+    approach.  However, the generated parsers should not trigger such
+    warnings.
+    
+    Reported by Efi Fogel.
+    http://lists.gnu.org/archive/html/help-bison/2013-04/msg00018.html
+    
+    See also http://stackoverflow.com/questions/16101062 for the weird
+    "-(unsigned)i" piece of code.
+    
+    * configure.ac (warn_tests): Enable -Wsign-compare.
+    * data/location.cc (position::add_): New.
+    (position::lines, position::columns): Use it.
+    * tests/actions.at (AT_CHECK_PRINTER_AND_DESTRUCTOR): Fix signedness issues.
+
+
+23761f428a4868820812ddb28aa71f60e0cf26d3 : Akim Demaille <demaille@gostai.com> : Thu Mar 25 17
+commit 23761f428a4868820812ddb28aa71f60e0cf26d3
+Author: Akim Demaille <demaille@gostai.com>
+Date:   Thu Mar 25 17:02:38 2010 +0100
+
+    tests: fix 250: parse.error=verbose overflow.
+    
+    	* tests/regression.at (parse.error=verbose overflow): Avoid the
+    	double inclusion of stdlib.h as it triggers hard errors.
+    (cherry picked from commit d6b347e43324926f750b22709e2c5262f60fa991)
+
+
+d6b347e43324926f750b22709e2c5262f60fa991 : Akim Demaille <demaille@gostai.com> : Thu Mar 25 17
+commit d6b347e43324926f750b22709e2c5262f60fa991
+Author: Akim Demaille <demaille@gostai.com>
+Date:   Thu Mar 25 17:02:38 2010 +0100
+
+    tests: fix 250: parse.error=verbose overflow.
+    
+    	* tests/regression.at (parse.error=verbose overflow): Avoid the
+    	double inclusion of stdlib.h as it triggers hard errors.
+
+
+69a2ab11cf39c253cd6a879915445de18171b739 : Joel E. Denny <jdenny@clemson.edu> : Wed Sep 23 17
+commit 69a2ab11cf39c253cd6a879915445de18171b739
+Author: Joel E. Denny <jdenny@clemson.edu>
+Date:   Wed Sep 23 17:54:04 2009 -0400
+
+    yysyntax_error: avoid duplicate lookahead collection.
+    
+    Except when memory reallocation is required, this change
+    eliminates the need to invoke yysyntax_error twice and thus to
+    repeat the collection of lookaheads.  It also prepares for
+    future extensions that will make those repetitions more
+    expensive and that will require additional memory management in
+    yysyntax_error.  Finally, it fixes an obscure bug already
+    exercised in the test suite.
+    * data/yacc.c (yysyntax_error): Add arguments for message
+    buffer variables stored in the parser.  Instead of size, return
+    status similar to yyparse status but indicating success of
+    message creation.  Other than the actual reallocation of the
+    message buffer, import and clean up memory management code
+    from...
+    (yyparse, yypush_parse): ... here.
+    * tests/regression.at (%error-verbose overflow): No longer an
+    expected failure.
+    (cherry picked from commit 45319f1365eb8d125424f31401d9d33cc02ff4ad)
+    
+    Conflicts:
+    
+    	src/parse-gram.c
+    	src/parse-gram.h
+
+
+d88cf117910f0023d3a0f53c2380aec40a748c3d : Joel E. Denny <jdenny@clemson.edu> : Wed Sep 23 17
+commit d88cf117910f0023d3a0f53c2380aec40a748c3d
+Author: Joel E. Denny <jdenny@clemson.edu>
+Date:   Wed Sep 23 17:53:15 2009 -0400
+
+    yysyntax_error: test memory management more.
+    
+    * tests/atlocal.in (NO_WERROR_CFLAGS): New cpp macro.
+    * tests/regression.at (%error-verbose and YYSTACK_USE_ALLOCA):
+    New test group.
+    (%error-verbose overflow): New test group that reveals an
+    obscure bug.  Expected fail for now.
+    (cherry picked from commit 52cea04ad36abf3ab684b88cba45d6c26dda80c9)
+
+
+45319f1365eb8d125424f31401d9d33cc02ff4ad : Joel E. Denny <jdenny@clemson.edu> : Wed Sep 23 17
+commit 45319f1365eb8d125424f31401d9d33cc02ff4ad
+Author: Joel E. Denny <jdenny@clemson.edu>
+Date:   Wed Sep 23 17:39:39 2009 -0400
+
+    yysyntax_error: avoid duplicate lookahead collection.
+    
+    Except when memory reallocation is required, this change
+    eliminates the need to invoke yysyntax_error twice and thus to
+    repeat the collection of lookaheads.  It also prepares for
+    future extensions that will make those repetitions more
+    expensive and that will require additional memory management in
+    yysyntax_error.  Finally, it fixes an obscure bug already
+    exercised in the test suite.
+    * data/yacc.c (yysyntax_error): Add arguments for message
+    buffer variables stored in the parser.  Instead of size, return
+    status similar to yyparse status but indicating success of
+    message creation.  Other than the actual reallocation of the
+    message buffer, import and clean up memory management code
+    from...
+    (yyparse, yypush_parse): ... here.
+    * tests/regression.at (parse.error=verbose overflow): No longer
+    an expected failure.
+
+
+52cea04ad36abf3ab684b88cba45d6c26dda80c9 : Joel E. Denny <jdenny@clemson.edu> : Wed Sep 23 17
+commit 52cea04ad36abf3ab684b88cba45d6c26dda80c9
+Author: Joel E. Denny <jdenny@clemson.edu>
+Date:   Wed Sep 23 17:37:58 2009 -0400
+
+    yysyntax_error: test memory management more.
+    
+    * tests/atlocal.in (NO_WERROR_CFLAGS): New cpp macro.
+    * tests/regression.at (parse.error=verbose and
+    YYSTACK_USE_ALLOCA): New test group.
+    (parse.error=verbose overflow): New test group that reveals an
+    obscure bug.  Expected fail for now.
+
+
+a2ea208d82fdd67257d16e11b93ab17a8c48d452 : Joel E. Denny <jdenny@ces.clemson.edu> : Fri Aug 3 04
+commit a2ea208d82fdd67257d16e11b93ab17a8c48d452
+Author: Joel E. Denny <jdenny@ces.clemson.edu>
+Date:   Fri Aug 3 04:51:23 2007 +0000
+
+    * data/yacc.c (yyexhaustedlab): Define it when YYERROR_VERBOSE is
+    true since it's then always used regardless of whether yyoverflow is
+    defined.  Reported by Christian Burger at
+    <http://lists.gnu.org/archive/html/bug-bison/2007-07/msg00031.html>.
+    * THANKS: Add Christian Burger.
+
+
+ddc8ede1abfd807faf5ddb0ee6c56cead0db84e3 : Paul Eggert <eggert@cs.ucla.edu> : Sun Jul 9 20
+commit ddc8ede1abfd807faf5ddb0ee6c56cead0db84e3
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun Jul 9 20:36:33 2006 +0000
+
+    * NEWS: Instead of %union, you can define and use your own union type
+    YYSTYPE if your grammar contains at least one <type> tag.
+    Your YYSTYPE need not be a macro; it can be a typedef.
+    * doc/bison.texinfo (Value Type, Multiple Types, Location Type):
+    (Union Decl, Decl Summary): Document this.
+    * data/glr.c (YYSTYPE): Implement this.
+    * data/glr.cc (YYSTYPE): Likewise.
+    * data/lalr1.cc (YYSTYPE): Likewise.
+    * data/yacc.c (YYSTYPE): Likewise.
+    * src/output.c (prepare): Output tag_seen_flag.
+    * src/parse-gram.y (declaration, grammar_declaration):
+    Use 'union_seen' rather than 'typed' to determine whether
+    %union has been seen, since grammars can now be typed without
+    %union.
+    (symbol_declaration, type.opt, symbol_def):
+    Keep track of whether a tag has been seen.
+    * src/reader.c (union_seen, tag_seen): New vars.
+    (typed): remove.
+    * src/reader.h (union_seen, tag_seen, typed): Likewise.
+    * src/scan-code.l (untyped_var_seen): New variable.
+    (handle_action_dollar): Adjust to above changes.
+    (handle_action_dollar, handle_action_at):
+    Improve overflow checking for outlandish numbers.
+    * tests/input.at (AT_CHECK_UNUSED_VALUES): Redo test to
+    avoid new diagnostics generated by above changes.
+    * tests/regression.at (YYSTYPE typedef): Add test to check
+    for type tags without %union.
+
+
+e9071366c3104e4e4a2490c16d53e7eeef670f45 : Akim Demaille <akim@epita.fr> : Tue Jun 6 16
+commit e9071366c3104e4e4a2490c16d53e7eeef670f45
+Author: Akim Demaille <akim@epita.fr>
+Date:   Tue Jun 6 16:40:06 2006 +0000
+
+    Extract the parsing of user actions from the grammar scanner.
+    As a consequence, the relation between the grammar scanner and
+    parser is much simpler.  We can also split "composite tokens" back
+    into simple tokens.
+    * src/gram.h (ITEM_NUMBER_MAX, RULE_NUMBER_MAX): New.
+    * src/scan-gram.l (add_column_width, adjust_location): Move to and
+    rename as...
+    * src/location.h, src/location.c (add_column_width)
+    (location_compute): these.
+    Fix the column count: the initial column is 0.
+    (location_print): Be robust to ending column being 0.
+    * src/location.h (boundary_set): New.
+    * src/main.c: Adjust to scanner_free being renamed as
+    gram_scanner_free.
+    * src/output.c: Include scan-code.h.
+    * src/parse-gram.y: Include scan-gram.h and scan-code.h.
+    Use boundary_set.
+    (PERCENT_DESTRUCTOR, PERCENT_PRINTER, PERCENT_INITIAL_ACTION)
+    (PERCENT_LEX_PARAM, PERCENT_PARSE_PARAM): Remove the {...} part,
+    which is now, again, a separate token.
+    Adjust all dependencies.
+    Whereever actions with $ and @ are used, use translate_code.
+    (action): Remove this nonterminal which is now useless.
+    * src/reader.c: Include assert.h, scan-gram.h and scan-code.h.
+    (grammar_current_rule_action_append): Use translate_code.
+    (packgram): Bound check ruleno, itemno, and rule_length.
+    * src/reader.h (gram_in, gram__flex_debug, scanner_cursor)
+    (last_string, last_braced_code_loc, max_left_semantic_context)
+    (scanner_initialize, scanner_free, scanner_last_string_free)
+    (gram_out, gram_lineno, YY_DECL_): Move to...
+    * src/scan-gram.h: this new file.
+    (YY_DECL): Rename as...
+    (GRAM_DECL): this.
+    * src/scan-code.h, src/scan-code.l, src/scan-code-c.c: New.
+    * src/scan-gram.l (gram_get_lineno, gram_get_in, gram_get_out):
+    (gram_get_leng, gram_get_text, gram_set_lineno, gram_set_in):
+    (gram_set_out, gram_get_debug, gram_set_debug, gram_lex_destroy):
+    Move these declarations, and...
+    (obstack_for_string, STRING_GROW, STRING_FINISH, STRING_FREE):
+    these to...
+    * src/flex-scanner.h: this new file.
+    * src/scan-gram.l (rule_length, rule_length_overflow)
+    (increment_rule_length): Remove.
+    (last_braced_code_loc): Rename as...
+    (gram_last_braced_code_loc): this.
+    Adjust to the changes of the parser.
+    Move all the handling of $ and @ into...
+    * src/scan-code.l: here.
+    * src/scan-gram.l (handle_dollar, handle_at): Remove.
+    (handle_action_dollar, handle_action_at): Move to...
+    * src/scan-code.l: here.
+    * src/Makefile.am (bison_SOURCES): Add flex-scanner.h,
+    scan-code.h, scan-code-c.c, scan-gram.h.
+    (EXTRA_bison_SOURCES): Add scan-code.l.
+    (BUILT_SOURCES): Add scan-code.c.
+    (yacc): Be robust to white spaces.
+    * tests/conflicts.at, tests/input.at, tests/reduce.at,
+    * tests/regression.at: Adjust the column numbers.
+    * tests/regression.at: Adjust the error message.
+
+
+fc3f467ff12133962ef69f58e60cb24fc29cc929 : Paul Eggert <eggert@cs.ucla.edu> : Fri Feb 17 00
+commit fc3f467ff12133962ef69f58e60cb24fc29cc929
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Feb 17 00:08:17 2006 +0000
+
+    * data/yacc.c [(! defined yyoverflow || YYERROR_VERBOSE) && !
+    YYSTACK_USE_ALLOCA && ! defined YYSTACK_ALLOC && defined
+    __cplusplus && ! defined _STDLIB_H && !
+    ((defined YYMALLOC || defined malloc) && (defined YYFREE ||
+    defined free))]: Include <stdlib.h> rather than rolling our own
+    declarations of malloc and free, to avoid problems with
+    incompatible declarations (using 'throw') C++'s stdlib.h.  This
+    should fix Debian bug 340012
+    <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=340012>,
+    reported by Guillaume Melquiond.
+
+
+4517da37570b39a3d4b3f523dd373abe7c622bb0 : Paul Eggert <eggert@cs.ucla.edu> : Wed Dec 28 08
+commit 4517da37570b39a3d4b3f523dd373abe7c622bb0
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Dec 28 08:45:47 2005 +0000
+
+    * src/location.h (boundary): Note that a line or column equal
+    to INT_MAX indicates an overflow.
+    * src/scan-gram.l: Include verify.h.  Don't include get-errno.h.
+    (rule_length_overflow, increment_rule_length, add_column_width):
+    New functions.
+    (<INITIAL>{id}, <SC_ESCAPED_STRING>"\"", <SC_ESCAPED_CHARACTER>"'"):
+    (<SC_BRACED_CODE>"}"):
+    Use increment_rule_length rather than incrementing it by hand.
+    (adjust_location, handle_syncline): Diagnose overflow.
+    (handle_action_dollar, handle_action_at):
+    Fix bug with monstrosities like $-2147483648.
+    Remove now-unnecessary checks.
+    (scan_integer): Verify assumptions and remove now-unnecessary checks.
+    (convert_ucn_to_byte): Verify assumptions.
+    (handle_syncline): New arg LOC.  All callers changed.
+    Don't store through a value derived from char const * pointer.
+
+
+12ce2df60d16961eaa03a5aa009eeaa645e4e1cb : Paul Eggert <eggert@cs.ucla.edu> : Fri Dec 9 22
+commit 12ce2df60d16961eaa03a5aa009eeaa645e4e1cb
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Dec 9 22:14:36 2005 +0000
+
+    Cleanups so that Bison-generated parsers have less lint.
+    * data/c.m4 (b4_yydestruct_generate, b4_yysymprint_generate):
+    Prepend /*ARGSUSED*/, for lint's sake.
+    * data/glr.c (YYUSE): Properly parenthesize, and use an alternate
+    definition if 'lint' is defined.
+    (YYID): New macro (or function, if lint).
+    All uses of /*CONSTCOND*/0 replaced by YYID(0).
+    * data/yacc.c: Likewise.
+    * data/glr.c (yyuserAction, yyuserMerge, yy_reduce_print):
+    (yyrecoverSyntaxError): Prepend /*ARGSUSED*/.
+    * data/glr.cc (YYLLOC_DEFAULT): Omit /*CONSTCOND*/ since this code
+    is C++ only.
+    * data/lalr1.cc (YYUSE): Just use a cast, since this code is C++ only.
+    * data/yacc.c (YYSTACK_FREE) [defined YYSTACK_ALLOC]:
+    Use YYID(0) rather than 0, for lint.
+    (yystrlen): Rewrite to avoid lint warning about ptrdiff_t overflow.
+    (yysyntax_error): Rewrite to avoid lint warnings about parenthesization.
+
+
+1a05945136faf21ac5e3a07cfcdee8ee2e8ab6ae : Paul Eggert <eggert@cs.ucla.edu> : Tue Jul 19 00
+commit 1a05945136faf21ac5e3a07cfcdee8ee2e8ab6ae
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Tue Jul 19 00:05:57 2005 +0000
+
+    * NEWS: Document minor wording changes in diagnostics of
+    Bison-generated parsers.
+    * data/glr.c (yyMemoryExhausted): Renamed from yyStackOverflow.
+    Remove unused formals.  All uses changed.
+    (yyreportAmbiguity): "ambiguity detected" -> "syntax is ambiguous".
+    (yyparse): Rename yyoverflowlab to yyexhaustedlab.
+    * data/yacc.c (yyparse): "parser stack overflow" -> "memory exhausted".
+    Rename yyoverflowab to yyexhaustedlab.
+    When memory exhaustion occurs during syntax-error reporting,
+    report it separately rather than in a single diagnostic; this
+    eases translation.
+    * doc/bison.texinfo (Memory Management): Renamed from Stack Overflow.
+    (Memory Exhausted): Renamed from Parser Stack Overflow.
+    Revamp wording slightly to prefer "memory exhaustion".
+    * tests/actions.at: "parser stack overflow" -> "memory exhausted".
+
+
+6100a9aa2e68e992396e3e1da954921dc1fee801 : Paul Eggert <eggert@cs.ucla.edu> : Mon Jul 18 18
+commit 6100a9aa2e68e992396e3e1da954921dc1fee801
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Jul 18 18:09:40 2005 +0000
+
+    Improve tests for stack overflow in GLR parser.
+    Problem reported by twlevo@xs4all.nl.
+    * data/glr.c (struct yyGLRStack): Remove yyerrflag member.
+    All uses removed.
+    (yyStackOverflow): Just longjmp, but with value 2 so that caller
+    can handle the problem.
+    (YYCHK1): Use goto (a la yacc.c) rather than setting a flag.
+    (yyparse): New local variable yyresult to record the result.
+    Use result of setjmp to set it, rather than storing itinto
+    struct.
+    (yyDone): Remove label.
+    (yyacceptlab, yyabortlab, yyoverflowlab, yyreturn): New labels,
+    to mimic yacc.c.  Do not discard lookahead if it's EOF (possible
+    if YYABORT is used).
+    * tests/actions.at (_AT_CHECK_PRINTER_AND_DESTRUCTOR): Exit with
+    yyparse status; put status > 1 into diagnostic.
+    Check that status==2 works.
+    * tests/calc.at, tests/cxx-type.at, tests/glr-regression.at:
+    Use exit status 3 for failure to open (which shouldn't happen).
+
+
+15f40952f7696eab92570c3be352204242bb80b3 : Paul Eggert <eggert@cs.ucla.edu> : Sun Jul 17 07
+commit 15f40952f7696eab92570c3be352204242bb80b3
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun Jul 17 07:30:38 2005 +0000
+
+    * data/glr.c (yyparse): Don't assume that the initial calls
+    to YYMALLOC succeed; in that case, yyparse incorrectly returned 0.
+    Print a stack-overflow message and fail instead.
+    Initialize the line-number information before creating the stack,
+    so that the stack-overflow message can report line zero safely.
+
+
+63cb01d656aadba43f5ad2feb935bf32546002f2 : Paul Eggert <eggert@cs.ucla.edu> : Tue Jul 5 21
+commit 63cb01d656aadba43f5ad2feb935bf32546002f2
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Tue Jul 5 21:58:37 2005 +0000
+
+    Rewrite GLR parser to catch more buffer overrun, storage exhaustion,
+    and size overflow errors.
+    * data/glr.c: Include <stdio.h> etc. after user prolog, not before,
+    in case the user prolog sets feature-test macros like _GNU_SOURCE.
+    (YYSIZEMAX): New macro.
+    (yystpcpy): New function, taken from yacc.c.
+    (struct yyGLRStack.yyspaceLeft): Now size_t, not int.
+    (yyinitGLRStack, yyfreeGLRstack): Remove unnecessary forward decls,
+    so that we don't have to maintain their signatures.
+    (yyFail): Check for buffer overflow, by using vsnprintf rather
+    than vsprintf.  Allocate a bigger buffer if possible.
+    Report an error if buffer allocation fails.
+    (yyStackOverflow): New function.
+    (yyinitStateSet, yyinitGLRStack): Return a boolean indicating whether
+    the initialization was successful.  It might fail if storage was
+    exhausted.
+    (yyexpandGLRStack): Add more checks for storage allocation failure.
+    Use yyStackOverflow to report failures.
+    (yymarkStackDeleted, yyglrShift, yyglrShiftDefer, yydoAction):
+    (yysplitStack, yyprocessOneStack, yyparse, yypstack):
+    Don't assume stack number fits in int.
+    (yysplitStack): Check for storage allocation failure.
+    (yysplitStack, yyprocessOneStack): Add pure_formals, so that we
+    can print diagnostics on storage allocation failure.  All callers
+    changed.
+    (yyresolveValue): Use yybool for boolean.
+    (yyreportSyntaxError): Check for size-calculation overflow.
+    This code is taken from yacc.c.
+    (yyparse): Check for storage allocation errors when allocating
+    the initial stack.
+
+
+cea1469d47457150f9643ef3e5c21154b0eba1db : Paul Eggert <eggert@cs.ucla.edu> : Sun May 22 05
+commit cea1469d47457150f9643ef3e5c21154b0eba1db
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun May 22 05:20:01 2005 +0000
+
+    Fix a destructor bug reported by Wolfgang Spraul in
+    <http://lists.gnu.org/archive/html/bug-bison/2005-05/msg00042.html>.
+    * data/yacc.c (yyabortlab): Don't call destructor, and
+    don't set yychar to EMPTY.
+    (yyoverflowlab): Don't call destructor.
+    (yyreturn): Call destructor, if yychar is neither YYEOF nor YYEMPTY.
+    * tests/calc.at (AT_CHECK_CALC): Expect one fewer output lines,
+    since we no longer output the message "discarding lookahead token
+    end of input ()".
+
+
+80ce3401e9d2d2e41a94ad8b57134dc1e3c998f5 : Paul Eggert <eggert@cs.ucla.edu> : Mon May 2 04
+commit 80ce3401e9d2d2e41a94ad8b57134dc1e3c998f5
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon May 2 04:52:33 2005 +0000
+
+    * tests/actions.at: Test that stack overflow invokes destructors.
+    From Marcus Holland-Moritz.
+    * data/yacc.c (yyerrlab): Move the code that destroys the stack
+    from here....
+    (yyreturn): to here.  That way, destructors are called properly
+    even if the stack overflows, or the user calls YYACCEPT or
+    YYABORT.  Stack-overflow problem reported by Marcus Holland-Moritz.
+    (yyoverflowlab): Destroy the lookahead.
+
+
+506ffb1f7442541ace4623e03d9ba2a6f32a663e : Paul Eggert <eggert@cs.ucla.edu> : Sat Apr 16 06
+commit 506ffb1f7442541ace4623e03d9ba2a6f32a663e
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sat Apr 16 06:25:03 2005 +0000
+
+    (YYSTACK_ALLOC_MAXIMUM): New macro.
+    (YYSIZE_T): Define to unsigned long int when using an older compiler.
+    (yyparse): Revamp code to generate long syntax error message, to
+    make it easier to translate, and to avoid problems with arithmetic
+    overflow.  Change "virtual memory" to "memory" in diagnostic, since
+    we don't know whether the memory is virtual.
+
+
+d7e14fc000458de046cfcded04c2fe8438f63919 : Paul Eggert <eggert@cs.ucla.edu> : Wed Dec 22 21
+commit d7e14fc000458de046cfcded04c2fe8438f63919
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Dec 22 21:19:47 2004 +0000
+
+    * NEWS: Bison-generated parsers no longer default to using the
+    alloca function (when available) to extend the parser stack, due
+    to widespread problems in unchecked stack-overflow detection.
+    * data/glr.c (YYMAXDEPTH): Remove undef when zero.  It's the user's
+    responsibility to set it to a positive value.  This lets the user
+    specify a value that is not a preprocessor constant.
+    * data/yacc.c (YYMAXDEPTH): Likewise.
+    (YYSTACK_ALLOC): Define only if YYSTACK_USE_ALLOCA is nonzero.
+    * doc/bison.texinfo (Stack Overflow): YYMAXDEPTH no longer needs
+    to be a compile-time constant.  However, explain the constraints on it.
+    Also, explain the constraints on YYINITDEPTH.
+    (Table of Symbols): Explain that alloca is no longer the default.
+    Explain the user's responsibility if they define YYSTACK_USE_ALLOCA
+    to 1.
+
+
+60e3ecc734352a7c702bb2d3e54dba567eeb5b60 : Paul Eggert <eggert@cs.ucla.edu> : Wed Dec 8 05
+commit 60e3ecc734352a7c702bb2d3e54dba567eeb5b60
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Dec 8 05:54:20 2004 +0000
+
+    (set_goto_map): Don't allow ngotos to equal
+    GOTO_NUMBER_MAXIMUM, since we occasionally compute
+    ngotos + 1 without checking for overflow.
+    (build_relations): Use END_NODE, not -1, to denote end of edges.
+    (set_goto_map, map_goto, initialize_F, add_loopback_edge,
+    build_relations): Use goto_number, not int, for goto numbers.
+
+
+4cf44c004591323a8a247680046404c6faf99765 : Paul Eggert <eggert@cs.ucla.edu> : Fri Oct 22 23
+commit 4cf44c004591323a8a247680046404c6faf99765
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Oct 22 23:08:33 2004 +0000
+
+    (goto_map, ngotos, from_state, to_state): Omit
+    initial values, since they're never used.
+    (set_goto_map): ngotos is now unsigned, so test for overflow
+
+
+6e649e659ebc2d8b54fa4636986370b76c2ff988 : Paul Eggert <eggert@cs.ucla.edu> : Fri Nov 15 20
+commit 6e649e659ebc2d8b54fa4636986370b76c2ff988
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Nov 15 20:32:21 2002 +0000
+
+    * data/glr.c, data/lalr1.cc, data/yacc.cc, doc/bison.texinfo,
+    src/conflicts.c, src/parse-gram.y, src/tables.c, src/tables.h,
+    tests/action.at, tests/calc.at, tests/conflicts.at,
+    tests/cxx-type.at, tests/regression.at:
+    "parse error" -> "syntax error" for POSIX compatibility.
+    "parsing stack overflow..." -> "parser stack overflow" so
+    that code matches Bison documentation.
+
+
+d8d3f94a993ce890baae68bf9da7ded29f9f8d76 : Paul Eggert <eggert@cs.ucla.edu> : Sun Nov 3 08
+commit d8d3f94a993ce890baae68bf9da7ded29f9f8d76
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Sun Nov 3 08:42:32 2002 +0000
+
+    Revamp to fix POSIX incompatibilities, to count columns correctly, and
+    to check for invalid inputs.
+    
+    Use mbsnwidth to count columns correctly.  Account for tabs, too.
+    Include mbswidth.h.
+    (YY_USER_ACTION): Invoke extend_location rather than LOCATION_COLUMNS.
+    (extend_location): New function.
+    (YY_LINES): Remove.
+    
+    Handle CRLF in C code rather than in Lex code.
+    (YY_INPUT): New macro.
+    (no_cr_read): New function.
+    
+    Scan UCNs, even though we don't fully handle them yet.
+    (convert_ucn_to_byte): New function.
+    
+    Handle backslash-newline correctly in C code.
+    (SC_LINE_COMMENT, SC_YACC_COMMENT): New states.
+    (eols, blanks): Remove.  YY_USER_ACTION now counts newlines etc.;
+    all uses changed.
+    (tag, splice): New EREs.  Do not allow NUL or newline in tags.
+    Use {splice} wherever C allows backslash-newline.
+    YY_STEP after space, newline, vertical-tab.
+    ("/*"): BEGIN SC_YACC_COMMENT, not yy_push_state (SC_COMMENT).
+    
+    (letter, id): Don't assume ASCII; e.g., spell out a-z.
+    
+    ({int}, handle_action_dollar, handle_action_at): Check for integer
+    overflow.
+    
+    (YY_STEP): Omit trailing semicolon, so that it's more like C.
+    
+    (<SC_ESCAPED_STRING,SC_ESCAPED_CHARACTER>): Allow \0 and \00
+    as well as \000.  Check for UCHAR_MAX, not 255.
+    Allow \x with an arbitrary positive number of digits, as in C.
+    Check for overflow here.
+    Allow \? and UCNs, for compatibility with C.
+    
+    (handle_symbol_code_dollar): Use quote_n slot 1 to avoid collision
+    with quote slot used by complain_at.
+
+
+bf1ebda27b5bb3503e4016322e15d74ce29d345d : Paul Eggert <eggert@cs.ucla.edu> : Fri Oct 25 05
+commit bf1ebda27b5bb3503e4016322e15d74ce29d345d
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Oct 25 05:14:04 2002 +0000
+
+    * tests/calc.at (_AT_DATA_CALC_Y): Remove unused strcat declaration.
+    * tests/cxx-type.at (_AT_TEST_GLR_CALC): Include stdlib.h, since
+    we use malloc.  Don't assume 'A' through 'Z' are contiguous.
+    Don't assume strdup exists; POSIX says its an XSI extension.
+    Check for buffer overflow on input.
+
+
+c469accea717bf6e9750fed8c4d4a1d356aca184 : Paul Eggert <eggert@cs.ucla.edu> : Fri Oct 25 05
+commit c469accea717bf6e9750fed8c4d4a1d356aca184
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Oct 25 05:13:24 2002 +0000
+
+    (_AT_TEST_GLR_CALC): Include stdlib.h, since
+    we use malloc.  Don't assume 'A' through 'Z' are contiguous.
+    Don't assume strdup exists; POSIX says its an XSI extension.
+    Check for buffer overflow on input.
+
+
+0ae6073a18a8f31ececdef5e0e0bf1c645b46ad6 : Paul Eggert <eggert@cs.ucla.edu> : Tue Oct 22 04
+commit 0ae6073a18a8f31ececdef5e0e0bf1c645b46ad6
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Tue Oct 22 04:53:49 2002 +0000
+
+    (warning_issued): Renamed from warn_message_count,
+    so that we needn't worry about integer overflow (!).
+    Now of type bool.  All uses changed.
+    (complaint_issued): Renamed from complain_message_count; likewise.
+    (fatal_at, fatal): Use EXIT_FAILURE and EXIT_SUCCESS rather than 1 and 0.
+
+
+52f8da14ea4bc92ead3a212e51ade03e6207129d : Paul Eggert <eggert@cs.ucla.edu> : Wed Oct 2 07
+commit 52f8da14ea4bc92ead3a212e51ade03e6207129d
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Oct 2 07:57:24 2002 +0000
+
+    (ebitset_size, ebitset_list, ebitset_list_reverse):
+    Use bitset_bindex, not int or unsigned int or size_t, to count bits.
+    
+    (ebitset_bytes): Use size_t, not unsigned int, to count bytes.
+    
+    (struct ebitset_struct.size, ebitset_elts_grow,
+    ebitset_elt_add, ebitset_elt_remove, ebitset_weed,
+    ebitset_elt_find, ebitset_list_reverse, ebitset_list, ebitset_init):
+    Use bitset_windex instead of unsigned int.
+    
+    (ebitset_elts_grow): Check for arithmetic overflow when computing sizes.
+
+
+32e218da16167ab1bfb15814a5092ec7b334565e : Paul Eggert <eggert@cs.ucla.edu> : Wed Oct 2 07
+commit 32e218da16167ab1bfb15814a5092ec7b334565e
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Oct 2 07:54:52 2002 +0000
+
+    (bitsetv_alloc, bitsetv_create, bitsetv_free,
+    bitsetv_zero, bitsetv_ones, bitsetv_transitive_closure,
+    bitsetv_reflexive_transitive_closure):
+    Use bitset_bindex, not int or unsigned int or size_t, to count bits.
+    
+    (bitsetv_alloc): Use size_t, not unsigned int, to count bytes.
+    
+    (bitsetv_dump, debug_bitsetv):
+    Use bitset_windex instead of unsigned int.
+    Use proper printf formats for widths of integer types.
+    
+    (bitsetv_alloc): Check for arithmetic overflow when computing sizes.
+
+
+0bfb02fff710385e0bee916e3bda5f78f41b81b3 : Akim Demaille <akim@epita.fr> : Tue Jun 18 10
+commit 0bfb02fff710385e0bee916e3bda5f78f41b81b3
+Author: Akim Demaille <akim@epita.fr>
+Date:   Tue Jun 18 10:00:36 2002 +0000
+
+    * data/bison.simple (yyoverflowlab): #ifndef yyoverflow, so that
+    there are no `label `yyoverflowlab' defined but not used' warnings
+    when yyoverflow is defined.
+
+
+83c1796f411f126fb64bffeccb866004f4ee9dde : Paul Eggert <eggert@cs.ucla.edu> : Wed Apr 24 05
+commit 83c1796f411f126fb64bffeccb866004f4ee9dde
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Apr 24 05:56:13 2002 +0000
+
+    * data/bison.simple: Remove unnecessary commentary and white
+    space differences from 1_29-branch.
+    Depend on YYERROR_VERBOSE, not defined (YYERROR_VERBOSE).
+    
+    (union yyalloc, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYCOPY,
+    YYSTACK_RELOCATE): Do not define if yyoverflow is defined, or
+    if this is a C++ parser and YYSTYPE or YYLTYPE has nontrivial
+    constructors or destructors.
+    
+    (yyparse) [! defined YYSTACK_RELOCATE]: Do not relocate the stack.
+
+
+cf44a9aea745a5b70acb38160249a3f9a8918680 : Paul Eggert <eggert@cs.ucla.edu> : Wed Apr 24 05
+commit cf44a9aea745a5b70acb38160249a3f9a8918680
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Wed Apr 24 05:55:48 2002 +0000
+
+    Remove unnecessary commentary and white space differences from
+    1_29-branch.  Depend on YYERROR_VERBOSE, not defined (YYERROR_VERBOSE).
+    
+    (union yyalloc, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYCOPY,
+    YYSTACK_RELOCATE): Do not define if yyoverflow is defined, or
+    if this is a C++ parser and YYSTYPE or YYLTYPE has nontrivial
+    constructors or destructors.
+    
+    (yyparse) [! defined YYSTACK_RELOCATE]: Do not relocate the stack.
+
+
+897c1dd9a97a95f2ab28f550fde1702d83845bce : Paul Eggert <eggert@cs.ucla.edu> : Mon Mar 18 21
+commit 897c1dd9a97a95f2ab28f550fde1702d83845bce
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Mar 18 21:53:39 2002 +0000
+
+    Fix the problem with union yyalloc and C++.
+    
+    * src/bison.simple (union yyalloc, YYSTACK_GAP_MAX, YYSTACK_BYTES,
+    YYSTACK_RELOCATE): Do not define if yyoverflow is defined, or if
+    this is a C++ parser and YYSTYPE or YYLTYPE has nontrivial
+    constructors or destructors.
+    (yymemcpy) [! defined YYSTACK_RELOCATE]: Do not define; not needed.
+    (yyparse) [! defined YYSTACK_RELOCATE]: Do not relocate the stack.
+    
+    * src/reader.c (parse_union_decl): Define YYSTYPE_IS_TRIVIAL if we
+    use our YYSTYPE.  It must be trivial, or our own union wouldn't be
+    valid C++ anyway.
+    (readgram): Define YYSTYPE_IS_TRIVIAL if it is int.
+    (reader_output_yylsp): Define YYLTYPE_IS_TRIVIAL if we use our
+    YYLTYPE.
+
+
+8afe2396ab8f3d3dfa2c066a1907ce002066f5ab : Paul Eggert <eggert@cs.ucla.edu> : Mon Mar 18 21
+commit 8afe2396ab8f3d3dfa2c066a1907ce002066f5ab
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Mon Mar 18 21:48:47 2002 +0000
+
+    (union yyalloc, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYSTACK_RELOCATE):
+    Do not define if yyoverflow is defined, or if this is a C++ parser and
+    either YYSTYPE or YYLTYPE has nontrivial constructors or destructors.
+    (yymemcpy) [! defined YYSTACK_RELOCATE]: Do not define; not needed.
+    (yyparse) [! defined YYSTACK_RELOCATE]: Do not relocate the stack.
+
+
+adc8c84856a3b1ad48015552681fe1e9757aa356 : Akim Demaille <akim@epita.fr> : Thu Dec 27 18
+commit adc8c84856a3b1ad48015552681fe1e9757aa356
+Author: Akim Demaille <akim@epita.fr>
+Date:   Thu Dec 27 18:06:41 2001 +0000
+
+    * src/reader.c (packgram): Catch nitems overflows.
+
+
+f30e1ab65cd39d44e492025c1c6ba0429a013dae : Akim Demaille <akim@epita.fr> : Sat Dec 15 16
+commit f30e1ab65cd39d44e492025c1c6ba0429a013dae
+Author: Akim Demaille <akim@epita.fr>
+Date:   Sat Dec 15 16:22:13 2001 +0000
+
+    * src/nullable.c (set_nullable): Useless rules must be skipped,
+    otherwise, since we range over their symbols, we might look at a
+    nonterminal which no longer ``exists'', i.e., it is not counted in
+    `nvars', hence we overflow our arrays.
+
+
+9c2c67e6fee0853016620cfa0addd00c79d0b8e7 : Akim Demaille <akim@epita.fr> : Sat Dec 15 16
+commit 9c2c67e6fee0853016620cfa0addd00c79d0b8e7
+Author: Akim Demaille <akim@epita.fr>
+Date:   Sat Dec 15 16:21:44 2001 +0000
+
+    * src/nullable.c (set_nullable): Useless rules must be skipped,
+    otherwise, since we range over their symbols, we might look at a
+    nonterminal which no longer ``exists'', i.e., it is not counted in
+    `nvars', hence we overflow our arrays.
+
+
+f4e421e6e4e6f500c9721140c32f4d5bf300b185 : Akim Demaille <akim@epita.fr> : Fri Nov 30 14
+commit f4e421e6e4e6f500c9721140c32f4d5bf300b185
+Author: Akim Demaille <akim@epita.fr>
+Date:   Fri Nov 30 14:04:24 2001 +0000
+
+    * lib/quotearg.h (quotearg_n, quotearg_n_style):
+    First arg is int, not unsigned.
+    * lib/quotearg.c (quotearg_n, quotearg_n_style): Likewise.
+    (SIZE_MAX, UINT_MAX): New macros.
+    (quotearg_n_options): Abort if N is negative.
+    Avoid overflow check on hosts where size_t is 64 bits and int
+    is 32 bits, as overflow is impossible there.
+    Fix off-by-one typo that caused unnecessary reallocation.
+
+
+3757d84e90759d5cc544d87f17132f7cf82203a0 : Akim Demaille <akim@epita.fr> : Fri Nov 30 14
+commit 3757d84e90759d5cc544d87f17132f7cf82203a0
+Author: Akim Demaille <akim@epita.fr>
+Date:   Fri Nov 30 14:04:22 2001 +0000
+
+    * lib/quotearg.h (quotearg_n, quotearg_n_style):
+    First arg is int, not unsigned.
+    * lib/quotearg.c (quotearg_n, quotearg_n_style): Likewise.
+    (SIZE_MAX, UINT_MAX): New macros.
+    (quotearg_n_options): Abort if N is negative.
+    Avoid overflow check on hosts where size_t is 64 bits and int
+    is 32 bits, as overflow is impossible there.
+    Fix off-by-one typo that caused unnecessary reallocation.
+
+
+7093d0f541b397fb279c21c50e21d58985a4fded : Akim Demaille <akim@epita.fr> : Fri Nov 30 14
+commit 7093d0f541b397fb279c21c50e21d58985a4fded
+Author: Akim Demaille <akim@epita.fr>
+Date:   Fri Nov 30 14:00:14 2001 +0000
+
+    Name space cleanup in generated parser.
+    * doc/bison.texinfo (Bison Parser): Discuss system headers
+    and their effect on the user name space.
+    * src/bison.simple:
+    (YYSTACK_ALLOC, YYSTACK_FREE, union yyalloc, YYSTACK_GAP_MAX,
+    YYSTACK_BYTES, YYSTACK_RELOCATE): Do not define unless necessary,
+    i.e. unless ! defined (yyoverflow) || defined (YYERROR_VERBOSE).
+    (YYSIZE_T): New macro.  Use it instead of size_t, to avoid infringing
+    on user names when possible.
+    (YYSTACK_USE_ALLOCA): Do not define; just use any existing defn.
+    Simplify test for whather <alloca.h> exists.
+    (<stdlib.h>): Include if we will use malloc, and if standard C or C++.
+    (<stdio.h>): Include if YYDEBUG.
+    (yymemcpy): Renamed from __yy_memcpy.  Do not define unless
+    ! defined (yyoverflow) && ! defined (yymemcpy).
+    (yymemcpy, yyparse): Rename local variables as needed so that
+    they all begin with 'yy'.
+    (yystrlen, yystpcpy): New functions.
+    (YY_DECL_NON_LSP_VARIABLES): Renamed from _YY_DECL_VARIABLES.
+    All uses changed.
+    (yyparse): size_t -> YYSIZE_T.  Use yystrlen and yystpcpy
+    instead of relying on string.h functions.  Use YYSTACK_ALLOC
+    and YYSTACK_FREE instead of malloc and free.
+
+
+396452de26cbbd5c179da1d2c91e602e639eced0 : Paul Eggert <eggert@cs.ucla.edu> : Fri Nov 30 02
+commit 396452de26cbbd5c179da1d2c91e602e639eced0
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Nov 30 02:56:45 2001 +0000
+
+    * src/bison.simple (YYSTACK_REALLOC): Remove.
+    (YYSTACK_ALLOC): Resurrect this macro, with its old meaning.
+    (YYSTACK_FREE, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYSTACK_RELOCATE):
+    New macros.
+    (union yyalloc): New type.
+    (__yy_memcpy): Last arg is size_t, not unsigned int, to remove
+    an arbitrary restriction on hosts where size_t is wider than int.
+    
+    (yyparse): Don't dump core if alloca or malloc fails; instead, report
+    a parser stack overflow.  Allocate just one block of memory for all
+    three stacks, instead of allocating three blocks; this typically is
+    faster and reduces fragmentation.
+    
+    Do not limit the number of items in the stack to a value that fits
+    in 'int', as this is an arbitrary limit on hosts with 64-bit
+    size_t and 32-bit int.
+
+
+600f9b0cccca08ac972d0bbea0d99352b69dcc88 : Paul Eggert <eggert@cs.ucla.edu> : Fri Nov 30 02
+commit 600f9b0cccca08ac972d0bbea0d99352b69dcc88
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Nov 30 02:54:54 2001 +0000
+
+    (YYSTACK_REALLOC): Remove.
+    (YYSTACK_ALLOC): Resurrect this macro, with its old meaning.
+    (YYSTACK_FREE, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYSTACK_RELOCATE):
+    New macros.
+    (union yyalloc): New type.
+    (__yy_memcpy): Last arg is size_t, not unsigned int, to remove
+    an arbitrary restriction on hosts where size_t is wider than int.
+    
+    (yyparse): Don't dump core if alloca or malloc fails; instead, report
+    a parser stack overflow.  Allocate just one block of memory for all
+    three stacks, instead of allocating three blocks; this typically is
+    faster and reduces fragmentation.
+    
+    Do not limit the number of items in the stack to a value that fits
+    in 'int', as this is an arbitrary limit on hosts with 64-bit
+    size_t and 32-bit int.
+
+
+7ad28769d60335656d7b472d06ea451cd0af5139 : Paul Eggert <eggert@cs.ucla.edu> : Fri Nov 30 02
+commit 7ad28769d60335656d7b472d06ea451cd0af5139
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Nov 30 02:47:56 2001 +0000
+
+    (YYSTACK_REALLOC): Remove.
+    (YYSTACK_ALLOC): Resurrect this macro, with its old meaning.
+    (YYSTACK_FREE, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYSTACK_RELOCATE):
+    New macros.
+    (union yyalloc): New type.
+    (__yy_memcpy): Last arg is size_t, not unsigned int, to remove
+    an arbitrary restriction on hosts where size_t is wider than int.
+    
+    (yyparse): Don't dump core if alloca or malloc fails; instead, report
+    a parser stack overflow.  Allocate just one block of memory for all
+    three stacks, instead of allocating three blocks; this typically is
+    faster and reduces fragmentation.
+    
+    Do not limit the number of items in the stack to a value that fits
+    in 'int', as this is an arbitrary limit on hosts with 64-bit
+    size_t and 32-bit int.
+
+
+57d4ee2b82a5dac2fcdf572b886601746c988ca4 : Paul Eggert <eggert@cs.ucla.edu> : Fri Nov 30 02
+commit 57d4ee2b82a5dac2fcdf572b886601746c988ca4
+Author: Paul Eggert <eggert@cs.ucla.edu>
+Date:   Fri Nov 30 02:45:34 2001 +0000
+
+    * src/bison.simple (YYSTACK_REALLOC): Remove.
+    (YYSTACK_ALLOC): Resurrect this macro, with its old meaning.
+    (YYSTACK_FREE, YYSTACK_GAP_MAX, YYSTACK_BYTES, YYSTACK_RELOCATE):
+    New macros.
+    (union yyalloc): New type.
+    (__yy_memcpy): Last arg is size_t, not unsigned int, to remove
+    an arbitrary restriction on hosts where size_t is wider than int.
+    
+    (yyparse): Don't dump core if alloca or malloc fails; instead, report
+    a parser stack overflow.  Allocate just one block of memory for all
+    three stacks, instead of allocating three blocks; this typically is
+    faster and reduces fragmentation.
+    
+    Do not limit the number of items in the stack to a value that fits
+    in 'int', as this is an arbitrary limit on hosts with 64-bit
+    size_t and 32-bit int.
+
+
+3d76b07def2060a412e81f8ae2925b3cff795d40 : Akim Demaille <akim@epita.fr> : Wed Nov 14 14
+commit 3d76b07def2060a412e81f8ae2925b3cff795d40
+Author: Akim Demaille <akim@epita.fr>
+Date:   Wed Nov 14 14:57:44 2001 +0000
+
+    * src/bison.simple (yyparse): Let yyls1, yyss1 and yyvs1 be
+    defined only if yyoverflow is defined, to avoid `warning: unused
+    variable `yyvs1''.
+    Reported by The Test Suite.
+
+
+3e85a0023636f636a2c631c88ba51989ac14ffc9 : Akim Demaille <akim@epita.fr> : Wed Nov 14 14
+commit 3e85a0023636f636a2c631c88ba51989ac14ffc9
+Author: Akim Demaille <akim@epita.fr>
+Date:   Wed Nov 14 14:57:06 2001 +0000
+
+    * src/bison.simple (yyparse): Let yyls1, yyss1 and yyvs1 be
+    defined only if yyoverflow is defined, to avoid `warning: unused
+    variable `yyvs1''.
+    Reported by The Test Suite.
+
+
+e9e4c321148155fd9129b12bf5996d4b9ae15367 : Akim Demaille <akim@epita.fr> : Mon Nov 12 09
+commit e9e4c321148155fd9129b12bf5996d4b9ae15367
+Author: Akim Demaille <akim@epita.fr>
+Date:   Mon Nov 12 09:24:50 2001 +0000
+
+    * src/bison.simple (YYSTACK_REALLOC): New.
+    (yyparse) [!yyoverflow]: Use it and free the old stack.
+    Reported by FIXME: Who.
+
+
+97e9ee3ad550bbbb7b9ebf61f697fe1fd6d80244 : Akim Demaille <akim@epita.fr> : Mon Nov 12 09
+commit 97e9ee3ad550bbbb7b9ebf61f697fe1fd6d80244
+Author: Akim Demaille <akim@epita.fr>
+Date:   Mon Nov 12 09:14:35 2001 +0000
+
+    * src/bison.simple (YYSTACK_REALLOC): New.
+    (yyparse) [!yyoverflow]: Use it and free the old stack.
+    Reported by FIXME: Who.
+
+
+
+
+
+

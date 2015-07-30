@@ -1,0 +1,3818 @@
+git clone https://github.com/mackyle/sqlite.git
+
+d20b592fbaa17b723dbb8713e07d4142be208df3 : D. Richard Hipp <drh@hwaci.com> : Wed May 27 18
+commit d20b592fbaa17b723dbb8713e07d4142be208df3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed May 27 18:19:50 2015 +0000
+
+    Fix a minor and harmless memory leak in fuzzcheck.  Adjust the makefiles
+    to run fuzzcheck with --quiet on valgrind tests.
+
+
+1ec0fc17f36823026b1a6997ac091b083a51f159 : Dan Kennedy <danielk1977@gmail.com> : Tue May 19 11
+commit 1ec0fc17f36823026b1a6997ac091b083a51f159
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue May 19 11:32:01 2015 +0000
+
+    Fix a memory leak that could follow an OOM condition in fts5.
+
+
+a7470dfbfc4a16ff9d100350233a4e257001ea99 : Dan Kennedy <danielk1977@gmail.com> : Sat Apr 25 12
+commit a7470dfbfc4a16ff9d100350233a4e257001ea99
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Apr 25 12:20:24 2015 +0000
+
+    Fix an obscure memory leak that could follow an OOM in where.c.
+
+
+110486a4d2e65f56e970663485c4dc1d53325275 : D. Richard Hipp <drh@hwaci.com> : Tue Apr 21 17
+commit 110486a4d2e65f56e970663485c4dc1d53325275
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 21 17:07:01 2015 +0000
+
+    Make sure the datatype and collating sequence of transients tables are
+    not initialized more than once.  Otherwise a memory leak results.
+
+
+f65498ccfec91c41585ca7aa4ff139118ea64863 : D. Richard Hipp <drh@hwaci.com> : Tue Apr 21 16
+commit f65498ccfec91c41585ca7aa4ff139118ea64863
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 21 16:09:07 2015 +0000
+
+    Fix a memory leak in the SELECT code generator tracing logic (code that is
+    omitted in non-debugging builds).
+
+
+c5b251f4f5b63224509808adb08405bde61d89b7 : Dan Kennedy <danielk1977@gmail.com> : Mon Apr 20 15
+commit c5b251f4f5b63224509808adb08405bde61d89b7
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Apr 20 15:13:08 2015 +0000
+
+    Fix a memory leak caused by duplicate entries in the sqlite_stat1 table.
+
+
+873b4f8eacd9e94af13e6f8109b646cc5dce70c3 : D. Richard Hipp <drh@hwaci.com> : Mon Apr 20 13
+commit 873b4f8eacd9e94af13e6f8109b646cc5dce70c3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Apr 20 13:59:18 2015 +0000
+
+    Fix an obscure memory leak in sqlite3Stat4ProbeFree()
+
+
+03bdf3be81e48a70d5e97e09543bcc15a637b24e : Dan Kennedy <danielk1977@gmail.com> : Fri Apr 17 16
+commit 03bdf3be81e48a70d5e97e09543bcc15a637b24e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Apr 17 16:29:11 2015 +0000
+
+    Fix a memory leak in sqlite3ota.c that can follow an OOM error.
+
+
+367b48395830d7570d453a17cac7432eef9d0578 : D. Richard Hipp <drh@hwaci.com> : Wed Apr 15 07
+commit 367b48395830d7570d453a17cac7432eef9d0578
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Apr 15 07:57:27 2015 +0000
+
+    Fix the error message generator for illegal token errors so that it does not
+    leak memory if it immediately follows another erroneous SQL statement.
+
+
+147f467d7e4d5ab4d82404635e0de30cc020551e : Joe Mistachkin <sqlite@mistachkin.com> : Thu Feb 26 21
+commit 147f467d7e4d5ab4d82404635e0de30cc020551e
+Author: Joe Mistachkin <sqlite@mistachkin.com>
+Date:   Thu Feb 26 21:04:44 2015 +0000
+
+    Fix potential memory leaks in the misc 'compress' extension.
+
+
+3e74d6bc76fd27d5725d934291da34237b5db664 : Dan Kennedy <danielk1977@gmail.com> : Wed Feb 4 11
+commit 3e74d6bc76fd27d5725d934291da34237b5db664
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Feb 4 11:08:47 2015 +0000
+
+    Fix a memory leak that could follow an OOM error in ota.
+
+
+e571fe1e01c6e447b9c58252aae0db4c21c0d120 : D. Richard Hipp <drh@hwaci.com> : Thu Oct 9 14
+commit e571fe1e01c6e447b9c58252aae0db4c21c0d120
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Oct 9 14:10:38 2014 +0000
+
+    Add a test case for the memory leak fixed by the previous check-in.
+
+
+47bbf8b93da0d237e496f03509bcbdccc0999e0d : D. Richard Hipp <drh@hwaci.com> : Thu Oct 9 14
+commit 47bbf8b93da0d237e496f03509bcbdccc0999e0d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Oct 9 14:00:49 2014 +0000
+
+    Fix a memory leak associated with the FTS4 matchinfo() function.
+
+
+83d5c479ef0bcf4d16cc5a0db337617c5c3d43ce : D. Richard Hipp <drh@hwaci.com> : Tue Oct 7 23
+commit 83d5c479ef0bcf4d16cc5a0db337617c5c3d43ce
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Oct 7 23:02:24 2014 +0000
+
+    Make sure the sqlite3VdbeMemClearAndResize() routine is never called with a
+    zero size parameter, since a size of zero could lead to either a memory leak
+    or an assertion fault.
+
+
+75e22f353acf61e3550dcc6feed86b983653d27e : D. Richard Hipp <drh@hwaci.com> : Sat Oct 4 00
+commit 75e22f353acf61e3550dcc6feed86b983653d27e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 4 00:07:44 2014 +0000
+
+    Avoid leaking Index.aiRowEst memory if an OOM causes a rollback which deletes
+    the index before the aiRowEst deletion code in sqlite3AnalysisLoad() routine
+    has a chance to run.  Since the aiRowEst now might be deleted from freeIndex()
+    which does not always have a db pointer, make sure the aiRowEst memory is
+    not held in lookaside.
+
+
+24d3733cf01507b3a7cc84c36128f2a67ff36f5c : Joe Mistachkin <sqlite@mistachkin.com> : Thu May 8 22
+commit 24d3733cf01507b3a7cc84c36128f2a67ff36f5c
+Author: Joe Mistachkin <sqlite@mistachkin.com>
+Date:   Thu May 8 22:08:22 2014 +0000
+
+    Fix a memory leak of the temporary read buffer.
+
+
+68dc0529427c424501225284c34212e958b23600 : Dan Kennedy <danielk1977@gmail.com> : Wed Apr 16 16
+commit 68dc0529427c424501225284c34212e958b23600
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Apr 16 16:43:05 2014 +0000
+
+    Rework the way trees of MergeEngine objects are built in vdbesort.c to make it easier to follow. Fix memory leaks that could follow an OOM or IO error. Add various comments to explain functions in vdbesort.c.
+
+
+7d5fd4d5024b6b4dfc5148d4e4050d1d6428506a : D. Richard Hipp <drh@hwaci.com> : Fri Mar 28 19
+commit 7d5fd4d5024b6b4dfc5148d4e4050d1d6428506a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 28 19:47:19 2014 +0000
+
+    Fix a compiler warning and an after-OOM memory leak.
+
+
+d85d017d30e7e8d8d69e86fb0012b5571f9b514c : D. Richard Hipp <drh@hwaci.com> : Sat Mar 22 00
+commit d85d017d30e7e8d8d69e86fb0012b5571f9b514c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 22 00:27:14 2014 +0000
+
+    Fix the ORDER BY optimization logic so that it will do a block-sort on
+    a partial DESC ORDER BY.  This enhancement uncovered a memory leak in
+    pushUntoSorter() which is also fixed.
+
+
+2def8c88693d7a0a98c6837cdd00ae4e3908b8d3 : Dan Kennedy <danielk1977@gmail.com> : Fri Mar 21 19
+commit 2def8c88693d7a0a98c6837cdd00ae4e3908b8d3
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Mar 21 19:27:54 2014 +0000
+
+    Avoid leaking memory in an obscure case where the flattener adds an ORDER BY clause to the recursive part of a recursive query.
+
+
+78f453a1ca51271472969125901a2107e1ffca59 : Dan Kennedy <danielk1977@gmail.com> : Mon Jan 13 16
+commit 78f453a1ca51271472969125901a2107e1ffca59
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Jan 13 16:36:40 2014 +0000
+
+    Fix some memory leaks and crashes that could follow an OOM condition during WITH clause parsing.
+
+
+fd3ba82bf19557855fb96d95f43f0fc2ae4937a3 : D. Richard Hipp <drh@hwaci.com> : Wed Oct 16 11
+commit fd3ba82bf19557855fb96d95f43f0fc2ae4937a3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Oct 16 11:31:51 2013 +0000
+
+    Fix memory and resource leaks for WinCE and Cygwin, and a compiler warning
+    on windows with SQLITE_THREADSAFE=0.
+
+
+cfed938a67aef9c6dce548ee87056f944e5332d1 : Joe Mistachkin <sqlite@mistachkin.com> : Wed Oct 16 09
+commit cfed938a67aef9c6dce548ee87056f944e5332d1
+Author: Joe Mistachkin <sqlite@mistachkin.com>
+Date:   Wed Oct 16 09:49:10 2013 +0000
+
+    Fix memory/resource leaks for WinCE and Cygwin.
+
+
+71aa986e8f3ac9c2e0c63519029072d370394e84 : D. Richard Hipp <drh@hwaci.com> : Mon Sep 30 17
+commit 71aa986e8f3ac9c2e0c63519029072d370394e84
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Sep 30 17:37:15 2013 +0000
+
+    Fix memory leaks in the amatch extension.  Add a few simple test cases.
+
+
+7674ac58f9c000824c3bdbf51796a3498d57c171 : D. Richard Hipp <drh@hwaci.com> : Mon Jun 17 21
+commit 7674ac58f9c000824c3bdbf51796a3498d57c171
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jun 17 21:37:40 2013 +0000
+
+    Add more testcase() macros.  Fix a memory leak following OOM in the
+    virtual table analysis logic.
+
+
+a09fbec2ff2062ad10bbab72d83c92c009046063 : D. Richard Hipp <drh@hwaci.com> : Wed Jun 12 02
+commit a09fbec2ff2062ad10bbab72d83c92c009046063
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 12 02:53:39 2013 +0000
+
+    Another attempt at disabling virtual tables.  This one leaks memory.
+
+
+ed8f14a77e663e52342050458878531908e1dae1 : D. Richard Hipp <drh@hwaci.com> : Sun Jun 9 20
+commit ed8f14a77e663e52342050458878531908e1dae1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Jun 9 20:22:41 2013 +0000
+
+    Fix the memory leak in CREATE TABLE that occurs if there are two or more
+    COLLATE clauses on the same column.
+
+
+77ed898a11b79aeea5c6235468754e4a2349f21b : D. Richard Hipp <drh@hwaci.com> : Sun Jun 9 20
+commit 77ed898a11b79aeea5c6235468754e4a2349f21b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Jun 9 20:16:26 2013 +0000
+
+    Add test cases to demonstrate the memory leak on the COLLATE clause.
+
+
+3dd8a0dee52a064280b1fa1cfac9606d4a834215 : D. Richard Hipp <drh@hwaci.com> : Sat Jun 8 19
+commit 3dd8a0dee52a064280b1fa1cfac9606d4a834215
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jun 8 19:58:27 2013 +0000
+
+    Candidate fix for a memory leak that occurs if a CREATE TABLE statement
+    contains two or more COLLATE clauses on the same column definition.
+
+
+7885fe32420ebc90468a804281a26101f49c1c90 : D. Richard Hipp <drh@hwaci.com> : Wed May 8 20
+commit 7885fe32420ebc90468a804281a26101f49c1c90
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed May 8 20:05:58 2013 +0000
+
+    Fix memory leaks in the NGQP logic for virtual tables.
+
+
+785d7121767ff6bab2d2890257a4acdaeac63f9e : D. Richard Hipp <drh@hwaci.com> : Wed May 8 14
+commit 785d7121767ff6bab2d2890257a4acdaeac63f9e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed May 8 14:14:26 2013 +0000
+
+    NGQP working with virtualt tables, though many legacy tests fail and there
+    are yet some memory leaks.
+
+
+cf0d02b3180d655918952b6f875903c750c3a7b6 : D. Richard Hipp <drh@hwaci.com> : Tue May 7 19
+commit cf0d02b3180d655918952b6f875903c750c3a7b6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue May 7 19:44:38 2013 +0000
+
+    Inserting a few WhereLoop objects without leaking memory.  Costs are
+    not correct.  Inequality and IN constraints are not implemented.
+
+
+62f4fe2d03b7abb4aa95695f76165b699813ca98 : D. Richard Hipp <drh@hwaci.com> : Tue Jan 29 23
+commit 62f4fe2d03b7abb4aa95695f76165b699813ca98
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 29 23:55:50 2013 +0000
+
+    Fix LIMIT and OFFSET so that they work and do not leak memory even on
+    complex queries involving deeply nested views of UNION ALL compounds.
+    Ticket [db4d96798da8].  Secondary to ticket [d58ccbb3f1b7].
+
+
+afda0fdb3e0cc2d8ec0ad2f62875786938f1fd20 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 6 21
+commit afda0fdb3e0cc2d8ec0ad2f62875786938f1fd20
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 6 21:16:43 2012 +0000
+
+    Remove the Expr.pColl field and compute the collating sequence as it is needed.
+    This fixes the test script "shared9.test", though there is still a memory leak.
+    And there are other problems.  Consider this a work-in-progress.
+
+
+3a54eb8be779721412f8669edd55f4d2c050100d : D. Richard Hipp <drh@hwaci.com> : Fri Jun 8 14
+commit 3a54eb8be779721412f8669edd55f4d2c050100d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 8 14:11:30 2012 +0000
+
+    Merge the vtab1 test script fix and the FTS3 memory leak fix from trunk
+    into the apple-osx branch.
+
+
+6d8d0c0900741fd4b52045bd1cf276ed3986a664 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 8 14
+commit 6d8d0c0900741fd4b52045bd1cf276ed3986a664
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 8 14:01:53 2012 +0000
+
+    Fix an obscure memory leak in FTS3 that can come about when two memory
+    allocations are immediately adjacent to one another.
+
+
+eac4be0191ae9862c4088251abf14955346f6927 : D. Richard Hipp <drh@hwaci.com> : Wed Apr 11 11
+commit eac4be0191ae9862c4088251abf14955346f6927
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Apr 11 11:38:53 2012 +0000
+
+    Fix harmless static-analysis warnings, mosting having to do with memory
+    leaks in the command-line shell.  Add a clang analysis of the command-line
+    shell to the "warnings-clang.sh" script.  Other minor cleanups to the
+    command-line shell code.
+
+
+51e78ae323ac6b59188e0bda4da4f67790a9371f : Dan Kennedy <danielk1977@gmail.com> : Tue Jun 14 14
+commit 51e78ae323ac6b59188e0bda4da4f67790a9371f
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jun 14 14:18:45 2011 +0000
+
+    Fix a memory leak that can follow an OOM error in a user-function that uses sqlite3_set_auxdata().
+
+
+06083e192218dde14b6281fee59b3448008953cc : Dan Kennedy <danielk1977@gmail.com> : Sat Dec 4 18
+commit 06083e192218dde14b6281fee59b3448008953cc
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Dec 4 18:20:19 2010 +0000
+
+    Fix a memory leak in fts3 that can occur in an OOM condition.
+
+
+1db29e1f831e0ce484a718757a06bcaef8bcd63c : D. Richard Hipp <drh@hwaci.com> : Wed Oct 27 15
+commit 1db29e1f831e0ce484a718757a06bcaef8bcd63c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Oct 27 15:36:22 2010 +0000
+
+    Fix a memory leak in the update_hook method of the TCL interface.
+
+
+0c310c6b4d9a11deaae7a17691b118ad1e945d0e : Shane Harrelson <shane.harrelson@gmail.com> : Thu Sep 30 18
+commit 0c310c6b4d9a11deaae7a17691b118ad1e945d0e
+Author: Shane Harrelson <shane.harrelson@gmail.com>
+Date:   Thu Sep 30 18:30:18 2010 +0000
+
+    Fix memory leak in enc4.test script.
+
+
+18dc7a02cf3b31643c4c293aa1ac00c9895d076e : Samuel Adam <adam@certifound.com> : Fri Sep 10 23
+commit 18dc7a02cf3b31643c4c293aa1ac00c9895d076e
+Author: Samuel Adam <adam@certifound.com>
+Date:   Fri Sep 10 23:16:17 2010 +0000
+
+    fixed memory leak in proxy lock file error handling
+
+
+884ddf92aa8a708b76746ca1bb5616108c1a5a95 : Dan Kennedy <danielk1977@gmail.com> : Thu Aug 26 14
+commit 884ddf92aa8a708b76746ca1bb5616108c1a5a95
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Aug 26 14:15:38 2010 +0000
+
+    Fix a couple of memory leaks in r-tree that can occur following an OOM condition.
+
+
+75d519b397d9df6efee95d34661528af1c875650 : Dan Kennedy <danielk1977@gmail.com> : Mon Aug 9 16
+commit 75d519b397d9df6efee95d34661528af1c875650
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Aug 9 16:12:52 2010 +0000
+
+    Fix a memory leak in test_journal.c causing tests to fail.
+
+
+21fae25cdfd4368468de751c179b0cd9a127d16e : Dan Kennedy <danielk1977@gmail.com> : Wed Jun 16 10
+commit 21fae25cdfd4368468de751c179b0cd9a127d16e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jun 16 10:55:43 2010 +0000
+
+    Fix a memory leak that can occur in os_unix.c if an IO error occurs within the xUnlock method.
+
+
+f3c4707663c9abe47222337679d2e8054268453d : D. Richard Hipp <drh@hwaci.com> : Tue Apr 6 18
+commit f3c4707663c9abe47222337679d2e8054268453d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 6 18:51:43 2010 +0000
+
+    Runs quicktest without hitting an assert now.  Some tests get unexpected
+    results still and there is a memory leak.
+
+
+1df683f449f463bb6021f080596e8b9a87fe7778 : Dan Kennedy <danielk1977@gmail.com> : Fri Jan 22 15
+commit 1df683f449f463bb6021f080596e8b9a87fe7778
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jan 22 15:48:18 2010 +0000
+
+    Fix two similar problems in fts3 that meant that an OOM error could cause a memory leak.
+
+
+b54898fa13bb3b02b6674551ae35d83e2de28802 : Dan Kennedy <danielk1977@gmail.com> : Wed Sep 9 18
+commit b54898fa13bb3b02b6674551ae35d83e2de28802
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Sep 9 18:46:53 2009 +0000
+
+    Trying to open a transaction in one thread and close it in another is a misuse with LinuxThreads. Doing so may cause memory and file-descriptors to be leaked. Update an assert() and some test cases to account for this.
+
+
+c846af712c0ccb7397101ddea868c9dae2881190 : Dan Kennedy <danielk1977@gmail.com> : Wed Jul 1 14
+commit c846af712c0ccb7397101ddea868c9dae2881190
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jul 1 14:56:40 2009 +0000
+
+    Do not ignore alias "a" in a query of the form "SELECT ... FROM (...) AS a" Fix for #3935. Also expand upon (6751) to fix some similar obscure memory leaks. (CVS 6831)
+
+
+465c8c889104875b2ca822d7a35059b5759f53b0 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 12 03
+commit 465c8c889104875b2ca822d7a35059b5759f53b0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 12 03:47:37 2009 +0000
+
+    An additional memory leak in the parser fixed.  Ticket #3911. (CVS 6751)
+
+
+f38d2d4f2e49b309140cd9f599b36be43e22ab4e : D. Richard Hipp <drh@hwaci.com> : Fri Jun 12 03
+commit f38d2d4f2e49b309140cd9f599b36be43e22ab4e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 12 03:27:27 2009 +0000
+
+    Make sure nested queries with USING clauses do not leak memory.
+    Preliminary fix for ticket #3911. (CVS 6750)
+
+
+0ae6f004d6e42b2e318818509c3c8dcb543ed8eb : D. Richard Hipp <drh@hwaci.com> : Sun May 31 17
+commit 0ae6f004d6e42b2e318818509c3c8dcb543ed8eb
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun May 31 17:16:10 2009 +0000
+
+    Fix the ".genfkey" command of the CLI so that it does not leak memory
+    if sqlite3_realloc() fails.  Ticket #3891. (CVS 6696)
+
+
+46957a16431e64e0f4c06d2c74afe2e5b8fb6ef4 : D. Richard Hipp <drh@hwaci.com> : Wed May 20 20
+commit 46957a16431e64e0f4c06d2c74afe2e5b8fb6ef4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed May 20 20:10:47 2009 +0000
+
+    Fix a memory leak that occurs when an out-of-memory error occurs while
+    preparing a statement that has multiple virtual table updates within
+    triggers.  Other virtual table changes to support full-coverage testing. (CVS 6661)
+
+
+86f111b8899c3e207d1f8e8bd9cd30bad77c5b3e : D. Richard Hipp <drh@hwaci.com> : Thu Apr 30 05
+commit 86f111b8899c3e207d1f8e8bd9cd30bad77c5b3e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Apr 30 05:40:34 2009 +0000
+
+    Fix a memory leak introduced in the previous check-in. (CVS 6574)
+
+
+2c556de9a34d176f0a0f38b7658874298e7bddb9 : Dan Kennedy <danielk1977@gmail.com> : Tue Jan 6 14
+commit 2c556de9a34d176f0a0f38b7658874298e7bddb9
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jan 6 14:34:35 2009 +0000
+
+    Fix a memory leak in test_journal.c (test code). Also remove function pager_truncate_cache(), a wrapper around sqlite3PCacheTruncate(), from pager.c. (CVS 6118)
+
+
+6e485c764d19c6ef0e3d26970d152a7a90966377 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 4 12
+commit 6e485c764d19c6ef0e3d26970d152a7a90966377
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 4 12:26:01 2008 +0000
+
+    Fix a memory leak in the shell that occurs when a ".import" command fails.
+    Ticket #3517 (CVS 5975)
+
+
+cc27a391e833efba78462efbb7af256007b88525 : Dan Kennedy <danielk1977@gmail.com> : Wed Nov 26 07
+commit cc27a391e833efba78462efbb7af256007b88525
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Nov 26 07:40:30 2008 +0000
+
+    Fix an obscure memory leak that can follow an IO error. (CVS 5956)
+
+
+824ad0b07f2be012d90842d038f49af87dc9c6d2 : Dan Kennedy <danielk1977@gmail.com> : Thu Nov 13 19
+commit 824ad0b07f2be012d90842d038f49af87dc9c6d2
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Nov 13 19:12:35 2008 +0000
+
+    Fix a couple of memory leaks that may follow malloc failures. (CVS 5906)
+
+
+9e26982ccbea4788d36cda7b1967d7fd24c942fd : D. Richard Hipp <drh@hwaci.com> : Sat Oct 11 16
+commit 9e26982ccbea4788d36cda7b1967d7fd24c942fd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 11 16:47:36 2008 +0000
+
+    Fix a memory leak on ORDER BY of a compound select caused by the resolver
+    on a flattened query.  Also fix a OOM segfault in WHERE clause processing. (CVS 5801)
+
+
+5b1c0ca12f70f0bb55a6833f91dbee0ab168fdc7 : D. Richard Hipp <drh@hwaci.com> : Sat Oct 11 15
+commit 5b1c0ca12f70f0bb55a6833f91dbee0ab168fdc7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 11 15:38:30 2008 +0000
+
+    Added an assert() to detect lookaside memory leaks.  Also added the
+    SQLITE_OMIT_LOOKASIDE compile-time option which is useful in trying to
+    track down lookaside memory leaks. (CVS 5800)
+
+
+6093e0845f3660b463575d169aae0917fd864b3b : Dan Kennedy <danielk1977@gmail.com> : Mon Sep 22 17
+commit 6093e0845f3660b463575d169aae0917fd864b3b
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Sep 22 17:22:20 2008 +0000
+
+    Fix a memory leak that can follow a malloc failure in sqlite3_initialize. (CVS 5731)
+
+
+261c5d9e5d91759766ac123d0821601203023f39 : Dan Kennedy <danielk1977@gmail.com> : Wed Jul 2 16
+commit 261c5d9e5d91759766ac123d0821601203023f39
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jul 2 16:10:46 2008 +0000
+
+    Fix a memory leak that can occur following a malloc failure. (CVS 5339)
+
+
+5126fdf003d11a6ff819ec5384c824b5d79fc341 : Dan Kennedy <danielk1977@gmail.com> : Tue Jul 1 17
+commit 5126fdf003d11a6ff819ec5384c824b5d79fc341
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jul 1 17:39:27 2008 +0000
+
+    Fix another memory leak related to UNION ALL and sub-selects. (CVS 5336)
+
+
+a04865ecf4c4cfd6f9c334ff5cab468f2756584e : Dan Kennedy <danielk1977@gmail.com> : Tue Jul 1 16
+commit a04865ecf4c4cfd6f9c334ff5cab468f2756584e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jul 1 16:05:26 2008 +0000
+
+    Fix a memory leak to do with the recent UNION ALL sub-select optimization. (CVS 5333)
+
+
+606d67203dc74da989acdb7772b08087956c0d72 : D. Richard Hipp <drh@hwaci.com> : Thu Jun 19 01
+commit 606d67203dc74da989acdb7772b08087956c0d72
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jun 19 01:03:18 2008 +0000
+
+    Bug fixes:  Plug a memory leak introduced by the previous check-in.  Get
+    the amalgamation to the point where it will compile. (CVS 5241)
+
+
+aa8eb404dbf0cc14a2a302579e0241576943fa2b : D. Richard Hipp <drh@hwaci.com> : Thu Jun 19 00
+commit aa8eb404dbf0cc14a2a302579e0241576943fa2b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jun 19 00:16:08 2008 +0000
+
+    Add some test logic to the new memory allocation subsystem.  (Lots more needed.)
+    The test suite is currently indicating memory leaks, though it is unclear if
+    this is a true code problem or just an instrumentation problem. (CVS 5240)
+
+
+8f25d32ae8ee3b525c391e0dbc99e7278b4d4784 : Dan Kennedy <danielk1977@gmail.com> : Fri Mar 28 19
+commit 8f25d32ae8ee3b525c391e0dbc99e7278b4d4784
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Mar 28 19:16:34 2008 +0000
+
+    Fix a memory leak that can occur when the library API is misused. (CVS 4932)
+
+
+d4fd3e838005b131b33aad9db76b0f25f4506efa : Dan Kennedy <danielk1977@gmail.com> : Fri Mar 28 07
+commit d4fd3e838005b131b33aad9db76b0f25f4506efa
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Mar 28 07:42:54 2008 +0000
+
+    If memory is leaked when running a test script with the --malloctrace option, write out a file called leaks.sql in the same format as mallocs.sql containing th e leaked applications. The same tools can then be used to examine the stack traces associated with leaked allocations. (CVS 4926)
+
+
+9696195719b07deb4d4edc6078991398c00e9a50 : Dan Kennedy <danielk1977@gmail.com> : Tue Mar 25 09
+commit 9696195719b07deb4d4edc6078991398c00e9a50
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Mar 25 09:56:45 2008 +0000
+
+    Fix for memory leak in malloc3.test. (CVS 4913)
+
+
+85c1bd0433fdf38d46504cab93232808775a9e58 : D. Richard Hipp <drh@hwaci.com> : Tue Mar 18 00
+commit 85c1bd0433fdf38d46504cab93232808775a9e58
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 18 00:54:22 2008 +0000
+
+    Fix a memory leak introduced by the previous bug fix. (CVS 4876)
+
+
+12056c0109e6fea3c3c0c8dc8a3e85f2fb84ac5a : D. Richard Hipp <drh@hwaci.com> : Wed Jan 16 17
+commit 12056c0109e6fea3c3c0c8dc8a3e85f2fb84ac5a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 16 17:46:38 2008 +0000
+
+    Get all tests running without memory leaks. (CVS 4714)
+
+
+bf032d20fbe97879fe8ae41a33297ef6f5bb8cd0 : D. Richard Hipp <drh@hwaci.com> : Tue Jan 15 02
+commit bf032d20fbe97879fe8ae41a33297ef6f5bb8cd0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 15 02:22:24 2008 +0000
+
+    Fix for a couple of minor memory leaks. (CVS 4712)
+
+
+58531598d9b0adcada8ff597499e6dde7fc61c06 : Dan Kennedy <danielk1977@gmail.com> : Sat Jan 5 18
+commit 58531598d9b0adcada8ff597499e6dde7fc61c06
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Jan 5 18:44:29 2008 +0000
+
+    Fix a memory leak introduced with #4687. (CVS 4688)
+
+
+3bb0dbffc302b16843ac3fa5b46e4961c8aa6021 : Dan Kennedy <danielk1977@gmail.com> : Thu Dec 13 19
+commit 3bb0dbffc302b16843ac3fa5b46e4961c8aa6021
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Dec 13 19:15:03 2007 +0000
+
+    Fix a memory leak that can occur following a malloc() failure. (CVS 4628)
+
+
+827b1c5b52409ce6a8c453f36503142fb9a24fc3 : D. Richard Hipp <drh@hwaci.com> : Mon Nov 12 17
+commit 827b1c5b52409ce6a8c453f36503142fb9a24fc3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Nov 12 17:56:43 2007 +0000
+
+    Another attempt at fixing a memory leak in the TCL interface.
+    See check-in (4338) for the first attempt.  Ticket #2597. (CVS 4540)
+
+
+9cc96974a40747e50619df5c1206e7e1dcb89393 : D. Richard Hipp <drh@hwaci.com> : Sat Oct 20 12
+commit 9cc96974a40747e50619df5c1206e7e1dcb89393
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 20 12:34:01 2007 +0000
+
+    Fix a mutex leak in the new malloc-free memory allocator. (CVS 4494)
+
+
+b185fa303d7b8d113c339a5f28050146ae184552 : D. Richard Hipp <drh@hwaci.com> : Sat Oct 6 01
+commit b185fa303d7b8d113c339a5f28050146ae184552
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 6 01:40:35 2007 +0000
+
+    Fix a memory leak in the sqlite3_realloc() implementation of the
+    non-debugging memory allocator. (CVS 4475)
+
+
+e3487552beab268bf1b43f46326eef6066d5f41b : Dan Kennedy <danielk1977@gmail.com> : Wed Oct 3 15
+commit e3487552beab268bf1b43f46326eef6066d5f41b
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Oct 3 15:22:26 2007 +0000
+
+    Fix a memory leak that could occur during error-state recovery. (CVS 4457)
+
+
+c60d68f84dcef28fc901d6dabd71e5d008ff225e : Scott Hess <shess@google.com> : Thu Aug 30 19
+commit c60d68f84dcef28fc901d6dabd71e5d008ff225e
+Author: Scott Hess <shess@google.com>
+Date:   Thu Aug 30 19:56:38 2007 +0000
+
+    Fix memory leak reported by an fts1 user.  Was losing a doclist on a
+    query error. (CVS 4347)
+
+
+6ff1a1c7cd8e2c2e3d348df757cded013929926d : D. Richard Hipp <drh@hwaci.com> : Thu Aug 30 16
+commit 6ff1a1c7cd8e2c2e3d348df757cded013929926d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Aug 30 16:46:04 2007 +0000
+
+    Fix a memory leak in the win32 OS driver.  Ticket #2602. (CVS 4345)
+
+
+4603ac10ac7c2ab8abfc74e53c14a5a48cc20cd6 : Scott Hess <shess@google.com> : Tue Aug 28 20
+commit 4603ac10ac7c2ab8abfc74e53c14a5a48cc20cd6
+Author: Scott Hess <shess@google.com>
+Date:   Tue Aug 28 20:36:54 2007 +0000
+
+    Fix memory leak of InteriorReader.term.  Comes up when doing queries
+    against large segments. (CVS 4315)
+
+
+43a481b07309e05bd2c06cfb6426a9d59a170be5 : D. Richard Hipp <drh@hwaci.com> : Fri Aug 24 04
+commit 43a481b07309e05bd2c06cfb6426a9d59a170be5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Aug 24 04:15:00 2007 +0000
+
+    Bug fix in the memory leak trace output. (CVS 4283)
+
+
+58c875b12c54aeaed2b9062b5e5740058cb6bb4a : D. Richard Hipp <drh@hwaci.com> : Thu Aug 23 02
+commit 58c875b12c54aeaed2b9062b5e5740058cb6bb4a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Aug 23 02:47:53 2007 +0000
+
+    Improvements to memory leak detection.  The --backtrace=NNN option is now
+    recognized by tester.tcl.  Memory leak summaries are automatically written
+    to the file ./memleak.txt and each leak is tagged with the test in which
+    it occurred.  The quick.test script runs on Linux with no errors and
+    no leaks. (CVS 4273)
+
+
+15dc1619178310603d0a6f7f6e78179925d8c873 : Dan Kennedy <danielk1977@gmail.com> : Thu Jul 26 06
+commit 15dc1619178310603d0a6f7f6e78179925d8c873
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Jul 26 06:50:06 2007 +0000
+
+    Fix two obscure memory leaks that can follow a malloc() failure in sqlite3_set_auxdata(). Ticket #2534. (CVS 4185)
+
+
+8208ab433407866df306391d47295db87141b086 : D. Richard Hipp <drh@hwaci.com> : Fri Jul 20 00
+commit 8208ab433407866df306391d47295db87141b086
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jul 20 00:35:59 2007 +0000
+
+    Fix a memory leak in the Rename method of the echo test virtual table.
+    No changes to the core. (CVS 4166)
+
+
+a498160f79e36b8047fdf66cee2dc75634667ae6 : Dan Kennedy <danielk1977@gmail.com> : Tue Jul 3 05
+commit a498160f79e36b8047fdf66cee2dc75634667ae6
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jul 3 05:31:16 2007 +0000
+
+    Fix a memory leak in shell.c. Reported on the mailing list. This has only been informally tested. (CVS 4153)
+
+
+851704d7a94a317a33a4fffae409e6bdf3b439c3 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 15 17
+commit 851704d7a94a317a33a4fffae409e6bdf3b439c3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 15 17:03:14 2007 +0000
+
+    Fix a memory leak in the parser that can occur following a malloc failure. (CVS 4071)
+
+
+27e8e21f0db8ea21ceb77f6b8753c9aa789a31c5 : Dan Kennedy <danielk1977@gmail.com> : Fri Jun 15 16
+commit 27e8e21f0db8ea21ceb77f6b8753c9aa789a31c5
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jun 15 16:37:29 2007 +0000
+
+    Fix an obscure memory leak in the SQL compiler.. (CVS 4070)
+
+
+18078e9387832ca00b582c854f3a1dcff3c45f75 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 15 15
+commit 18078e9387832ca00b582c854f3a1dcff3c45f75
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 15 15:31:50 2007 +0000
+
+    Fix a memory leak that was discovered by the tests that were added to
+    cover ticket #2339. (CVS 4069)
+
+
+30968386f7f377bd1e774653e7e782878ba0d0fd : D. Richard Hipp <drh@hwaci.com> : Mon Apr 16 17
+commit 30968386f7f377bd1e774653e7e782878ba0d0fd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Apr 16 17:07:55 2007 +0000
+
+    Fix a memory leak introduced by (3842) associated with ticket #2296. (CVS 3848)
+
+
+649c65750eab65f3bf040a0c1262b215b9d74cba : D. Richard Hipp <drh@hwaci.com> : Sat Mar 31 03
+commit 649c65750eab65f3bf040a0c1262b215b9d74cba
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 31 03:59:24 2007 +0000
+
+    Fix a long-standing memory leak in the hash table.  The leak only appears
+    following a malloc failure of a hash that copies its keys, which rarely
+    happens and so we have not previously noticed it. (CVS 3777)
+
+
+1d2986cdbb4eadcf7be3a4ddbc8b7f0ced6b7b07 : D. Richard Hipp <drh@hwaci.com> : Sat Mar 31 02
+commit 1d2986cdbb4eadcf7be3a4ddbc8b7f0ced6b7b07
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 31 02:36:44 2007 +0000
+
+    Fix a large memory leak in the btree layer
+    that occurs following an I/O error when in shared cache mode. (CVS 3776)
+
+
+2b3a1136b0f96cac97a492face6b54f47c05a8a6 : D. Richard Hipp <drh@hwaci.com> : Sat Mar 31 01
+commit 2b3a1136b0f96cac97a492face6b54f47c05a8a6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 31 01:34:45 2007 +0000
+
+    Fix memory leaks in WHERE clause processing and in TRIGGER parsing. (CVS 3775)
+
+
+a5c73c75a6c273f9f9b6b074c87dea8cb85eab3e : D. Richard Hipp <drh@hwaci.com> : Fri Mar 30 20
+commit a5c73c75a6c273f9f9b6b074c87dea8cb85eab3e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 30 20:40:34 2007 +0000
+
+    Fix a memory leak that occurs after a malloc failure in trigger parsing. (CVS 3772)
+
+
+5d59cb249b5f6f456be80533a6fec30fb07da08c : D. Richard Hipp <drh@hwaci.com> : Fri Mar 30 18
+commit 5d59cb249b5f6f456be80533a6fec30fb07da08c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 30 18:42:56 2007 +0000
+
+    Fix a memory leak in multi-database commit.  Also enhance a comment that
+    explains why a particular valgrind error is harmless. (CVS 3771)
+
+
+0dc81719e7373503d47b39d15c47a688aa14294c : D. Richard Hipp <drh@hwaci.com> : Fri Mar 30 17
+commit 0dc81719e7373503d47b39d15c47a688aa14294c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 30 17:17:52 2007 +0000
+
+    Get the memleak.test script working again after recent changes. (CVS 3768)
+
+
+b6e22c79564ef2d973bd4d586b02b59ee2599d34 : Scott Hess <shess@google.com> : Tue Mar 20 23
+commit b6e22c79564ef2d973bd4d586b02b59ee2599d34
+Author: Scott Hess <shess@google.com>
+Date:   Tue Mar 20 23:52:38 2007 +0000
+
+    Refactor PLWriter in preparation for buffered-document change.
+    Currently, PLWriter (Position List Writer) creates a locally-owned
+    DataBuffer to write into.  This is necessary to support doclist
+    collection during tokenization, where there is no obvious buffer to
+    write output to, but is not necessary for the other users of PLWriter.
+     This change adds a DLCollector (Doc List Collector) structure to
+    handle the tokenization case.
+    
+    Also fix a potential memory leak in writeZeroSegment().  In case of
+    error from leafWriterStep(), the DataBuffer dl was being leaked. (CVS 3706)
+
+
+818879cb37ae50623e7530d541907249c6242db5 : D. Richard Hipp <drh@hwaci.com> : Thu Jan 4 14
+commit 818879cb37ae50623e7530d541907249c6242db5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jan 4 14:58:14 2007 +0000
+
+    Fix a memory leak introduced by the latest changes to pager.c. (CVS 3554)
+
+
+d3408b59e31c5a96dbe18a88db22fed90442b977 : D. Richard Hipp <drh@hwaci.com> : Wed Jan 3 23
+commit d3408b59e31c5a96dbe18a88db22fed90442b977
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 3 23:37:28 2007 +0000
+
+    Clean up memory leaks and uninitialized variables detected by valgrind.
+    Identify all tests where we deliberately derefence freed memory by adding
+    a "-misuse" tag. (CVS 3550)
+
+
+10e80ee06d20e46e845b90e5cd0cbbe2c9877925 : Scott Hess <shess@google.com> : Wed Nov 29 05
+commit 10e80ee06d20e46e845b90e5cd0cbbe2c9877925
+Author: Scott Hess <shess@google.com>
+Date:   Wed Nov 29 05:17:28 2006 +0000
+
+    http://www.sqlite.org/cvstrac/tktview?tn=2046
+    
+    The virtual table interface allows for a cursor to field multiple
+    xFilter() calls.  For instance, if a join is done with a virtual
+    table, there could be a call for each row which potentially matches.
+    Unfortunately, fulltextFilter() assumes that it has a fresh cursor,
+    and overwrites a prepared statement and a malloc'ed pointer, resulting
+    in unfinalized statements and a memory leak.
+    
+    This change hacks the code to manually clean up offending items in
+    fulltextFilter(), emphasis on "hacks", since it's a fragile fix
+    insofar as future additions to fulltext_cursor could continue to have
+    the problem. (CVS 3521)
+
+
+ceeac27076f54c1e10ec75e784a9b07e73638dff : Scott Hess <shess@google.com> : Tue Oct 31 18
+commit ceeac27076f54c1e10ec75e784a9b07e73638dff
+Author: Scott Hess <shess@google.com>
+Date:   Tue Oct 31 18:13:42 2006 +0000
+
+    Fix a pair of memory leaks.  These were turned up by running valgrind
+    memcheck with various 10k doc insert, update, delete, and query tests. (CVS 3497)
+
+
+c0525b4f9be1f34407d15dc4c808e957bc1286c9 : D. Richard Hipp <drh@hwaci.com> : Fri Sep 29 14
+commit c0525b4f9be1f34407d15dc4c808e957bc1286c9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Sep 29 14:01:05 2006 +0000
+
+    Make sure memory does not leak when patching up column names so that
+    they are unique in a join or view.  Tickets #1952 and #2002. (CVS 3451)
+
+
+e5e7ddb9679a2fc6e815b3935e93d50c8678bc15 : D. Richard Hipp <drh@hwaci.com> : Tue Jul 11 13
+commit e5e7ddb9679a2fc6e815b3935e93d50c8678bc15
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jul 11 13:15:08 2006 +0000
+
+    Prevent memory leak and possible NULL pointer deference after malloc
+    failure.  Ticket #1886. (CVS 3329)
+
+
+b23b554f7c098c84680d91fd5c4077c971c571bb : Dan Kennedy <danielk1977@gmail.com> : Fri Jun 23 11
+commit b23b554f7c098c84680d91fd5c4077c971c571bb
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jun 23 11:34:55 2006 +0000
+
+    Fix some memory leaks that occur when malloc() fails. (CVS 3286)
+
+
+a7f6c0be95eff167a4e6829b8c1dcbc045216cc1 : Dan Kennedy <danielk1977@gmail.com> : Mon Jun 19 04
+commit a7f6c0be95eff167a4e6829b8c1dcbc045216cc1
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Jun 19 04:49:35 2006 +0000
+
+    Fix memory leak in where.c. (CVS 3271)
+
+
+f2dd9d6d7285bc9f5fed6768c303c089965443c9 : D. Richard Hipp <drh@hwaci.com> : Mon Feb 13 13
+commit f2dd9d6d7285bc9f5fed6768c303c089965443c9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Feb 13 13:23:58 2006 +0000
+
+    Fix a memory leak in test_async.c. (CVS 3085)
+
+
+25854466cb5a554fcfb11df090479af151f52c7c : Dan Kennedy <danielk1977@gmail.com> : Sat Jan 7 14
+commit 25854466cb5a554fcfb11df090479af151f52c7c
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Jan 7 14:02:27 2006 +0000
+
+    Fix some memory leaks caused by obscure syntax errors in SQL. (CVS 2882)
+
+
+624dd0efe5e699bfe7feaaa877d524dbc6d72bf5 : Dan Kennedy <danielk1977@gmail.com> : Fri Dec 9 14
+commit 624dd0efe5e699bfe7feaaa877d524dbc6d72bf5
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Dec 9 14:25:08 2005 +0000
+
+    Many small changes to ensure memory is not leaked after malloc() fails. (CVS 2808)
+
+
+729406f8d15b9066eef310a14d7ebc6233cafe9c : D. Richard Hipp <drh@hwaci.com> : Wed Oct 5 11
+commit 729406f8d15b9066eef310a14d7ebc6233cafe9c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Oct 5 11:35:09 2005 +0000
+
+    Fix an assert or memory leak that occurs when trying to EXPLAIN a statement
+    other than a SELECT that outputs results.  Examples of such statements
+    include PRAGMA integrity_check or INSERT/DELETE/UPDATE with PRAGMA
+    count_changes=ON. (CVS 2743)
+
+
+7fc6842b2b2503b492f7e12de206deb4534fb5a1 : D. Richard Hipp <drh@hwaci.com> : Mon Oct 3 15
+commit 7fc6842b2b2503b492f7e12de206deb4534fb5a1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Oct 3 15:11:09 2005 +0000
+
+    The hash tables deallocate when empty in order to avoid nuisanse complaints
+    from valgrind.  Added tests to verify no hash table memory leaks in os_unix.c. (CVS 2738)
+
+
+97f44f20b5cc7a171ab40e9ca374e8e5819b9bf0 : D. Richard Hipp <drh@hwaci.com> : Sat Sep 17 17
+commit 97f44f20b5cc7a171ab40e9ca374e8e5819b9bf0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Sep 17 17:58:22 2005 +0000
+
+    Fix a memory leak that occurs after malloc fails. (CVS 2713)
+
+
+f65f1ce8d487fa0e062fa7ee1ef5d95a85b72a08 : D. Richard Hipp <drh@hwaci.com> : Fri Sep 16 02
+commit f65f1ce8d487fa0e062fa7ee1ef5d95a85b72a08
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Sep 16 02:38:10 2005 +0000
+
+    Fix a whole host of newly discovered memory leaks the occur after a
+    failure of realloc(). (CVS 2696)
+
+
+752cd6be83bcb8d21bdaf12649d822159d165a6e : D. Richard Hipp <drh@hwaci.com> : Fri Sep 16 00
+commit 752cd6be83bcb8d21bdaf12649d822159d165a6e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Sep 16 00:27:01 2005 +0000
+
+    Fix a memory leak: a failure to deallocate the P3 parameter on a call
+    to sqlite3VdbeChangeP3. (CVS 2695)
+
+
+d746b45de597166947a47d0f4766c0acd559e117 : D. Richard Hipp <drh@hwaci.com> : Sat Sep 10 15
+commit d746b45de597166947a47d0f4766c0acd559e117
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Sep 10 15:35:07 2005 +0000
+
+    Avoid a memory leak and/or assertion failure when parsing a table
+    declaration that contains a duplicate column name.
+    Ticket #1418. (CVS 2684)
+
+
+c204285f6bfe57efe367788deaaed8178aedf258 : D. Richard Hipp <drh@hwaci.com> : Sat Aug 13 00
+commit c204285f6bfe57efe367788deaaed8178aedf258
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Aug 13 00:56:27 2005 +0000
+
+    Fix a memory leak that occurs when a CREATE TABLE that contains a
+    DEFAULT VALUE fails due to a name conflict.  Tickets #1356 and #1357. (CVS 2584)
+
+
+88c56caede6698fe9ea1790176a2d63cc7a0d538 : D. Richard Hipp <drh@hwaci.com> : Sun May 22 19
+commit 88c56caede6698fe9ea1790176a2d63cc7a0d538
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun May 22 19:21:52 2005 +0000
+
+    Fix a memory leak.  Ticket #1259. (CVS 2472)
+
+
+36aca538bee46a3b9d48b2d955cf726c48eec640 : Dan Kennedy <danielk1977@gmail.com> : Fri May 20 09
+commit 36aca538bee46a3b9d48b2d955cf726c48eec640
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri May 20 09:40:56 2005 +0000
+
+    Fix memory leaks in Tcl user function interface. (CVS 2464)
+
+
+8c838a4383e8bd8e5de6e08ba9535d9699df94dd : D. Richard Hipp <drh@hwaci.com> : Thu Mar 31 18
+commit 8c838a4383e8bd8e5de6e08ba9535d9699df94dd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Mar 31 18:26:21 2005 +0000
+
+    Fix a memory leak in the TCL bindings. (CVS 2435)
+
+
+797552469a07243cc228115894f9696a1f6ff7b8 : D. Richard Hipp <drh@hwaci.com> : Mon Mar 28 18
+commit 797552469a07243cc228115894f9696a1f6ff7b8
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Mar 28 18:04:28 2005 +0000
+
+    Fix another memory leak in the pager. (CVS 2425)
+
+
+a04ee9afc990ad36d50bc690d1d228b8d379255f : D. Richard Hipp <drh@hwaci.com> : Mon Mar 28 03
+commit a04ee9afc990ad36d50bc690d1d228b8d379255f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Mar 28 03:39:56 2005 +0000
+
+    Fix some memory leaks that occur after a malloc failure. (CVS 2421)
+
+
+6d52ae3db2fb7a8170e3c80cb62fa5ccb2cf2cbe : Dan Kennedy <danielk1977@gmail.com> : Wed Mar 16 12
+commit 6d52ae3db2fb7a8170e3c80cb62fa5ccb2cf2cbe
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Mar 16 12:15:21 2005 +0000
+
+    Fix some memory leaks that can occur if a memory allocation fails. (CVS 2388)
+
+
+af0c9c095f8ebe2ea371d3c9d92258568d09538f : Dan Kennedy <danielk1977@gmail.com> : Mon Jan 17 07
+commit af0c9c095f8ebe2ea371d3c9d92258568d09538f
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Jan 17 07:53:44 2005 +0000
+
+    Fix some memory leak problems with corrupt.test and auto-vacuum databases. (CVS 2226)
+
+
+41d2aa98678c01181022bc75b6af0e76f5f0c6bd : Dan Kennedy <danielk1977@gmail.com> : Mon Jan 17 03
+commit 41d2aa98678c01181022bc75b6af0e76f5f0c6bd
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Jan 17 03:40:08 2005 +0000
+
+    Fix a memory leak that occurs as a result of an IO error. (CVS 2224)
+
+
+cf2e95e3561dc31b5561c015043e397de7134a7d : D. Richard Hipp <drh@hwaci.com> : Wed Nov 24 01
+commit cf2e95e3561dc31b5561c015043e397de7134a7d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Nov 24 01:16:43 2004 +0000
+
+    Fix a memory leak in pager.c. (CVS 2151)
+
+
+6b7e54a8ef299ab9ae6b18fa2ccc51173f819c76 : D. Richard Hipp <drh@hwaci.com> : Tue Nov 23 22
+commit 6b7e54a8ef299ab9ae6b18fa2ccc51173f819c76
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Nov 23 22:16:40 2004 +0000
+
+    fulltest runs now, but still finds a memory leak. (CVS 2150)
+
+
+82e6fc6030c51bdf47360a74004900823ec400b8 : Dan Kennedy <danielk1977@gmail.com> : Tue Nov 23 16
+commit 82e6fc6030c51bdf47360a74004900823ec400b8
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Nov 23 16:31:17 2004 +0000
+
+    Fix a memory leak in ALTER TABLE. (CVS 2149)
+
+
+f633b3472545ca2575d4794261b38167a47582f3 : D. Richard Hipp <drh@hwaci.com> : Sun Aug 1 03
+commit f633b3472545ca2575d4794261b38167a47582f3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Aug 1 03:52:18 2004 +0000
+
+    Fix a memory leak when the auxiliary data of a database structure is used. (CVS 1874)
+
+
+fc23e10c917261c0b9360c9207c083d6c102778b : D. Richard Hipp <drh@hwaci.com> : Sat Jul 24 17
+commit fc23e10c917261c0b9360c9207c083d6c102778b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jul 24 17:38:29 2004 +0000
+
+    Prepared statements now work with CREATE and DROP.  All tests pass.
+    No memory leaks. (CVS 1866)
+
+
+a053f92a870efa260beb0231e880a6e25c4baf6f : D. Richard Hipp <drh@hwaci.com> : Sat Jul 24 14
+commit a053f92a870efa260beb0231e880a6e25c4baf6f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jul 24 14:35:58 2004 +0000
+
+    Fix more problems with deferred execution of CREATE.  Still need to do DROP.
+    There is now a memory leak. (CVS 1865)
+
+
+1ac56917e443f75e8e058fc165268a47ffa9865d : D. Richard Hipp <drh@hwaci.com> : Tue Jul 20 02
+commit 1ac56917e443f75e8e058fc165268a47ffa9865d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jul 20 02:05:11 2004 +0000
+
+    Fix an obscure memory leak in the expression list allocator. (CVS 1835)
+
+
+97c0405b6eb843f6ce3a25a01ba1fc1cd8e82092 : Dan Kennedy <danielk1977@gmail.com> : Fri Jun 25 10
+commit 97c0405b6eb843f6ce3a25a01ba1fc1cd8e82092
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jun 25 10:26:13 2004 +0000
+
+    Remove crash.test from memleak.test. (CVS 1691)
+
+
+4c38717b2bd6de62511d4bc96cc8b58109cffcc8 : Dan Kennedy <danielk1977@gmail.com> : Wed Jun 16 07
+commit 4c38717b2bd6de62511d4bc96cc8b58109cffcc8
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jun 16 07:45:24 2004 +0000
+
+    Fix two more memory leaks. (CVS 1603)
+
+
+e33b3b62ef9ae4e02645af67e86b3d925a99fa16 : Dan Kennedy <danielk1977@gmail.com> : Tue Jun 15 16
+commit e33b3b62ef9ae4e02645af67e86b3d925a99fa16
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jun 15 16:51:01 2004 +0000
+
+    Assorted memory leak fixes. (CVS 1600)
+
+
+7e0a12cfc05e693fbefd7e8c188c785e2f1c9732 : D. Richard Hipp <drh@hwaci.com> : Fri May 7 01
+commit 7e0a12cfc05e693fbefd7e8c188c785e2f1c9732
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri May 7 01:46:01 2004 +0000
+
+    Fix a memory leak in DETACH when using the codec. (CVS 1317)
+
+
+6af875aa551b212b6b178fe2e6a0dffd0e2bcf92 : D. Richard Hipp <drh@hwaci.com> : Sat Feb 21 19
+commit 6af875aa551b212b6b178fe2e6a0dffd0e2bcf92
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Feb 21 19:17:18 2004 +0000
+
+    Fix a long-standing memory leak that the new last_insert_rowid() tests
+    brought to light. (CVS 1259)
+
+
+93354fc888c33caa8f84be8ceb26250b7fe3b5a0 : D. Richard Hipp <drh@hwaci.com> : Sat Feb 21 19
+commit 93354fc888c33caa8f84be8ceb26250b7fe3b5a0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Feb 21 19:02:30 2004 +0000
+
+    Cleanup the printf code to make it smaller and more modular.
+    Fix a memory leak in the new OP_ContextPush opcode. (CVS 1258)
+
+
+f59baeb5fd7ed23ada22e9878cd875d188f0f2fa : D. Richard Hipp <drh@hwaci.com> : Wed Feb 18 16
+commit f59baeb5fd7ed23ada22e9878cd875d188f0f2fa
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Feb 18 16:57:23 2004 +0000
+
+    Fix a memory leak that occurs if you call sqlite_interrupt() on a query
+    using aggregate functions where the aggregate function returns a string
+    longer than 32 characters. (CVS 1248)
+
+
+c123d3a2c6b430c1c714da6f54a229b088e935ba : D. Richard Hipp <drh@hwaci.com> : Wed Feb 18 01
+commit c123d3a2c6b430c1c714da6f54a229b088e935ba
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Feb 18 01:31:54 2004 +0000
+
+    Add more tests of the sqlite_interrupt() logic - looking for a reported
+    memory leak.  (Didn't find it.) (CVS 1246)
+
+
+22a7b2e222153eb218db2654c87fd150bb973aec : D. Richard Hipp <drh@hwaci.com> : Sun Jun 29 20
+commit 22a7b2e222153eb218db2654c87fd150bb973aec
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Jun 29 20:25:08 2003 +0000
+
+    The prior fix of ticket #360 was incorrect and caused a memory leak.  This
+    check-in plugs the memory leak and correctly fixes ticket #360. (CVS 1040)
+
+
+5ecb18fd6efedfaff3dd6f9fa980aa53b96fbcc1 : D. Richard Hipp <drh@hwaci.com> : Sun Jun 29 18
+commit 5ecb18fd6efedfaff3dd6f9fa980aa53b96fbcc1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Jun 29 18:29:48 2003 +0000
+
+    Fix a bad memory leak in the in-memory database module. (CVS 1039)
+
+
+011780d2458a81275657122e3ded6aad04463588 : D. Richard Hipp <drh@hwaci.com> : Fri Apr 18 22
+commit 011780d2458a81275657122e3ded6aad04463588
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 18 22:52:39 2003 +0000
+
+    fix a memory leak in btree_rb.c. (CVS 918)
+
+
+c2f98b68005ab971c5c79258161988be6af4fa34 : D. Richard Hipp <drh@hwaci.com> : Sun Mar 30 00
+commit c2f98b68005ab971c5c79258161988be6af4fa34
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Mar 30 00:19:50 2003 +0000
+
+    Fix a memory leak in triggers and update tests to show the latest error
+    message text. (CVS 886)
+
+
+5b9ff6cf921476ffd8393e851835f60f8f04e0d5 : D. Richard Hipp <drh@hwaci.com> : Wed Feb 26 13
+commit 5b9ff6cf921476ffd8393e851835f60f8f04e0d5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Feb 26 13:52:52 2003 +0000
+
+    Fix a memory leak associated with PRIMARY KEY in a CREATE TABLE statement
+    that fails.  Ticket #249. (CVS 874)
+
+
+f4ba843967d9287fc7b794409896b3921d01c984 : D. Richard Hipp <drh@hwaci.com> : Wed Feb 26 13
+commit f4ba843967d9287fc7b794409896b3921d01c984
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Feb 26 13:52:51 2003 +0000
+
+    Fix a memory leak associated with PRIMARY KEY in a CREATE TABLE statement
+    that fails.  Ticket #249. (CVS 1730)
+
+
+7204e109b41c09fc4115b06d80df0c2d5c2532bd : D. Richard Hipp <drh@hwaci.com> : Tue Jan 14 02
+commit 7204e109b41c09fc4115b06d80df0c2d5c2532bd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 14 02:54:08 2003 +0000
+
+    Fix a memory leak in the PRAGMA authorization code. (CVS 833)
+
+
+a95ec2b1aba9a3a034a1f7469a8f091765818403 : D. Richard Hipp <drh@hwaci.com> : Thu Sep 5 23
+commit a95ec2b1aba9a3a034a1f7469a8f091765818403
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 5 23:21:37 2002 +0000
+
+    Fix a memory leak that occurred when sqlite_open() failed. (CVS 745)
+
+
+edb7478639199d53c6b50674030a7d7f3a2e74ae : D. Richard Hipp <drh@hwaci.com> : Sat Aug 31 16
+commit edb7478639199d53c6b50674030a7d7f3a2e74ae
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Aug 31 16:52:45 2002 +0000
+
+    Initial checking of two new test files: format3.test and memleak.test. (CVS 735)
+
+
+1d7c55f9a9193580b3b82196d2ffdb7ddc058351 : D. Richard Hipp <drh@hwaci.com> : Sun Aug 25 18
+commit 1d7c55f9a9193580b3b82196d2ffdb7ddc058351
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Aug 25 18:29:12 2002 +0000
+
+    Fix the memory leak introduced by check-in (725). (CVS 726)
+
+
+008a382a1a0b193e262ae26fa38cb67ee698f4c9 : D. Richard Hipp <drh@hwaci.com> : Sat Aug 24 18
+commit 008a382a1a0b193e262ae26fa38cb67ee698f4c9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Aug 24 18:24:52 2002 +0000
+
+    Change the way token memory is allocated in an effort to fix ticket #136.
+    There is now a memory leak when using views of views. (CVS 725)
+
+
+cb24c274cd530fae9d5590bdc25739e2d6f6f335 : D. Richard Hipp <drh@hwaci.com> : Thu May 23 12
+commit cb24c274cd530fae9d5590bdc25739e2d6f6f335
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu May 23 12:50:18 2002 +0000
+
+    Partial fix for ticket #49.  The correct result is computed, but now we have
+    a memory leak.  I'm not sure if the memory leak was pre-existing or a result
+    of this change. (CVS 581)
+
+
+e89f9945d8a00d393f3b81e21b7a512842244775 : D. Richard Hipp <drh@hwaci.com> : Sun Mar 3 03
+commit e89f9945d8a00d393f3b81e21b7a512842244775
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Mar 3 03:42:31 2002 +0000
+
+    Fix a memory leak in expression processing. (CVS 414)
+
+
+4582a4fffbafcb20b48602923b5dfdfcc8a7923e : D. Richard Hipp <drh@hwaci.com> : Thu Jun 8 13
+commit 4582a4fffbafcb20b48602923b5dfdfcc8a7923e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jun 8 13:36:40 2000 +0000
+
+    remove all memory leaks (CVS 80)
+
+
+commit fd3ba82bf19557855fb96d95f43f0fc2ae4937a3
+Type: memory leak
+File: src/os_win.c
+PC: __CYGWIN__
+
+
+
+commit fd3ba82bf19557855fb96d95f43f0fc2ae4937a3
+Type: resource leak
+File: src/os_win.c
+PC: SQLITE_MAX_MMAP_SIZE>0
+
+
+
+commit f237d775a0afd0d5dc67991c1c2d45696e4b4135
+Type: resource leak
+File: src/os_unix.c
+PC: true
+
+---
+SEG FAULT
+
+0683ba9cfb0530ae9b0e53af23afc186e3438024 : Dan Kennedy <danielk1977@gmail.com> : Fri Jun 26 20
+commit 0683ba9cfb0530ae9b0e53af23afc186e3438024
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jun 26 20:08:25 2015 +0000
+
+    Fix a segfault that could follow an OOM error in fts5.
+
+
+6df5c2757b799d50211d457c68699a6c1dbac537 : Dan Kennedy <danielk1977@gmail.com> : Sat Mar 21 19
+commit 6df5c2757b799d50211d457c68699a6c1dbac537
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Mar 21 19:35:09 2015 +0000
+
+    Avoid a segfault if NULL is passed as the first argument to SQL scalar function fts3_tokenizer().
+
+
+ca2a678afd2f5532c734736973c8728dac2f9625 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 5 16
+commit ca2a678afd2f5532c734736973c8728dac2f9625
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 5 16:27:43 2015 +0000
+
+    Towards getting INSERT statements to except many VALUE terms (more than
+    the limit imposed by SQLITE_LIMIT_COMPOUND_SELECT).  This check-in segfaults
+    on a stack overflow.  And it is slow.
+
+
+f30a8a581134746904cf23c006ad50e8ee048827 : D. Richard Hipp <drh@hwaci.com> : Tue Dec 23 20
+commit f30a8a581134746904cf23c006ad50e8ee048827
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Dec 23 20:05:19 2014 +0000
+
+    Fix a potential segfault following OOM error in the test harness.  The
+    SQLite core itself is not at fault.
+
+
+a44438c13a1d9d23449b5be3996b3822ba5f2b4a : Dan Kennedy <danielk1977@gmail.com> : Thu Oct 2 09
+commit a44438c13a1d9d23449b5be3996b3822ba5f2b4a
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Oct 2 09:27:08 2014 +0000
+
+    Fix a segfault that could occur if an 'optimize' command was issued on an FTS table that contained at least one row but zero terms.
+
+
+66ef5db96b635918ecf5645df52046ebf8c960a8 : Dan Kennedy <danielk1977@gmail.com> : Sat Sep 27 18
+commit 66ef5db96b635918ecf5645df52046ebf8c960a8
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Sep 27 18:18:32 2014 +0000
+
+    Fix a segfault in the sessions module that could follow an OOM.
+
+
+aa1de2816f4d4115d6c012bf3fbf9c14dbdad06c : Dan Kennedy <danielk1977@gmail.com> : Sat Sep 27 16
+commit aa1de2816f4d4115d6c012bf3fbf9c14dbdad06c
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Sep 27 16:33:09 2014 +0000
+
+    Fix a segfault in the streaming API functions triggered by a very long table name.
+
+
+4d2baa1d3ceb340cc7c168e50b852e032ad23a89 : D. Richard Hipp <drh@hwaci.com> : Sat Sep 6 03
+commit 4d2baa1d3ceb340cc7c168e50b852e032ad23a89
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Sep 6 03:16:28 2014 +0000
+
+    Add the sqlite3_memdebug_title_count global variable, used during debugging
+    to count the number of invocations of test_memdebug_settitle.  By examining
+    this variable in the debugger after a segfault, one can then set a breakpoint
+    on test_memdebug_settitle that will fire just before the problem.
+
+
+0f0d612f4f9bd110b59c1c7fb203df891895ee20 : D. Richard Hipp <drh@hwaci.com> : Thu May 8 23
+commit 0f0d612f4f9bd110b59c1c7fb203df891895ee20
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu May 8 23:01:59 2014 +0000
+
+    Initial attempt to merge in all trunk changes over the previous 1.5 years.
+    This check-in compiles but there are compiler warnings and "make test"
+    segfaults after only running a few test modules.
+
+
+ce5ca7635e00b117619db5ee82f54adfe64e4872 : Dan Kennedy <danielk1977@gmail.com> : Mon Mar 3 14
+commit ce5ca7635e00b117619db5ee82f54adfe64e4872
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Mar 3 14:20:30 2014 +0000
+
+    Fix a segfault that can occur following an OOM error.
+
+
+fb02566c01340d4aba76bd832c3fc0d07a3b3d67 : D. Richard Hipp <drh@hwaci.com> : Tue Sep 3 14
+commit fb02566c01340d4aba76bd832c3fc0d07a3b3d67
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Sep 3 14:49:07 2013 +0000
+
+    Merge in all the latest trunk changes, including the win32-longpath VFS and
+    the fix for the segfault in the omit-left-join optimization.
+
+
+b632d5306d08cb28b2afeceaace9a2bfaf383b40 : D. Richard Hipp <drh@hwaci.com> : Fri Aug 16 13
+commit b632d5306d08cb28b2afeceaace9a2bfaf383b40
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Aug 16 13:34:50 2013 +0000
+
+    Fix a potential segfault following an OOM while running ANALYZE.
+
+
+d1bd306e2ddaf215b983a06f665bcf175a673e07 : Dan Kennedy <danielk1977@gmail.com> : Thu Aug 8 12
+commit d1bd306e2ddaf215b983a06f665bcf175a673e07
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Aug 8 12:21:32 2013 +0000
+
+    Fix a segfault in "ALTER TABLE t1 ADD COLUMN b DEFAULT (-+1)". Also an assert() failure that could occur if SQLITE_ENABLE_STAT4 were not defined.
+
+
+75631026ca1866d36c421f9db21ba3115bd702d6 : D. Richard Hipp <drh@hwaci.com> : Thu Aug 1 22
+commit 75631026ca1866d36c421f9db21ba3115bd702d6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Aug 1 22:27:26 2013 +0000
+
+    Fix the CREATE INDEX statement so that trying to create a TEMP index on
+    a non-TEMP table throws an error rather than segfaulting.
+
+
+fe834d94093ef2f98a796e41a9a84b29f8abd283 : D. Richard Hipp <drh@hwaci.com> : Thu Aug 1 19
+commit fe834d94093ef2f98a796e41a9a84b29f8abd283
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Aug 1 19:17:39 2013 +0000
+
+    Make sure signed integer overflow does not cause a segfault while attempting
+    to read a corrupt database where the header size varint on a record is larger
+    than the maximum 32-bit signed integer.
+
+
+69c7dceee5c1aded1d6260a0a110eca9b2dd17e3 : D. Richard Hipp <drh@hwaci.com> : Tue Mar 26 01
+commit 69c7dceee5c1aded1d6260a0a110eca9b2dd17e3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 26 01:07:50 2013 +0000
+
+    Previous check-in accidently left mmap turned off by default. This checkin
+    fixes that.  Unfortunately, shared.test is now segfaulting.  All other
+    veryquick tests appear to work, however.
+
+
+3fffa1347aabc2797fafdd63e77a0d0d29a7daf4 : D. Richard Hipp <drh@hwaci.com> : Wed Dec 19 17
+commit 3fffa1347aabc2797fafdd63e77a0d0d29a7daf4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Dec 19 17:10:16 2012 +0000
+
+    Backport to the 3.7.15 branch
+    the fix to the segfault problem of ticket [a7b7803e8d1e869] which involved
+    the use of "AS" named result columns as logical terms of the WHERE clause.
+    Also, change the version number to 3.7.15.1.
+
+
+5da4dd9e3707dd5951f9157e3283711c198f0b6a : D. Richard Hipp <drh@hwaci.com> : Wed Dec 19 16
+commit 5da4dd9e3707dd5951f9157e3283711c198f0b6a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Dec 19 16:58:02 2012 +0000
+
+    Fix the segfault problem of ticket [a7b7803e8d1e869] which involved
+    the use of "AS" named result columns as logical terms of the WHERE clause.
+
+
+b841da85b5421bbd8dd17cd6603c188c0ef08877 : D. Richard Hipp <drh@hwaci.com> : Fri Dec 7 14
+commit b841da85b5421bbd8dd17cd6603c188c0ef08877
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Dec 7 14:02:14 2012 +0000
+
+    Veryquick now row to completion without segfaulting or asserting.  But there
+    are still lots of errors.
+
+
+4efcc632a5d3a16a5e4e614ff6f66a428ce4a41f : Dan Kennedy <danielk1977@gmail.com> : Thu Oct 25 19
+commit 4efcc632a5d3a16a5e4e614ff6f66a428ce4a41f
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Oct 25 19:25:39 2012 +0000
+
+    Fix a bug in fts3 causing it to return SQLITE_NOMEM when NEAR, OR and some auxiliary functions were used together. Also a segfault in vtab.c that could follow an OOM condition.
+
+
+08a5bfcf0b28f6878727294d2cef8523a9b76350 : D. Richard Hipp <drh@hwaci.com> : Thu Feb 2 03
+commit 08a5bfcf0b28f6878727294d2cef8523a9b76350
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 2 03:11:40 2012 +0000
+
+    Fix a possible segfault after an OOM fault.  This has been in the code for ages
+    but only expressed itself following the previous check-in.
+
+
+fcd45aa7387ae61c49e0c1136c5c5a0067ba0fa2 : D. Richard Hipp <drh@hwaci.com> : Wed Aug 3 21
+commit fcd45aa7387ae61c49e0c1136c5c5a0067ba0fa2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Aug 3 21:32:11 2011 +0000
+
+    Avoid segfaulting on an incremental blob write if SQLITE_ENABLE_PREUPDATE_HOOK
+    set but no pre-update hooks are defined.
+
+
+cb9f3ad8da4f949bd79e0084c78d94fe42d6ae4e : D. Richard Hipp <drh@hwaci.com> : Sat Mar 26 19
+commit cb9f3ad8da4f949bd79e0084c78d94fe42d6ae4e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 26 19:04:47 2011 +0000
+
+    Added most of the logic.  Simple test runs without segfaulting but does not
+    give the correct answer.
+
+
+62aeb2caa01fc55107cd45fecfa6783ed3615eb5 : D. Richard Hipp <drh@hwaci.com> : Fri Feb 11 06
+commit 62aeb2caa01fc55107cd45fecfa6783ed3615eb5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Feb 11 06:59:02 2011 +0000
+
+    Fix a bug in the new WHERE-clause processing that tries to use an
+    index to resolve IS NOT NULL constraints when SQLITE_ENABLE_STAT2 is
+    defined.  The bug could cause memory overruns and segfaults.  The bug
+    was new to the code and has not appeared in an official release.
+    Found during structural testing.
+
+
+d4370cad8b41ee16a92b361bdd622db8dc36ad1c : D. Richard Hipp <drh@hwaci.com> : Thu Feb 10 17
+commit d4370cad8b41ee16a92b361bdd622db8dc36ad1c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 10 17:46:14 2011 +0000
+
+    Prevent a segfault when automatic indices try to use a column with an
+    unknown collating function.  Ticket [77aa3b1e6592582e38605d36].  This
+    check-in also removes some stray \r characters unrelated to the problem.
+
+
+be204cbb0d300fbcdb810249dab475bcb6dc5b78 : Dan Kennedy <danielk1977@gmail.com> : Thu Jan 13 10
+commit be204cbb0d300fbcdb810249dab475bcb6dc5b78
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Jan 13 10:58:27 2011 +0000
+
+    Fix a segfault that can occur in matchinfo if an fts4 table contains mostly zero-length documents. Specifically, if the table contains more rows than it does bytes of text.
+
+
+530e0348be13c74114dc02ecb913c4dd1d918d4c : D. Richard Hipp <drh@hwaci.com> : Thu Nov 18 12
+commit 530e0348be13c74114dc02ecb913c4dd1d918d4c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Nov 18 12:31:24 2010 +0000
+
+    Prevent a possible segfault when the sqlite3_value_numeric_type() interface is
+    misused to try to determine the numeric type of the NULL value returned
+    from sqlite3_column_value() with an invalid column number.
+
+
+4a1b0362e04d27de1c096921c5b05034fa992903 : Dan Kennedy <danielk1977@gmail.com> : Thu Oct 21 15
+commit 4a1b0362e04d27de1c096921c5b05034fa992903
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Oct 21 15:12:44 2010 +0000
+
+    Fix some segfaults that could occur in obscure circumstances where error messages contained characters that could be mistaken for printf format specifiers.
+
+
+b60d61a207ec9ff3e9da0abb13c1064a40b28810 : D. Richard Hipp <drh@hwaci.com> : Wed Sep 1 14
+commit b60d61a207ec9ff3e9da0abb13c1064a40b28810
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Sep 1 14:45:16 2010 +0000
+
+    Make all private routines in test_quota.c begin with "quota".
+    Fix a test_quota.c segfault when setting a zero-quota.
+
+
+415ef6d387596dde6dbebd85a7edd11c2b15e611 : D. Richard Hipp <drh@hwaci.com> : Tue Aug 24 12
+commit 415ef6d387596dde6dbebd85a7edd11c2b15e611
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Aug 24 12:05:18 2010 +0000
+
+    Pull the incremental_vacuum bug fix ([255f1eefa373153942c67b18b]) and the
+    R-tree segfault bug fix ([7f2f71cc9e3c39093f09231f44]) into the 3.6.23
+    branch.  Increase the version number to 3.6.23.3.
+
+
+45b67b3a81c5fd6b69b00bc3f225e63d7c9fa8be : Dan Kennedy <danielk1977@gmail.com> : Thu May 13 07
+commit 45b67b3a81c5fd6b69b00bc3f225e63d7c9fa8be
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu May 13 07:08:54 2010 +0000
+
+    Fix for a segfault that can follow a malloc failure.
+
+
+af8da54eaf05abdf9383f13271329fd5348eee2e : D. Richard Hipp <drh@hwaci.com> : Sat May 1 11
+commit af8da54eaf05abdf9383f13271329fd5348eee2e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat May 1 11:19:08 2010 +0000
+
+    Fix the sqlite3_mutex_alloc() interface to return NULL (not segfault) when
+    operating in threadsafe mode.  (This is a general-purpose bug fix which
+    really ought to be ported to trunk.)
+
+
+d53dc2d4ac9b31c46e38fb062d0e2241ae41de4f : D. Richard Hipp <drh@hwaci.com> : Thu Feb 25 02
+commit d53dc2d4ac9b31c46e38fb062d0e2241ae41de4f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 25 02:11:22 2010 +0000
+
+    Fix a segfault that is possible for an OOM fault in ATTACH when in
+    shared-cache mode.  This is a cherrypick merge of check-in [e37137376a].
+
+
+9f9da6b04d6b256994624a6fa77d099d0adee8ce : Dan Kennedy <danielk1977@gmail.com> : Tue Feb 23 18
+commit 9f9da6b04d6b256994624a6fa77d099d0adee8ce
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Feb 23 18:05:26 2010 +0000
+
+    Fix a segfault that can occur if a malloc fails in ATTACH in shared-cache mode.
+
+
+61d958b75fdae427023cabafc23a0fc1176122c2 : Dan Kennedy <danielk1977@gmail.com> : Tue Feb 23 10
+commit 61d958b75fdae427023cabafc23a0fc1176122c2
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Feb 23 10:56:16 2010 +0000
+
+    Fix a segfault that can occur if a malloc fails in ATTACH in shared-cache mode.
+
+
+4a8a53b693ec504f9e01f6610d76063688c146a0 : Dan Kennedy <danielk1977@gmail.com> : Tue Feb 23 10
+commit 4a8a53b693ec504f9e01f6610d76063688c146a0
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Feb 23 10:50:27 2010 +0000
+
+    Fix a segfault that can occur if a malloc fails in ATTACH in shared-cache mode.
+
+
+b04f2e474249caa7878a7a14490ff5a13c71ef06 : D. Richard Hipp <drh@hwaci.com> : Mon Feb 22 23
+commit b04f2e474249caa7878a7a14490ff5a13c71ef06
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Feb 22 23:17:42 2010 +0000
+
+    Fix an assertion-fault/segfault problem that comes up when trying to
+    VACUUM an auto-vacuumed database with a large schema.
+    Ticket [da1151f97df244].
+
+
+05eb3c9482d46bfe95d12be23bb5f3ad4cf0e0e9 : Dan Kennedy <danielk1977@gmail.com> : Wed Feb 10 05
+commit 05eb3c9482d46bfe95d12be23bb5f3ad4cf0e0e9
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Feb 10 05:33:18 2010 +0000
+
+    Fix a segfault in fts3 that may occur if the snippet, offsets or matchinfo functions are used in a query that does not contain a MATCH clause.
+
+
+1bc68f51813b3fa7c2d817d519c65097172b08f9 : D. Richard Hipp <drh@hwaci.com> : Thu Jan 21 23
+commit 1bc68f51813b3fa7c2d817d519c65097172b08f9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jan 21 23:11:25 2010 +0000
+
+    Fix a segfault that can occur when the LHS of a LIKE operator has an
+    undefined collating sequence.  Ticket [1258875e07553].
+
+
+ab0acb24a71e0913e2450dece590f20b3ca23c0c : Dan Kennedy <danielk1977@gmail.com> : Wed Jan 6 18
+commit ab0acb24a71e0913e2450dece590f20b3ca23c0c
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jan 6 18:36:27 2010 +0000
+
+    Fix a segfault that can occur following an OOM in the FTS3 snippet() function
+
+
+f3af17bb81521f0c0ba726dcbae9c11817bd10bb : Dan Kennedy <danielk1977@gmail.com> : Tue Dec 1 12
+commit f3af17bb81521f0c0ba726dcbae9c11817bd10bb
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Dec 1 12:00:22 2009 +0000
+
+    Fix a segfault that can occur when querying an empty FTS3 table. Also restore the rowid/docid conflict handling to work as it did in version 3.6.20.
+
+
+b306082c434843e07e49e8aba00540759db0c01d : Dan Kennedy <danielk1977@gmail.com> : Sat Nov 28 12
+commit b306082c434843e07e49e8aba00540759db0c01d
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Nov 28 12:40:32 2009 +0000
+
+    Fix a bug introduced by the fts3 refactoring (segfault when creating a table with zero module args). Also a fix to handle an OOM error.
+
+
+c40d80a49b5f2e121df81c0b29d3f29fa80b4be9 : D. Richard Hipp <drh@hwaci.com> : Thu Oct 8 01
+commit c40d80a49b5f2e121df81c0b29d3f29fa80b4be9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Oct 8 01:43:55 2009 +0000
+
+    Fix a segfault that can occur following an OOM fault while renaming a
+    table holding foreign key constraints.
+
+
+ad0b7bb97d31ba542a5f93d3513f8f67d51bbbda : Dan Kennedy <danielk1977@gmail.com> : Mon Aug 31 05
+commit ad0b7bb97d31ba542a5f93d3513f8f67d51bbbda
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Aug 31 05:23:33 2009 +0000
+
+    Fix another test problem and some instances where an OOM may cause a segfault.
+
+
+c15f68fa21e81c3160e10dbf015331fcf0164cb6 : D. Richard Hipp <drh@hwaci.com> : Sat Aug 1 15
+commit c15f68fa21e81c3160e10dbf015331fcf0164cb6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Aug 1 15:09:58 2009 +0000
+
+    Fix a segfault following OOM that was introduced by check-in (6949) which
+    was a fix for ticket #3997. (CVS 6954)
+
+
+425af0462f81c6a4df22a88e6dbc9fae8617901e : D. Richard Hipp <drh@hwaci.com> : Fri Jun 19 02
+commit 425af0462f81c6a4df22a88e6dbc9fae8617901e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 19 02:25:49 2009 +0000
+
+    Fix a possible segfault when backing up an encrypted database. (CVS 6785)
+
+
+97a108fd6816313c22cddaf36dfa15320d09c13e : D. Richard Hipp <drh@hwaci.com> : Wed Jun 17 13
+commit 97a108fd6816313c22cddaf36dfa15320d09c13e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 17 13:57:16 2009 +0000
+
+    Fix a potential segfault following database corruption.  Problem
+    made visible by check-in (6772). (CVS 6775)
+
+
+fdf791735e93321f5e37e5935de381fa16ae3b9f : Dan Kennedy <danielk1977@gmail.com> : Tue Apr 21 17
+commit fdf791735e93321f5e37e5935de381fa16ae3b9f
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Apr 21 17:23:05 2009 +0000
+
+    Fix a segfault that followed a malloc failure introduced by (6527). (CVS 6532)
+
+
+0cedbc1aaeddfa8f01b0bdf37007874c28ca52ca : D. Richard Hipp <drh@hwaci.com> : Fri Apr 17 11
+commit 0cedbc1aaeddfa8f01b0bdf37007874c28ca52ca
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 17 11:56:28 2009 +0000
+
+    Check-in (6514) did not completely remove the obsolete test, resulting in a
+    segfault.  This check-in finishes the job.  Ticket #3802. (CVS 6516)
+
+
+ec33e62b139772bfb89d6656ce291d2c074c87d2 : D. Richard Hipp <drh@hwaci.com> : Sun Apr 5 15
+commit ec33e62b139772bfb89d6656ce291d2c074c87d2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Apr 5 15:18:03 2009 +0000
+
+    Fix a segfault in Lemon that occurs if the input grammar does not define
+    a type for tokens.  This does not effect SQLite since the SQLite grammar
+    does define a type for tokens. (CVS 6451)
+
+
+bd8832142ff26ff1bda2e9f3a0b55228d977bd5a : Dan Kennedy <danielk1977@gmail.com> : Tue Feb 17 16
+commit bd8832142ff26ff1bda2e9f3a0b55228d977bd5a
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Feb 17 16:29:11 2009 +0000
+
+    Allow sqlite3_shutdown() to be called by a process before sqlite3_initialize() is. Prior to this commit such a call could segfault. (CVS 6296)
+
+
+7a01e5991d44ffbe1cf5a3112c2dbbf8a72c17d4 : Dan Kennedy <danielk1977@gmail.com> : Sat Jan 31 14
+commit 7a01e5991d44ffbe1cf5a3112c2dbbf8a72c17d4
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Jan 31 14:54:07 2009 +0000
+
+    Avoid a segfault when running vacuum on an in-memory database. Ticket #3620. (CVS 6221)
+
+
+875795a8729a79874279742e07de9b5d5d136c0c : D. Richard Hipp <drh@hwaci.com> : Wed Jan 28 20
+commit 875795a8729a79874279742e07de9b5d5d136c0c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 28 20:21:17 2009 +0000
+
+    Fix a segfault that can occur when attempting to insert into
+    a corrupt database file.  Need a test case. (CVS 6212)
+
+
+f64fc1bd762762f0dd30fc847ca6ff19f9a4700e : Dan Kennedy <danielk1977@gmail.com> : Wed Dec 24 09
+commit f64fc1bd762762f0dd30fc847ca6ff19f9a4700e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Dec 24 09:30:22 2008 +0000
+
+    Fix a couple of problems in test file test_journal.c that were causing segfaults when running all.test. (CVS 6063)
+
+
+1d40471de790eb5a371b51414365e6c0223a66b4 : D. Richard Hipp <drh@hwaci.com> : Mon Dec 8 13
+commit 1d40471de790eb5a371b51414365e6c0223a66b4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Dec 8 13:42:36 2008 +0000
+
+    Fix a segfault associated with the column cache that occurs on nested VIEWs.
+    Ticket #3527. (CVS 5989)
+
+
+4c9902cb1f1a302d44609a8ea0aa85ddc1f49424 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 4 22
+commit 4c9902cb1f1a302d44609a8ea0aa85ddc1f49424
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 4 22:17:56 2008 +0000
+
+    Fix a segfault that can occur in the RowSet object following a malloc
+    failure. (CVS 5978)
+
+
+8175fe3ffc9c33e9245d874e96d20bc7f9cf9602 : Dan Kennedy <danielk1977@gmail.com> : Fri Nov 21 16
+commit 8175fe3ffc9c33e9245d874e96d20bc7f9cf9602
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Nov 21 16:22:18 2008 +0000
+
+    Fix a segfault that can be caused by an INSTEAD OF trigger on a view that includes an expression of the form "table.column" in the select list. (CVS 5940)
+
+
+ab3c2eea32f3e5e7636aab69e82550e459dd742f : D. Richard Hipp <drh@hwaci.com> : Tue Nov 4 14
+commit ab3c2eea32f3e5e7636aab69e82550e459dd742f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Nov 4 14:25:06 2008 +0000
+
+    Avoid a segfault when OOM on a simple EXPLAIN query.  Ticket #3478. (CVS 5860)
+
+
+9bfe7bc607d8aaacfc845d0a03c6f39a3c89088a : D. Richard Hipp <drh@hwaci.com> : Sat Oct 11 17
+commit 9bfe7bc607d8aaacfc845d0a03c6f39a3c89088a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 11 17:06:04 2008 +0000
+
+    Fix a OOM segfault in the BETWEEN operator parsing - discovered while
+    using SQLITE_OMIT_LOOKASIDE. Add SQLITE_OMIT_LOOKASIDE to test_config.c and
+    bypass lookaside.test when defined. (CVS 5803)
+
+
+9e26982ccbea4788d36cda7b1967d7fd24c942fd : D. Richard Hipp <drh@hwaci.com> : Sat Oct 11 16
+commit 9e26982ccbea4788d36cda7b1967d7fd24c942fd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 11 16:47:36 2008 +0000
+
+    Fix a memory leak on ORDER BY of a compound select caused by the resolver
+    on a flattened query.  Also fix a OOM segfault in WHERE clause processing. (CVS 5801)
+
+
+b787bb8de959c847acf12046e1106e155273828a : Dan Kennedy <danielk1977@gmail.com> : Thu Sep 18 18
+commit b787bb8de959c847acf12046e1106e155273828a
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Sep 18 18:17:04 2008 +0000
+
+    Fix a segfault introduced by (5720) that can follow an IO error. (CVS 5721)
+
+
+79f64ce8c0b5f64e1b5d8e8b9df3b2303b623c7e : Dan Kennedy <danielk1977@gmail.com> : Mon Aug 25 11
+commit 79f64ce8c0b5f64e1b5d8e8b9df3b2303b623c7e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Aug 25 11:57:17 2008 +0000
+
+    Fix a segfault that can occur when running integrity_check on a corrupt db. (CVS 5606)
+
+
+3eb1aafcb5dccc2da4c9167bcd4ff2bfd9266e90 : Dan Kennedy <danielk1977@gmail.com> : Wed Aug 20 17
+commit 3eb1aafcb5dccc2da4c9167bcd4ff2bfd9266e90
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Aug 20 17:19:09 2008 +0000
+
+    Fix a problem in Makefile.in causing the static function hash-table to be constructed incorrectly (segfault). (CVS 5570)
+
+
+7510177123ad25deca206419805011d23ec7acfc : D. Richard Hipp <drh@hwaci.com> : Mon Aug 11 14
+commit 7510177123ad25deca206419805011d23ec7acfc
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Aug 11 14:26:35 2008 +0000
+
+    Disallow empty triggers.  Ticket #3283.  This does not present a backwards
+    compatibility problem because prior to this change, an empty trigger would
+    segfault. (CVS 5550)
+
+
+f79a2ae8f015a573e923494f4373ccf2743fa9a0 : D. Richard Hipp <drh@hwaci.com> : Sat Aug 2 03
+commit f79a2ae8f015a573e923494f4373ccf2743fa9a0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Aug 2 03:50:39 2008 +0000
+
+    Additional coverage testing.  Fix a segfault following OOM in
+    sqltie3_load_extension(). (CVS 5523)
+
+
+b2e294968c338b41ffaa58c21f789c63beb4f82e : D. Richard Hipp <drh@hwaci.com> : Fri Jun 20 00
+commit b2e294968c338b41ffaa58c21f789c63beb4f82e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 20 00:03:22 2008 +0000
+
+    Patch to memsubsys1.test in order to avoid a segfault in tableapi.test. (CVS 5252)
+
+
+42a06846a0241cee6cfbbbf1775987527952e9ee : D. Richard Hipp <drh@hwaci.com> : Mon May 5 16
+commit 42a06846a0241cee6cfbbbf1775987527952e9ee
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon May 5 16:27:24 2008 +0000
+
+    Do not segfault in the CLI if sqlite3_open() fails to create a
+    database connection object.  Ticket #3096. (CVS 5084)
+
+
+db96210db2e731137f825a658a92f6c2a4cf9622 : Dan Kennedy <danielk1977@gmail.com> : Wed Mar 12 10
+commit db96210db2e731137f825a658a92f6c2a4cf9622
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Mar 12 10:39:00 2008 +0000
+
+    Do not segfault after a parse error in a sub-select in a statement of the form "DELETE WHERE ... IN(sub-select)". Ticket #2991. (CVS 4854)
+
+
+8164775da8f962b49fdf0fd070ef5e1f9bd7b881 : Dan Kennedy <danielk1977@gmail.com> : Thu Jan 24 14
+commit 8164775da8f962b49fdf0fd070ef5e1f9bd7b881
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Jan 24 14:27:44 2008 +0000
+
+    Fix a segfault that may follow a malloc failure during compilation of an INSTEAD OF trigger. (CVS 4749)
+
+
+15b97a02168369119480b96041687389cc332c87 : Dan Kennedy <danielk1977@gmail.com> : Wed Jan 23 17
+commit 15b97a02168369119480b96041687389cc332c87
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jan 23 17:13:41 2008 +0000
+
+    Fix another segfault that can occur following a malloc failure in the SQL compiler. (CVS 4748)
+
+
+ce16f34faf9ebee2621a461c41293b2ca84c7f93 : Dan Kennedy <danielk1977@gmail.com> : Wed Jan 23 15
+commit ce16f34faf9ebee2621a461c41293b2ca84c7f93
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jan 23 15:44:51 2008 +0000
+
+    Fix a couple of segfaults that could occur after a malloc() failure in the SQL compiler. (CVS 4747)
+
+
+dc69bb189e12ac6c27b3a2c04e7477a420cab760 : D. Richard Hipp <drh@hwaci.com> : Tue Jan 22 16
+commit dc69bb189e12ac6c27b3a2c04e7477a420cab760
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 22 16:35:37 2008 +0000
+
+    Detect and report a particular type of database corruption that would
+    formerly cause a segfault. (CVS 4740)
+
+
+b6fc978dda97298a36ff18cbe8eea6129540553d : D. Richard Hipp <drh@hwaci.com> : Tue Jan 22 16
+commit b6fc978dda97298a36ff18cbe8eea6129540553d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 22 16:35:36 2008 +0000
+
+    Detect and report a particular type of database corruption that would
+    formerly cause a segfault. (CVS 4739)
+
+
+f3aee70b289e841b06f9bc6bcba025b1b6f9fea1 : D. Richard Hipp <drh@hwaci.com> : Tue Nov 27 16
+commit f3aee70b289e841b06f9bc6bcba025b1b6f9fea1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Nov 27 16:55:08 2007 +0000
+
+    Fix a bug that can cause a segfault on win32 systems following an
+    I/O error. (CVS 4565)
+
+
+59d5b55573771214f7ac8604136305eb66b0da4d : Dan Kennedy <danielk1977@gmail.com> : Thu Nov 15 13
+commit 59d5b55573771214f7ac8604136305eb66b0da4d
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Nov 15 13:10:23 2007 +0000
+
+    Fix a segfault that can occur after a malloc failure in an ANALYZE statement. Ticket #2772. (CVS 4544)
+
+
+6ec69fa5001a9455c722c0bede58885184a79d57 : D. Richard Hipp <drh@hwaci.com> : Fri Sep 7 14
+commit 6ec69fa5001a9455c722c0bede58885184a79d57
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Sep 7 14:32:07 2007 +0000
+
+    Fix a segfault that could occur while attempting to add new pages
+    to the freelist in a corrupt database. (CVS 4414)
+
+
+0675590ed1c06381a454c72d81d63f7f7ae58ccf : D. Richard Hipp <drh@hwaci.com> : Fri Aug 24 17
+commit 0675590ed1c06381a454c72d81d63f7f7ae58ccf
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Aug 24 17:52:22 2007 +0000
+
+    Rework the win32 OS driver to use malloc()/free() directly rather than
+    going through the SQLite memory allocation layer.  With this change, the
+    complete quick.test script now runs on windows.  There are a few errors,
+    but no segfaults.  Progress. (CVS 4289)
+
+
+694d2c29581034c27da7bab8f44ff9da7cd6414c : Dan Kennedy <danielk1977@gmail.com> : Thu Aug 16 04
+commit 694d2c29581034c27da7bab8f44ff9da7cd6414c
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Aug 16 04:39:01 2007 +0000
+
+    Add a test for malloc() failure when compiling a trigger step of the form "INSERT INTO ... SELECT ...". Currently causes a segfault. (CVS 4232)
+
+
+60fd273a720ba5c603a2e862b595bfbbda93ba3d : D. Richard Hipp <drh@hwaci.com> : Tue Jun 19 10
+commit 60fd273a720ba5c603a2e862b595bfbbda93ba3d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jun 19 10:58:24 2007 +0000
+
+    Do not segfault even if sqlite is misused by requesting query results
+    after the query has been reset.  ticket #2426. (CVS 4090)
+
+
+5749c34a08c748743819e5a8f52a4aa02089e4b7 : D. Richard Hipp <drh@hwaci.com> : Mon Apr 30 21
+commit 5749c34a08c748743819e5a8f52a4aa02089e4b7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Apr 30 21:39:16 2007 +0000
+
+    Fix a potential segfault following a malloc() failure during a call
+    to sqlite3_prepare() where the nBytes parameter is positive but less than
+    the length of the input SQL string. (CVS 3888)
+
+
+f309013c9f00f4d4f2bfa61294f12f00b6976610 : D. Richard Hipp <drh@hwaci.com> : Wed Apr 25 18
+commit f309013c9f00f4d4f2bfa61294f12f00b6976610
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Apr 25 18:23:53 2007 +0000
+
+    Fix segfaults that can occur if a malloc failure happens just before
+    a built-in function calls sqlite3_value_text(). (CVS 3874)
+
+
+f3db3588f3da2c87076d6620e3ac8be72466feb2 : Dan Kennedy <danielk1977@gmail.com> : Mon Mar 19 13
+commit f3db3588f3da2c87076d6620e3ac8be72466feb2
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Mar 19 13:53:38 2007 +0000
+
+    Fix some problems with test cases in shared_err.test. Also a real bug causing a segfault after an IO error in pager.c. (CVS 3703)
+
+
+bd2e0e51a7726949efeadde8e4a7fddf18754f6c : D. Richard Hipp <drh@hwaci.com> : Mon Jan 8 21
+commit bd2e0e51a7726949efeadde8e4a7fddf18754f6c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 8 21:07:18 2007 +0000
+
+    Fix a critical bug in sqlite3_prepare_v2 that can lead to segfaults when
+    the schema changes and the statement is recompiled automatically.
+    Ticket #2154. (CVS 3576)
+
+
+b816aabde264e56ad89b49bfb97a572762291bb5 : D. Richard Hipp <drh@hwaci.com> : Thu Sep 28 11
+commit b816aabde264e56ad89b49bfb97a572762291bb5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 28 11:41:41 2006 +0000
+
+    Avoid segfaults when inserted NULL values into FTS1. (CVS 3447)
+
+
+2d24c5535246cd140860618d167edc5afda55535 : Dan Kennedy <danielk1977@gmail.com> : Wed Jun 14 15
+commit 2d24c5535246cd140860618d167edc5afda55535
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jun 14 15:14:51 2006 +0000
+
+    Fix segfault introduced in (3243). (CVS 3245)
+
+
+6889ca27cd3119d246050433902a6e11fe9567bc : Dan Kennedy <danielk1977@gmail.com> : Tue Jun 13 04
+commit 6889ca27cd3119d246050433902a6e11fe9567bc
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jun 13 04:11:44 2006 +0000
+
+    Bugfixes: Fix a segfault introduced as part of the new vtab code, deallocate memory in the Destroy() method of the echo module. (CVS 3222)
+
+
+0e83e20313a53b2486b6a3961cb1cb83422bb239 : Dan Kennedy <danielk1977@gmail.com> : Tue Jun 13 04
+commit 0e83e20313a53b2486b6a3961cb1cb83422bb239
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jun 13 04:11:43 2006 +0000
+
+    Bugfixes: Fix a segfault introduced as part of the new vtab code, deallocate memory in the Destroy() method of the echo module. (CVS 3221)
+
+
+0377f8aa808d49000bd31226c3cc6048fa8586e4 : D. Richard Hipp <drh@hwaci.com> : Mon Mar 6 20
+commit 0377f8aa808d49000bd31226c3cc6048fa8586e4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Mar 6 20:55:46 2006 +0000
+
+    Code changes resulting from Coverity analysis.
+    http://scan.coverity.com/  Found 1 potential segfault in sqlite3_mprintf().
+    Also 2 failures to fclose() following a malloc() failure.  And lots of
+    cases where unnecessary conditionals could be removed from the code. (CVS 3126)
+
+
+c8eb40744c23ee152b36975eac3dc9ee91647471 : D. Richard Hipp <drh@hwaci.com> : Wed Aug 24 16
+commit c8eb40744c23ee152b36975eac3dc9ee91647471
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Aug 24 16:13:52 2005 +0000
+
+    Fix a bug in DELETE that might cause a segfault when deleting more
+    than 40940 rows of data all at once. (CVS 2620)
+
+
+6008fa17254343e78a6a5c1347f5345dc50764ee : D. Richard Hipp <drh@hwaci.com> : Mon Jun 6 15
+commit 6008fa17254343e78a6a5c1347f5345dc50764ee
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jun 6 15:07:03 2005 +0000
+
+    Handle failures of getcwd() without segfaulting.  Ticket #1274. (CVS 2491)
+
+
+8601ba108b9a9d7fcbd1454b66ef1aa90b383138 : D. Richard Hipp <drh@hwaci.com> : Mon Jun 6 15
+commit 8601ba108b9a9d7fcbd1454b66ef1aa90b383138
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jun 6 15:06:39 2005 +0000
+
+    Handle failures of getcwd() without segfaulting.  Ticket #1274. (CVS 2490)
+
+
+bdbb383fd0f997f727c32de3a57c313b0843c556 : D. Richard Hipp <drh@hwaci.com> : Fri Apr 29 02
+commit bdbb383fd0f997f727c32de3a57c313b0843c556
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 29 02:10:00 2005 +0000
+
+    Prevent a segfault described by ticket #1229. (CVS 2450)
+
+
+fdbbdac12a9d8270ea75aec3d1375d6554ce08ac : Dan Kennedy <danielk1977@gmail.com> : Tue Mar 29 02
+commit fdbbdac12a9d8270ea75aec3d1375d6554ce08ac
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Mar 29 02:54:03 2005 +0000
+
+    Fix segfault due to exception handler being run with uninitialised variable. (CVS 2426)
+
+
+f6c06025d96197ddfe938dc233d644149e1e218c : Dan Kennedy <danielk1977@gmail.com> : Sat Jan 29 09
+commit f6c06025d96197ddfe938dc233d644149e1e218c
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Jan 29 09:00:49 2005 +0000
+
+    Fix a test bug causing a segfault in bind.test. (CVS 2288)
+
+
+a92197401942dcc51cada91deaa2cf663fa99f90 : D. Richard Hipp <drh@hwaci.com> : Fri Jan 21 00
+commit a92197401942dcc51cada91deaa2cf663fa99f90
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jan 21 00:22:38 2005 +0000
+
+    Fix a segfault that occurs on a corrupt database. (CVS 2248)
+
+
+c992794a5d409cceaca1608ab2a46e36095afa3b : D. Richard Hipp <drh@hwaci.com> : Thu Dec 9 18
+commit c992794a5d409cceaca1608ab2a46e36095afa3b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 9 18:29:14 2004 +0000
+
+    Enhance sqlite3_bind_parameter_index so that is does not segfault if
+    you call it incorrectly by passing NULL in place of the parameter name.
+    Ticket #1032. (CVS 2159)
+
+
+5863c6f4f62b34561751921653b7a94b565b6e77 : D. Richard Hipp <drh@hwaci.com> : Sat Nov 20 18
+commit 5863c6f4f62b34561751921653b7a94b565b6e77
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Nov 20 18:13:10 2004 +0000
+
+    Fix segfaults that might occur after a malloc failure. (CVS 2119)
+
+
+55762b4a8aebde56de6307d151c7e67942ecbdec : D. Richard Hipp <drh@hwaci.com> : Fri Sep 24 12
+commit 55762b4a8aebde56de6307d151c7e67942ecbdec
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Sep 24 12:48:13 2004 +0000
+
+    Avoid a segfault in sqlite3_bind_parameter_index when there are
+    unnamed parameters.  Ticket #918. (CVS 1977)
+
+
+15e136f9f7b37e7766df28e9ff263768d1fa6aec : D. Richard Hipp <drh@hwaci.com> : Thu Sep 9 13
+commit 15e136f9f7b37e7766df28e9ff263768d1fa6aec
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 9 13:55:50 2004 +0000
+
+    Fix a segfault in the authorizer when it is given a SELECT statement with
+    no FROM clause.  Ticket #896. (CVS 1954)
+
+
+244b1ea37ef0970304074927e2e9594997568a4e : D. Richard Hipp <drh@hwaci.com> : Thu Sep 9 13
+commit 244b1ea37ef0970304074927e2e9594997568a4e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 9 13:54:30 2004 +0000
+
+    Fix a segfault in the authorizer when it is given a SELECT statement with
+    no FROM clause.  Ticket #896. (CVS 1953)
+
+
+780e4344c5f6cc349246c062d643a4a6112b2417 : Dan Kennedy <danielk1977@gmail.com> : Mon Jun 28 00
+commit 780e4344c5f6cc349246c062d643a4a6112b2417
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Jun 28 00:17:32 2004 +0000
+
+    Fix a seg-fault caused by a malloc() failure. (CVS 1748)
+
+
+53a1581213b91c758e4791b21ced76972d6b7a13 : D. Richard Hipp <drh@hwaci.com> : Tue Jun 22 13
+commit 53a1581213b91c758e4791b21ced76972d6b7a13
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jun 22 13:22:40 2004 +0000
+
+    Fix some segfaults that could have occurred after a malloc() failure. (CVS 1661)
+
+
+c6ca7354353d3b5ede7eb5b3f06f785bef87b9ad : D. Richard Hipp <drh@hwaci.com> : Sat Jun 19 15
+commit c6ca7354353d3b5ede7eb5b3f06f785bef87b9ad
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jun 19 15:40:23 2004 +0000
+
+    Clear up another zero-length array.  This seems to fix the segfault in
+    func-13.4 too. (CVS 1641)
+
+
+640a708b910840f7e049b482573a6d7694d10e23 : Dan Kennedy <danielk1977@gmail.com> : Wed Jun 2 06
+commit 640a708b910840f7e049b482573a6d7694d10e23
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jun 2 06:30:16 2004 +0000
+
+    Fix a segfault in sqlite3OsLock() (CVS 1525)
+
+
+22dc8d34c39e209674c2dc52366d68312e85d542 : Dan Kennedy <danielk1977@gmail.com> : Fri May 21 02
+commit 22dc8d34c39e209674c2dc52366d68312e85d542
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri May 21 02:11:41 2004 +0000
+
+    Fix typo in bind.test that was causing a seg-fault. (CVS 1424)
+
+
+5aaed4c611ad8d16db7a94ca36f58b21b92a4955 : D. Richard Hipp <drh@hwaci.com> : Tue Sep 23 10
+commit 5aaed4c611ad8d16db7a94ca36f58b21b92a4955
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Sep 23 10:25:33 2003 +0000
+
+    A failed malloc() could have resulted in a segfault.  Fixed by this check-in. (CVS 1102)
+
+
+494c856b7d6ba6dcd51ced6abb0df8011d5fa1c4 : D. Richard Hipp <drh@hwaci.com> : Fri Aug 15 13
+commit 494c856b7d6ba6dcd51ced6abb0df8011d5fa1c4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Aug 15 13:24:52 2003 +0000
+
+    Fix a segfault that occurs in the VACUUM command if run on an empty database
+    with the EMPTY_RESULT_CALLBACKS pragma enabled.  Ticket #427. (CVS 1073)
+
+
+feb6e7e5bc06d831317f4c13424024fc6d3abfa5 : D. Richard Hipp <drh@hwaci.com> : Mon May 19 23
+commit feb6e7e5bc06d831317f4c13424024fc6d3abfa5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon May 19 23:55:30 2003 +0000
+
+    Fix segfault that occurs when opening a non-existing database in the shell
+    then immediately doing ".q". (CVS 986)
+
+
+9cc65e793448235b140fd39e9855f0b29279f9e9 : D. Richard Hipp <drh@hwaci.com> : Thu Mar 27 13
+commit 9cc65e793448235b140fd39e9855f0b29279f9e9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Mar 27 13:01:29 2003 +0000
+
+    Fix a segfault in the trigger code. (CVS 884)
+
+
+da7a51de0ecf5ff8faec7626caeabc05651348e7 : D. Richard Hipp <drh@hwaci.com> : Sat Sep 21 15
+commit da7a51de0ecf5ff8faec7626caeabc05651348e7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Sep 21 15:57:57 2002 +0000
+
+    Make sure memory malloced() for structures is aligned on an even byte boundry.
+    Solaris segfaults otherwise. (CVS 753)
+
+
+cd37844e568f0080baaa2f047597b7b1c10829c2 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 28 12
+commit cd37844e568f0080baaa2f047597b7b1c10829c2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 28 12:18:47 2002 +0000
+
+    Additional test cases added.  The following bug fixed: A segfault was occurring
+    if a VIEW consisted of a join with a USING clause. (CVS 651)
+
+
+90021fd00cfb6a2bba9202428e54b8f00d9adfd9 : D. Richard Hipp <drh@hwaci.com> : Thu Jun 6 23
+commit 90021fd00cfb6a2bba9202428e54b8f00d9adfd9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jun 6 23:42:28 2002 +0000
+
+    Bug fix: do not segfault if a SELECT without a FROM clause includes
+    the * wildcard in the result column list. (CVS 609)
+
+
+19537e0282cdac1c05e579a4a5f6773aa5a7ea8b : D. Richard Hipp <drh@hwaci.com> : Thu May 23 02
+commit 19537e0282cdac1c05e579a4a5f6773aa5a7ea8b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu May 23 02:09:04 2002 +0000
+
+    Fix some places where a malloc() failure would lead to a segfault. (CVS 580)
+
+
+-----
+UNINIT VAR
+
+a5ca3a3628a38db4a36b462de68c2e035ad719b3 : D. Richard Hipp <drh@hwaci.com> : Wed Jun 17 17
+commit a5ca3a3628a38db4a36b462de68c2e035ad719b3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 17 17:08:22 2015 +0000
+
+    Fix a uninitialized variable use in the command-line shell when the
+    ".open" command is invoked without any arguments.
+
+
+43fb5e60392c4a163ca5639f729ae74bc88aaea0 : Dan Kennedy <danielk1977@gmail.com> : Tue May 26 20
+commit 43fb5e60392c4a163ca5639f729ae74bc88aaea0
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue May 26 20:07:32 2015 +0000
+
+    Avoid branching on an uninitalized variable when comparing SQL values with the undefined serial types 10 and 11 (which only appear in corrupt databases).
+
+
+98fb3795848cc934261e9ca7dbab4d2653664652 : D. Richard Hipp <drh@hwaci.com> : Fri May 22 23
+commit 98fb3795848cc934261e9ca7dbab4d2653664652
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri May 22 23:45:56 2015 +0000
+
+    Fix a bug in fuzzershell caused by an uninitialized local variable.
+
+
+e564605ff4a7923467a0cd821a8923d0b0028fac : Joe Mistachkin <sqlite@mistachkin.com> : Mon Jan 12 19
+commit e564605ff4a7923467a0cd821a8923d0b0028fac
+Author: Joe Mistachkin <sqlite@mistachkin.com>
+Date:   Mon Jan 12 19:59:12 2015 +0000
+
+    Silence some harmless uninitialized local variable warnings.
+
+
+1759d1780ecc7db41793a86fdf19272864426556 : D. Richard Hipp <drh@hwaci.com> : Sat Dec 6 02
+commit 1759d1780ecc7db41793a86fdf19272864426556
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Dec 6 02:05:44 2014 +0000
+
+    Fix a (harmless) uninitialized variable reference in b-tree balancing for
+    auto-vacuumed tables with overflow pages.
+
+
+a9b7d47f80fdb52f2b03015e07a29586e6214415 : Dan Kennedy <danielk1977@gmail.com> : Sat Aug 9 18
+commit a9b7d47f80fdb52f2b03015e07a29586e6214415
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Aug 9 18:22:59 2014 +0000
+
+    Fix an uninitialized variable causing a problem during fts5 table initialization.
+
+
+2ae76fc3d21b0a4bc45639df0fcd30251069df09 : D. Richard Hipp <drh@hwaci.com> : Sun Mar 23 16
+commit 2ae76fc3d21b0a4bc45639df0fcd30251069df09
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Mar 23 16:29:23 2014 +0000
+
+    Avoid a possible use of an uninitialized variable following an I/O or OOM
+    error.
+
+
+981ccfaba9b33cd09fc8b4bc5bfe717a1f751537 : D. Richard Hipp <drh@hwaci.com> : Tue Dec 3 19
+commit 981ccfaba9b33cd09fc8b4bc5bfe717a1f751537
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Dec 3 19:16:06 2013 +0000
+
+    Fix a possible (and probably harmless) uninitialized variable in STAT3/4.
+
+
+d091216f6f0b826e9b272e0125520019f94bcf3d : D. Richard Hipp <drh@hwaci.com> : Wed Jun 26 00
+commit d091216f6f0b826e9b272e0125520019f94bcf3d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 26 00:34:13 2013 +0000
+
+    Fix an uninitialized variable detected by valgrind.  Unclear whether or not
+    this should apply to trunk.
+
+
+ced58344fee6e6ba42e9c997209e2a78debb6e49 : D. Richard Hipp <drh@hwaci.com> : Wed Jun 19 13
+commit ced58344fee6e6ba42e9c997209e2a78debb6e49
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 19 13:32:46 2013 +0000
+
+    Fix a harmless uninitialized variable warning.
+
+
+286d8df8292c5807fd1eae505542afeeaf0b3a4b : D. Richard Hipp <drh@hwaci.com> : Tue Dec 4 00
+commit 286d8df8292c5807fd1eae505542afeeaf0b3a4b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Dec 4 00:53:08 2012 +0000
+
+    Fix an uninitialized variable detected by valgrind.
+
+
+c08d02ad7b5cee1019be088b29f5ace7f5714f25 : D. Richard Hipp <drh@hwaci.com> : Sat Oct 22 21
+commit c08d02ad7b5cee1019be088b29f5ace7f5714f25
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Oct 22 21:00:46 2011 +0000
+
+    Avoid a harmless reference to an uninitialized variable following an
+    error in FTS3.  This is not a bug.  The change is to silence a valgrind
+    warning.
+
+
+6aea358302a20a205eb8bf2702dceb0656cd2625 : D. Richard Hipp <drh@hwaci.com> : Tue Oct 18 19
+commit 6aea358302a20a205eb8bf2702dceb0656cd2625
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Oct 18 19:14:33 2011 +0000
+
+    Fix an uninitialized variable in OR-clause processing.
+
+
+600b49e77d82c282663a35cc4a0f47f4f719285f : D. Richard Hipp <drh@hwaci.com> : Thu Sep 22 00
+commit 600b49e77d82c282663a35cc4a0f47f4f719285f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 22 00:28:55 2011 +0000
+
+    Fix an uninitialized variable and a misuse of memcpy().
+
+
+78351facf43381f19da33d9c296acfb201ec7543 : D. Richard Hipp <drh@hwaci.com> : Wed Aug 31 23
+commit 78351facf43381f19da33d9c296acfb201ec7543
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Aug 31 23:57:22 2011 +0000
+
+    Avoid using uninitialized variables after failures in the merge sort code.
+
+
+5d8ff5ac0591aafad56c8559c90a11aad31d8a11 : Dan Kennedy <danielk1977@gmail.com> : Fri Nov 26 16
+commit 5d8ff5ac0591aafad56c8559c90a11aad31d8a11
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Nov 26 16:31:44 2010 +0000
+
+    Fix an uninitialized variable in fts3.c.
+
+
+82a1d1a8cd57f2696e0761e003b6b1ca8eb40d7a : D. Richard Hipp <drh@hwaci.com> : Sat Jun 26 20
+commit 82a1d1a8cd57f2696e0761e003b6b1ca8eb40d7a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jun 26 20:00:54 2010 +0000
+
+    Suppress a couple uninitialized variable warnings.
+
+
+1c0f61c070d60095cccb58db27ce225b87bbd62c : D. Richard Hipp <drh@hwaci.com> : Sat Jun 19 23
+commit 1c0f61c070d60095cccb58db27ce225b87bbd62c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jun 19 23:53:11 2010 +0000
+
+    Fix an uninitialized variable in os_unix.c.
+
+
+90431fbe64ba2f94b5712352bb628304323a1070 : D. Richard Hipp <drh@hwaci.com> : Mon May 10 17
+commit 90431fbe64ba2f94b5712352bb628304323a1070
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon May 10 17:29:29 2010 +0000
+
+    Fix an uninitialized variable in OSX proxy locking.
+
+
+35930e3c9a728d1edac18b0c3b9702aa994744b8 : D. Richard Hipp <drh@hwaci.com> : Fri Apr 30 15
+commit 35930e3c9a728d1edac18b0c3b9702aa994744b8
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 30 15:54:47 2010 +0000
+
+    Fix a couple uninitialized variables in the xShmLock method of the unix VFS.
+    Improved debugging logic for xShmLock.
+
+
+95a31dda6c6a2f52e4c04da6c7bb49044df7d9f3 : D. Richard Hipp <drh@hwaci.com> : Tue Apr 13 15
+commit 95a31dda6c6a2f52e4c04da6c7bb49044df7d9f3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 13 15:30:53 2010 +0000
+
+    Fix an uninitialized variable in readDbPage of pager.c.
+
+
+4960d089de3eab4c2899bd21701501f4c85488a4 : D. Richard Hipp <drh@hwaci.com> : Thu Mar 4 17
+commit 4960d089de3eab4c2899bd21701501f4c85488a4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Mar 4 17:11:31 2010 +0000
+
+    Fix an uninitialized variable in printf when compiling with
+    SQLITE_OMIT_FLOATING_POINT.
+
+
+2321c307c68ff020c516093d42b275ba590736fd : D. Richard Hipp <drh@hwaci.com> : Wed Dec 2 20
+commit 2321c307c68ff020c516093d42b275ba590736fd
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Dec 2 20:25:57 2009 +0000
+
+    Change an error message in FTS3 to avoid using an uninitialized variable.
+
+
+c8f81197dd059d7efebc436cf57450e56a8ce34e : D. Richard Hipp <drh@hwaci.com> : Tue Aug 25 13
+commit c8f81197dd059d7efebc436cf57450e56a8ce34e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Aug 25 13:10:27 2009 +0000
+
+    Fix an uninitialized variable in sqlite3VdbeIdxRowid().
+
+
+9f63d1551868d71f012c2a57a893805eed300832 : D. Richard Hipp <drh@hwaci.com> : Fri Apr 11 19
+commit 9f63d1551868d71f012c2a57a893805eed300832
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 11 19:18:25 2008 +0000
+
+    Avoid the use of uninitialized variables in sqlite3GenerateRowIndexDelete.
+    Ticket #3048. (CVS 4991)
+
+
+03b6aaa20c259847d2c882413e2399f03e05d422 : D. Richard Hipp <drh@hwaci.com> : Mon Mar 17 17
+commit 03b6aaa20c259847d2c882413e2399f03e05d422
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Mar 17 17:18:38 2008 +0000
+
+    Fix an uninitialized variable in the Prev and Next opcodes. (CVS 4873)
+
+
+bc291837accf002277204dab98cd4ae18a7dcf18 : D. Richard Hipp <drh@hwaci.com> : Thu Sep 20 10
+commit bc291837accf002277204dab98cd4ae18a7dcf18
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 20 10:02:54 2007 +0000
+
+    Fixes for uninitialized variables.  Tickets #2658 and #2659. (CVS 4437)
+
+
+093d05d363752edcf50cca38ef4524a8d0fc0427 : Ralf S. Engelschall <rse@engelschall.com> : Thu Sep 20 08
+commit 093d05d363752edcf50cca38ef4524a8d0fc0427
+Author: Ralf S. Engelschall <rse@engelschall.com>
+Date:   Thu Sep 20 08:38:15 2007 +0000
+
+    The code is correct as it contains an assert(3) in the "default" switch
+    case, but GCC 4.3 is not able to detect this and instead complains
+    with "warning: 'amode' may be used uninitialized in this function".
+    Hence, although the assert(3) already protects the code here, get rid of
+    this compiler warning by doing a simple initialization of the "amode"
+    variable. (CVS 4436)
+
+
+5ce0f71060d518c42a165d36577f33ab060174c2 : D. Richard Hipp <drh@hwaci.com> : Sun Apr 1 23
+commit 5ce0f71060d518c42a165d36577f33ab060174c2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Apr 1 23:49:52 2007 +0000
+
+    Fix some warnings about unused and uninitialized variables. (CVS 3788)
+
+
+67e986967b0d501bee8362624aa8655a80d8626b : D. Richard Hipp <drh@hwaci.com> : Thu Jan 4 01
+commit 67e986967b0d501bee8362624aa8655a80d8626b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jan 4 01:20:11 2007 +0000
+
+    Add a comment to vdbe.c to explain the use of an uninitialized variable. (CVS 3551)
+
+
+d3408b59e31c5a96dbe18a88db22fed90442b977 : D. Richard Hipp <drh@hwaci.com> : Wed Jan 3 23
+commit d3408b59e31c5a96dbe18a88db22fed90442b977
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 3 23:37:28 2007 +0000
+
+    Clean up memory leaks and uninitialized variables detected by valgrind.
+    Identify all tests where we deliberately derefence freed memory by adding
+    a "-misuse" tag. (CVS 3550)
+
+
+2eff4ccd7b888fca5dab732819424fd9e7ed3b6c : D. Richard Hipp <drh@hwaci.com> : Mon Jan 23 16
+commit 2eff4ccd7b888fca5dab732819424fd9e7ed3b6c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 23 16:24:54 2006 +0000
+
+    Fix uninitialized variable in os_unix.c. (CVS 3006)
+
+
+137584a5bd442924a0d770616247c3d4f4093af5 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 9 00
+commit 137584a5bd442924a0d770616247c3d4f4093af5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 9 00:09:02 2006 +0000
+
+    Remove benign reference to an uninitialized variable.  Ticket #1590. (CVS 2890)
+
+
+b0396fa93e239541cc9fe78f7b39924ff1c34579 : D. Richard Hipp <drh@hwaci.com> : Mon May 16 22
+commit b0396fa93e239541cc9fe78f7b39924ff1c34579
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon May 16 22:37:55 2005 +0000
+
+    Fix an uninitialized variable.  Ticket #1244. (CVS 2460)
+
+
+fdbbdac12a9d8270ea75aec3d1375d6554ce08ac : Dan Kennedy <danielk1977@gmail.com> : Tue Mar 29 02
+commit fdbbdac12a9d8270ea75aec3d1375d6554ce08ac
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Mar 29 02:54:03 2005 +0000
+
+    Fix segfault due to exception handler being run with uninitialised variable. (CVS 2426)
+
+
+f9b6be4cdd42ffbbf41e9801c949e9365803f790 : D. Richard Hipp <drh@hwaci.com> : Mon Sep 13 13
+commit f9b6be4cdd42ffbbf41e9801c949e9365803f790
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Sep 13 13:13:19 2004 +0000
+
+    Fix an uninitialized variable bug in nullif().  Ticket #898. (CVS 1957)
+
+
+024e600e3947e5d65680dad6fe23dfa10027213e : D. Richard Hipp <drh@hwaci.com> : Mon Jun 21 18
+commit 024e600e3947e5d65680dad6fe23dfa10027213e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jun 21 18:14:46 2004 +0000
+
+    Fix an uninitialized variable.  The variable was harmless, but pedantic
+    error checking in MSVC raised an exception on it. (CVS 1651)
+
+
+1e9273d7370258ea88f1f6573393b0360bdefa6d : D. Richard Hipp <drh@hwaci.com> : Fri Feb 13 20
+commit 1e9273d7370258ea88f1f6573393b0360bdefa6d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Feb 13 20:09:42 2004 +0000
+
+    Fix an uninitialized variable in shell.c that would cause a crash if you
+    specified SQL on the command-line. (CVS 1238)
+
+
+eadd1ec9a6fbe2868b6706213ac66b0abdf9e001 : D. Richard Hipp <drh@hwaci.com> : Fri Feb 13 14
+commit eadd1ec9a6fbe2868b6706213ac66b0abdf9e001
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Feb 13 14:07:13 2004 +0000
+
+    Fix an uninitialized variable introduced by check-in (1202). (CVS 1235)
+
+
+ba9448cbd31752e2472994878d18a9733f81a20a : D. Richard Hipp <drh@hwaci.com> : Wed Feb 11 10
+commit ba9448cbd31752e2472994878d18a9733f81a20a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Feb 11 10:35:30 2004 +0000
+
+    Fix an uninitialized variable in expr.c.  Ticket #604. (CVS 1225)
+
+
+d56bab29b71b83bd89cf6d8700ccbcb5422a8b23 : D. Richard Hipp <drh@hwaci.com> : Sat Dec 28 01
+commit d56bab29b71b83bd89cf6d8700ccbcb5422a8b23
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Dec 28 01:06:30 2002 +0000
+
+    Fix an uninitialized variable in the pager.  Tickets #208 and #206.
+    Bug introduced by check-in (795). (CVS 804)
+
+
+3c178eeb9772406d18f5df3214147722d594c3b3 : D. Richard Hipp <drh@hwaci.com> : Mon Sep 30 01
+commit 3c178eeb9772406d18f5df3214147722d594c3b3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Sep 30 01:31:22 2002 +0000
+
+    Fix an uninitialized variable that could cause problems when comparing
+    two NULLs. (CVS 757)
+
+
+00abe5995b23555a9c0b420db8a2c5ec5b5cdd2c : D. Richard Hipp <drh@hwaci.com> : Mon Mar 18 13
+commit 00abe5995b23555a9c0b420db8a2c5ec5b5cdd2c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Mar 18 13:03:55 2002 +0000
+
+    Fix an uninitialized variable in AggReset() (CVS 432)
+
+
+
+-- oVERFLOWS
+
+661bfa691d8da16a03e2ed87f352e5ffea159324 : D. Richard Hipp <drh@hwaci.com> : Tue Jun 23 18
+commit 661bfa691d8da16a03e2ed87f352e5ffea159324
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jun 23 18:24:25 2015 +0000
+
+    Multiple overflow cells are always adjacent and sequential.  Exploit this
+    invariant for a small size reduction and performance increase and add
+    assert()s to prove the invariant.
+
+
+b848801e1f9607b148d3f1714420c9a1088e9f5c : D. Richard Hipp <drh@hwaci.com> : Tue Jun 2 19
+commit b848801e1f9607b148d3f1714420c9a1088e9f5c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jun 2 19:36:29 2015 +0000
+
+    Always check for cell overflow before returning a slot from the
+    pageFindSlot routine in btree.c.
+
+
+86b27d97743df874aee781d31284e96e37450af6 : D. Richard Hipp <drh@hwaci.com> : Wed May 27 15
+commit 86b27d97743df874aee781d31284e96e37450af6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed May 27 15:42:53 2015 +0000
+
+    A different approach to preventing buffer overreads when comparing a vector
+    of values with a corrupt index record that spans at least one overflow page.
+
+
+7e41ac10beac044dd3e588805e666f78af7193b3 : Dan Kennedy <danielk1977@gmail.com> : Wed May 27 14
+commit 7e41ac10beac044dd3e588805e666f78af7193b3
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed May 27 14:21:05 2015 +0000
+
+    A different approach to preventing buffer overreads when comparing a vector of values with a corrupt index record that spans at least one overflow page.
+
+
+27de2d5df6aa403025cc6b24ce1ef7fd20ace5f2 : Dan Kennedy <danielk1977@gmail.com> : Tue May 26 20
+commit 27de2d5df6aa403025cc6b24ce1ef7fd20ace5f2
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue May 26 20:31:20 2015 +0000
+
+    Avoid a buffer overread when comparing against a corrupt record that spans at least one overflow page.
+
+
+f4ce02f5c49d085ee8c1c51456b5c2d86bb01b04 : D. Richard Hipp <drh@hwaci.com> : Thu May 21 02
+commit f4ce02f5c49d085ee8c1c51456b5c2d86bb01b04
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu May 21 02:24:35 2015 +0000
+
+    Silently ignore any attempt to add a prefix index for prefixes zero bytes in size to an fts3/4 table. Or any prefix index size so large that it overflows a 32-bit signed integer.  Cherrypick [ad4b19d2ac0889a]
+
+
+2c4fc9bfc264123eba0cb330c2e585243d8ed456 : Dan Kennedy <danielk1977@gmail.com> : Wed May 20 19
+commit 2c4fc9bfc264123eba0cb330c2e585243d8ed456
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed May 20 19:48:55 2015 +0000
+
+    Avoid signed integer overflow when converting oversized in-line integer
+    widths and precisions in printf(). Cherrypick of [c494171f77dc], [5ce4e7d7651e], [95625ef3adc3] and [8e4ac2ce2441].
+
+
+965ae628052843eb71b98d2b583f55089ed65884 : Dan Kennedy <danielk1977@gmail.com> : Wed May 20 19
+commit 965ae628052843eb71b98d2b583f55089ed65884
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed May 20 19:32:18 2015 +0000
+
+    Silently ignore any attempt to add a prefix index for prefixes zero bytes in size to an fts3/4 table. Or any prefix index size so large that it overflows a 32-bit signed integer. Cherrypick of [ad4b19d2ac0889a2].
+
+
+101871b86923d5c4982e20ecf5346331e1c461e1 : D. Richard Hipp <drh@hwaci.com> : Sun Apr 19 22
+commit 101871b86923d5c4982e20ecf5346331e1c461e1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Apr 19 22:31:45 2015 +0000
+
+    Silently ignore parser stack overflow when parsing a malformed schema in
+    PRAGMA writable_schema mode.
+
+
+3b4fd07ed0f184c986e3623120ed808311a2d77f : D. Richard Hipp <drh@hwaci.com> : Tue Apr 7 23
+commit 3b4fd07ed0f184c986e3623120ed808311a2d77f
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 7 23:10:44 2015 +0000
+
+    Merge printf() width and precision overflow fixes from trunk.
+
+
+d790c77bbcd221b62b8310a8f1e40fedb173b5bb : D. Richard Hipp <drh@hwaci.com> : Tue Apr 7 15
+commit d790c77bbcd221b62b8310a8f1e40fedb173b5bb
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 7 15:39:29 2015 +0000
+
+    Avoid signed integer overflow when converting oversized in-line integer
+    widths and precisions in printf().
+
+
+9e788a03f701d39151d69e1963bd892b32de8f5a : Dan Kennedy <danielk1977@gmail.com> : Tue Apr 7 14
+commit 9e788a03f701d39151d69e1963bd892b32de8f5a
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Apr 7 14:38:57 2015 +0000
+
+    Another change to avoid a problem caused by integer overflow in the printf() code.
+
+
+83df1c824554b2f23deebb38e36e395f46d66693 : D. Richard Hipp <drh@hwaci.com> : Tue Apr 7 13
+commit 83df1c824554b2f23deebb38e36e395f46d66693
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Apr 7 13:28:41 2015 +0000
+
+    Further changes to guard against integer overflow in the width and precision
+    of printf() arguments.
+
+
+f0d5d095e0003455f1930ba0d3c5bee91456cb22 : Dan Kennedy <danielk1977@gmail.com> : Sat Mar 21 12
+commit f0d5d095e0003455f1930ba0d3c5bee91456cb22
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sat Mar 21 12:22:51 2015 +0000
+
+    Avoid an integer overflow in fts3 causing gcc 4.7.1 with -O2 to behave counter-intuitively (perhaps because the behaviour is undefined). Add an "ifcapable trace" to a test in shell4.test.
+
+
+dc7cf094c928b723a3718b687532ea18b9993146 : Dan Kennedy <danielk1977@gmail.com> : Thu Mar 19 15
+commit dc7cf094c928b723a3718b687532ea18b9993146
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Mar 19 15:52:07 2015 +0000
+
+    Silently ignore any attempt to add a prefix index for prefixes zero bytes in size to an fts3/4 table. Or any prefix index size so large that it overflows a 32-bit signed integer.
+
+
+6611e6498da2ca5ec5184a562a0c46d8f0c73e28 : D. Richard Hipp <drh@hwaci.com> : Sat Feb 7 15
+commit 6611e6498da2ca5ec5184a562a0c46d8f0c73e28
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Feb 7 15:16:35 2015 +0000
+
+    Fix potential 32-bit integer overflow problems on the offset and length
+    parameters to sqlite3_blob_read() and sqlite3_blob_write().  For
+    sqlite3_blob_open(), make sure the *ppBlob return parameter is zeroed if
+    the interface fails with SQLITE_MISUSE.
+
+
+ca2a678afd2f5532c734736973c8728dac2f9625 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 5 16
+commit ca2a678afd2f5532c734736973c8728dac2f9625
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 5 16:27:43 2015 +0000
+
+    Towards getting INSERT statements to except many VALUE terms (more than
+    the limit imposed by SQLITE_LIMIT_COMPOUND_SELECT).  This check-in segfaults
+    on a stack overflow.  And it is slow.
+
+
+7b236a8afe459c657a819dae1c21858d7754501b : D. Richard Hipp <drh@hwaci.com> : Fri Dec 12 00
+commit 7b236a8afe459c657a819dae1c21858d7754501b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Dec 12 00:26:59 2014 +0000
+
+    Merge the cell overflow page number cache thread race fix from trunk.
+
+
+1759d1780ecc7db41793a86fdf19272864426556 : D. Richard Hipp <drh@hwaci.com> : Sat Dec 6 02
+commit 1759d1780ecc7db41793a86fdf19272864426556
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Dec 6 02:05:44 2014 +0000
+
+    Fix a (harmless) uninitialized variable reference in b-tree balancing for
+    auto-vacuumed tables with overflow pages.
+
+
+84c81c6e952ce41fa5e8b42f96e66f14dcd99c69 : Dan Kennedy <danielk1977@gmail.com> : Tue Nov 25 18
+commit 84c81c6e952ce41fa5e8b42f96e66f14dcd99c69
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Nov 25 18:59:55 2014 +0000
+
+    Fix an integer overflow bug in vdbesort.c.
+
+
+102aaa3ec038767f91ba5c3118cada8ebe884d51 : D. Richard Hipp <drh@hwaci.com> : Mon Sep 22 20
+commit 102aaa3ec038767f91ba5c3118cada8ebe884d51
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Sep 22 20:38:10 2014 +0000
+
+    Fix to payload size overflow detection in the cellSizePtr() change of
+    the previous check-in.
+
+
+cabb33a34becb856802f3b77481f65266f084ac5 : D. Richard Hipp <drh@hwaci.com> : Tue Sep 16 18
+commit cabb33a34becb856802f3b77481f65266f084ac5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Sep 16 18:22:44 2014 +0000
+
+    Simplification of the OP_Column logic for the case of rows with overflow.
+
+
+7c7d390fc1abbb20d0632a4b0d2f6eace48fb0b7 : D. Richard Hipp <drh@hwaci.com> : Thu Sep 11 18
+commit 7c7d390fc1abbb20d0632a4b0d2f6eace48fb0b7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 11 18:44:04 2014 +0000
+
+    Add new APIs that take 64-bit length parameters: sqlite3_malloc64(),
+    sqlite3_realloc64(), sqlite3_bind_blob64(), sqlite3_bind_text64(),
+    sqlite3_result_blob64(), and sqlite3_result_text64().
+    Add the sqlite3_msize() interface.
+    Internal memory allocation routines now use 64-bit unsigned
+    length parameters for safety.
+    Fix the sqlite3_get_table() to use sqlite3_realloc64() to avoid
+    a integer overflow problem.
+
+
+a99a04dfc1c124de58425c8dada1ff15ced5f302 : D. Richard Hipp <drh@hwaci.com> : Tue Sep 9 17
+commit a99a04dfc1c124de58425c8dada1ff15ced5f302
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Sep 9 17:27:35 2014 +0000
+
+    Add new APIs that take 64-bit length parameters:
+    sqlite3_malloc64(),
+    sqlite3_realloc64(),
+    sqlite3_bind_blob64(),
+    sqlite3_bind_texte64(),
+    sqlite3_result_blob64(),
+    and sqlite3_result_texte64().
+    Internal memory allocation routines also now use 64-bit unsigned length
+    parameters for safety.
+    Also add the sqlite3_msize() interface.
+    Fix the sqlite3_get_table() to use sqlite3_realloc64() to avoid a
+    integer overflow problem.
+
+
+71ffbc10e323bddd76652c9b18782a802c911fd8 : D. Richard Hipp <drh@hwaci.com> : Tue Jul 22 15
+commit 71ffbc10e323bddd76652c9b18782a802c911fd8
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jul 22 15:33:31 2014 +0000
+
+    Correction:  The maximum SQLITE_MAX_ATTACHED value to avoid overflowing a
+    signed 8-bit integer is 125, not 127.
+
+
+f693bab14924c7710dc03c0c17f2be38b35a5a8d : D. Richard Hipp <drh@hwaci.com> : Mon May 19 15
+commit f693bab14924c7710dc03c0c17f2be38b35a5a8d
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon May 19 15:16:11 2014 +0000
+
+    Changes to help ensure that a multiplication does not overflow when computing
+    the number of bytes needed for a memory allocation, and cause a malfunction.
+    No problems existing problems were discovered.  However, these changes should
+    help to ensure that no problems arise in the future.
+
+
+b71d72edeff7d4c844a5fee43f54d6d719caeb16 : Dan Kennedy <danielk1977@gmail.com> : Thu Apr 3 16
+commit b71d72edeff7d4c844a5fee43f54d6d719caeb16
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Apr 3 16:25:29 2014 +0000
+
+    Fix an integer overflow problem in the sorter.
+
+
+7a66da9add92018e31e0f91a344a2e1fc3af5254 : Dan Kennedy <danielk1977@gmail.com> : Thu Mar 20 18
+commit 7a66da9add92018e31e0f91a344a2e1fc3af5254
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Mar 20 18:56:35 2014 +0000
+
+    Only use the direct-overflow-read optimization if all data from the overflow page in question is being read.
+
+
+8e97efcbf799c4662cbb4662fd47771a0943bd0c : D. Richard Hipp <drh@hwaci.com> : Tue Mar 11 23
+commit 8e97efcbf799c4662cbb4662fd47771a0943bd0c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 11 23:40:44 2014 +0000
+
+    Combine the various boolean fields of the BtCursor object into a single
+    bit-vector.  This allows setting or clearing more than one boolean at a
+    time and makes the overflow-pgno-cache branch faster than trunk on
+    speedtest1.
+
+
+0aeb16281575062a05bef66e4118e4f5289de92e : Dan Kennedy <danielk1977@gmail.com> : Tue Mar 11 20
+commit 0aeb16281575062a05bef66e4118e4f5289de92e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Mar 11 20:33:04 2014 +0000
+
+    Enable the b-tree cursor objects overflow page-number cache, which is normally enabled only for incr-blob cursors, for all cursors.
+
+
+e1c4a1e065d1868a22f085fd1894b5d30c8602f2 : D. Richard Hipp <drh@hwaci.com> : Wed Mar 5 15
+commit e1c4a1e065d1868a22f085fd1894b5d30c8602f2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Mar 5 15:52:43 2014 +0000
+
+    Count the number of elements in a SrcList object using an "int" rather than
+    a "u8", to avoid overflows and to work around an issue in the C compiler on
+    AIX.
+
+
+9f26389aee7a5bb961260e7abbb26c4269565e35 : D. Richard Hipp <drh@hwaci.com> : Sat Jan 11 12
+commit 9f26389aee7a5bb961260e7abbb26c4269565e35
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jan 11 12:52:25 2014 +0000
+
+    In LEMON, limit the size of the grammar file to 100MB.  This ensures that
+    the program will never experience integer overflow.  To be doubly sure,
+    use calloc() instead of malloc() when allocating arrays.
+
+
+50387024111a81ddc00ce86a57c8e6cbe2927d18 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 5 16
+commit 50387024111a81ddc00ce86a57c8e6cbe2927d18
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 5 16:41:55 2013 +0000
+
+    Fix two potential (and apparently harmless) shift overflows discovered by
+    the -fcatch-undefined-behavior option of clang.
+
+
+3feab56a8e22a3b008e26bddddf207208f2e0f53 : D. Richard Hipp <drh@hwaci.com> : Wed Nov 20 20
+commit 3feab56a8e22a3b008e26bddddf207208f2e0f53
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Nov 20 20:58:00 2013 +0000
+
+    Improved comments on the OP_Column changes.  Optimize out loading of overflow
+    pages for content with zero length.  Add test cases for the latter.
+
+
+74ad3485d0c23cf6b36384305a4e59dc9be73720 : D. Richard Hipp <drh@hwaci.com> : Sat Nov 2 11
+commit 74ad3485d0c23cf6b36384305a4e59dc9be73720
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Nov 2 11:34:58 2013 +0000
+
+    A pair of sqlite3_analyzer bug fixes: (1) quote strings in the SQL at the end
+    of the output. (2) Fix test_stat.c so that it no longer misses some overflow
+    pages on internal index pages.
+
+
+f50cbe49bbc49c367954ed75db14cd58d7d18d80 : D. Richard Hipp <drh@hwaci.com> : Mon Oct 7 00
+commit f50cbe49bbc49c367954ed75db14cd58d7d18d80
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Oct 7 00:36:01 2013 +0000
+
+    Restore the hexrekey pragma which was accidently deleted during the
+    pragma refactoring.  Make sure the hexkey and hexrekey pragmas do not
+    overflow buffers with a over-length key.
+
+
+d5065dc1cc83541d9601d4ce3733c89699c3d4cb : D. Richard Hipp <drh@hwaci.com> : Wed Oct 2 20
+commit d5065dc1cc83541d9601d4ce3733c89699c3d4cb
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Oct 2 20:46:30 2013 +0000
+
+    In the lemon parser generator, change all hashes to unsigned to avoid
+    potential problems with signed integer overflow.
+
+
+5e4682deb4dd031d415316ac44912d04b4044409 : D. Richard Hipp <drh@hwaci.com> : Sat Sep 28 12
+commit 5e4682deb4dd031d415316ac44912d04b4044409
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Sep 28 12:40:55 2013 +0000
+
+    Updates to the sqlite3_analyzer utility:  Change the names of some labels,
+    especially change "Fragmentation" to "Non-sequential pages".  Revise the
+    computation of non-sequential pages so that it ignores itercalated non-leaf
+    pages (overflow and index pages).
+
+
+fe834d94093ef2f98a796e41a9a84b29f8abd283 : D. Richard Hipp <drh@hwaci.com> : Thu Aug 1 19
+commit fe834d94093ef2f98a796e41a9a84b29f8abd283
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Aug 1 19:17:39 2013 +0000
+
+    Make sure signed integer overflow does not cause a segfault while attempting
+    to read a corrupt database where the header size varint on a record is larger
+    than the maximum 32-bit signed integer.
+
+
+4d0f89517024bc5d2042fd55f01386201be56600 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 28 19
+commit 4d0f89517024bc5d2042fd55f01386201be56600
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 28 19:00:20 2013 +0000
+
+    Issue an error message and quit (rather than overflowing a reference counter)
+    if the number of references to a table exceeds the maximum due to nested
+    UNION views.  Fix for ticket [d58ccbb3f1].
+
+
+e0539828fe4a070b3a80df6b9d91f7df1f1d99d4 : D. Richard Hipp <drh@hwaci.com> : Mon Dec 10 22
+commit e0539828fe4a070b3a80df6b9d91f7df1f1d99d4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Dec 10 22:19:14 2012 +0000
+
+    When an arithmetic operation with two integer operands must give a
+    floating-point answer due to overflow, make sure the answer is not
+    rounded back to integer by affinity.
+
+
+149f0f1f4b618e922f414b8c87177dd7b61ef12f : Dan Kennedy <danielk1977@gmail.com> : Fri Oct 26 19
+commit 149f0f1f4b618e922f414b8c87177dd7b61ef12f
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Oct 26 19:22:45 2012 +0000
+
+    Fix a 32-bit integer overflow problem that could cause an error in a CREATE INDEX statement that writes more than 16GB of data.
+
+
+23ff2a34f773c67630ec6b110664e79f1400f695 : D. Richard Hipp <drh@hwaci.com> : Thu Jun 7 02
+commit 23ff2a34f773c67630ec6b110664e79f1400f695
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jun 7 02:35:29 2012 +0000
+
+    Provide an (undocumented) compile-time option to disable the page cache
+    overflow counter, in order to avoid a mutex.
+
+
+2be329dd9d24df07ccfc8951fabcfe1506ace642 : D. Richard Hipp <drh@hwaci.com> : Wed Mar 28 16
+commit 2be329dd9d24df07ccfc8951fabcfe1506ace642
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Mar 28 16:22:03 2012 +0000
+
+    Avoid loading overflow pages just to satisfy typeof() or length() functions
+    if the correct result can be computed without the extra page fetches.
+
+
+fd2b92c4743750c8c2415b3a10c0205cba499713 : Dan Kennedy <danielk1977@gmail.com> : Mon Mar 26 10
+commit fd2b92c4743750c8c2415b3a10c0205cba499713
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Mar 26 10:57:31 2012 +0000
+
+    Modify the FTS integrity-check so that the checksums do not depend on the results of signed integer overflow, which is undefined in C.
+
+
+34da8a6a487e57a3d7ed9272cffa8bb623aa9fc3 : D. Richard Hipp <drh@hwaci.com> : Fri Mar 16 16
+commit 34da8a6a487e57a3d7ed9272cffa8bb623aa9fc3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 16 16:52:54 2012 +0000
+
+    Cherrypick the [3475092cff] fix for 32-bit overflow with large language-ids
+    into trunk.
+
+
+188a1116fdf7aa1a320468507096c48622bcdc85 : Dan Kennedy <danielk1977@gmail.com> : Fri Mar 16 15
+commit 188a1116fdf7aa1a320468507096c48622bcdc85
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Mar 16 15:54:19 2012 +0000
+
+    Fix some integer overflow problems that can occur when using large langauge id values.
+
+
+02038004efb730c538e26eb27c349699e91e4809 : D. Richard Hipp <drh@hwaci.com> : Mon Feb 27 14
+commit 02038004efb730c538e26eb27c349699e91e4809
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Feb 27 14:28:50 2012 +0000
+
+    Fix the xDelete implementation of the multiplexor VFS so that it correctly
+    deletes overflow WAL files.
+
+
+e75f2e8c65eab71f0f21791f0b061c9fdd0b94d8 : D. Richard Hipp <drh@hwaci.com> : Fri Feb 24 16
+commit e75f2e8c65eab71f0f21791f0b061c9fdd0b94d8
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Feb 24 16:13:55 2012 +0000
+
+    Separate multiplexor overflow pages for -wal and -journal files into
+    separate namespaces when in 8+3 filename mode.
+
+
+ddfe0e0f7bc632506378b4a8d1f911422acedec7 : D. Richard Hipp <drh@hwaci.com> : Sat Jan 14 00
+commit ddfe0e0f7bc632506378b4a8d1f911422acedec7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Jan 14 00:42:40 2012 +0000
+
+    In the multiplexor routine that determines the size of an overflow file,
+    return 0 and leave the error code unchanges if there were prior errors.
+    This prevents some I/O errors from going unreported in nx-devkit tests.
+
+
+68ae6614990a03a673ca1950176b4ae4ace657c3 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 9 14
+commit 68ae6614990a03a673ca1950176b4ae4ace657c3
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 9 14:57:38 2012 +0000
+
+    Cherry-pick the fix to surplus overflow files in the multiplexor,
+    check-in [1238619756c0c] in the trunk.
+
+
+cbefa30b1e0990982605d1368c34a9de82cfdae5 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 9 13
+commit cbefa30b1e0990982605d1368c34a9de82cfdae5
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 9 13:41:59 2012 +0000
+
+    Make sure the multiplexor does not create unnecessary overflow files.
+
+
+a0e1772b9fc1195d7b219b93db5ba1b2d6aa2396 : D. Richard Hipp <drh@hwaci.com> : Mon Jan 2 15
+commit a0e1772b9fc1195d7b219b93db5ba1b2d6aa2396
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jan 2 15:45:12 2012 +0000
+
+    Make sure large negative arguments to PRAGMA cache_size do not cause
+    32-bit signed integer overflow.  Also correct a requirements mark.
+
+
+2909f06ae7a7434de5f200dc8935881fa88f0204 : Dan Kennedy <danielk1977@gmail.com> : Wed Dec 21 18
+commit 2909f06ae7a7434de5f200dc8935881fa88f0204
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Dec 21 18:04:41 2011 +0000
+
+    Fix other problems where 32-bit integer overflow may cause a problem. Two that require an improbably large sub-journal and two in test harness code.
+
+
+43e5b3c2e7453f31387d4f40af9f5a3e74f407e0 : Dan Kennedy <danielk1977@gmail.com> : Wed Dec 21 17
+commit 43e5b3c2e7453f31387d4f40af9f5a3e74f407e0
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Dec 21 17:00:16 2011 +0000
+
+    Avoid 32-bit overflow when calculating the byte offset of an overflow page in SQLITE_DIRECT_OVERFLOW_READ code. Fix for [ac0ff496b7].
+
+
+6414b5c8804dcc2af611578be560f30cc8924140 : D. Richard Hipp <drh@hwaci.com> : Fri Dec 16 04
+commit 6414b5c8804dcc2af611578be560f30cc8924140
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Dec 16 04:57:32 2011 +0000
+
+    The xTruncate method for the multiplexor now changes surplus overflow
+    files to zero-length by default.  Or if the "truncate" query parameter
+    is used, it actually deletes the surplus overflow files.  This allows
+    VACUUM to shrink the database again.
+
+
+d9888e2cf0000a6dc60dded1894cd2cead4d804d : Dan Kennedy <danielk1977@gmail.com> : Thu Dec 15 17
+commit d9888e2cf0000a6dc60dded1894cd2cead4d804d
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Dec 15 17:00:10 2011 +0000
+
+    When deleting a file with the multiplexor VFS, also delete any overflow files that exist.
+
+
+22f73006d31c9b4e5620f52ea6aa4cf4066cef82 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 15 02
+commit 22f73006d31c9b4e5620f52ea6aa4cf4066cef82
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 15 02:22:16 2011 +0000
+
+    In the multiplexor, do not try to delete overflow files that do not exist.
+    And assume all but the last overflow file is the size of the chunk size.
+
+
+f695c0f1012ec3aaf8a823eb0f3dae1e6c48cc7c : D. Richard Hipp <drh@hwaci.com> : Sun Dec 11 22
+commit f695c0f1012ec3aaf8a823eb0f3dae1e6c48cc7c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sun Dec 11 22:44:09 2011 +0000
+
+    In the multiplexor shim, when using 8+3 filenames, begin numbering journal
+    overflow files with 101 instead of 001 to avoid name collisions with the
+    main database file.
+
+
+ec8886b7d9fac3d49714ea5e03676cf966e6f76c : D. Richard Hipp <drh@hwaci.com> : Mon Oct 17 20
+commit ec8886b7d9fac3d49714ea5e03676cf966e6f76c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Oct 17 20:41:46 2011 +0000
+
+    Avoid 32-bit integer overflow when evaluating the exponent of a floating point
+    value during ascii to binary conversion.
+
+
+01446b8a8a0f34c1f100990849a54d352cd9a380 : D. Richard Hipp <drh@hwaci.com> : Tue Oct 11 17
+commit 01446b8a8a0f34c1f100990849a54d352cd9a380
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Oct 11 17:54:54 2011 +0000
+
+    Remove all precision and width limits from formatting fields in the
+    sqlite3_mprintf() family of functions. Malloc for space as necessary.
+    The prevents a stack overflow on very large numbers using %f.
+
+
+5d96b2b3e08491616a641693e6c0f92065e09c28 : Dan Kennedy <danielk1977@gmail.com> : Wed Oct 5 17
+commit 5d96b2b3e08491616a641693e6c0f92065e09c28
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Oct 5 17:36:27 2011 +0000
+
+    Fix test code related to reporting the size of overflow pages in zipvfs databases.
+
+
+0a0686cac33fe7118c941957fed358865deedf62 : D. Richard Hipp <drh@hwaci.com> : Tue Sep 27 13
+commit 0a0686cac33fe7118c941957fed358865deedf62
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Sep 27 13:40:26 2011 +0000
+
+    Changes to sqlite3_analyzer to try to avoid integer overflow problems
+    when linking against older versions of TCL.
+
+
+492206d04862b8702db47f3b06662556321e615c : D. Richard Hipp <drh@hwaci.com> : Wed Aug 31 13
+commit 492206d04862b8702db47f3b06662556321e615c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Aug 31 13:27:19 2011 +0000
+
+    Add checks to make sure cells in corrupt database files
+    do not overflow a page when doing autovacuum.
+    Problem detected by valgrind.
+
+
+9eac59fc3964994d5a34faa7701d8cee6e4801b7 : D. Richard Hipp <drh@hwaci.com> : Mon Jun 13 12
+commit 9eac59fc3964994d5a34faa7701d8cee6e4801b7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Jun 13 12:19:21 2011 +0000
+
+    Use only unsigned values in the implementatin of LIKE and GLOB so that
+    values won't overflow to negative when dealing with malformed UTF8.
+
+
+5071d3025b30fdd1aed08d8cc108d3a7672a4cd0 : D. Richard Hipp <drh@hwaci.com> : Fri Apr 15 16
+commit 5071d3025b30fdd1aed08d8cc108d3a7672a4cd0
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Apr 15 16:39:52 2011 +0000
+
+    Changes to memory allocator usage tracking to delay the onset of integer
+    overflow.
+
+
+c67535a82f2877f72bdb65ee519ae8b9ccb54de9 : D. Richard Hipp <drh@hwaci.com> : Mon Apr 11 15
+commit c67535a82f2877f72bdb65ee519ae8b9ccb54de9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Apr 11 15:35:24 2011 +0000
+
+    Fix a signed integer overflow problem in the testcase() macro.
+
+
+9f4cf76748d191ada98080d1f841b69ae386f9f2 : D. Richard Hipp <drh@hwaci.com> : Tue Mar 8 02
+commit 9f4cf76748d191ada98080d1f841b69ae386f9f2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 8 02:38:28 2011 +0000
+
+    Fix additional cases of possible signed integer overflow, especially with
+    regard to negation.
+
+
+7beffca4b3f6ee3147f016914d8dd1874500cee9 : D. Richard Hipp <drh@hwaci.com> : Sat Mar 5 21
+commit 7beffca4b3f6ee3147f016914d8dd1874500cee9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 5 21:41:34 2011 +0000
+
+    Simplifications to the overflow-free multiplier.  Also remove some commented-out
+    code that was left in that subroutine by mistake on the previous check-in.
+
+
+f32bdcaa7a66e31afc1de219bebd7c04e2938651 : D. Richard Hipp <drh@hwaci.com> : Sat Mar 5 20
+commit f32bdcaa7a66e31afc1de219bebd7c04e2938651
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 5 20:59:46 2011 +0000
+
+    Fix all known instances of signed-integer overflow.  Within SQL expressions,
+    integer overflow now forces coercion to floating point.  The shift operators
+    work with any integer right-hand operand with negative values reversing
+    the direction of the shift.
+
+
+3852e8b0525562db47924243cf033fde3c70bbb4 : D. Richard Hipp <drh@hwaci.com> : Sat Mar 5 13
+commit 3852e8b0525562db47924243cf033fde3c70bbb4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Mar 5 13:54:15 2011 +0000
+
+    Fix an instance of signed arithmetic overflow and an one bit-shift overflow.
+    Mark six other signed arithmetic overflow locations that need fixing.
+
+
+c134e8b58f745cb26152df93560ff76ffb2d5a7c : D. Richard Hipp <drh@hwaci.com> : Wed Jan 26 13
+commit c134e8b58f745cb26152df93560ff76ffb2d5a7c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 26 13:24:40 2011 +0000
+
+    Add a mutex around an sqlite3StatusAdd() call to prevent the pagecount
+    overflow measurements from getting off in multithreaded applications.
+
+
+c729e581d5184eda91a608b1a299aad684e50cbf : D. Richard Hipp <drh@hwaci.com> : Wed Jan 26 00
+commit c729e581d5184eda91a608b1a299aad684e50cbf
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jan 26 00:07:03 2011 +0000
+
+    Rename the PCache1.mxPinned field to n90pct (since it is 90% of nMax) in order
+    to distinguish it from PGroup.mxPinned.  Fix the computation of n90pct so that
+    it does not overflow adversely on excessively large cache sizes.
+
+
+37f4fc7e49e9a3fa7059d872f83aeb99c27330db : D. Richard Hipp <drh@hwaci.com> : Thu Jan 6 15
+commit 37f4fc7e49e9a3fa7059d872f83aeb99c27330db
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jan 6 15:51:19 2011 +0000
+
+    Enhance the showdb tool to show overflow page pointers at the end of
+    overflow cells.
+
+
+77837b0c8c1d729c89bdf0272a519a8389723584 : D. Richard Hipp <drh@hwaci.com> : Thu Jan 6 01
+commit 77837b0c8c1d729c89bdf0272a519a8389723584
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Jan 6 01:26:38 2011 +0000
+
+    Enhance the showdb tool to show a btree page layout.  Add limit checks so that
+    overflow content does not overflow the buffer.
+
+
+92cd5cd47fd90492b84813fe8eeaa4388b1dbee6 : D. Richard Hipp <drh@hwaci.com> : Wed Jul 28 17
+commit 92cd5cd47fd90492b84813fe8eeaa4388b1dbee6
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jul 28 17:01:24 2010 +0000
+
+    Record the pcache allocation size statistics even for pcache overflow
+    allocations.  Adjust the wording on one of the stat output lines in
+    the shell.
+
+
+4bd9780bcf3c55457ab4413d70d264fb087567a2 : D. Richard Hipp <drh@hwaci.com> : Tue May 18 23
+commit 4bd9780bcf3c55457ab4413d70d264fb087567a2
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue May 18 23:29:53 2010 +0000
+
+    Update the wal-index hash format so that hash-table space is reused following
+    a rollback, thus preventing hash table overflows.  Add assert()s to verify
+    that hash tables do not overfill.  Further refactoring of the wal-index code.
+
+
+105699515e2fbb81cbf75666239670c03f115a12 : D. Richard Hipp <drh@hwaci.com> : Thu Apr 8 14
+commit 105699515e2fbb81cbf75666239670c03f115a12
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Apr 8 14:38:52 2010 +0000
+
+    Fix an integer overflow bug in the automatic index logic.  The bug was
+    detected by the testcase() macros added in the previous check-in.  Also
+    add some more testcase() macros, since this issue points up their importance.
+
+
+877ac8d40f7964336f3d2c211e98db934c5ee72a : Ryan C. Gordon <icculus@icculus.org> : Sun Feb 14 05
+commit 877ac8d40f7964336f3d2c211e98db934c5ee72a
+Author: Ryan C. Gordon <icculus@icculus.org>
+Date:   Sun Feb 14 05:19:56 2010 +0000
+
+    Added %expect directive, to consider a certain number of conflicts "correct."
+    
+    This has the side effect of changing the process exit code to never overflow.
+
+
+4bb7bd2d65badd8323f51b924f634f03c8122735 : D. Richard Hipp <drh@hwaci.com> : Thu Oct 29 18
+commit 4bb7bd2d65badd8323f51b924f634f03c8122735
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Oct 29 18:38:22 2009 +0000
+
+    Fix a 16-bit integer overflow that might occur in statements that use both
+    an EXISTS clause and IN operator with a RHS holding in excess of 32K entries.
+
+
+7da9ff223b8a0feb430df3c735e6e1a96243264e : D. Richard Hipp <drh@hwaci.com> : Thu Sep 3 19
+commit 7da9ff223b8a0feb430df3c735e6e1a96243264e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Sep 3 19:43:49 2009 +0000
+
+    Fix a VDBE stack overflow issue with the UPDATE statement.
+
+
+863e10a3c4ab1713842e9ea60053e065d310f230 : D. Richard Hipp <drh@hwaci.com> : Wed Jun 17 16
+commit 863e10a3c4ab1713842e9ea60053e065d310f230
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jun 17 16:20:04 2009 +0000
+
+    Use caution to avoid integer overflow when doing real to integer affinity
+    operations.  Ticket #3922. (CVS 6776)
+
+
+f9e65616ecaf991b124a4d0ba0e03c436636472c : D. Richard Hipp <drh@hwaci.com> : Tue Jun 9 13
+commit f9e65616ecaf991b124a4d0ba0e03c436636472c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jun 9 13:42:25 2009 +0000
+
+    Enable cell overflow checking in sqlite3BtreeInitPage() using the
+    compile-time option SQLITE_ENABLE_OVERSIZE_CELL_CHECK.  Change the tests
+    so that they recognize different error messages depending on the setting
+    of this macro. (CVS 6735)
+
+
+c69e4fbe6ab14cf4f81cd8653353168fad0d4894 : Dan Kennedy <danielk1977@gmail.com> : Tue Jun 9 09
+commit c69e4fbe6ab14cf4f81cd8653353168fad0d4894
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Jun 9 09:41:00 2009 +0000
+
+    Do not clear the MemPage.nFree variable when insertCell() adds an overflow cell to a page. Not doing this means balance_quick() can avoid a call to sqlite3BtreeInitPage(). (CVS 6732)
+
+
+31c2e106d5ce1fcd879160fcd1b027f99fe0b0e1 : D. Richard Hipp <drh@hwaci.com> : Fri Jun 5 14
+commit 31c2e106d5ce1fcd879160fcd1b027f99fe0b0e1
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jun 5 14:17:22 2009 +0000
+
+    Take care that a corrupt variable-length integer does not cause 32-bit
+    integer overflow when parsing a record format, nor cause excessively large
+    memory allocations. (CVS 6719)
+
+
+1269d58baf1cff6e083b38091dd9524ac68fae14 : Dan Kennedy <danielk1977@gmail.com> : Wed Jun 3 17
+commit 1269d58baf1cff6e083b38091dd9524ac68fae14
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed Jun 3 17:26:18 2009 +0000
+
+    Add corruptD.test, a container for testing the "cell overflow" problem. Also shuffle a small amount of code in BtreeInitPage() to check that the page header pointer to the start of the cell offset array is set to a sane value. (CVS 6710)
+
+
+6e6c2e6852fcc615b006fae5587e81e035a48f1c : D. Richard Hipp <drh@hwaci.com> : Tue May 5 15
+commit 6e6c2e6852fcc615b006fae5587e81e035a48f1c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue May 5 15:46:43 2009 +0000
+
+    Make sure the left-shift operator never overflows. (CVS 6605)
+
+
+830d75ca02a14fb1cc795675ce77589184bd141e : D. Richard Hipp <drh@hwaci.com> : Tue Feb 17 18
+commit 830d75ca02a14fb1cc795675ce77589184bd141e
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Feb 17 18:37:29 2009 +0000
+
+    Add tests to double-check that nothing within SQLite ever tries to allocate
+    amounts of memory that are close to the maximum signed integer, leading to
+    an integer overflow within malloc().  This is not currently a problem.
+    The extra tests just insure it never becomes a problem. (CVS 6298)
+
+
+69526bdf7cdd8c898bb1fbe06f19abd02f06c5c7 : D. Richard Hipp <drh@hwaci.com> : Thu Dec 11 19
+commit 69526bdf7cdd8c898bb1fbe06f19abd02f06c5c7
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Dec 11 19:50:19 2008 +0000
+
+    Make sure the OP_ForceInt vdbe opcode does not cause a rowid overflow.
+    Ticket #3536.  Tests to verify this change will be checked in separately. (CVS 6022)
+
+
+c0f25c3ddfbd825a155c22be9222fa6dc6e588d4 : D. Richard Hipp <drh@hwaci.com> : Wed Dec 10 19
+commit c0f25c3ddfbd825a155c22be9222fa6dc6e588d4
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Dec 10 19:26:22 2008 +0000
+
+    Never use strlen().  Use our own internal sqlite3Strlen30() which is
+    guaranteed to never overflow an integer.  Additional explicit casts to
+    avoid nuisance warning messages. (CVS 6007)
+
+
+cf6e94c01541ffd5f720b838fad8256145ae9b71 : Dan Kennedy <danielk1977@gmail.com> : Thu Jun 5 16
+commit cf6e94c01541ffd5f720b838fad8256145ae9b71
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu Jun 5 16:47:39 2008 +0000
+
+    Reorganize some of the code that detects expression trees with a depth greater than EXPR_MAX_DEPTH so that they are detected earlier. This further reduces the opportunities for stack overflow. (CVS 5189)
+
+
+c97e16718c1444f6f30fb431d59c22b055e85e52 : D. Richard Hipp <drh@hwaci.com> : Wed Mar 26 12
+commit c97e16718c1444f6f30fb431d59c22b055e85e52
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Mar 26 12:46:24 2008 +0000
+
+    Make sure an imbalance in the number of columns on a compound SELECT is
+    detected and reported as an error before it can cause an assertion fault
+    or array-bounds overflow in the code generator.
+    Oops: part of the fix for ticket #3015 got included with this
+    check-in by mistake. (CVS 4917)
+
+
+4994d0960245b6700e10ed8caeeb79977467c399 : Dan Kennedy <danielk1977@gmail.com> : Wed May 23 09
+commit 4994d0960245b6700e10ed8caeeb79977467c399
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed May 23 09:52:42 2007 +0000
+
+    Fix a database corrupting bug in the optimistic overflow chain. Exposed by running bigrow.test with auto-vacuum enabled. (CVS 4030)
+
+
+78f992e9f9de9f6f23df2158e6a110e3ef631574 : Dan Kennedy <danielk1977@gmail.com> : Thu May 17 18
+commit 78f992e9f9de9f6f23df2158e6a110e3ef631574
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu May 17 18:28:11 2007 +0000
+
+    Change the way overflow pages are allocated from the free-list to increase the chance that they are a contiguous block. Much more can still be done. (CVS 4023)
+
+
+78d275411d9abdce5f9efc4ac1dacffd80612b09 : Dan Kennedy <danielk1977@gmail.com> : Thu May 17 14
+commit 78d275411d9abdce5f9efc4ac1dacffd80612b09
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu May 17 14:45:13 2007 +0000
+
+    Add speed3.test file. For testing performance issues related to overflow pages. (CVS 4020)
+
+
+f9d2214388405735b9c1feeb74d3b0d56592c29e : Dan Kennedy <danielk1977@gmail.com> : Thu May 10 11
+commit f9d2214388405735b9c1feeb74d3b0d56592c29e
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Thu May 10 11:43:53 2007 +0000
+
+    Another test for overflow in strftime(). It was not broken. (CVS 3969)
+
+
+22381f49ad362b7db3132c9c2e6b295d48247979 : Dan Kennedy <danielk1977@gmail.com> : Wed May 2 16
+commit 22381f49ad362b7db3132c9c2e6b295d48247979
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Wed May 2 16:48:37 2007 +0000
+
+    Cache the location of overflow pages in cursors used for incremental blob IO. (CVS 3899)
+
+
+e0c7428eb95253776c602349d677f821abde7411 : Dan Kennedy <danielk1977@gmail.com> : Mon Apr 30 16
+commit e0c7428eb95253776c602349d677f821abde7411
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Mon Apr 30 16:55:01 2007 +0000
+
+    Try to avoid reading pages when moving overflow chains to the free-list. (CVS 3886)
+
+
+d3f78a58fbd20ca3a4bfc01c7969c68edbbd2847 : D. Richard Hipp <drh@hwaci.com> : Fri Mar 30 13
+commit d3f78a58fbd20ca3a4bfc01c7969c68edbbd2847
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Mar 30 13:35:06 2007 +0000
+
+    Make yypMinor available to the stack overflow callbacks in lemon
+    generated parsers.  This does not effect SQLite. (CVS 3761)
+
+
+edacc593ef4f71c5c1ebedb1945ae9541da49bec : D. Richard Hipp <drh@hwaci.com> : Tue Mar 6 15
+commit edacc593ef4f71c5c1ebedb1945ae9541da49bec
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 6 15:53:44 2007 +0000
+
+    Fixes to the overflow-chain optization of (3672). (CVS 3674)
+
+
+b27fed6e8f992c3cd2fe5e4ee8d03c11b8f66f45 : D. Richard Hipp <drh@hwaci.com> : Tue Mar 6 11
+commit b27fed6e8f992c3cd2fe5e4ee8d03c11b8f66f45
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 6 11:42:19 2007 +0000
+
+    Do not read the last page of a overflow chain when deleting that chain.
+    Just add the page to the freelist.  This reduces I/O. (CVS 3672)
+
+
+0ba382c906e695dc890dfee9d66838f0c4fbd7f7 : Scott Hess <shess@google.com> : Wed Nov 29 21
+commit 0ba382c906e695dc890dfee9d66838f0c4fbd7f7
+Author: Scott Hess <shess@google.com>
+Date:   Wed Nov 29 21:03:01 2006 +0000
+
+    Test that terms longer than interior nodes work correctly.  A bug
+    prior to fts2.c r1.10 meant that such large terms caused an eventual
+    stack overflow. (CVS 3523)
+
+
+b93cdcb16cb4cd2128aa08a4b5b4b12423414705 : D. Richard Hipp <drh@hwaci.com> : Mon Feb 27 23
+commit b93cdcb16cb4cd2128aa08a4b5b4b12423414705
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Feb 27 23:19:21 2006 +0000
+
+    Add a test to make sure parser stack overflow is detected and reported. (CVS 3114)
+
+
+9bf662004a49201663b1154aef511323e1d4282b : D. Richard Hipp <drh@hwaci.com> : Mon Feb 27 21
+commit 9bf662004a49201663b1154aef511323e1d4282b
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Mon Feb 27 21:58:08 2006 +0000
+
+    Detect stack overflow in the parser and report an error. (CVS 3112)
+
+
+03471edb017394f07fbb6dce006a9fa52b486079 : D. Richard Hipp <drh@hwaci.com> : Thu Feb 23 21
+commit 03471edb017394f07fbb6dce006a9fa52b486079
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 23 21:43:56 2006 +0000
+
+    Detect integer overflow in the abs() function.  The random() function
+    now provides 64 bits of randomness instead of just 32.  Fix bugs in
+    testing logic of test4.c. (CVS 3108)
+
+
+fa98c42822986f39f55793c2ade891de0769949c : D. Richard Hipp <drh@hwaci.com> : Sat Feb 11 17
+commit fa98c42822986f39f55793c2ade891de0769949c
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Feb 11 17:34:00 2006 +0000
+
+    I give up.  SUM() now throws an error on integer overflow.  Those of us
+    who think this is goofy can use TOTAL() instead.
+    Tickets #1664, #1669, #1670, #1674. (CVS 3084)
+
+
+67db8060a4ac8a2ed5cbd9020116390d62ecaadc : D. Richard Hipp <drh@hwaci.com> : Thu Feb 9 17
+commit 67db8060a4ac8a2ed5cbd9020116390d62ecaadc
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 9 17:47:42 2006 +0000
+
+    Integer overflow in SUM causes an exception.  Ticket #1669. (CVS 3064)
+
+
+4eade02ba1cbdc92f80aedf415d56be090eeb085 : D. Richard Hipp <drh@hwaci.com> : Thu Feb 9 13
+commit 4eade02ba1cbdc92f80aedf415d56be090eeb085
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Feb 9 13:38:20 2006 +0000
+
+    Avoid overflowing the 48-bit mantissa of a floating point number when
+    summing large integers in the SUM() function.  Ticket #1664. (CVS 3061)
+
+
+fbef5e5cba79e9eecc64209ffd096c0a713b8504 : Dan Kennedy <danielk1977@gmail.com> : Fri Jan 13 13
+commit fbef5e5cba79e9eecc64209ffd096c0a713b8504
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Fri Jan 13 13:01:19 2006 +0000
+
+    Fix a vdbe stack overflow problem that could occur with a correlated sub-query. (CVS 2938)
+
+
+0a30ed114170c7af3fe738889a28e7e3191b26e9 : D. Richard Hipp <drh@hwaci.com> : Wed Aug 24 17
+commit 0a30ed114170c7af3fe738889a28e7e3191b26e9
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Aug 24 17:07:38 2005 +0000
+
+    Additional defense against the rowid-fifo overflow problem. (CVS 2622)
+
+
+150df11be59148985b1895d69bdcc19f6a0b5c86 : D. Richard Hipp <drh@hwaci.com> : Tue Feb 1 03
+commit 150df11be59148985b1895d69bdcc19f6a0b5c86
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Feb 1 03:20:00 2005 +0000
+
+    Lemon optimization:  When doing a shift following a reduce that pops one
+    or more elements off the stack, no need to check for stack overflow. (CVS 2300)
+
+
+11051b46371942529dabdc9fbb3c89384c7f02ab : Dan Kennedy <danielk1977@gmail.com> : Sun Jan 16 08
+commit 11051b46371942529dabdc9fbb3c89384c7f02ab
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Sun Jan 16 08:00:01 2005 +0000
+
+    Move duplicate code to update pointer-map wrt overflow pages into a function. (CVS 2217)
+
+
+385d41d42640da644762d013437e20a438501862 : Dan Kennedy <danielk1977@gmail.com> : Tue Nov 2 14
+commit 385d41d42640da644762d013437e20a438501862
+Author: Dan Kennedy <danielk1977@gmail.com>
+Date:   Tue Nov 2 14:40:32 2004 +0000
+
+    Fix an auto-vacuum bug for btree entries that span more than one overflow page. (CVS 2039)
+
+
+c6ff8bca9d6a5a1429a0a35981082c3df5a20ebe : D. Richard Hipp <drh@hwaci.com> : Thu May 13 01
+commit c6ff8bca9d6a5a1429a0a35981082c3df5a20ebe
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu May 13 01:12:57 2004 +0000
+
+    Allocate more overflow data onto overflow pages, thus wasting less disk space. (CVS 1367)
+
+
+9a207e5f2df43703e4de6d655bbe87ec51725552 : D. Richard Hipp <drh@hwaci.com> : Thu Apr 29 16
+commit 9a207e5f2df43703e4de6d655bbe87ec51725552
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Thu Apr 29 16:16:29 2004 +0000
+
+    Fix a stack overflow problem with INSTEAD OF triggers. (CVS 1310)
+
+
+39e0d70dbe701fb0829f4c9a79e1c75bbaa25662 : D. Richard Hipp <drh@hwaci.com> : Wed Mar 17 23
+commit 39e0d70dbe701fb0829f4c9a79e1c75bbaa25662
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Mar 17 23:32:08 2004 +0000
+
+    Fix a VDBE stack overflow that occurs when the left-hand side of an IN
+    expression is NULL and the result is stored on the stack rather than used
+    to control a jump.  Ticket #668. (CVS 1299)
+
+
+3c28f13b75d8eb0259e15a7fb40bad360fd3fe35 : D. Richard Hipp <drh@hwaci.com> : Tue Mar 2 18
+commit 3c28f13b75d8eb0259e15a7fb40bad360fd3fe35
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Mar 2 18:37:41 2004 +0000
+
+    Make sure a LIMIT clause on a SELECT cleans up the vdbe stack so that if it
+    occurs inside a trigger, it won't cause a stack overflow.  Ticket #640. (CVS 1282)
+
+
+2c963b5951c1e53dacb38276c858d41374226fe8 : D. Richard Hipp <drh@hwaci.com> : Sat Feb 21 19
+commit 2c963b5951c1e53dacb38276c858d41374226fe8
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Sat Feb 21 19:41:04 2004 +0000
+
+    Test cases for printf of double overflows. (CVS 1260)
+
+
+6a263697cf847e2e70c4cbcf71cb8ce8f04d640a : D. Richard Hipp <drh@hwaci.com> : Fri Jan 16 13
+commit 6a263697cf847e2e70c4cbcf71cb8ce8f04d640a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Fri Jan 16 13:58:18 2004 +0000
+
+    Fix a buffer-overflow problem in the randStr function (used only for testing). (CVS 1182)
+
+
+9d70c05dbef6d89b8f8ba4159aef03ba84db1b49 : D. Richard Hipp <drh@hwaci.com> : Tue Jan 6 01
+commit 9d70c05dbef6d89b8f8ba4159aef03ba84db1b49
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Jan 6 01:52:34 2004 +0000
+
+    Additional integer overflow boundary case tests. (CVS 1159)
+
+
+bdcd658edf9db6a7eb6ae354d80092ef34f99eab : D. Richard Hipp <drh@hwaci.com> : Wed Dec 10 01
+commit bdcd658edf9db6a7eb6ae354d80092ef34f99eab
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Dec 10 01:31:21 2003 +0000
+
+    Fix the code generator to a void a VDBE stack overflow on 3-way joins.
+    Ticket #519. (CVS 1129)
+
+
+7bac1482cdd4d5a31f221ab12797ac6f8de57945 : D. Richard Hipp <drh@hwaci.com> : Wed Jul 31 19
+commit 7bac1482cdd4d5a31f221ab12797ac6f8de57945
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Wed Jul 31 19:50:27 2002 +0000
+
+    Fix for ticket #124: Fix a stack VDBE overflow problem on joins on an
+    INTEGER PRIMARY KEY. (CVS 700)
+
+
+11e7cecf91d725da215c02dfa1563f6a1a79756a : D. Richard Hipp <drh@hwaci.com> : Tue Aug 1 09
+commit 11e7cecf91d725da215c02dfa1563f6a1a79756a
+Author: D. Richard Hipp <drh@hwaci.com>
+Date:   Tue Aug 1 09:56:27 2000 +0000
+
+    fix parser stack overflow (CVS 119)
+
+
+

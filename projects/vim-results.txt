@@ -1,0 +1,215 @@
+git clone git://github.com/b4winckler/vim.git
+
+commit 126d5646aa37808c41d18f98c29ef255870135f0
+Type: memory leak
+File: src/if_cscope.c
+PC: FEAT_CSCOPE
+
+commit 126d5646aa37808c41d18f98c29ef255870135f0
+Type: memory leak
+File: src/memline.c
+PC: FEAT_BYTEOFF || PROTO
+
+
+commit 126d5646aa37808c41d18f98c29ef255870135f0
+Type: memory leak
+File: src/misc1.c
+PC: true
+
+commit 126d5646aa37808c41d18f98c29ef255870135f0
+Type: memory leak
+File: src/netbeans.c
+PC: FEAT_NETBEANS_INTG
+
+commit 70bffe65af5e138479f3a24ae1d2489bff552535
+Type: memory leak
+File: src/ops.c
+PC: FEAT_VIMINFO
+
+commit 85a94fc8cbfe0ff3bb5ecae4e477c31bcddf56a0
+Type: memory leak
+File: src/hardcopy.c
+PC: FEAT_PRINTER
+
+
+commit 7ec754b555ace262991280027e8893bceb87a9c0
+Type: memory leak
+File: src/eval.c
+PC: FEAT_EVAL
+
+commit 16cd3b5d91b9bd392d336a9182f815a9186549ab
+Type: memory leak
+File: src/ex_cmds.c
+PC: defined(UNIX) && !defined(ARCHIE)) || defined(OS2)
+
+
+commit f15621e7d67a3dbff1703b975401f769479d83d5
+Type: memory leak
+File: src/eval.c
+PC: FEAT_EVAL
+
+commit 685562a5daa769a2d9bd37a45cd483b5789d46a4
+Type: memory leak
+File: src/if_py_both.h
+PC: true
+
+
+commit 14b92edb460ffc67340426fc01b7fbec37586e0c
+Type: memory leak
+File: src/if_py_both.h
+PC: true
+
+commit c3d37c59632f7e2ee0f5669fc2aec26bd19b94e4
+Type: memory leak
+File: src/regexp_nfa.c
+PC: true
+
+commit 1ae64c557cfb2395830c51d76cb7c486dbb8fc59
+Type: memory leak
+File: src/misc1.c
+PC: FEAT_SEARCHPATH
+
+
+
+
+commit 36443a74e8719f50fbe0664734332b4280d86421
+Type: memory leak
+File: src/syntax.c
+PC: true
+
+commit 36443a74e8719f50fbe0664734332b4280d86421
+Type: memory leak
+File: src/window.c
+PC: FEAT_SYN_HL
+
+
+commit 9038b4ac051528cd2fed43cf2d4bd33e2e190bb9
+Type: segmentation fault
+File: src/ex_docmd.c
+PC: _MSC_VER == 1200
+
+commit 9e0afd40c2057326db8e03ebd79838eb4de42b93
+Type: uninitialized variable
+File: src/os_win32.c
+PC: FEAT_MBYTE
+
+commit 2f095028e2a7d1b5490964dc16467169b1ef4f94
+Type: uninitialized variable
+File: src/screen.c
+PC: FEAT_MBYTE
+
+
+commit 5d49f9cb134f70fd059cb672ea6e4a150513d2e4
+Type: uninitialized variable
+File: src/ex_getln.c
+PC: FEAT_USR_CMDS && FEAT_EVAL
+
+
+commit ea71cff8b9f67412bf76a09d671627ca6e9f1ff2
+Type: uninitialized variable
+File: src/option.c
+PC: FEAT_PYTHON || FEAT_PYTHON3
+
+commit 4dfb469b57d169e30b75d301eeb44bb8b8219bac
+Type: uninitialized variable
+File: src/ops.c
+PC: FEAT_COMMENTS || PROTO
+
+
+commit f9c94d65e13e26167b5e7117203d551d9a4c36ea
+Type: uninitialized variable
+File: src/misc1.c
+PC: FEAT_COMMENTS || PROTO
+
+commit 35a2c2a0c3e1103fb68c59fb0bfc02274bec0c26
+Type: uninitialized variable
+File: src/getchar.c
+PC: true
+
+
+-- OVERFLOWS
+
+f78e7475ee15e8b928254fe6d74b2e99b588aead : Bram Moolenaar <bram@vim.org> : Wed Jan 14 19
+commit f78e7475ee15e8b928254fe6d74b2e99b588aead
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Wed Jan 14 19:00:38 2015 +0100
+
+    updated for version 7.4.578
+    Problem:    Using getcurpos() after "$" in an empty line returns a negative
+    	    number.
+    Solution:   Don't add one when this would overflow. (Hirohito Higashi)
+
+
+b8ccd3820858b3c33c7f0c8266ac7f3b83b8fec6 : Bram Moolenaar <bram@vim.org> : Sun Sep 8 16
+commit b8ccd3820858b3c33c7f0c8266ac7f3b83b8fec6
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Sun Sep 8 16:07:07 2013 +0200
+
+    updated for version 7.4.026
+    Problem:    Clang warning for int shift overflow.
+    Solution:   Use unsigned and cast back to int. (Dominique Pelle)
+
+
+6e74b81a936c65bcc84abf0e7798cc219a5a7d80 : Bram Moolenaar <bram@vim.org> : Sat Aug 10 12
+commit 6e74b81a936c65bcc84abf0e7798cc219a5a7d80
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Sat Aug 10 12:45:09 2013 +0200
+
+    updated for version 7.4b.022
+    Problem:    Not waiting for a character when the tick count overflows.
+    Solution:   Subtract the unsigned numbers and cast to int. (Ken Takata)
+
+
+534d0306d8957ddd5cd8125ad4958bfff69bd3dd : Bram Moolenaar <bram@vim.org> : Wed Feb 13 14
+commit 534d0306d8957ddd5cd8125ad4958bfff69bd3dd
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Wed Feb 13 14:36:44 2013 +0100
+
+    updated for version 7.3.809
+    Problem:    The dosinst.c program has a buffer overflow. (Thomas Gwae)
+    Solution:   Ignore $VIMRUNTIME if it is too long.
+
+
+443ca7fa7e75e2daf17995d5f7edc95279c70727 : Bram Moolenaar <bram@vim.org> : Wed Nov 28 18
+commit 443ca7fa7e75e2daf17995d5f7edc95279c70727
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Wed Nov 28 18:22:11 2012 +0100
+
+    updated for version 7.3.739
+    Problem:    Computing number of lines may have an integer overflow.
+    Solution:   Check for MAXCOL explicitly. (Dominique Pelle)
+
+
+0fa7326ee9daadf7c710a5f5de758c58688ccc13 : Bram Moolenaar <bram@vim.org> : Sun Oct 21 02
+commit 0fa7326ee9daadf7c710a5f5de758c58688ccc13
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Sun Oct 21 02:37:10 2012 +0200
+
+    updated for version 7.3.701
+    Problem:    MS-Windows: Crash with stack overflow when setting 'encoding'.
+    Solution:   Handle that loading the iconv library may be called recursively.
+    	    (Jiri Sedlak)
+
+
+d40b6dc0418aeec5082c38154e9778a20d569172 : Bram Moolenaar <bram@vim.org> : Tue Sep 18 18
+commit d40b6dc0418aeec5082c38154e9778a20d569172
+Author: Bram Moolenaar <bram@vim.org>
+Date:   Tue Sep 18 18:03:37 2012 +0200
+
+    updated for version 7.3.664
+    Problem:    Buffer overflow in unescaping text. (Raymond Ko)
+    Solution:   Limit check for multi-byte character to 4 bytes.
+
+
+2a03b38e0046834ba4a183e991ffa1820611d182 : Bram Moolenaar <bram@zimbu.org> : Wed Feb 17 18
+commit 2a03b38e0046834ba4a183e991ffa1820611d182
+Author: Bram Moolenaar <bram@zimbu.org>
+Date:   Wed Feb 17 18:20:37 2010 +0100
+
+    updated for version 7.2.366
+    Problem:    CTRL-B doesn't go back to the first line of the buffer.
+    Solution:   Avoid an overflow when adding MAXCOL.
+
+
+
+

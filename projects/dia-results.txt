@@ -1,0 +1,390 @@
+commit 0752d3219e9d36746939f5dc0e0d595119025a3c
+Type: memory leak
+File: dia/lib/diaimportrenderer.c
+PC: true
+
+commit 80a86bb3e53e8a7882a172ec412e9aac986a9b28
+Type: memory leak
+File: svg-import.c
+PC: true
+
+commit acbfa8760d03f373063a74b8c3b1e1f250080ef6
+Type: memory leak
+File: svg-import.c
+PC: true
+
+
+commit 1d4e78762e9359f58b8f0d350c75f50daa06650b
+Type: memory leak
+File: prop_dict.c
+PC: true
+
+
+commit bacd80fce5e18f08207d4217c310b7d38034833b
+Type: memory leak
+File: font.c
+PC: true
+
+commit 9f0afbbbd735a7c7f269c65636adca68bfc0cef4
+Type: memory leak
+File: lib/dia_image.c 
+PC: true
+
+commit c5dc0a50fb6bba9c090ac30930f7d9208ece08e5
+Type: memory leak
+File: lib/persistence.c 
+PC: true
+    
+commit d270cc9e9df8f4a3f7511d9e4750a55267d0913a
+Type: memory leak
+File: plug-ins/pixbuf/pixbuf.c
+PC: true
+   
+commit 3deeb43f65c536036bf090ff068456d096c37df7
+Type: memory leak
+File: lib/font.c 
+PC: true
+
+commit 3deeb43f65c536036bf090ff068456d096c37df7
+Type: memory leak
+File: objects/SISSI/sissi.c 
+PC: true
+
+commit 3deeb43f65c536036bf090ff068456d096c37df7
+Type: memory leak
+File: lib/diagdkrenderer.c
+PC: true
+
+
+commit 7f6436cdb9b666fbcdb90722aa5b551829945e58
+Type: memory leak
+File: lib/parent.c
+PC: true
+    
+commit 7aa1a13672e5444e20a379ee606a871de90f8e6d
+Type: memory leak
+File: lib/widgets.c 
+PC: true
+
+commit 551dcb76c9ade0154c5a7ab9fea75fab01ad9a47
+Type: memory leak
+File: lib/dialibartrenderer.c 
+PC: !HAVE_FREETYPE && G_OS_WIN32 && defined PANGO_WIN32_FUTURE
+
+commit 2b369f1076d7b29248927dd06e6aaa0d9e1dd6ee
+Type: memory leak
+File: objects/custom/custom_util.c
+PC: true
+    
+commit 7beeb30f5b7d856bdb81d3b200137b209b7f39fa
+Type: memory leak
+File: plug-ins/xslt/xslt.c
+PC: true
+    
+commit ba69a886df4738930293896e124bad3f4be8728a
+Type: memory leak
+File: app/properties.c 
+PC: true
+    	
+
+commit b722485ff4decb75faa5b37b9a9394679db16256
+Type: memory leak
+File: lib/object.c
+PC: true
+
+commit b722485ff4decb75faa5b37b9a9394679db16256
+Type: memory leak
+File: app/render_gdk.c
+PC: HAVE_FREETYPE
+
+commit b722485ff4decb75faa5b37b9a9394679db16256
+Type: memory leak
+File: lib/font.c
+PC: HAVE_FREETYPE
+
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: uninitialized variable
+File: app/preferences.c
+PC: GLIB_CHECK_VERSION (1, 3, 2)
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: uninitialized variable
+File: app/recent_files.c
+PC: GLIB_CHECK_VERSION (1, 3, 0)
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: uninitialized variable
+File: objects/network/bus.c
+PC: true
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: uninitialized variable
+File: objects/GRAFCET/action.c
+PC: true
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: memory leak
+File: plug-ins/cgm/cgm.c
+PC: true
+
+commit 29230d5acdf20140b3afbfa3dd904ea9d42880fa
+Type: memory leak
+File: plug-ins/pstricks/render_pstricks.c
+PC: true
+
+
+commit ac2de8d4c0c9e3ce021d90aadb7c746dffd0495b
+Type: memory leak 
+File: app/commands.c
+PC: HAVE_GDK_PIXBUF
+ 
+
+commit b26b026387ac1d4fc496ec64b82d21f5126aa1b1
+Type: memory leak     
+File: app/load_save.c:
+PC: true
+
+commit b26b026387ac1d4fc496ec64b82d21f5126aa1b1
+Type: memory leak 
+File: lib/dia_xml.c
+PC: true
+
+commit b26b026387ac1d4fc496ec64b82d21f5126aa1b1
+Type: memory leak 
+File: lib/sheet.c
+PC: true
+
+commit b26b026387ac1d4fc496ec64b82d21f5126aa1b1
+Type: memory leak 
+File: lib/text.c
+PC: true
+    
+    
+commit b26b026387ac1d4fc496ec64b82d21f5126aa1b1
+Type: resource leak    
+File: objects/custom/custom.c
+PC: true
+    
+
+
+commit 117de7e0104f5733738e950725a3d7069ddb9748
+Type: memory leak
+File: objects/standard/image.c 
+PC: true
+
+
+
+commit 2994afbaa931a47acb8e271e82e308fa4efc29d3
+Type: segmentation fault
+File: app/disp_callbacks.c
+PC: true
+
+
+commit c1da9cfb5e91fab865f4f39aa7033d4b62454add
+Type: segmentation fault
+File: lib/font.c
+PC: true
+
+commit a14fa4b113e3d901b74b0f861cd87965f09efbc1
+Type: segmentation fault
+File: app/menus.c
+PC: GNOME
+
+commit 403145e9f4a0d8e25a263cc4d049e4cd45b43e92
+Type: segmentation fault
+File: lib/bezier_conn.c 
+PC: true
+    
+
+commit 7bf6bfba23d2267cec452cf1c819f796c9eb9eba
+Type: segmentation fault
+File: app/color_area.c 
+PC: true
+
+
+
+commit 7ff3cbb07369c0bca9d19b957d45dc9dd1c40aee
+Type: uninitialized variable
+File: path-math.c
+PC: true
+
+
+commit 1932e5c45f0e1d0efbe0d69f936af20d488c81b7
+Type: uninitialized variable
+File: load_save.c
+PC: true
+
+
+commit 5948aaa1d562db64a8d21a3b03e4e0f32eac6373
+Type: uninitialized variable
+File: plug-ins/dxf/autocad_pal.c 
+PC: true
+   
+commit 5948aaa1d562db64a8d21a3b03e4e0f32eac6373 	
+Type: uninitialized variable
+File: app/load_save.c(diagram_data_save) 
+PC: true
+    
+    
+commit 7469594819ba9a209a9a9cb6fdb55ef610bba22a
+Type: uninitialized variable
+File: lib/font.c app/create_object.c
+PC: true
+
+commit 7469594819ba9a209a9a9cb6fdb55ef610bba22a
+Type: uninitialized variable
+File: app/modify_tool.c
+PC: true
+
+
+commit 14c97acf2178e781aa7ff90723338bcf70c6ff3a
+Type: uninitialized variable
+File: objects/standard/image.c 
+PC: true
+    
+
+commit 19d24a1731aa2eed1a96b12d6e4decf0e9f687b9
+Type: uninitialized variable
+File: app/render_eps.c
+PC: HAVE_UNICODE
+
+
+commit d79e0f0d9bed56e2df872be1f9175d7c4b38d100
+Type: uninitialized variable
+File: lib/diagramdata.c 
+PC: true
+
+
+
+
+commit da751f1cb25aa9bf29a073f82a5edcb9dda18913
+Type: uninitialized variable
+File: display.c
+PC: true
+
+
+commit 3b8da5482503f47a7592fe224ee0430ac23bd927
+Type: uninitialized variable
+File: association.c
+PC: true
+
+
+-- OVERFLOWS
+
+38aa037eb73e86f7d8936646314e5a2d45d03746 : Hans Breuer <hans@breuer.org> : Sat Jul 12 10
+commit 38aa037eb73e86f7d8936646314e5a2d45d03746
+Author: Hans Breuer <hans@breuer.org>
+Date:   Sat Jul 12 10:21:42 2014 +0200
+
+    Avoid line number overflow in text_distance_from()
+
+
+67000b5a9ae05756f3f32655eaf8759818c4693c : Hans Breuer <hans@breuer.org> : Fri Mar 14 19
+commit 67000b5a9ae05756f3f32655eaf8759818c4693c
+Author: Hans Breuer <hans@breuer.org>
+Date:   Fri Mar 14 19:53:35 2014 +0100
+
+    Bug 710818 - Overflow safe wrappers for acos/asin (now really)
+    
+    acos() and asin() are only defined in a certain range. Implement some
+    range/overflow safe wrappers rather than potentially passing infinite
+    to other modules (e.g. cairo did assert() on it.)
+    
+    Additionally check for !isinf() in cairo plug-in (should not trigger
+    anymore).
+    
+    (cherry picked from commit 9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55)
+    
+    Conflicts:
+    	plug-ins/cairo/diacairo-renderer.c
+
+
+9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55 : Hans Breuer <hans@breuer.org> : Fri Mar 14 19
+commit 9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55
+Author: Hans Breuer <hans@breuer.org>
+Date:   Fri Mar 14 19:53:35 2014 +0100
+
+    Bug 710818 - Overflow safe wrappers for acos/asin (now really)
+    
+    acos() and asin() are only defined in a certain range. Implement some
+    range/overflow safe wrappers rather than potentially passing infinite
+    to other modules (e.g. cairo did assert() on it.)
+    
+    Additionally check for !isinf() in cairo plug-in (should not trigger
+    anymore).
+
+
+335ced1909180f0bc4fb064aaa676a86c740dce0 : Hans Breuer <hans@breuer.org> : Sun Nov 17 11
+commit 335ced1909180f0bc4fb064aaa676a86c740dce0
+Author: Hans Breuer <hans@breuer.org>
+Date:   Sun Nov 17 11:29:42 2013 +0100
+
+    Bug 710818 - Overflow safe wrappers for acos/asin
+    
+    acos() and asin() are only defined in a certain range. Implement some
+    range/overflow safe wrappers rather than potentially passing infinite
+    to other modules (e.g. cairo did assert() on it.)
+    
+    (cherry picked from commit 846a7ff5b5cb5d21f3c97d21f7a1890a0fcfb65b)
+    
+    Conflicts:
+    	lib/boundingbox.c
+    	lib/geometry.c
+
+
+846a7ff5b5cb5d21f3c97d21f7a1890a0fcfb65b : Hans Breuer <hans@breuer.org> : Sun Nov 17 11
+commit 846a7ff5b5cb5d21f3c97d21f7a1890a0fcfb65b
+Author: Hans Breuer <hans@breuer.org>
+Date:   Sun Nov 17 11:29:42 2013 +0100
+
+    Bug 710818 - Overflow safe wrappers for acos/asin
+    
+    acos() and asin() are only defined in a certain range. Implement some
+    range/overflow safe wrappers rather than potentially passing infinite
+    to other modules (e.g. cairo did assert() on it.)
+
+
+30a3526f20de63163240b48d875eb59817e67864 : Hans Breuer <hans@breuer.org> : Sat May 4 12
+commit 30a3526f20de63163240b48d875eb59817e67864
+Author: Hans Breuer <hans@breuer.org>
+Date:   Sat May 4 12:24:37 2013 +0200
+
+    [warningectomy] integer overflow in expression
+    
+    Checking for special directory entries was a bit too
+    complicated for my and gcc's taste. (IIRC the case
+    does not happen anymore with GDir anyway.)
+
+
+907980be99b781bf9a5f25da1490deb369814a1e : Hans Breuer <hans@breuer.org> : Sat Sep 22 16
+commit 907980be99b781bf9a5f25da1490deb369814a1e
+Author: Hans Breuer <hans@breuer.org>
+Date:   Sat Sep 22 16:20:29 2012 +0200
+
+    [dox] more documentation and improved grouping
+    
+    - make collaboration and inheritance graphs useful
+      (remove 'ops' - object vtables - from documentation to avoid
+       collaboration graph information overflow)
+    - dox for Autorouting, DiagramData, Layer, XmlIo, ...
+    - create enum PropFlags for better documentation
+
+
+69f3c0bfb8f2f952f3f29c4b09aaf0474f62bf5e : Lars Clausen <lclausen@src.gnome.org> : Sun Nov 13 19
+commit 69f3c0bfb8f2f952f3f29c4b09aaf0474f62bf5e
+Author: Lars Clausen <lclausen@src.gnome.org>
+Date:   Sun Nov 13 19:18:49 2005 +0000
+
+    Fix of bug #321387: Buffer overflow (by 1:)
+
+
+982a3fd47d4e7337b0e6f8a175422cea3e6e251c : Lars Clausen <lclausen@src.gnome.org> : Fri Dec 6 23
+commit 982a3fd47d4e7337b0e6f8a175422cea3e6e251c
+Author: Lars Clausen <lclausen@src.gnome.org>
+Date:   Fri Dec 6 23:07:33 2002 +0000
+
+    Line gaps out, buffer overflow in text.c
+
+
+

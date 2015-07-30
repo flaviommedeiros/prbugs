@@ -1,0 +1,1974 @@
+git clone https://github.com/ThomasAdam/fvwm.git
+
+
+-- OVERFLOWS
+
+e98919ddadbec766ee23da5a9b89cb83426832dc : renato <renato> : Tue Jan 2 01
+commit e98919ddadbec766ee23da5a9b89cb83426832dc
+Author: renato <renato>
+Date:   Tue Jan 2 01:45:50 2007 +0000
+
+    * Created function module_add_to_fdsets from events.c and module_interface.c
+    fdset adding code, using it instead.
+    * Added to it a check to avoid fd_set overflows.
+
+
+91ea02e32f625b6950abe80982c44f41c7151e7f : domivogt <domivogt> : Thu Jun 17 15
+commit 91ea02e32f625b6950abe80982c44f41c7151e7f
+Author: domivogt <domivogt>
+Date:   Thu Jun 17 15:42:47 2004 +0000
+
+    * Fixed potential future buffer overflows.
+
+
+e08084e49c9f9774597ccc39a9c5293a2e032e40 : domivogt <domivogt> : Mon May 27 13
+commit e08084e49c9f9774597ccc39a9c5293a2e032e40
+Author: domivogt <domivogt>
+Date:   Mon May 27 13:45:21 2002 +0000
+
+    * Fixed integer overflow in average bg calculation.
+
+
+f79a6d1709b162b8a20503b7978e9a723c087ab7 : domivogt <domivogt> : Mon May 27 13
+commit f79a6d1709b162b8a20503b7978e9a723c087ab7
+Author: domivogt <domivogt>
+Date:   Mon May 27 13:44:59 2002 +0000
+
+    * Fixed integer overflow in average bg calculation.
+
+
+452c3711ebfdaa1514f63f28faa26e30f2969631 : migo <migo> : Sat Feb 3 14
+commit 452c3711ebfdaa1514f63f28faa26e30f2969631
+Author: migo <migo>
+Date:   Sat Feb 3 14:31:08 2001 +0000
+
+    Buffer overflow and other security fixes; typos
+
+-- UNINIT VAR
+
+882a1e715f631886761ea7b80869b4f16bbd8a95 : olicha <olicha> : Thu Sep 19 14
+commit 882a1e715f631886761ea7b80869b4f16bbd8a95
+Author: olicha <olicha>
+Date:   Thu Sep 19 14:03:37 2002 +0000
+
+    * Clip the menu item icons and text drawing
+    * New libs files for rectangles, segments, regions ..etc
+    * Fixed an indirect uninitialized variable bug and update some comments
+    in the menus code
+    * Small clean up in colorset and FRender
+
+
+fb23ef89990201492a3e200dc557537ecd7b541d : domivogt <domivogt> : Sat Aug 17 03
+commit fb23ef89990201492a3e200dc557537ecd7b541d
+Author: domivogt <domivogt>
+Date:   Sat Aug 17 03:13:37 2002 +0000
+
+    * Fixed uninitialised variables.
+
+
+715ddec5122d2a59389b365f197a73a3d85c3874 : migo <migo> : Wed Aug 7 01
+commit 715ddec5122d2a59389b365f197a73a3d85c3874
+Author: migo <migo>
+Date:   Wed Aug 7 01:49:42 2002 +0000
+
+    * focus.c: fixed a possibly-uninitialized variable warning
+    * Fft.c: removed a code that called DrawStringFunc before this pointer
+    _ was ever initialized
+    * Makefile.am: specify stroke includes before Xft includes, improves some cases
+    * FvwmCommand: fixed an unused variable warning
+
+
+6f7d56af1c14ae5019f74748e9552944874c1998 : domivogt <domivogt> : Fri Mar 2 17
+commit 6f7d56af1c14ae5019f74748e9552944874c1998
+Author: domivogt <domivogt>
+Date:   Fri Mar 2 17:29:30 2001 +0000
+
+    * Fixed uninitialised variable.
+
+
+13dacbfed5285f978436f5b3312c30a3bca7b899 : domivogt <domivogt> : Thu Nov 4 05
+commit 13dacbfed5285f978436f5b3312c30a3bca7b899
+Author: domivogt <domivogt>
+Date:   Thu Nov 4 05:48:03 1999 +0000
+
+    * Fixed uninitialised variables gc1, gc2 (IconMan).
+    * Applied WinList fix by Olivier.
+
+
+-- SEGFAULTS
+
+25938d29302c2c94e77f862edc119b04b8dee57d : dane <dane> : Mon Jan 21 00
+commit 25938d29302c2c94e77f862edc119b04b8dee57d
+Author: dane <dane>
+Date:   Mon Jan 21 00:11:00 2013 +0000
+
+    2013-01-20  Dan Espen  <despen@verizon.net>
+    
+    	* libs/Flocale.c (FlocaleFreeNameProperty): Don't XFree "Unknown".
+    	* fvwm/events.c (HandlePropertyNotify): Comment about how new_name is initialized.
+    
+    	* libs/FlocaleCharset.c: spelling-error-binary patch
+    	from Vincent W. Chen Lintain Debian.
+    
+    2012-07-30  Dan Espen  <despen@verizon.net>
+    
+    	* NEWS: Added FvwmForm Separators,
+    	fvwm-desktop-menu fixes.
+    
+    2012-06-22  Dan Espen  <despen@verizon.net>
+    
+    	* configure.ac: Set variables for python.
+    
+    2012-06-16  Thomas Adam  <thomas@fvwm.org>
+    	* configure.ac:
+    	* libs/Bindings.c (AddBinding):
+    	* fvwm/builtins.c (FkeysymToKeycode):
+    	* fvwm/events.c (__handle_key):
+    	Add detection of XKeycodeToKeysym as deprecated, and provide a wrapper
+    	for it by way of fvwm_KeycodeToKeysym() to call the newer
+    	XkbKeycodeToKeysum() where needed.
+    
+    
+    2012-05-04  Thomas Adam  <thomas@fvwm.org>
+    	* libs/PictureImageLoader.c (PImageLoadSvg, PimageLoadXpm,
+    	  PImageLoadPng):
+    	  Fix compilation errors.
+    
+    2012-05-02  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/menu.c ( __scan_for_pixmap):
+    	* libs/PictureImageLoader.c (PImageLoadSvg, PimageLoadXpm,
+    	  PImageLoadPng):
+    	Add fvwm_msg() for hints about failed image load.
+    
+    2012-04-20  Thomas Adam  <thomas@fvwm.org>
+    	* NEWS:
+    	* configure.ac:
+    	Updated for 2.6.6 (CVS HEAD)
+    
+    2012-04-20  Thomas Adam  <thomas@fvwm.org>
+    	* configure.ac:
+    	* docs/ANNOUNCE:
+    	Prep for 2.6.5
+    
+    2012-03-17  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/events.c (HandlePropertyNotify):
+    	Fix XSizeHints problem with FVWM not correctly allowing resizing of
+    	windows when the hints are toggled with respect to FVWM processing
+    	XA_WM_NORMAL_HINTS.
+    
+    2012-03-16  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/placement.c ( __pl_position_get_pos_simple):
+    	When using "UnderMouse" for PositionPlacement, ensure we honor the EWMH
+    	working area by default if it's in use.
+    
+    2012-02-20  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/fvwm.c (InstallSignals):
+    	Unblock signals when installing them.
+    
+    	When signals are registered, ensure they're unblocked so as not to queue
+    	them up.
+    
+    2012-02-01  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/infostore.c (get_metainfo_length):
+    	* fvwm/infostore.c (new_metainfo):
+    	* fvwm/infostore.c (insert_metainfo):
+    	* fvwm/style.c (style_parse_one_style_option):
+    	Make C90 compliant.
+    
+    2012-02-01  Thomas Adam  <thomas@fvwm.org>
+    	* configure.ac:
+    	* docs/ANNOUNCE:
+    	Prep for 2.6.4
+    
+    2012-01-26  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/events.c (HandlePropertyNotify):
+    	Rather than tracking whether the icon name has been assigned or not, now
+    	also do this on _XA_WM_NAME when the icon title is not the same as the
+    	window title; since the ordering of events is not guaranteed to be processed
+    	correctly,
+    
+    2012-01-18  Thomas Adam  <thomas@fvwm.org>
+    	* README:
+    	Update for 2.6.X release, but generalise on the actual version of FVWM
+    	so that generic documents such as this do not need updating as often.
+    
+    2012-01-02  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/ConfigFvwmDefaults:
+    	Make BusyCursor Wait True, and give a CursorStyle of dot.
+    
+    	This gives a visual clue when generating fvwm-menu-desktop, for
+    	instance via PipeRead which might take some time.
+    
+    2011-12-19  Thomas Adam  <thomas@fvwm.org>
+    	* bin/fvwm-menu-desktop.in:
+    	Add back "/usr/share/applications" to the list in
+    	get_KDE_legacy_dirs().
+    
+    2011-11-03  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    	* configure.ac:
+    	AC_SUBST(SED)
+    
+    2011-10-16  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/conditional.c (CreateConditionMask):
+    	Fix processing of Layer conditional command
+    
+    	Since we handle negations for conditional parameters, ensure we
+    	match against the correct variable holding the negated condition.
+    
+    2011-10-15  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/frame.c (frame_free_move_resize_args):
+    	Don't restore the client's gravity.
+    
+    	There might be a chance some clients with a gravity other than Static
+    	(such as non-NW gravity) might not react well -- but setting the gravity
+    	to the main window hint will break clients being remapped as subwindows,
+    	c.f. XEmbed.
+    
+    2011-09-30  Thomas Adam <thomas@fvwm.org>
+    	* configure.ac:
+    	* NEWS:
+    	Updated for 2.6.4
+    
+    2011-09-30  Thomas Adam <thomas@fvwm.org>
+    	* configure.ac:
+    	* NEWS:
+    	* docs/ANNOUNCE:
+    	Update key files for 2.6.3 release.
+    
+    2011-09-26  Chris Siebenmann <cks-fvwm@cs.toronto.edu>
+    	* fvwm/add_window.c (interpolate_titleformat_name):
+    	* fvwm/style.c (__validate_titleformat_string):
+    	Add '%i' format for IconTitleFormat/TitleFormat
+    
+    	This inserts the window's icon name. There are some applications
+    	that update only their icon name, not their title.
+    
+    2011-09-10  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/ewmh.c (ewmh_HandleNotification):
+    	* fvwm/ewmh_intern.h:
+    	* fvwm/fvwm.h:
+    	Support _NET_WM_WINDOW_TYPE_NOTIFICATION
+    
+    	Applications such as xfce4-notifyd do not explicitly set
+    	override_redirect, but do set
+    	_NET_WM_WINDOW_TYPE_NOTIFICATION -- so fvwm should also handle this by
+    	marking such windows as unmanaged.
+    
+    2011-08-30  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/placement.c (__place_window):
+    	Don't assume PositionPlacement can modify EWMH working area
+    
+    	Because PositionPlacement uses the same mechanics as the Move command,
+    	and this now has the ability to check for the EWMH working area via
+    	"ewmhiwa", etc., let that modify it for us if the option is given.
+    
+    	This makes things like the following possible:
+    
+    		Style teddybear PositionPlacement screen 1 0p 0p ewmhiwa
+    
+    2011-08-28  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/ewmh.c (EWMH_fullscreen):
+    	Add "ewmhiwa" option when a client goes fullscreen
+    
+    2011-08-28  Thomas Adam <thomas@fvwm.org>
+    	* libs/FScreen.c (FScreenOfPointerXY):
+    	* libs/FScreen.h:
+    	Introduce wrapper around static function FindScreenOfXY() to determine
+    	which screen the pointer is on, and return it as something which can be
+    	used through parameter expansion (presumably in configs?)
+    
+    	* fvwm/expand.c (expand_vars_extended):
+    	Expand VAR_POINTER_SCREEN.
+    
+    2011-08-28  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/move_resize.c (GetMoveArguments):
+    	Add ewmhiwa option
+    
+    	As with the Maximize command, the coordinates of the Move command can be
+    	told to ignore the working area.  The default is to honour it, again as
+    	with the Maximize command.
+    
+    2011-08-15  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/move_resize.c (__resize_window):
+    	Add support code for warping/direction.
+    
+    	Adds the code which ensures, based on the new warptoborder/direction
+    	logic that the various logic is handled at the correct time.
+    
+    	* fvwm/move_resize.c (__resize_get_dir_from_window):
+    	__resize_dir_get_proximity() to include warp coords
+    
+    	In working out which direction a window should be moved in, ensure we also
+    	set the coordinates for where the pointer should be warped to, if it's been
+    	requested that the pointer should be warped to the closest border
+    	automatically.
+    
+    	* fvwm/move_resize.c (GetResizeArguments):
+    	Add "automatic" option to resize arguments
+    
+    	Both the "direction" and "warptoborder" sub-commands of Resize, can now
+    	optionally accept the option "automatic" which will attempt to work out
+    	which region of the window the pointer is in, and set the direction based on
+    	it.
+    
+    	* fvwm/move_resize.c (__resize_get_dir_from_resize_quadrant):
+    	Introduce __resize_get_dir_from_resize_quadrant()
+    
+    	In order to work out the direction to warp the pointer to automatically, as
+    	well as setting the direction automatically, this helper function will
+    	return the direction the pointer is in, based on the quadrant of the window.
+    
+    2011-08-15  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/style.c (__validate_titleformat_string):
+    	New helper function for validating TitleFormat and IconTitleFormat
+    	commands.
+    
+    	* fvwm/style.c:
+    	* fvwm/style.h:
+    	Introduce TitleFormat and IconTitleFormat style commands.  These
+    	effectively deprecate:
+    
+    	IndexedWindowName
+    	IndexedIconName
+    	ExactWindowName
+    	ExactIconName
+    
+    	* fvwm/add_window.c (interpolate_titleformat_name):
+    	Helper function to interpolate and parse the TitleFormat and
+    	IconTitleFormat string.
+    
+    	* fvwm/add_window.c (setup_visible_name):
+    	Make use of: interpolate_titleformat_name() for setting the
+    	visible name of an icon or window title.
+    
+    2011-08-06  Thomas Adam <thomas@fvwm.org>
+    
+    	* fvwm/borders.c (border_mp_draw_mp_titlebar):
+    	* fvwm/builtins.c (update_decors_colorset,
+                     	   CMD_ChangeDecor):
+    	* fvwm/events.c (HandleMapRequestKeepRaised):
+    	* fvwm/ewmh_events.c (ewmh_MoveResizeWindow):
+    	* fvwm/frame.c (frame_get_titlebar_dimensions):
+    	* fvwm/fvwm.c (CreateGCs):
+    	* fvwm/menus.c (paint_menu_gradient_background,
+                  		paint_menu,
+                  		pop_menu_down_and_repaint_parent,
+                  		__mloop_exit_warp_back(MenuParameters,
+                  		do_menu(MenuParameters,
+                  		get_menu_options):
+    	* fvwm/menustyle.c (menustyle_parse_style,
+                      		CMD_MenuStyle):
+    	* fvwm/module_interface.c (module_input_execute):
+    	* fvwm/move_resize.c (resize_move_window):
+    	* fvwm/placement.c (__pl_minoverlap_get_pos_penalty):
+    	* fvwm/session.c (LoadGlobalState):
+    	* fvwm/style.c (parse_and_set_window_style):
+    	* fvwm/virtual.c (get_page_arguments):
+        * libs/FGettext.c (FGettextInit, FGettext):
+        * libs/Ficonv.c (is_iconv_supported):
+        * libs/Graphics.c (CreateGradientPixmap):
+        * libs/PictureBase.c (PictureDefaultGC):
+        * libs/PictureImageLoader.c (PImageCreatePixmapFromFImage):
+        * libs/PictureUtils.c (PictureAllocColorTable):
+        * libs/fsm.c (CompletNewConnectionMsg):
+    	Remove dead code due to -Wset-but-unused-variable (GCC 4.6)
+    
+    	This removes dead references to variables which were created and never
+    	used.  Whilst we could disable the warning completely when compiling, it
+    	was a useful chance to remove dead code.
+    
+    
+    2011-08-06  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/ewmh.c (EWMH_fullscreen):
+    	Remove unused variable.
+    
+    2011-08-06	Thomas Adam <thomas@fvwm.org>
+    	* Changelog:
+    	* docs/ANNOUNCE:
+    	* NEWS:
+    	* configure.ac:
+    	Update key files for 2.6.2 release.
+    
+    2011-07-25  Thomas Adam <thomas@fvwm.org>
+    	* doc/commands/MenuStyle.xml:
+    	* fvwm/menubindings.c (menu_shortcuts):
+    	* fvwm/menubindings.h:
+    	* fvwm/menustyle.c (menustyle_get_styleopt_index,
+    	  menustyle_parse_style, menustyle_copy):
+    	* fvwm/menustyle.h:
+    	Add new MenuStyle option "UniqueHotkeyActivatesImmediate"
+    
+    	This change allows for the hotkey to be pressed on a menu and for it
+    	remain open until the user presses one of the keys to enact that
+    	specified item.  The default behaviour is the current one of closing the
+    	menu and running the action in the case of there being only one entry at
+    	the specified hotkey.
+    
+    2011-07-24  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/move_resize.c (unmaximize_fvwm_window):
+    	* fvwm/ewmh.c (EWMH_fullscreen):
+    	* fvwm/fvwm.h:
+    	Fix fullscreen restoring with ResizeHintOverride
+    
+    	Correctly handle restoring a window whose geometry isn't subject to
+    	resize increments when coming out of fullscreen, with respect to that
+    	window then being subsequently maximized.
+    
+    2011-07-18  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/move_resize.c (unmaximize_fvwm_window):
+    	* fvwm/ewmh.c (EWMH_fullscreen):
+    	* fvwm/fvwm.h:
+    	Correctly restore windows coming out of fullscreen
+    
+    	When windows enter into fullscreen, ensure certain attributes of that
+    	window -- such as the iconification, maximisation, shading, etc., are
+    	tracked and correctly restored when the window leaves fullscreen mode.
+    
+    	In the case of window maximisation, because fullscreen mode internally
+    	uses "ResizeMoveMaximize" to achieve this, the effect of this is to lose
+    	the window's maximised state in the interim, because calling
+    	ResizeMoveMaximize will remove the maximised state of the window before
+    	changing it for its own purposes.
+    
+    2011-06-11  Thomas Adam <thomas@fvwm.org>
+    	* fvwm/session.c (SaveWindowStates):
+    	Don't skip saving window state for windows without WM_COMMAND
+    
+    	Newer applications (that is, those written before 1821) used to use a
+    	nasty hack in the way of the WM_COMMAND XAtom to effectively start the
+    	running application.  But this is a crap way of doing it, and the ICCCM
+    	even agrees.  Such Atoms have been deprecated for a long time.
+    
+    	But FVWM uses this file for more than just hints to some other Session
+    	Manager -- it's used to reapply state across restarts, and skipping it
+    	on the off-chance some session manager might need WM_COMMAND in today's
+    	world is silly.
+    
+    	If a session manager relying soley on WM_COMMAND is being used under
+    	FVWM, it won't be honouring many applications anyway, so dropping
+    	support for it is fine.
+    
+    2011-06-04  Thomas Adam <thomas@fvwm.org>
+    	* configure.ac:
+    	Fix XCursor detection.
+    
+    	Include the linker libraries if XCursor is found.
+    
+    2011-04-18    <despen@verizon.net>
+    	* fvwm/fvwm.c (SetRCDefaults): Make fvwm-desktop-menu dynamic.
+    
+    2011-04-16  Thomas Adam <thomas@fvwm.org>
+    	* docs/ANNOUNCE:
+    	* configure.ac:
+    	Update for 2.6.1
+    
+    2011-04-16  Thomas Adam <thomas@fvwm.org>
+    	* configure.ac:
+    	Fix Fribidi library check to use 0.19.2 as a minimum.
+    
+    2011-04-15  Thomas Adam <thomas@fvwm.org>
+    	* libs/FBidi.c (FBidi_convert):
+    	Compiler warnings fix.
+    	* libs/fsm.c (CompletNewConnectionMsg):
+    	Compiler warnings fix.
+    
+    2011-04-15  Thomas Adam <thomas@fvwm.org>
+    	* NEWS:
+    	* configure.ac:
+    	Updated for the FVWM 2.6.0 stable release.
+    
+    2011-04-10    <despen@verizon.net>
+    	* fvwm/fvwm.c (SetRCDefaults): Add fvwm-menu-desktop to built in menu.
+    
+    2011-04-10  Thomas Adam  <thomas@fvwm.org>
+    	* acinclude.m4:
+    	* configure.ac:
+    	More --as-needed ld fixes for linking against exernal libraries.
+    
+    2011-04-05  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/update.c (apply_window_updates):
+    	Don't clear all States on WindowStyle.
+    
+    2011-04-02  Thomas Adam  <thomas@fvwm.org>
+    	*fvwm/ewmh_conf.c (CMD_EwmhBaseStruts):
+    	Use EWMH_UpdateWorkArea() and not separate function calls
+    
+    	Don't assume the work of EWMH_UpdateWorkArea() will only ever call two
+    	function calls by itself in the future; hence, centralise the call to
+    	doing that to the correct containing function.
+    
+    2011-02-05  Thomas Adam  <thomas@fvwm.org>
+    	* acinclude.m4:
+    	Fix DSO linker error (ld) with missing "-lfontconfig" for fontconfig
+    
+    	Stricter DSO checks with newer Libc versions requires the linker find
+    	the symbols elsewhere.  The only one that's missing is "-lfontconfig" as
+    	we already supply -lX11 -lXent elsewhere.
+    
+    2011-03-02  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/events.c (HandleFocusIn):
+    	Fix NeverFocus windows when handling FocusIn events.
+    
+    	Certain button presses on client windows can trigger a FocusIn event on
+    	the parent (such as opening a menu on a GTK application).  Disallow the
+    	click to trigger the window receiving focus, as well as redrawing the
+    	border to reflect the window has focus.
+    
+    2011-02-14  Thomas Adam  <thomas@fvwm.org>
+    	* libs/PictureImageLoader.c (PImageLoadPng):
+    	Use png_get_color_type() as the data type we were previously using is
+    	now no longer public (Finfo_ptr->color_type).  This is in libpng 1.5 --
+    	hopefully no need for an #ifdef.
+    
+    2010-12-19  Thomas Adam  <thomas@fvwm.org>
+    	* fvwm/builtins.c (CMD_CursorMove):
+    	Honour EdgeScroll settings to not flip pages when EdgeScroll is
+    	disabled.
+    
+    2010-12-04    <despen@verizon.net>
+    
+    	* fvwm/ConfigFvwmSetup: Better colors in menus and active frames.
+    
+    2010-11-12  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    	* fvwm/placement.c (__place_get_placement_flags):
+    	fix reporting of placement reason with nousposition style.
+    
+    2010-10-09  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/events.c (__handle_cr_on_client):
+    	fix resize of shaded windows with a shade direction that does not match
+    	the window gravity
+    
+    	* libs/gravity.h:
+    	* libs/gravity.c (__gravity_override_one_axis):
+    	(gravity_override_dir):
+    	new helper functions
+    
+    	* libs/gravity.c (gravity_combine_xy_dir):
+    	fixed calculation with only one axis set
+    
+    2010-09-16  Sergey Vlasov <vsu@altlinux.ru>
+    	* fvwm/move_resize.c (GetOnePositionArgument):
+    	Fix parsing of commands like 'Move 50-50w 50-50w'.
+    
+    2010-08-31  Gerard Vermeulen <gav451@gmail.org>
+    	* fvwm/move_resize.c (GetOnePositionArgument):
+    	Parse commands like 'Move w+-5p w+-2p'.
+    
+    2010-08-09  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	* configure.ac:
+    	Updated for the FVWM 2.5.31 release.
+    
+    2010-08-09  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	* configure.ac:
+    	Updated for the FVWM 2.5.31 release.
+    
+    2010-08-07  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/builtins.c (CMD_Exec):
+    	Remove extraneous whitespace.
+    
+    2010-07-28  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/builtins.c (CMD_Exec):
+    	Close fd if it's not opened successfully.
+    
+    2010-07-28  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/update.c (apply_window_updates):
+    	* NEWS:
+    	Copy over State settings on WindowStyle command.
+    
+    	When merging/updating style hints for recaptured windows, ensure we
+    	preserve any State hints set on the window.
+    
+    2010-05-22  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/windowlist.c (CMD_WindowList):
+    	* NEWS:
+    	When reporting on a window's width and height ensure we use the
+    	orig_hints XSizeHints struct for calculating resize increment
+    	geometries.
+    
+    2010-05-09  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	* configure.ac:
+    	Update CVS to use 2.5.31
+    
+    2010-05-09  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	* configure.ac:
+    	* docs/ANNOUNCE:
+    	Updated for the FVWM 2.5.30 release.
+    
+    2010-05-09  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	Cosmetic clean up for NEWS.
+    
+    2010-04-28  Dan Espen  <dane@mk.telcordia.com>
+    	* fvwm/colorset.c (parse_colorset): Remove bogus error message.
+    
+    2010-04-24  Thomas Adam <thomas@xteddy.org>
+    	* libs/Fpng.h:
+    	Define version checks for conditional macros.
+    
+    	libpng 1.4.0 has different macros for previous version of the same
+    	macros in libong 1.2.0, so check for them here.
+    
+    2010-04-18  Thomas Adam <thomas@xteddy.org>
+    	* libs/charmap.c (charmap_table_to_string):
+    	Don't allow incremental matching of C_ALL for contexts.
+    
+    	When printing out bindings, ensure we allow "A" for any/all
+    	contexts/modifiers to be matched exactly, so that the context column for
+    	bindings matches with what the user put in their config file.
+    
+    2010-04-03  Thomas Adam <thomas@xteddy.org>
+    	* NEWS:
+    	* configure.ac:
+    	Updated for the FVWM 2.5.29 release.
+    
+    2010-04-03  Thomas Adam <thomas@xteddy.org>
+    	* libs/Fplay.h:
+    	Cull unused functions when compiling against librplay.
+    
+    	When compiling with -Werror, ensure we're not trying to use unneeded
+    	librplay static functions we ourselves declare.
+    
+    2010-04-03  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/placement.c (__pl_minoverlap_get_pos_penalty):
+    	Tweak placement calculation for over-zealous windows.
+    
+    	Don't adjust a window's position unless it's actually greater than the
+    	screen's dimension (i.e., potentially placed off screen.)
+    
+    	2010-03-30  Christoph Fritz <chf.fritz@googlemail.com>
+    	* fvwm/windowlist.c (CMD_WindowList):
+    	Free allocated memory.
+    
+    2010-02-28  Thomas Adam <thomas@xteddy.org>
+    	* fvwm/move_resize.c (__resize_step):
+    	Don't explicitly send MotionNotify event during Resize (GeometryWindow)
+    
+    	When calling DisplaySize() from a resize event performed on a window,
+    	ensure we use the window's last event (which will be MotionNotify
+    	anyway) otherwise this completely confuses the GeometryWindow as it has
+    	to then update itself each time.
+    
+    	When using Xinerama/TwinView, the effect is that the GeometryWindow
+    	flickers and/or displays itself on the opposite screen to where the
+    	pointer is, because the x/y positions don't take into account the
+    	location of the pointer from the original hand-crafted event, but are
+    	correct from the execute context the window being resized is called in.
+    
+    2010-02-06  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/style.c (check_window_style_change):
+    	* fvwm/update.c (apply_window_updates):
+    	* fvwm/update.h:
+    	Propagate Layer changes via Style command on-the-fly.
+    
+    	Until there's a distinction between initially-mapped styles and runtime
+    	commands, and that currently, Style commands take effect immediately,
+    	ensure that for any Layer requests received via Style commands, these
+    	too are applied immediately.
+    
+    	The previous assumption was that this was only applicable when mapping a
+    	new window, but goes against expectations from the user.
+    
+    2010-01-07  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/read.c (run_command_file):
+    	Restructure how we look for Read files slightly.
+    
+    	When searching for files with the Read command, check to see if the file
+    	first of all has an absolute path and if so open it.  If it's relative
+    	then search for it in either FVWM_USERDIR or FVWM_DATADIR as before.  If
+    	the file still can't be found, try and open it outright.  This will
+    	allow therefore:
+    
+    	../../some_file
+    
+    	as a valid filename -- of course this really only makes sense when
+    	invoking fvwm with "-f" on the command-line, as relative paths to config
+    	files in this way should be built up using "$."
+    
+    2010-01-05  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/menustyle.c (menustyle_copy_face):
+    	Fix segfault setting MenuFace pixmap style for menus.
+    
+    	As with the tearoff bug from 2010-01-03, ensure we don't try and free a
+    	non-existent pixmap from an invalid pointer.
+    
+    2010-01-05  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/read.c (run_command_file):
+    	Fix opening of files to Read/PipeRead to accept absolute paths.
+    
+    	Don't just assume "/" is a valid identifier for opening files.  "./" is
+    	just as likely.  Fixes use-case of:
+    
+    	fvwm -f ./some_fvwm2rc
+    
+    2010-01-04  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/events.c (flush_property_notify):
+    	Add atom to struct so it is checked for by test_typed_window_event().
+    
+    2010-01-04  David Fries <David@Fries.net>
+    	* fvwm/events.c (test_typed_window_event):
+    	* fvwm/events.c (flush_property_notify):
+    	Efficiently handle flushing property events of the same type.
+    
+    	* fvwm/events.h (test_typed_window_event_args):
+    	Add XAtom type to struct.
+    
+    2010-01-04  David Fries <David@Fries.net>
+    	* fvwm/virtual.c (HandlePaging):
+    	Move no page detect check, it wasn't being hit.
+    	* fvwm/move_resize.c (__move_loop):
+    	Transform window position to pointer position and back when calling
+    	HandlePaging.
+    
+    2010-01-03  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/menustyle.c (menustyle_copy_face):
+    	Fix segfault when creating a tearoff menu using a Pixmap background.
+    
+    	When we copy the original menustyle to the new torn-off menu which
+    	contains a background image, don't then update the menu's pixel
+    	background color, as this is already free()d for us by an earlier copy
+    	call.
+    
+    2009-12-31  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/builtins.c (CMD_BugOpts):
+    	Remove debug line.
+    
+    2009-12-31  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/builtins.c (CMD_BugOpts):
+    	* fvwm/fvwm.c (InitVariables):
+    	* fvwm/events.c (HandleClientMessage):
+    	* fvwm/screen.h:
+    	Add new BugOpts QtDragnDropWorkaround option to handle an oddity in how
+    	Qt windows handle having ClientMessage events sent to them.
+    
+    2009-12-30  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/placement.c (__pl_minoverlap_get_pos_penalty):
+    	Fix y-axis offset calculations when using MinOverlapPlacement, by
+    	forcing the window on-screen when over-zealous penality calculations
+    	don't take into account the size of the window borders.
+    
+    2009-12-26  Thomas Adam <thomas.adam22@gmail.com>
+    	* bin/fvwm-convert-2.6.1.in:
+    	Add in BUGS section a note that converting over FvwmTheme lines is
+    	likely buggy.
+    
+    2009-12-26  Thomas Adam <thomas.adam22@gmail.com>
+    	* NEWS:
+    	* AUTHORS:
+    	* bin/fvwm-convert-2.6.in:
+    	* bin/fvwm-convert-2.6.1.in:
+    	First pass at a fvwm-convert-2.6 script to convert fvwm-2.4 syntax
+    	files.
+    
+    2009-12-19  Thomas Adam <thomas.adam22@gmail.com>
+    	* libs/Flocale.c (FlocaleEncodeString):
+    	Pre-initialise "len2" to zero, to avoid GCC warning during compilation.
+    
+    2009-12-12  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/fvwm.c (StartupStuff):
+    	Reset the state of the "Restarting" flag to False when restarting FVWM.
+    
+    	* fvwm/events.c (HandleMapRequestKeepRaised):
+    	Only run InitialMapCommand when FVWM isn't restarting and all windows
+    	have been recaptured.  The window is already mapped by the time FVWM is
+    	restarting, and running the InitialMapCommand again only serves to
+    	"toggle" the window state (c.f. InitialMapCommand Iconic, etc.)
+    
+    2009-09-20  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* configure.ac:
+    	increased version number to 2.5.29
+    
+    	* NEWS:
+    	updated for 2.5.28 release
+    
+    2009-08-28  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* fvwm/ewmh.c (ewmh_ChangeProperty):
+    	only convert _NET_WM_ICON hint to long before storing
+    
+    2009-08-26  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* fvwm/builtins.c (CMD_BugOpts):
+    	remove unused variables
+    
+    	* NEWS:
+    	* fvwm/ewmh.c (ewmh_ChangeProperty):
+    	fix storing of CARD32 arrays on 64 bit machines
+    
+    	* fvwm/ewmh_icons.c (ewmh_SetWmIconFromPixmap):
+    	prevent segmentation fault when reading a bad _NET_WM_ICON hint
+    
+    2009-08-22	Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/geometry.c (__cs_handle_aspect_ratio):
+    	Workaround gcc -O3, by declaring local vars as volatile.  This fixes an
+    	otherwise continual loop when resizing windows when keeping aspect
+    	ratio (c.f. mplayer.)
+    
+    2009-08-20  Christoph Fritz <chris_honschu(at)gmx.de>
+    	* configure.ac:
+    	Fix typo in AS_HELP_STRING referring to enable-htmldoc
+    
+    2009-08-19  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* fvwm/builtins.c (CMD_BugOpts):
+    	Fix parsing of BugOpts options lists separated by ',', and
+    	restoring to default value when the boolean option is omitted if
+    	not inside a list.
+    
+    	* NEWS:
+    	Change QT to Qt.
+    
+    	* NEWS:
+    	* libs/Flocale.h:
+    	* libs/Ficonv.h (FiconvSetTransliterateUtf8):
+    	* libs/Ficonv.c (FiconvSetTransliterateUtf8, translit_csname)
+    	(is_translit_supported, set_default_iconv_charsets)
+    	(set_iconv_charset_index, FiconvUtf8ToCharset):
+    	* fvwm/builtins.c (CMD_BugOpts):
+    	Add TransliterateUtf8 bug opt for working around clients
+    	which don't care about the WM_NAME value.
+    
+    2009-08-09  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* fvwm/stack.c (BroadcastRestack):
+    	Fix splitting or M_RESTACK packages causing weird window stacking
+    	in modules when more than 83 windows are broadcast.
+    
+    2009-08-04  Thomas Adam <thomas.adam22@gmail.com>
+    	* configure.ac:
+    	Remove dnl comments from configure.ac regarding malloc.h -- it's
+    	self-explanatory anyway.
+    
+    2009-08-03  Thomas Adam <thomas.adam22@gmail.com>
+    	* configure.ac:
+    	Most *BSD platforms are deprecating malloc.h in favout of stdlib.h
+    	-- this never used to produce compiler warnings, but things are
+    	starting to become more vocal, so don't use this in our
+    	./configure script if we're compiling FVWM on a *BSD system.
+    
+    2009-07-31  Christoph Fritz <chris_honschu(at)gmx.de>
+    
+    	* fvwm/style.h:
+    	* fvwm/fvwm.h:
+            * fvwm/add_window.c (setup_numeric_vals):
+    	add "typedef struct snap_attraction_t"
+    	* fvwm/style.c (style_parse_one_style_option):
+    	add new SnapAttraction options "None", "ScreenWindows",
+    	"ScreenIcons" and "ScreenAll"
+    	* fvwm/move_resize.c (DoSnapAttract):
+    	Bugfix, option SameType/Icons/Windows did falsely not affect
+    	conditions of option "Screen" and option "SameType" snapped
+    	falsely icons and windows together. Implement options
+    	None/ScreenWindows/ScreenIcons/ScreenAll for differentiated
+    	screen edge snapping.
+    
+    2009-07-10  Thomas Adam  <thomas.adam22@gmail.com>
+    	* fvwm/add_window.c (setup_window_name_count):
+    	* fvwm/add_window.c (setup_icon_name_count):
+    	Deprecate these in favour of setup_name_count()
+    
+    	* fvwm/add_window.c (setup_name_count):
+    	Amalgamate setup_window_name_count and setup_icon_name_count to just
+    	one function (very similar code between them.)  Used with
+    	IndexedWindowName and IndexedIconName.
+    
+    2009-07-10  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	Fix the options RPlayVolume and RPlayPriority in FvwmEvent.
+    
+    	* libs/Fplay.h (Fplay_set, Fplay_get, Frptp_putline)
+    	(Frptp_async_putline):
+    	Fix ANSI C compatibility.
+    
+    	* NEWS:
+    	* fvwm/ewmh_names.c (EWMH_WMName):
+    	set the HAS_EWMH_WM_NAME flag even if the window name on display
+    	isn't changing.
+    	(EWMH_WMIconName):
+    	same for HAS_EWMH_WM_ICON_NAME
+    
+    2009-07-08  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	fix for segfault with RPlatHost directive in FvwmEvent
+    	* libs/Makefile.am (libfvwm_a_SOURCES):
+    	* libs/Fplay.h:
+    	add Fplay.h wrapper header for rplay.h
+    
+    	* NEWS:
+    	fix debian bug #438132
+    
+    2009-07-06  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* fvwm/style.c (fw_match_style_id):
+    	Fix fvwmstyle resource
+    
+    2009-07-05  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* NEWS:
+    	* fvwm/events.c (HandleMapRequestKeepRaised):
+    	Make sure that a PropertyNotify on the WM_STATE property is always
+    	sent out when a window is requested to be moved to the withdrawn
+    	state. (Needed by QT)
+    
+    2009-07-01  Viktor Griph  <griph(at)dd(dot)chalmers(dot)se>
+    
+    	* sample.fvwmrc/DecorMwm:
+    	* sample.fvwmrc/DecorWin95:
+    	* sample.fvwmrc/new-features:
+    	* sample.fvwmrc/system.fvwm2rc:
+    	* sample.fvwmrc/system.fvwm2rc-sample-1:
+    	* sample.fvwmrc/system.fvwm2rc-sample-2:
+    	* sample.fvwmrc/system.fvwm2rc-sample-95:
+    	Use !-negation for styles instead of No...
+    
+    	* NEWS:
+    	fix a typo
+    
+    	* sample.fvwmrc/system.fvwm2rc-sample-95:
+    	sed -i '/^#*\(+\|AddToMenu\) "[^%"]*%[^%"]*"/s/%\([^"]*\)/%\1%/'
+    	sed -i 's/StayOnTop/StaysOnTop/'
+    	According to patches by Manoj Srivastava
+    
+    2009-03-17  Mikhael Goikhman  <migo@homemail.com>
+    
+    	* fvwm/externs.h:
+    	* fvwm/fvwm.c:
+    	* fvwm/session.c:
+    	convert my old code to use var_name and function_name coding style
+    
+    2009-02-23  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* NEWS:
+    	* configure.ac:
+    	increased version to 2.5.28
+    
+    	* ANNOUNCE:
+    	* NEWS:
+    	* configure.ac:
+    	updated for 2.5.27 release
+    
+    2009-02-23  Thomas Adam <thomas.adam22@gmail.com>
+    	* fvwm/bindings.c (print_bindings):
+    	Fixed compilation of not having libstroke installed by using ifdefs
+    	around stroke code.
+    
+    2009-02-22  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/bindings.c (print_bindings):
+    	slight cleanup
+    
+    	* libs/charmap.c (charmap_table_to_string):
+    	several memory menagement fixes.
+    
+    2009-02-22  Thomas Adam <thomas.adam22@gmail.com>
+    
+    	* libs/charmap.c (charmap_table_to_string):
+    	Reduce memory management on the stack, by making only those variables
+    	to be accessed outside of the function charmap_table_to_string()
+    	allocated on the heap instead.
+    
+    	* fvwm/bindings.c (print_bindings):
+    	b->Action was previously checked whether it was NULL or not before
+    	printing its value to STDERR -- however, this caused a segfault when
+    	trying to perform strlen() operations internally -- hence don't bother
+    	checking if it's NULL.  This avoids segfaulting.
+    
+    2009-02-05  Thomas Adam <thomas.adam22@gmail.com>
+    
+    	* libs/charmap.c (charmap_table_to_string):
+    	* libs/charmap.h:
+    	Introduce charmap_to_string function which is used to build up a
+    	binding string, for use with PrintInfo.
+    
+    	* fvwm/bindings.c (print_bindings):
+    	Introduce print_bindings to print all bindings known to fvwm.
+    
+    	* fvwm/builtins.c (CMD_PrintInfo):
+    	* fvwm/builtins.h:
+    	Add support for "binding" as an option to PrintInfo.
+    
+    2009-02-19  Thomas Adam  <thomas.adam22@gmail.com>
+    
+    	* fvwm/placement.c (__pl_position_get_pos_simple):
+    	Force the window on-screen if using PositionPlacement UnderMouse.
+    
+    2009-02-07  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/events.c (HandleMapRequestKeepRaised):
+    	* fvwm/add_window.c (AddWindow):
+    	* fvwm/style.h:
+    	* fvwm/style.c (style_parse_one_style_option):
+    	add new style InitialMapCommand
+    
+    2008-02-08  Thomas Adam <thomas.adam22@gmail.com>
+    
+    	* bin/fvwm-menu-desktop.in:
+    	Fix the location prefix for GNOME application files.
+    
+    2008-12-29  Alexandre Julliard  <julliard@winehq.org>
+    
+    	* fvwm/ewmh_events.c (ewmh_WMStateMaxHoriz):
+    	Having either _NET_WM_STATE_MAXIMIZED_HORIZ or
+    	_NET_WM_STATE_MAXIMIZED_HORZ should be enough to make the window
+    	horizontally maximized.
+    
+    2008-11-29  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/fvwm.h:
+    	* fvwm/module_list.c (do_execute_module):
+    	* fvwm/fvwm.c (fvmm_deinstall_signals):
+    	restore default signal handlers before execl()/execvp()
+    
+    2008-10-05  Thomas Adam <thomas.adam22@gmail.com>
+    
+    	* fvwm/style.c (fw_match_style_id):
+    	Allow for the window's visible name to be considered when matching a
+    	style line.  It is possible to use $[w.visiblename] as the style name.
+    	Whilst the normal name and the visible name are usually the same, in
+    	the case of having IndxedWindowName, if a style line matches this as a
+    	visible name, apply it first of all.
+    
+    2008-10-03  Thomas Adam  <thomas.adam22@gmail.com>
+    	* AUTHORS:
+    	* fvwm/expand.c:
+    	Add $[w.visiblename] as an expansion parameter.
+    
+    2008-08-12  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/placement.c (__pl_position_get_pos_simple):
+    	position placement honours StartsOnPage
+    
+    2008-08-09  Dominik Vogt  <dominik(dot)vogt(at)gmx(dot)de>
+    
+    	* fvwm/session.c (MatchWinToSM):
+    	fixed keeping fullscreen state of windows over a restart; the old code
+    	tried to do this through session management and effectively overwrote
+    	the responsible ewmh hint; eventually, fvwm thought that the window
+    	was ful
+
+
+b827296ca87f43ae1b42fd06e69a83643c8e131b : tadam <tadam> : Tue Jan 5 22
+commit b827296ca87f43ae1b42fd06e69a83643c8e131b
+Author: tadam <tadam>
+Date:   Tue Jan 5 22:36:17 2010 +0000
+
+    Fix segfault setting MenuFace pixmap style for menus.
+    
+    As with the tearoff bug from 2010-01-03, ensure we don't try and free a
+    non-existent pixmap from an invalid pointer.
+
+
+53e434f47c4266fe80c81b636e7c9c1e47974274 : tadam <tadam> : Sun Jan 3 12
+commit 53e434f47c4266fe80c81b636e7c9c1e47974274
+Author: tadam <tadam>
+Date:   Sun Jan 3 12:08:48 2010 +0000
+
+    Fix segfault when creating a tearoff menu using a Pixmap background.
+    
+    When we copy the original menustyle to the new torn-off menu which
+    contains a background image, don't then update the menu's pixel
+    background color, as this is already free()d for us by an earlier copy
+    call in menustyle_copy().
+
+
+c6a42810bccb529fa214ef123945533ee553aca1 : griph <griph> : Wed Jul 8 19
+commit c6a42810bccb529fa214ef123945533ee553aca1
+Author: griph <griph>
+Date:   Wed Jul 8 19:17:51 2009 +0000
+
+    * fix segmentation fault in FvwmEvent when RPlayHost option is an
+    undefined environment variable.
+    * wrap rplay functions similar to other libraries to avoid ifdefs
+
+
+efd50febb82f57586c5e89013f7e476ac75125b1 : tadam <tadam> : Sun Feb 22 00
+commit efd50febb82f57586c5e89013f7e476ac75125b1
+Author: tadam <tadam>
+Date:   Sun Feb 22 00:18:47 2009 +0000
+
+    Fix segfault and optimise memory management to print_bindings functionality.
+    
+    Only allocate those variables on the stack where they're needed -- make
+    everything else belong on the heap.  Furthermore, fix segfault in
+    fvwm/bindings.c:print_bindings() when performing strlen on unallocated
+    memory.
+
+
+7576274267cb66d94ff7ab0e5de27b6d44a2fe5f : griph <griph> : Sat Feb 9 11
+commit 7576274267cb66d94ff7ab0e5de27b6d44a2fe5f
+Author: griph <griph>
+Date:   Sat Feb 9 11:19:17 2008 +0000
+
+    * fix segmentation fault when attempting remove of a module from an empty
+    list
+
+
+d3ef09ad2eca182350d4d3619e57ccd0f2dfc695 : renato <renato> : Sun Aug 5 22
+commit d3ef09ad2eca182350d4d3619e57ccd0f2dfc695
+Author: renato <renato>
+Date:   Sun Aug 5 22:19:21 2007 +0000
+
+    moved module_cleanup to after ExecuteCommandQueues to avoid segfaults
+
+
+bf800db384d3f94725abae5608e1f4cc4fa6c5d9 : griph <griph> : Sun Jul 22 13
+commit bf800db384d3f94725abae5608e1f4cc4fa6c5d9
+Author: griph <griph>
+Date:   Sun Jul 22 13:09:53 2007 +0000
+
+    * don't invalidate modules during I/O (fixes segfault)
+
+
+8533c03b0e0d0e8e90176b80bb4808ee875591d9 : griph <griph> : Sat Mar 17 21
+commit 8533c03b0e0d0e8e90176b80bb4808ee875591d9
+Author: griph <griph>
+Date:   Sat Mar 17 21:01:14 2007 +0000
+
+    * fix svg support segfaults
+
+
+6feb228f281ec628253e9790f778501686890823 : griph <griph> : Thu Jul 13 08
+commit 6feb228f281ec628253e9790f778501686890823
+Author: griph <griph>
+Date:   Thu Jul 13 08:39:50 2006 +0000
+
+    * fix segfault with expansion of $[n] when the argument string contains
+    no tokens.
+
+
+11568fab6b4bc6790f93991baff064fe3b5d193c : scott <scott> : Wed Jun 9 14
+commit 11568fab6b4bc6790f93991baff064fe3b5d193c
+Author: scott <scott>
+Date:   Wed Jun 9 14:34:13 2004 +0000
+
+    Active _last_ matching binding. (ie. same behaviour as before
+    win-specific bindings patch.)
+    bugfix: segfault when looking up stroke bindings in root context.
+
+
+f472e07de3549cdd29dd16906d6db596f89bdeb2 : clasen <clasen> : Fri Jun 25 19
+commit f472e07de3549cdd29dd16906d6db596f89bdeb2
+Author: clasen <clasen>
+Date:   Fri Jun 25 19:25:11 1999 +0000
+
+    avoid unnecessary segfaults.
+
+
+65b2b7579aaf95548eed092a4f4889598ab71edf : drbob <drbob> : Sun Apr 18 19
+commit 65b2b7579aaf95548eed092a4f4889598ab71edf
+Author: drbob <drbob>
+Date:   Sun Apr 18 19:49:58 1999 +0000
+
+    Added vpacket.h - new header to contain structure definitions for any new-style
+    (post-GSFR) module packets. Initially it contains the new-style
+    M_CONFIGURE_WINDOW packet.
+    Also fixed a segfault in virtual.c caused by using a NULL FocusWin pointer.
+
+
+f1e0bcbb84611dd5dad1a7e3eecdee137436141b : clasen <clasen> : Wed Mar 17 00
+commit f1e0bcbb84611dd5dad1a7e3eecdee137436141b
+Author: clasen <clasen>
+Date:   Wed Mar 17 00:28:20 1999 +0000
+
+    Fix segfaults, replace snprintf by g_snprintf, implement tear-off menus
+    and spin-buttons.
+
+
+-- MEMLEAK
+
+3ca73635637a1499e635e0081ad08f3857dcc531 : domivogt <domivogt> : Tue Sep 2 20
+commit 3ca73635637a1499e635e0081ad08f3857dcc531
+Author: domivogt <domivogt>
+Date:   Tue Sep 2 20:29:34 2014 +0000
+
+    * Fix memory leak in wait command.
+
+
+d7f22f37baeb6eaccdde90ad736477a64295ce02 : tadam <tadam> : Sat Apr 14 09
+commit d7f22f37baeb6eaccdde90ad736477a64295ce02
+Author: tadam <tadam>
+Date:   Sat Apr 14 09:40:45 2012 +0000
+
+    Fix memory leak with InfoStore
+
+
+70e0637493d65989f83887e2200fa526f1c0d8f6 : tadam <tadam> : Sat Apr 14 09
+commit 70e0637493d65989f83887e2200fa526f1c0d8f6
+Author: tadam <tadam>
+Date:   Sat Apr 14 09:34:33 2012 +0000
+
+    Fix memory leak with InfoStore
+
+
+a23ba60eb0faf483fcffb748d22486631f64913f : domivogt <domivogt> : Wed Jan 9 10
+commit a23ba60eb0faf483fcffb748d22486631f64913f
+Author: domivogt <domivogt>
+Date:   Wed Jan 9 10:21:36 2008 +0000
+
+    * Fixed memory leak in FlocaleInit_X_Charset.
+
+
+cdfdb715b2326595b1fa898a130f7a2180fe7668 : griph <griph> : Fri Jan 19 22
+commit cdfdb715b2326595b1fa898a130f7a2180fe7668
+Author: griph <griph>
+Date:   Fri Jan 19 22:54:17 2007 +0000
+
+    * fix memory leak in w.*iconfile variable expansion
+
+
+df2401f4668d75d6829fbae3eb7abf1b512a8a43 : domivogt <domivogt> : Sun Dec 31 00
+commit df2401f4668d75d6829fbae3eb7abf1b512a8a43
+Author: domivogt <domivogt>
+Date:   Sun Dec 31 00:09:26 2006 +0000
+
+    * Fixed another memory leak in do_execute_module().
+
+
+7118607c162ea84c78c2eb17e16a998ee990767f : renato <renato> : Sat Dec 30 20
+commit 7118607c162ea84c78c2eb17e16a998ee990767f
+Author: renato <renato>
+Date:   Sat Dec 30 20:07:03 2006 +0000
+
+    Fixed possible memory leak in do_execute_module
+
+
+8985453ac1e41dfe0f682c954cfe37fe20aaf4c7 : domivogt <domivogt> : Sun Aug 7 09
+commit 8985453ac1e41dfe0f682c954cfe37fe20aaf4c7
+Author: domivogt <domivogt>
+Date:   Sun Aug 7 09:39:56 2005 +0000
+
+    * Fixed a memory leak in style merging, tweaked and simplified the code.
+    * Only one pass through the style list is done before allowing the event
+      code to do something else.
+    * A little cleanup.
+
+
+f225057060daa43a3473362170bc127f46da2c16 : olicha <olicha> : Fri Aug 8 09
+commit f225057060daa43a3473362170bc127f46da2c16
+Author: olicha <olicha>
+Date:   Fri Aug 8 09:57:36 2003 +0000
+
+    * Removed some debug code
+    * Fixed a memory leak in style list simplification, this leak is old
+    (unlike to happen to often) it is strange that we do not found it before.
+
+
+3bf118439463be92b6ac4c7b9674ce2b46142310 : malu <malu> : Fri Jul 11 11
+commit 3bf118439463be92b6ac4c7b9674ce2b46142310
+Author: malu <malu>
+Date:   Fri Jul 11 11:00:31 2003 +0000
+
+    Fixed a memory leak and removed some duplicated code
+
+
+65b95b8c327f61897cc6ac2475a3f3e1b56729d4 : olicha <olicha> : Wed Jun 4 08
+commit 65b95b8c327f61897cc6ac2475a3f3e1b56729d4
+Author: olicha <olicha>
+Date:   Wed Jun 4 08:58:11 2003 +0000
+
+    * Fixed memory leaks in FlocaleEncodeString
+
+
+76a73b158329dfc47928879f82f814f4bf3486aa : olicha <olicha> : Thu May 22 10
+commit 76a73b158329dfc47928879f82f814f4bf3486aa
+Author: olicha <olicha>
+Date:   Thu May 22 10:21:30 2003 +0000
+
+    * A few purify.fvwm2rc adjustments
+    * Fixed a On memory leaks
+
+
+7322309bda6f025f5127d4fb5d87623e56aa8f04 : olicha <olicha> : Thu May 22 07
+commit 7322309bda6f025f5127d4fb5d87623e56aa8f04
+Author: olicha <olicha>
+Date:   Thu May 22 07:39:26 2003 +0000
+
+    * Fixed memory leaks for layer and state in Conditional
+
+
+8e20ddf43af324d51408ed9d7cace3822c5e144b : olicha <olicha> : Sun May 18 18
+commit 8e20ddf43af324d51408ed9d7cace3822c5e144b
+Author: olicha <olicha>
+Date:   Sun May 18 18:12:14 2003 +0000
+
+    * Fixed one tone of bugs (leak/core dump) in fvwm:
+    * Some purify.fvwm2rc update
+    * Fixed a memory leak (a FvwmWindow !) when a window is not destroyed
+    but scheduled for destroy. Not sure that this is the good fix.
+    * Fixed the default buttons memory leak and
+    * Removed inconsistent #if 0 code and comments about leak and MiniIcon
+    decor style
+    * Limited the depth of function to MAX_FUNCTION_DEPTH (=512). This fixes
+    cores dumps with "recursive" functions
+    * Fixed a core dump with a root transparent rotated title bar
+    * Fixed X errors 56 with RootTransparent titlebar and no E pixmap
+    * Fixed memory leak and chaining in LocalePath
+    * Fixed a parsing leak in PrintInfo
+    * Fixed a mask memory leaks in Circulate
+    * Fixed a core dump when a 0 font is given with an encoding hints
+    * Added a default FFT font
+    * Fixed a core dump when the default font change and a redraw (icon or
+    window) is proceeded before flush_window_updates is called
+    * Fixed gradients copy in CopyMenuStyle
+    * Fixed UMR's related to colorset in menus styles
+    * Fixed a fore stipple gc leak in menus style
+    * Fixed a sor_keyname memory leak in WindowList
+    * Added x,r,w,f,i file conditions to the On command
+
+
+6fb930a969e0d10c1135a4b0baf87c8392fd56a4 : olicha <olicha> : Thu May 8 06
+commit 6fb930a969e0d10c1135a4b0baf87c8392fd56a4
+Author: olicha <olicha>
+Date:   Thu May 8 06:07:13 2003 +0000
+
+    * Fixed a WindowList memory leak
+
+
+b3d1de69b7391ae054f3fd3d752182c9b4608f97 : domivogt <domivogt> : Sun Apr 27 15
+commit b3d1de69b7391ae054f3fd3d752182c9b4608f97
+Author: domivogt <domivogt>
+Date:   Sun Apr 27 15:52:19 2003 +0000
+
+    * Fixed the putenv() memory leaks.  Use flib_putenv in the future.
+
+
+df1d8990ebbef8b1731df8ac6bf8f94256f97baa : domivogt <domivogt> : Sun Apr 27 01
+commit df1d8990ebbef8b1731df8ac6bf8f94256f97baa
+Author: domivogt <domivogt>
+Date:   Sun Apr 27 01:24:43 2003 +0000
+
+    * Fixed various memory leaks and a core dump.
+
+
+c0e9e867bfa18e431fdc4e193621cbd70b0fc4f6 : olicha <olicha> : Wed Apr 23 12
+commit c0e9e867bfa18e431fdc4e193621cbd70b0fc4f6
+Author: olicha <olicha>
+Date:   Wed Apr 23 12:17:45 2003 +0000
+
+    * Fixed some minor TaskBar memories leak
+    * New interface function PFreeFvwmPictureData for freeing the data allocated
+    by  PGetFvwmPictureData (not the pixmaps and al.).
+
+
+42d3cf43343aed27076fb9c4d5629a997faade8c : olicha <olicha> : Tue Apr 22 19
+commit 42d3cf43343aed27076fb9c4d5629a997faade8c
+Author: olicha <olicha>
+Date:   Tue Apr 22 19:43:20 2003 +0000
+
+    * Various core dump and memory leaks fixes:
+    * fvwm/colorset.c (get_root_pixmap): minor leak
+    * fvwm/functions.c (execute_complex_function): UMR
+    * fvwm/ewmh_names.c: important leaks
+    * libs/Ficonv.c: formatting
+    * Note: I used valgrind, a great software!
+
+
+9be8996799319f44f7983bc45246be88d54c8e25 : olicha <olicha> : Sun Dec 1 22
+commit 9be8996799319f44f7983bc45246be88d54c8e25
+Author: olicha <olicha>
+Date:   Sun Dec 1 22:07:03 2002 +0000
+
+    * Fixed memory leaks in FvwmScript
+
+
+d2aefd6b8058f01873cf7f8ea05e6a9452d5112e : olicha <olicha> : Sun Dec 1 22
+commit d2aefd6b8058f01873cf7f8ea05e6a9452d5112e
+Author: olicha <olicha>
+Date:   Sun Dec 1 22:05:04 2002 +0000
+
+    * [2.4] Fixed memory leaks in FvwmScript
+
+
+be2b85ffe4fda8145fe110f4fe173aa8b6d1b5f5 : domivogt <domivogt> : Mon Nov 25 15
+commit be2b85ffe4fda8145fe110f4fe173aa8b6d1b5f5
+Author: domivogt <domivogt>
+Date:   Mon Nov 25 15:10:10 2002 +0000
+
+    * Cleaned up memory leaks in FvwmProxy and parsing (please use the functions
+    from libs/Parse.c).
+
+
+c924549daf137abe0331364caaa198edcd310a17 : olicha <olicha> : Thu Oct 31 21
+commit c924549daf137abe0331364caaa198edcd310a17
+Author: olicha <olicha>
+Date:   Thu Oct 31 21:39:15 2002 +0000
+
+    * Added a new way to allocate colors for images and gradients
+    * This method allows, in particular, to save (in a "fast" way) the allocated
+    pixels with a minimal memory usage.
+    * Fixed color leaks for png, ewmh and dithered xpm images.
+    * Fixed color leaks in fvwm and IconBox icons
+
+
+4f6377a2bfb78a609797c64caf9566ccb7d1e5d7 : domivogt <domivogt> : Tue Oct 22 00
+commit 4f6377a2bfb78a609797c64caf9566ccb7d1e5d7
+Author: domivogt <domivogt>
+Date:   Tue Oct 22 00:48:31 2002 +0000
+
+    * Fixed a memory leak.
+    * Stacking order fixes.
+
+
+f0158d07077fca4dc67bc92c325ff383c494ae3d : domivogt <domivogt> : Mon Sep 2 14
+commit f0158d07077fca4dc67bc92c325ff383c494ae3d
+Author: domivogt <domivogt>
+Date:   Mon Sep 2 14:06:05 2002 +0000
+
+    * Began work to remove the "Event" global.  Changed the command interface so
+    that the eventp argument is only read.  This makes it necessary to query the
+    pointer a bit more often.
+    * Fixed memory leak in CMD_Stroke.
+
+
+8f71ded5ef89eba67811023a8e30e321c04ae2b5 : domivogt <domivogt> : Mon Jun 17 00
+commit 8f71ded5ef89eba67811023a8e30e321c04ae2b5
+Author: domivogt <domivogt>
+Date:   Mon Jun 17 00:33:05 2002 +0000
+
+    * Fixed a problem w/ shaded windows changind the title direction.
+    * Fixed a memory leak and an initial window placement bug.
+    * Fixed shading window to 0 width or height.
+
+
+3ee3073189e160d2ded4c90be9323f4ecfe17936 : olicha <olicha> : Sat Apr 6 07
+commit 3ee3073189e160d2ded4c90be9323f4ecfe17936
+Author: olicha <olicha>
+Date:   Sat Apr 6 07:03:53 2002 +0000
+
+    * Some PNG news and doc
+    * Fixed a GC memory leaks in FImageLoader
+    * WARNING: there is one needs_lang_check in the fvwm2 man page
+
+
+4faaee997b47868242fdec79dd0833bf19fd6cdd : domivogt <domivogt> : Mon Mar 25 22
+commit 4faaee997b47868242fdec79dd0833bf19fd6cdd
+Author: domivogt <domivogt>
+Date:   Mon Mar 25 22:43:36 2002 +0000
+
+    * Fixed memory leak w/ vector lines.
+
+
+9d185fcb2aebfe64c08bd4d6bbdcc09296623682 : olicha <olicha> : Fri Jan 18 14
+commit 9d185fcb2aebfe64c08bd4d6bbdcc09296623682
+Author: olicha <olicha>
+Date:   Fri Jan 18 14:51:45 2002 +0000
+
+    * Remove FvwmBacker _XSETROOT_ID code: it caues memory leak
+    * Remove the documentations of the new xpmroot options
+    * There is  something that I do not understand with the "memory of the
+    background of the root window"
+
+
+479a964d7564b5268847a83e5816b3452a3022ac : olicha <olicha> : Wed Jan 9 15
+commit 479a964d7564b5268847a83e5816b3452a3022ac
+Author: olicha <olicha>
+Date:   Wed Jan 9 15:48:15 2002 +0000
+
+    * Fixed a memory leak in CMD_Style
+
+
+fbc109dd8e9df29534b0fec8c80b9935ab690fb1 : olicha <olicha> : Wed Jan 9 15
+commit fbc109dd8e9df29534b0fec8c80b9935ab690fb1
+Author: olicha <olicha>
+Date:   Wed Jan 9 15:44:28 2002 +0000
+
+    * Fixed a memory leak in CMD_Style
+    * Fixed transparent animated menu with HilightBackOff
+
+
+0e8ece3eeba9aaef562c6d6f4d69b9ef6afdbbb8 : domivogt <domivogt> : Fri Mar 30 18
+commit 0e8ece3eeba9aaef562c6d6f4d69b9ef6afdbbb8
+Author: domivogt <domivogt>
+Date:   Fri Mar 30 18:27:31 2001 +0000
+
+    * Fixed menu animation crash and keyboard shortcut problems.
+    * Fixed IconMan memory leak.
+
+
+a64df81ee28106ad88592f7d011656f62bac78e2 : migo <migo> : Wed Jan 10 00
+commit a64df81ee28106ad88592f7d011656f62bac78e2
+Author: migo <migo>
+Date:   Wed Jan 10 00:01:20 2001 +0000
+
+    fixed FvwmGtk core dump caused by memory leak fixes
+
+
+b14d97076b895f673b24c75014d775c42956d605 : domivogt <domivogt> : Sat Nov 25 04
+commit b14d97076b895f673b24c75014d775c42956d605
+Author: domivogt <domivogt>
+Date:   Sat Nov 25 04:07:49 2000 +0000
+
+    * Fixed multi head focus problems.
+    * Fixed decor memory leak.
+    * Removed last function quoting patch.
+    * Default menu is called with 'Menu' instead of 'Popup'.
+    * Distibution script builds .bz2 too.
+    * Rewrote some focus stuff.
+
+
+c6cd66c6c41a5041d0873bf338e6762653be8f5c : dane <dane> : Wed Nov 22 13
+commit c6cd66c6c41a5041d0873bf338e6762653be8f5c
+Author: dane <dane>
+Date:   Wed Nov 22 13:28:22 2000 +0000
+
+    * FvwmForm/FvwmForm.c:
+    * FvwmForm/FvwmForm.h: Move string initialization into logic so memory leak
+    fixes work.
+    Resist temptation to move curly braces around.
+
+
+bf42d6800540a61e26c9260072d06e6f428cf454 : domivogt <domivogt> : Tue Nov 21 13
+commit bf42d6800540a61e26c9260072d06e6f428cf454
+Author: domivogt <domivogt>
+Date:   Tue Nov 21 13:22:07 2000 +0000
+
+    * Another bunch of memory leak and free memory read/free fixes.
+
+
+a0d531061597014275b0ca64b9cc2d3b534c8d61 : olicha <olicha> : Mon Oct 16 19
+commit a0d531061597014275b0ca64b9cc2d3b534c8d61
+Author: olicha <olicha>
+Date:   Mon Oct 16 19:55:04 2000 +0000
+
+    * Fixed a memory leaks in ChangeFont
+    * ItemDraw support a single clic
+
+
+43ab134a784cb832fc878e6fffa5b2974171a37d : olicha <olicha> : Fri Oct 6 13
+commit 43ab134a784cb832fc878e6fffa5b2974171a37d
+Author: olicha <olicha>
+Date:   Fri Oct 6 13:46:03 2000 +0000
+
+    More memory leaks fix in setBusyCursor
+
+
+659c8d026e89e79076a7a1c294983c76df6ca8b0 : olicha <olicha> : Mon Oct 2 19
+commit 659c8d026e89e79076a7a1c294983c76df6ca8b0
+Author: olicha <olicha>
+Date:   Mon Oct 2 19:32:52 2000 +0000
+
+    Fixed memory leaks in FvwmScript
+
+
+b9a878ed97d0260dc298f106ec62684b04ea483c : domivogt <domivogt> : Tue Jul 4 01
+commit b9a878ed97d0260dc298f106ec62684b04ea483c
+Author: domivogt <domivogt>
+Date:   Tue Jul 4 01:43:07 2000 +0000
+
+    * Fixed one stacking order problem.
+    * Fixed memory leak.
+    * Removed unused variables in FvwmCommand.c.
+
+
+16209774ac4672dcae2b677c18da38632c11f272 : domivogt <domivogt> : Wed Feb 2 09
+commit 16209774ac4672dcae2b677c18da38632c11f272
+Author: domivogt <domivogt>
+Date:   Wed Feb 2 09:11:51 2000 +0000
+
+    * Fixed memory leak.
+
+
+d879bce46f6aba841c62afd97a7d314a5ccf0d75 : domivogt <domivogt> : Wed Feb 2 09
+commit d879bce46f6aba841c62afd97a7d314a5ccf0d75
+Author: domivogt <domivogt>
+Date:   Wed Feb 2 09:02:51 2000 +0000
+
+    * Fixed style memory leak.
+
+
+952c10b7238a6d0693685a7a1882f7ab25fd7518 : domivogt <domivogt> : Sun Jan 2 05
+commit 952c10b7238a6d0693685a7a1882f7ab25fd7518
+Author: domivogt <domivogt>
+Date:   Sun Jan 2 05:18:48 2000 +0000
+
+    * New Style 'Font' replaces old WindowFont command.
+    * Fixed updating the window font.
+    * Fixed 'UseDecor' style flag.
+    * Fixed memory leak when window disappears before AddWindow() completes.
+    * Removed some '#if 0's with the old HilightColor/HilightColorset code et al.
+    * Renamed StdFont member of screen structure to DefaultFont.
+    * Signature of PlaceWindow() changed to return True or False only.
+
+
+874520946faf77b9c80356147eb3cf77953bcbff : hippo <hippo> : Fri Oct 22 14
+commit 874520946faf77b9c80356147eb3cf77953bcbff
+Author: hippo <hippo>
+Date:   Fri Oct 22 14:27:37 1999 +0000
+
+    Fixed memory leak
+
+
+fa6515366b1c89db6b832bac5f94f68f2d4d0607 : domivogt <domivogt> : Thu Sep 30 23
+commit fa6515366b1c89db6b832bac5f94f68f2d4d0607
+Author: domivogt <domivogt>
+Date:   Thu Sep 30 23:57:21 1999 +0000
+
+    * Styles are merged if adjacent in the list of styles (saves a lot of time
+    when creating windows).
+    * Fixed several style propagation problems.
+    * Last style set still wins.
+    * Styles can be merged without leaking memory.
+
+
+83ad7a01e555593463924d3e22a2b5bc8bed2263 : domivogt <domivogt> : Sun Aug 29 23
+commit 83ad7a01e555593463924d3e22a2b5bc8bed2263
+Author: domivogt <domivogt>
+Date:   Sun Aug 29 23:37:06 1999 +0000
+
+    * Finished colour set patch for FvwmButtons.
+    * Fixed memory leak in IconMan.
+    * New *FvwmButtonsButtonGeometry option.
+    * FvwmButtons can be resized to any size now.
+    * FvwmIconMan resizes without steps vertically.
+    * Some cleanup and safety fixes in FvwmButtons.
+    * New function in Colorset.c allow to draw coluor set backgrounds into a
+    rectangle area.
+    * Menu style is propagated to continuation menus.
+    * Reactivated accidentally #ifdef'ed code in menus.c.
+
+
+92292c11eb7408acb69858c844b43d324b2f5cb8 : domivogt <domivogt> : Fri May 7 10
+commit 92292c11eb7408acb69858c844b43d324b2f5cb8
+Author: domivogt <domivogt>
+Date:   Fri May 7 10:04:30 1999 +0000
+
+    * added missing fvwm_make_browse_menu.sh
+    * fixed memory leak in menus
+    * fixed broken pointer type in menus
+
+
+86d75a33f6d8a21803e75e63c1053ed777ca671b : hippo <hippo> : Fri Mar 12 15
+commit 86d75a33f6d8a21803e75e63c1053ed777ca671b
+Author: hippo <hippo>
+Date:   Fri Mar 12 15:49:42 1999 +0000
+
+    Fixed a memory leak
+
+
+6a9722dc8cb4ae974c311144254e6a1ea022817b : domivogt <domivogt> : Tue Jan 5 17
+commit 6a9722dc8cb4ae974c311144254e6a1ea022817b
+Author: domivogt <domivogt>
+Date:   Tue Jan 5 17:27:27 1999 +0000
+
+    * FvwmButtons/parse.c (ParseOptions): fixed memory leak (item[3] not
+    freed).
+    
+    * fvwm/menus.c (FPopupMenu): force menus on screen if making them non
+    overlapping moves them partially off screen.
+
+
+ad529030251f889c4beb0752bc7365fd9ea518a7 : domivogt <domivogt> : Wed Dec 30 18
+commit ad529030251f889c4beb0752bc7365fd9ea518a7
+Author: domivogt <domivogt>
+Date:   Wed Dec 30 18:52:03 1998 +0000
+
+    * libs/Picture.c (GetPicture): fixed use of freed memory (path)
+    
+    * fvwm/read.c (ReadSubFunc): fixed PipeRead memory leak
+    
+    * fvwm/builtins.c (SetMenuStyle): removed unused code
+    
+    * fvwm/menus.h: remove unused flag 'hasFont' from MenuLook
+    
+    * fvwm/builtins.c (SetMenuStyle): fixed font memory leak
+    
+    * fvwm/menus.c (MakeMenu): fixed bug in menu continuations:
+    menuContinuation->first->prev still pointed to last item of parent menu
+    (AddToMenu): fixed memory leak with "Title top"
+    
+    * fvwm/add_window.c (AddWindow): fixed memory leak (tmp_win->name
+    assigned twice in the same function: duplicate code removed)
+    
+    * FAQ: updated question 1. Miaow.
+    
+    * fvwm/builtins.c (SetMenuStyle): fixed TrianglesRelief option
+
+
+d78fc3c78dd9722b6b7cd8bf709521037516f93a : domivogt <domivogt> : Tue Dec 22 01
+commit d78fc3c78dd9722b6b7cd8bf709521037516f93a
+Author: domivogt <domivogt>
+Date:   Tue Dec 22 01:51:56 1998 +0000
+
+        * fvwm/fvwm2.1: a little cleanup on 'Style'
+    
+        * fvwm/builtins.c (ReadMenuFace): fixed coredumps: freeing NULL
+        pointers for item and s_colors[i]
+        (ReadMenuFace): fixed memory leak: perc not freed
+    
+        * fvwm/fvwm2.1 (Note): updated manpage for FvwmAnimate/FvwmEvent
+    
+        * fvwm/menus.c (PaintEntry): Why the hell were the popup tringles
+        placed dynamically? An offset of five pixels from the right edge of
+        the menu siply has to do. The dynamic placement might put the tringle
+        over the text of the menu item.
+    
+        * fvwm/builtins.c (DestroyMenuStyle): it is possible to destroy a used
+        menu style. Menus using it revert back to the default menu style
+    
+        * fvwm/menus.c:
+        DELAY_POPUP_MENUS macro removed
+        switched to new MenuFace structure
+        replaced c10msDelaysBeforePopup by menu-specific value PopupDelay10ms
+        (MenuInteraction): fixed bug: mouse movement considered only if moved
+        in x and y direction by more that three pixels
+    
+        * fvwm/resize.c (DisplaySize):
+        * fvwm/add_window.c (AddWindow):
+        * fvwm/builtins.c:
+        * fvwm/fvwm.c (main):
+        * fvwm/move.c: removed some menu dependencies
+    
+        * fvwm/builtins.c (SetGlobalStyle): new command
+    
+        * fvwm/builtins.c (SetGlobalOptions):
+        * fvwm/fvwm.c (InitVariables):
+        * fvwm/placement.c (PlaceWindow):
+        * fvwm/screen.h (ScreenInfo): moved global options into 'go' structure
+        created 'gs' structure for global styles
+    
+        * fvwm/builtins.c:
+        * fvwm/functions.c (func_config):
+        * fvwm/parse.h:
+        * fvwm/misc.h: new command GlobalStyle
+    
+        * fvwm/move.c (DisplayPosition): removed some of the menu dependencies
+    
+        (CreateIconWindow):
+        (DrawIconWindow):
+        removed dependencies to menu code
+    
+        * fvwm/fvwm2.1: documented DefaultFont command
+        updated syntax for IconFont and WIndowFont
+    
+        * fvwm/builtins.c (ReadMenuFace): static now
+        (FreeMenuFaceStyle): changes for new MenuStyle syntax
+        (ReadMenuFace): fixed coredump: Pixmap/TiledPixmap without pixmap name
+        (ReadMenuFace): fixem meory leaks
+        (ReadMenuFace): fixed coredump: incomplete gradients freed
+    
+        * fvwm/menus.h: new structures MenuLookStyle and MenuFeelStyle,
+        modified MenuFace.
+    
+        * fvwm/screen.h (ScreenInfo): added StdGC, StdReliefGC and StdShadowGC.
+    
+        * fvwm/fvwm.c (main): modified logic for creation of SizeWindow
+        (SetRCDefaults): 'DefaultFont' replaces 'WindowFont' and 'IconFont'
+        in list of initial config commands
+    
+        * fvwm/screen.h: added ApplyWindowFont declaration
+        (ScreenInfo): new hasIconFont and hasWindowFont
+    
+        * fvwm/parse.h:
+        * fvwm/functions.c (func_config): Added 'DefaultFont' and
+        'DefaultColors'
+    
+        * fvwm/builtins.c (ApplyIconFont):
+        (LoadIconFont):
+        (ApplyWindowFont):
+        (LoadWindowFont): moved calculations based on the font into separate
+        functions so that 'SetDefaultFont' may do this too.
+    
+        * fvwm/builtins.c (ChangeMenuStyle): fixed memory leaks in parsing
+        (DestroyMenuStyle): cleaned up
+    
+        * libs/Parse.c (GetQuotedString):
+        (SkipQuote): new functions for ease of parsing.
+
+
+1ce8bbcf0e32b9d34ca2f006e5c4a64c2cb625d2 : domivogt <domivogt> : Thu Dec 10 02
+commit 1ce8bbcf0e32b9d34ca2f006e5c4a64c2cb625d2
+Author: domivogt <domivogt>
+Date:   Thu Dec 10 02:04:12 1998 +0000
+
+    applied SnapAttraction patch update
+    backed out miniicons memory leak fix. this is too complicated for now,
+    so let fvwm2 leak rather than coredump :(
+
+
+eb822ce8e047c8c5db0fd21ab0824c28ebb4d7bd : domivogt <domivogt> : Tue Dec 8 14
+commit eb822ce8e047c8c5db0fd21ab0824c28ebb4d7bd
+Author: domivogt <domivogt>
+Date:   Tue Dec 8 14:28:33 1998 +0000
+
+    updated distribution list
+    removed SetEnv memory leak 'fix'
+
+
+5af45c8b2dc756ff6fb99bbf1dd49ceb2f7b22d1 : domivogt <domivogt> : Sun Dec 6 21
+commit 5af45c8b2dc756ff6fb99bbf1dd49ceb2f7b22d1
+Author: domivogt <domivogt>
+Date:   Sun Dec 6 21:48:23 1998 +0000
+
+    fixed memory leak in ReadButtonFace (?)
+    fixed memory leak in SetEnv
+    * fvwm/windows.c (do_windowList): DestroyMenu called as soon as
+    possible (might cause problems with WindowList as doubleclick action).
+    x_pager.c: removed unnecessary ifdef, fixed mouse-button-3 bug with multiple
+    desktops, changed mouse button 3 behaviour
+
+
+5a513cac104c71fd8aa7dba4b7d56ed51a677c41 : psmith <psmith> : Wed Dec 2 22
+commit 5a513cac104c71fd8aa7dba4b7d56ed51a677c41
+Author: psmith <psmith>
+Date:   Wed Dec 2 22:05:32 1998 +0000
+
+    After tracking down the coredump in the purify test, commented out
+    the parts causing the problem.
+    
+    Then, continued to fix a few heap problems (UMR's, mostly) and many,
+    many memory leaks.  The test now completes losing only 400 bytes!
+    
+    Fixed bug installing FvwmCommand in bindir (can't access Jitterbug
+    right now to find the number).
+
+
+1f5758414bffb977cbddfadc4a8092fc942d4c5a : domivogt <domivogt> : Fri Nov 27 10
+commit 1f5758414bffb977cbddfadc4a8092fc942d4c5a
+Author: domivogt <domivogt>
+Date:   Fri Nov 27 10:43:18 1998 +0000
+
+    * fvwm/events.c (HandleMapNotify): changed logic for new
+    click-to-focus windows to receive focus (as hited at by Tim Phipps).
+    
+    * fvwm/builtins.c (DirectionFunc): implemented ne, se, sw, nw; based
+    scoring function of window centers.
+    
+    * libs/Parse.c (GetTokenIndex): fixed a coredump with an empty list or token
+    
+    * fvmw/**: applied patches by Tim Phipps (see below)
+    
+    * fvwm/builtins.c (focus_func): cleaned up
+    (flip_focus_func): cleaned up
+    
+    * fvwm/fvwm2.1: changes on FlipFocus/Focus/WindowList
+    
+    * fvwm/focus.c (SetFocus): fixed SetFocus so that calling Focus from a
+    function moves the windowlist around to make the target window appears
+    at the top of the windowlist.
+    
+    * fvwm/windows.c (do_windowList): Applied alt-tab/unsort windowlist fix
+    
+    * fvwm/builtins.c (DirectionFunc): fixed coredump (empty direction)
+    
+    --
+    
+    * FvwmPager/FvwmPager.c: fixed some memory leaks
+    
+    * FvwmPager/x_pager.c: reindented some code
+
+
+d22b1788d04763c5128548d68671c7d0aaa5f061 : domivogt <domivogt> : Thu Nov 19 11
+commit d22b1788d04763c5128548d68671c7d0aaa5f061
+Author: domivogt <domivogt>
+Date:   Thu Nov 19 11:02:01 1998 +0000
+
+    * fvwm/resize.c (resize_window):  fixed bug that prevented moving from
+    a mouse button from working with ClickToFocus
+    
+    * fvwm/move.c (moveLoop): Applied SnapAttraction patch.
+    (moveLoop): fixed bug that prevented moving from a mouse button from
+    working with ClickToFocus
+    
+    * fvwm/builtins.c (SetMenuStyle1): fixed memory leak
+    
+    * fvwm/menus.c (MakeMenu): bugfix: Titles in newmenu patch drawn too
+    far right.
+    
+    * fvwm/**: Applied newmenu patch by German Garcia.
+
+
+884bc7aeaad5564a663e20824afa2587266044ce : psmith <psmith> : Sat Nov 14 04
+commit 884bc7aeaad5564a663e20824afa2587266044ce
+Author: psmith <psmith>
+Date:   Sat Nov 14 04:40:28 1998 +0000
+
+    Purified FvwmButtons and FvwmIconMan.  Fixed some uninitialized memory
+    reads, some array boundary overwrites, etc.  There are still some
+    memory leaks I haven't tracked down.
+
+
+c58485df936687d9952228c1030ccd340de70a97 : domivogt <domivogt> : Thu Nov 12 10
+commit c58485df936687d9952228c1030ccd340de70a97
+Author: domivogt <domivogt>
+Date:   Thu Nov 12 10:01:39 1998 +0000
+
+    Applied FvwmButtons panels update (fixes coredump too)
+    Fixed pixmap memory leaks
+    Fixed IconMan coredump and parsing problem
+    Fixed coredump in moveLoop
+
+
+a2450c9b066ad41f0a35cf38556bd779bcaec20e : domivogt <domivogt> : Tue Nov 10 09
+commit a2450c9b066ad41f0a35cf38556bd779bcaec20e
+Author: domivogt <domivogt>
+Date:   Tue Nov 10 09:21:21 1998 +0000
+
+    more memory leak fixes and other bugfixes
+
+
+0e79fd00ddc566cb1b80792a18bd1549701012d7 : psmith <psmith> : Sun Nov 8 05
+commit 0e79fd00ddc566cb1b80792a18bd1549701012d7
+Author: psmith <psmith>
+Date:   Sun Nov 8 05:31:53 1998 +0000
+
+    Fix memory leak: free pixmap after use.
+
+
+dfa1a0b8ccdca5b7ac01248c2766b3427f114fe5 : domivogt <domivogt> : Sat Nov 7 15
+commit dfa1a0b8ccdca5b7ac01248c2766b3427f114fe5
+Author: domivogt <domivogt>
+Date:   Sat Nov 7 15:15:43 1998 +0000
+
+    memory leak fixes
+
+
+6e3101705f64da1c3531e0256561481afee30f5b : domivogt <domivogt> : Sat Nov 7 15
+commit 6e3101705f64da1c3531e0256561481afee30f5b
+Author: domivogt <domivogt>
+Date:   Sat Nov 7 15:10:13 1998 +0000
+
+    memory leak fixes
+
+
+34dd5d96f91595b246f279d1475ed393fb4853a6 : domivogt <domivogt> : Sat Nov 7 15
+commit 34dd5d96f91595b246f279d1475ed393fb4853a6
+Author: domivogt <domivogt>
+Date:   Sat Nov 7 15:05:00 1998 +0000
+
+    memory leak fixes
+
+
+1134e10b623762f6da297fb857814a1b194a6980 : domivogt <domivogt> : Sat Nov 7 15
+commit 1134e10b623762f6da297fb857814a1b194a6980
+Author: domivogt <domivogt>
+Date:   Sat Nov 7 15:00:54 1998 +0000
+
+    memory leak fixes
+
+
+0adae230d4b985bad383867c7d4f6b4f0ba8692e : psmith <psmith> : Fri Nov 6 23
+commit 0adae230d4b985bad383867c7d4f6b4f0ba8692e
+Author: psmith <psmith>
+Date:   Fri Nov 6 23:26:51 1998 +0000
+
+    Many changes.
+      - Cleaned up Purify memory leaks, uninitialized memory accesses, etc.
+      - Cleaned up some build issues.
+      - Cleaned up some configure issues.
+      - Added new DB() macros for unified debugging output.
+      - Rewrote most of the module packet generation code in fvwm2.
+
+
+

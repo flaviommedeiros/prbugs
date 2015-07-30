@@ -1,0 +1,2410 @@
+
+commit 2f04e542355b1df2bada7dc8e03e9fac6c0de61b
+Type: uninitialized variable
+File: ssl_engine_int.c
+PC: HAVE_ECC
+
+-----------------------------------------------
+commit 8f1a8d3466214074f12cdf52b05add5d00715ebd
+Type: memory leak
+File: ssl_engine_kernel.c
+PC: true
+
+commit 044b3d7eec416e838402adc668c6856caa610871
+Type: memory leak
+File: lua_request.c
+PC: true
+
+commit c9fb88b1a44882e1fef85dba62180992f1290383
+Type: memory leak
+File: proxy_util.c
+PC: true
+
+commit cfc4287425f1f454411e5c49b796daf2af7f0e63
+Type: memory leak
+File: mod_deflate.c
+PC: true
+
+commit cc37acc338ae931219c4b357fd89621e8dd2de4d
+Type: memory leak
+File: prefork.c
+PC: true
+
+commit 1f77e21a6177a7fadbb70453b09a134300440334
+Type: memory leak
+File: core_filters.c
+PC: true
+
+commit 1f77e21a6177a7fadbb70453b09a134300440334
+Type: memory leak
+File: http_filters.c
+PC: true
+
+commit 14912b931549e854cbc31781caebdc51ebb04434
+Type: memory leak
+File: logresolve.c
+PC: true
+
+commit f0928daf8c4c2debfc347a66e9953806b87e2619
+Type: memory leak
+File: mod_substitute.c
+PC: true
+
+commit d25c63adecc8aa680c5bb14d69e1f51716d7243a
+Type: memory leak
+File: mod_proxy_http.c
+PC: true
+
+commit 2f04e542355b1df2bada7dc8e03e9fac6c0de61b
+Type: memory leak
+File: ssl_engine_int.c
+PC: SSL_CTX_set_ecdh_auto
+
+commit b84b86481fece7ab76c49d660eef24a899627a70
+Type: memory leak
+File: mod_ssl.c
+PC: SSL_CTX_set_ecdh_auto
+       
+commit 566f2fbbd5841330d30921d8bf4214c227b56d1f
+Type: memory leak
+File: mod_ssl.c
+PC: OPENSSL_VERSION_NUMBER >= 0x00090805f (OpenSSL >= 0.9.8e)
+
+commit a3533194fa088292718cfb2f384221b58792d7ff
+Type: memory leak
+File: util_ldap_cache.c
+PC: APR_HAS_LDAP
+
+commit 9a190abc01092577ee2f11bd71e1f3a660792749
+Type: memory leak
+File: mpm_common.c
+PC: AP_MPM_USES_POD
+
+commit dc4eaba3fe35ca93da7ed4fc9ad0cd2c4bfc4672
+Type: memory leak
+File: ab.c
+PC: USE_SSL
+
+commit a2d857d1b80b6620f4b1dd52842854b4e7fc506a
+Type: memory leak
+File: mod_ssl.c
+PC: HAVE_OPENSSL
+    
+commit 463e509ceee4cdedeabbf483105d8c73b245e190
+File: 
+    
+    * Use a separate subpool to manage the data for the socket and the connection
+      member of the proxy_conn_rec struct as we destroy this data more frequently
+      than other data in the proxy_conn_rec struct like hostname and addr (at least
+      in the case where we have keepalive connections that timed out and were
+      closed by the backend).
+      This fixes a memory leak with short lived and broken connections.
+    
+    * Fix another memory leak related to PR 44026. Now that we keep the connection
+      data structure alive in the reslist, the live time of c->pool is too long.
+      r->pool has the correct live time since rp dies before r.
+    
+    
+    
+438afb711a13a40dca87d4f99ab8c51c6606437d : Jeff Trawick <trawick@apache.org> : Fri May 9 13
+commit 438afb711a13a40dca87d4f99ab8c51c6606437d
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Fri May 9 13:43:24 2008 +0000
+
+    rotatelogs: sync with trunk to pick up
+    
+        enhanced error logging:
+          http://svn.apache.org/viewvc?view=rev&revision=646845
+        -f option to create logfile ASAP:
+          http://svn.apache.org/viewvc?view=rev&revision=632355
+        PR 40183. Don't leak memory when reopening the logfile:
+          http://svn.apache.org/viewvc?view=rev&revision=615901
+        avoid extra apr_time_now() calls and code bloat:
+           http://svn.apache.org/viewvc?view=rev&revision=600154
+    
+    Reviewed by: wrowe, covener, trawick
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@654811 13f79535-47bb-0310-9956-ffa450edef68
+
+
+
+
+9ffec24e6e53343af91a13940354521b9626d44b : Ruediger Pluem <rpluem@apache.org> : Mon Jan 28 14
+commit 9ffec24e6e53343af91a13940354521b9626d44b
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Mon Jan 28 14:51:14 2008 +0000
+
+    * Don't leak memory when reopening the logfile.
+    
+    PR: 40183
+    Submitted by: rpluem, Takashi Sato <serai lans-tv.com>
+    Reviewed by: rpluem
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@615901 13f79535-47bb-0310-9956-ffa450edef68
+
+
+db5c65aa750107c4c72c9bd79f0ecf664427d94c : Ruediger Pluem <rpluem@apache.org> : Thu Dec 20 08
+commit db5c65aa750107c4c72c9bd79f0ecf664427d94c
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Thu Dec 20 08:57:23 2007 +0000
+
+    * Using the reslist pool for the proxy_conn_rec structure introduces a memory
+      leak when connections get created and destroyed frequently by the reslist
+      (e.g.  destroying idle elements of the reslist). So use the subpool
+      dedicated for the proxy_conn_rec structure to allocate the memory for the
+      structure itself.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@605838 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f37b6cb3c76e2835f81b9b9e1d0808ae0bee52d6 : Ruediger Pluem <rpluem@apache.org> : Wed Dec 12 07
+commit f37b6cb3c76e2835f81b9b9e1d0808ae0bee52d6
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Wed Dec 12 07:44:02 2007 +0000
+
+    * Fix another memory leak related to PR 44026. Now that we keep the connection
+      data structure alive in the reslist, the live time of c->pool is too long.
+      r->pool has the correct live time since rp dies before r.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@603502 13f79535-47bb-0310-9956-ffa450edef68
+
+
+55e811d251f14e93fba277f2990880a2d6d52b6e : Ruediger Pluem <rpluem@apache.org> : Tue Dec 11 13
+commit 55e811d251f14e93fba277f2990880a2d6d52b6e
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Tue Dec 11 13:27:21 2007 +0000
+
+    * Use a separate subpool to manage the data for the socket and the connection
+      member of the proxy_conn_rec struct as we destroy this data more frequently
+      than other data in the proxy_conn_rec struct like hostname and addr (at least
+      in the case where we have keepalive connections that timed out and were
+      closed by the backend).
+      This fixes a memory leak with short lived and broken connections.
+    
+    PR: 44026
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@603237 13f79535-47bb-0310-9956-ffa450edef68
+
+
+28dc948c981bf2dc50a698bbdfdc28e6d65bd293 : Paul Querna <pquerna@apache.org> : Fri Jun 8 20
+commit 28dc948c981bf2dc50a698bbdfdc28e6d65bd293
+Author: Paul Querna <pquerna@apache.org>
+Date:   Fri Jun 8 20:04:34 2007 +0000
+
+    Propogate the conn_rec::pool down to ssl_scache_retrieve so that the memcache layer doesn't 'leak' into a long lived pool for temp allocations.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@545608 13f79535-47bb-0310-9956-ffa450edef68
+
+
+581ee2b74f083f34cab92b2e5706e25b7ffb333d : Chris Darroch <chrisd@apache.org> : Tue Jan 16 19
+commit 581ee2b74f083f34cab92b2e5706e25b7ffb333d
+Author: Chris Darroch <chrisd@apache.org>
+Date:   Tue Jan 16 19:36:26 2007 +0000
+
+    We now create memory sub-pools for each DB connection and close DB
+    connections in a pool cleanup function.  This simplifies the ap_dbd_acquire()
+    and ap_dbd_cacquire() functions, and also stops us from leaking ap_dbd_t
+    structures when using reslists.
+    
+    We ensure that prepared statements are destroyed before their DB connection
+    is closed, in case any drivers would have problems cleaning up prepared
+    statements after the DB connection is closed.
+    
+    The combination of reslists and memory pool cleanup functions was causing
+    segfaults when child processes exited, as reported in PR 39985.  To prevent
+    this, we register dbd_destroy() as a cleanup that will execute prior to
+    the internal cleanup function registered by apr_reslist_create().  When the
+    reslist's memory pool is destroyed, dbd_destroy() informs dbd_destruct() not
+    to do anything when subsequently called by the reslist's internal cleanup
+    function.
+    
+    We avoid the use of s->process->pool (the global pool) since it isn't
+    destroyed by exiting child processes in most multi-process MPMs.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@496831 13f79535-47bb-0310-9956-ffa450edef68
+
+
+3bf3f92a15a9759881b6e5ecabaa59f58dab19ab : Ruediger Pluem <rpluem@apache.org> : Tue Dec 19 21
+commit 3bf3f92a15a9759881b6e5ecabaa59f58dab19ab
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Tue Dec 19 21:45:35 2006 +0000
+
+    Merge r422731, r422736, r422739, r423940, r424759, r424950, r425109, r426790,
+    r426791, r426793, r426795, r416165, r426799, r475403, r475406, r475915,
+    r475920, r475922, r476600, r437668 from trunk, which makes mod_deflate.c the
+    same as r483597 from trunk:
+    
+    All comments to these changes for the sake of completeness:
+    
+    * Fix wrong FLUSH bucket handling in deflate_out_filter: Actually the internal
+      structures of libz never got flushed as ctx->stream.avail_in is always zero
+      here. As the EOS and the FLUSH bucket case use the same code for flushing
+      libz's internal buffers move this code to the new function flush_zlib_buffer.
+    
+    * Fix potential memory leaks in deflate_out_filter if bailing out due to an
+      error (either in the lower filter chain or during a libz operation). We need
+      to call deflateEnd as it is very likely that this filter is never called
+      again to ensures that libz's internal structures get cleaned properly.
+    
+    * Remove ourselves from the filter chain if we failed to init libz, as we
+      pass data down the filter chain uncompressed afterwards.
+    
+    * In preparation of the changes of the inflate out filter:
+      - rename flush_zlib_buffer to flush_libz_buffer (this name seems
+        better)
+      - add a parameter to tell flush_libz_buffer whether it should
+        deflate or inflate as this function should be also used for the
+        inflate out filter.
+    
+    * This shortcut is too short. It is not up to the filters to decide
+      whether filters down the chain can do something useful with this empty
+      brigade.
+    
+    * Initialize zRC to avoid a compiler warning.
+    
+    * Rather use a pool cleanup function than calling deflateEnd before every
+      return from function to ensure that libz's internals get cleaned up.
+    
+    * Add parameter crc to flush_libz_buffer in order to call the libz's crc32
+      function on the output buffer if needed. This is actually needed by the
+      later rework of the inflate out filter.
+    
+    * Use a define for the number of validation bytes (CRC and length) after the
+      compressed data
+    
+    * We can ignore Z_BUF_ERROR in flush_libz_buffer because:
+      When we call libz_func we can assume that
+    
+       - avail_in is zero (due to the surrounding code that calls
+         flush_libz_buffer)
+       - avail_out is non zero due to the fact that we just emptied
+         the output buffer and stored it into a brigade
+    
+      So the only reason for Z_BUF_ERROR is that the internal libz
+      buffers are now empty and thus we called libz_func one time
+      too often. This does not hurt. It simply says that we are done.
+    
+    * some optimizations taken from the inflate out filter
+    
+    * Remove bogus code that chokes on flush buckets
+    
+    * Rework inflate out filter and give it a similar workflow as the deflate out
+      filter. This fixes the following bugs in the inflate out filter:
+    
+      - Incorrect handling of flush buckets.
+      - Excessive memory usage for large compressed content (because we now
+        already sent parts down the chain and do not process the whole brigade
+        first before sending something down the chain).
+      - Handle the case correctly where the validation bytes at the end of
+        the compressed data stream are distributed across different buckets /
+        brigades.
+      - Fix a memory leak due to not cleaning up the internal structures of
+        libz in some error cases.
+    
+    * Ensure that we do not try to inflate validation data or garbage data. None
+      of this is zlib's business.
+    
+    * Ensure that we do not perform our final operations twice if a second EOS
+      falls down the chain by accident. Otherwise we are likely to run in a
+      SEGFAULT. So remove ourselves from the chain.
+    
+    * Actually append new data to the validation buffer and do not overwrite old
+      data already there by setting the correct offset for the target buffer.
+    
+    * Also log the presence of garbage data at the end of the stream if all
+      validation data is available in the first round.
+    
+    * Housekeeping: keep track of size even in the edge-case where validation
+      bytes trickle in over multiple buckets.
+    
+    
+    PR: 39854
+    Reviewed by: rpluem, niq, jerenkrantz, wrowe
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@488817 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1c61c93442ce6c5306c4a7d5ce91fbb31f0ce269 : Ruediger Pluem <rpluem@apache.org> : Sat Jul 29 13
+commit 1c61c93442ce6c5306c4a7d5ce91fbb31f0ce269
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Sat Jul 29 13:24:37 2006 +0000
+
+    * Rework inflate out filter and give it a similar workflow as the deflate out
+      filter. This fixes the following bugs in the inflate out filter:
+    
+      - Incorrect handling of flush buckets.
+      - Excessive memory usage for large compressed content (because we now
+        already sent parts down the chain and do not process the whole brigade
+        first before sending something down the chain).
+      - Handle the case correctly where the validation bytes at the end of
+        the compressed data stream are distributed across different buckets /
+        brigades.
+      - Fix a memory leak due to not cleaning up the internal structures of
+        libz in some error cases.
+    
+    PR: 39854
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@426799 13f79535-47bb-0310-9956-ffa450edef68
+
+
+c6c12525522029ddc933e2508996556921ce7213 : Ruediger Pluem <rpluem@apache.org> : Mon Jul 17 15
+commit c6c12525522029ddc933e2508996556921ce7213
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Mon Jul 17 15:08:27 2006 +0000
+
+    * Fix potential memory leaks in deflate_out_filter if bailing out due to an
+      error (either in the lower filter chain or during a libz operation). We need
+      to call deflateEnd as it is very likely that this filter is never called
+      again to ensures that libz's internal structures get cleaned properly.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@422736 13f79535-47bb-0310-9956-ffa450edef68
+
+
+c64a3138344b79106277cefeaf204b84ba5c661e : Bill Stoddard <stoddard@apache.org> : Wed Nov 2 22
+commit c64a3138344b79106277cefeaf204b84ba5c661e
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Wed Nov 2 22:42:45 2005 +0000
+
+    fix memory leak. Reported by <christophe.jaillet@wanadoo.fr>
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@330380 13f79535-47bb-0310-9956-ffa450edef68
+
+
+3ca346979e1f3743a014411e45e73596a7293984 : Jeff Trawick <trawick@apache.org> : Fri Oct 7 23
+commit 3ca346979e1f3743a014411e45e73596a7293984
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Fri Oct 7 23:31:32 2005 +0000
+
+    Commit Greg's patch to fix worker MPM memory leak.
+    
+    Approved by: Greg, OtherBill, Jeff
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x@307218 13f79535-47bb-0310-9956-ffa450edef68
+
+
+0003f00957bed1e6efac102900833cdd80f8f760 : Jeff Trawick <trawick@apache.org> : Sat Oct 1 11
+commit 0003f00957bed1e6efac102900833cdd80f8f760
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Sat Oct 1 11:02:10 2005 +0000
+
+    merge from trunk:
+    
+    *) SECURITY: CAN-2005-2970 (cve.mitre.org)
+         worker MPM: Fix a memory leak which can occur after an aborted
+         connection in some limited circumstances.  [Greg Ames, Jeff Trawick]
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@292949 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6a28069cef904802aeb334adce5e210a7379194c : Jeff Trawick <trawick@apache.org> : Fri Sep 30 16
+commit 6a28069cef904802aeb334adce5e210a7379194c
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Fri Sep 30 16:34:25 2005 +0000
+
+    SECURITY: CAN-2005-2970 (cve.mitre.org)
+    worker MPM: Fix a memory leak which can occur after an aborted
+    connection in some limited circumstances.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@292809 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a93f6c34bb6f727ec63269d2b07254a6103c7a6d : Andre Malo <nd@apache.org> : Fri Aug 27 19
+commit a93f6c34bb6f727ec63269d2b07254a6103c7a6d
+Author: Andre Malo <nd@apache.org>
+Date:   Fri Aug 27 19:29:57 2004 +0000
+
+    Fix memory leak.
+    
+    PR: 27862
+    Submitted by: shengperson yahoo.com (chunyan sheng)
+    Reviewed by: Joe Orton, Jeff Trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@104864 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d4ef03d61abe73eca4e0163a5c72a4197959ab5b : Andre Malo <nd@apache.org> : Fri Aug 27 19
+commit d4ef03d61abe73eca4e0163a5c72a4197959ab5b
+Author: Andre Malo <nd@apache.org>
+Date:   Fri Aug 27 19:23:26 2004 +0000
+
+    Fix memory leak.
+    
+    PR: 27862
+    Reviewed by: Joe Orton, Jeff Trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@104863 13f79535-47bb-0310-9956-ffa450edef68
+
+
+214a34fc4a3cd3d2c2c928cc9a048771f731b479 : Andre Malo <nd@apache.org> : Sun Apr 18 17
+commit 214a34fc4a3cd3d2c2c928cc9a048771f731b479
+Author: Andre Malo <nd@apache.org>
+Date:   Sun Apr 18 17:11:09 2004 +0000
+
+    remove unused parameters and minor memory leak
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@103440 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1f46921cb54d00a7b757aad2e6b450edaa8ab10f : Jeff Trawick <trawick@apache.org> : Sun Dec 14 00
+commit 1f46921cb54d00a7b757aad2e6b450edaa8ab10f
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Sun Dec 14 00:17:41 2003 +0000
+
+    merge this fix from 2.1-dev:
+    
+         Fix memory leak in handling of request bodies during reverse
+         proxy operations.
+    
+    PR:             24991
+    Submitted by:	Larry Toppi <larry.toppi citrix.com>
+    Reviewed by:	trawick, stas, ianh, stoddard, minfrin
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@102049 13f79535-47bb-0310-9956-ffa450edef68
+
+
+3cdc793b2c4cac02dc8a8e7af1c4f546b7e05c8f : Jeff Trawick <trawick@apache.org> : Wed Dec 10 19
+commit 3cdc793b2c4cac02dc8a8e7af1c4f546b7e05c8f
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Wed Dec 10 19:26:15 2003 +0000
+
+    Fix memory leak in handling of request bodies during reverse
+    proxy operations.
+    
+    PR:      24991
+    Submitted by: Larry Toppi <larry.toppi citrix.com>
+    Reviewed by:  Jeff Trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@102017 13f79535-47bb-0310-9956-ffa450edef68
+
+
+bdf5ceae98da35c9e84c0d62742c4aa0b9959138 : Jeff Trawick <trawick@apache.org> : Wed Apr 23 14
+commit bdf5ceae98da35c9e84c0d62742c4aa0b9959138
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Wed Apr 23 14:59:35 2003 +0000
+
+    improve -DONE_PROCESS handling with prefork MPM so that
+    it returns from ap_mpm_run() and allows core Apache code
+    to run any required cleanups
+    
+    this resolves problems such as semaphore leaks and
+    shared memory that isn't cleaned up
+    
+    (some necessary re-indention to be done in a separate
+    commit; otherwise, this would be a difficult commit
+    to review)
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@99533 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e8e91c0a2fca689b7cd3c2db8db3585af0cb2873 : Justin Erenkrantz <jerenkrantz@apache.org> : Thu Feb 27 04
+commit e8e91c0a2fca689b7cd3c2db8db3585af0cb2873
+Author: Justin Erenkrantz <jerenkrantz@apache.org>
+Date:   Thu Feb 27 04:24:38 2003 +0000
+
+    Fix potential memory leaks in mod_deflate on malformed data.
+    
+    PR: 16046
+    Reviewed by:	Andre, Jeff, Jim, FirstBill
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@98815 13f79535-47bb-0310-9956-ffa450edef68
+
+
+129839de9568c872aa35a50755d84d5bdc153697 : Bradley Nicholes <bnicholes@apache.org> : Mon Feb 24 23
+commit 129839de9568c872aa35a50755d84d5bdc153697
+Author: Bradley Nicholes <bnicholes@apache.org>
+Date:   Mon Feb 24 23:22:03 2003 +0000
+
+    Don't try to use the LDAP cache if it has been turned off.  Make sure that we
+    have a "curl" before trying to use it.  If caching has been turned off then the
+    curl variable will be NULL.  This fixes a problem where LDAP caching would
+    fault when caching was disabled.
+    
+    This also fixes some memory leaks due to not freeing resources when error
+    conditions occur.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@98786 13f79535-47bb-0310-9956-ffa450edef68
+
+
+7d8bdb5f1382f2da0c60452745e7276c44799840 : Justin Erenkrantz <jerenkrantz@apache.org> : Mon Feb 17 04
+commit 7d8bdb5f1382f2da0c60452745e7276c44799840
+Author: Justin Erenkrantz <jerenkrantz@apache.org>
+Date:   Mon Feb 17 04:46:00 2003 +0000
+
+    Fix potential memory leaks in mod_deflate on malformed input data.
+    
+    PR: 16046
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@98689 13f79535-47bb-0310-9956-ffa450edef68
+
+
+9352482d53af8b40585ac50291a79d324735ea25 : Cliff Woolley <jwoolley@apache.org> : Thu Jan 23 00
+commit 9352482d53af8b40585ac50291a79d324735ea25
+Author: Cliff Woolley <jwoolley@apache.org>
+Date:   Thu Jan 23 00:58:09 2003 +0000
+
+    note the patch.  i still need to test it more before i'll +1 it, though
+    the PR reporter says it works okay for him.  in particular, we need to
+    be sure i didn't accidentally introduce any leaks (memory or fd).
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@98464 13f79535-47bb-0310-9956-ffa450edef68
+
+
+17209d40de4d0d54148f1b61e9d72a824b6a1616 : William A. Rowe Jr <wrowe@apache.org> : Tue Jan 21 19
+commit 17209d40de4d0d54148f1b61e9d72a824b6a1616
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Jan 21 19:20:18 2003 +0000
+
+      Fix a nasty segfault, that there's a stack buffer we are trying to free!
+      Revert this 'memory leak' patch from the 1.79 rev.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@98431 13f79535-47bb-0310-9956-ffa450edef68
+
+
+4e4257fed75f1c29655295730594992aba3a0d50 : William A. Rowe Jr <wrowe@apache.org> : Tue Jan 21 19
+commit 4e4257fed75f1c29655295730594992aba3a0d50
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Jan 21 19:19:36 2003 +0000
+
+      Omitted the commit log message from the last commit, sorry;
+    
+      Fix a nasty segfault, that there's a stack buffer we are trying to free!
+      Revert this 'memory leak' patch from the 1.79 rev.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/ssl@98430 13f79535-47bb-0310-9956-ffa450edef68
+
+
+075e27638dc64d2e981b4fb1764c0703ba17741c : William A. Rowe Jr <wrowe@apache.org> : Tue Jan 21 19
+commit 075e27638dc64d2e981b4fb1764c0703ba17741c
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Jan 21 19:19:36 2003 +0000
+
+      Omitted the commit log message from the last commit, sorry;
+    
+      Fix a nasty segfault, that there's a stack buffer we are trying to free!
+      Revert this 'memory leak' patch from the 1.79 rev.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@98430 13f79535-47bb-0310-9956-ffa450edef68
+
+
+899ffeb57a6a972b72450d1c7657ed541d8d763f : Cliff Woolley <jwoolley@apache.org> : Thu Nov 14 19
+commit 899ffeb57a6a972b72450d1c7657ed541d8d763f
+Author: Cliff Woolley <jwoolley@apache.org>
+Date:   Thu Nov 14 19:22:26 2002 +0000
+
+    Fix a memory leak in mod_deflate with dynamic content.  Because the
+    brigade was being destroyed (ie, cleanup unregistered) rather than just
+    emptied out and then reused anyway, the last call down the filter stack
+    would leak buckets.
+    
+    PR: 14321
+    Submitted by:	Ken Franken <kfranken@decisionmark.com>
+    Reviewed by:	Jeff Trawick, Cliff Woolley
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@97526 13f79535-47bb-0310-9956-ffa450edef68
+
+
+9ffb21c9ef499a0bc4ed28732da072aa558bfacc : William A. Rowe Jr <wrowe@apache.org> : Tue Oct 29 21
+commit 9ffb21c9ef499a0bc4ed28732da072aa558bfacc
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Oct 29 21:12:34 2002 +0000
+
+      Fix memory leak in mod_ssl from internal SSL library allocations
+      within SSL_get_peer_certificate and X509_get_pubkey.
+    
+    Submitted by:	Zvi Har'El <rl@math.technion.ac.il>
+    Reviewed by:	Madhusudan Mathihalli <madhusudan_mathihalli@hp.com>
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/ssl@97344 13f79535-47bb-0310-9956-ffa450edef68
+
+
+b1375767dda30f7b2d932436228a985f33af8e3d : William A. Rowe Jr <wrowe@apache.org> : Tue Oct 29 21
+commit b1375767dda30f7b2d932436228a985f33af8e3d
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Oct 29 21:12:34 2002 +0000
+
+      Fix memory leak in mod_ssl from internal SSL library allocations
+      within SSL_get_peer_certificate and X509_get_pubkey.
+    
+    Submitted by:	Zvi Har'El <rl@math.technion.ac.il>
+    Reviewed by:	Madhusudan Mathihalli <madhusudan_mathihalli@hp.com>
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@97344 13f79535-47bb-0310-9956-ffa450edef68
+
+
+091ee616587a877e246ade41ce1698cda44599e4 : Justin Erenkrantz <jerenkrantz@apache.org> : Tue Sep 10 19
+commit 091ee616587a877e246ade41ce1698cda44599e4
+Author: Justin Erenkrantz <jerenkrantz@apache.org>
+Date:   Tue Sep 10 19:41:43 2002 +0000
+
+    Fix memory leak in core_output_filter.
+    
+    This would result in at least two EOS buckets being leaked per connection.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@96752 13f79535-47bb-0310-9956-ffa450edef68
+
+
+b953e8008db69cc0833bce7c5bfa0919b48ad270 : Brian Pane <brianp@apache.org> : Fri Sep 6 01
+commit b953e8008db69cc0833bce7c5bfa0919b48ad270
+Author: Brian Pane <brianp@apache.org>
+Date:   Fri Sep 6 01:18:55 2002 +0000
+
+    Fixed some bucket memory leaks in ap_http_filter()
+    Submitted by:	Joe Schaefer <joe+apache@sunstarsys.com>
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@96662 13f79535-47bb-0310-9956-ffa450edef68
+
+
+4c19aa850b918794fb83e62df3d3b2a9b51d455a : Bradley Nicholes <bnicholes@apache.org> : Tue May 28 19
+commit 4c19aa850b918794fb83e62df3d3b2a9b51d455a
+Author: Bradley Nicholes <bnicholes@apache.org>
+Date:   Tue May 28 19:28:13 2002 +0000
+
+    Need to destroy the global cache during module shutdown that was created
+    when the module what initialized.  This eliminates a memory leak.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@95322 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ddbb2e33f43004c67bf7038b8131ec0c01503ee3 : Bradley Nicholes <bnicholes@apache.org> : Tue May 28 19
+commit ddbb2e33f43004c67bf7038b8131ec0c01503ee3
+Author: Bradley Nicholes <bnicholes@apache.org>
+Date:   Tue May 28 19:26:26 2002 +0000
+
+    Need to also free the cache node itself when destroying the cache.  The
+    eliminates a memory leak on shutdown
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@95321 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d0280e9efdc92b21a5012833bbf35b434cc54829 : Bradley Nicholes <bnicholes@apache.org> : Tue May 21 22
+commit d0280e9efdc92b21a5012833bbf35b434cc54829
+Author: Bradley Nicholes <bnicholes@apache.org>
+Date:   Tue May 21 22:00:44 2002 +0000
+
+    Fixing a memory leak with the threads bucket_allocator.  We were allocating
+    too much and not freeing up enough.  On a thread exit the bucket and the
+    transaction pool need to be cleaned up.  When the MPM exits, the main pool
+    needs to be cleaned up.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@95207 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d89e2cab7a69aa958495f0451074a162823c2f5a : Bradley Nicholes <bnicholes@apache.org> : Sat Apr 6 00
+commit d89e2cab7a69aa958495f0451074a162823c2f5a
+Author: Bradley Nicholes <bnicholes@apache.org>
+Date:   Sat Apr 6 00:03:32 2002 +0000
+
+    Added a call to apr_bucket_alloc_destroy() to the clean_child_exit() code that
+    is called when each worker thread terminates.  This stopped the memory leak.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@94479 13f79535-47bb-0310-9956-ffa450edef68
+
+
+b49f2c8d3df6ee25c7db4ff94c4b01135c24ece7 : Bill Stoddard <stoddard@apache.org> : Mon Apr 1 18
+commit b49f2c8d3df6ee25c7db4ff94c4b01135c24ece7
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Mon Apr 1 18:55:46 2002 +0000
+
+    Win32: Move apr_bucket_alloc() to a more reasonable location to fix memory leak.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@94362 13f79535-47bb-0310-9956-ffa450edef68
+
+
+590d90775dec92d38213d15442a9efc8846632a8 : Bill Stoddard <stoddard@apache.org> : Thu Mar 7 21
+commit 590d90775dec92d38213d15442a9efc8846632a8
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Thu Mar 7 21:44:49 2002 +0000
+
+    Do a better job of cleaning up (plug memory leaks) and handling aborted
+    cache updates. We really need a better way to allocate cache_objects.
+    Making WAY too many malloc/calloc calls...
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@93775 13f79535-47bb-0310-9956-ffa450edef68
+
+
+609ca197ddb2f79e24a5918417985fe1bd736c53 : Brian Pane <brianp@apache.org> : Sun Jan 27 07
+commit 609ca197ddb2f79e24a5918417985fe1bd736c53
+Author: Brian Pane <brianp@apache.org>
+Date:   Sun Jan 27 07:30:02 2002 +0000
+
+    Fixed a read from a deleted brigade in the new version of
+    ap_rgetline()...
+    
+    In the "folding" case, there was an ap_get_brigade() call after
+    the brigade had been destroyed.  I noticed this while debugging
+    a memory leak that showed up while testing the httpd with ab.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@93044 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a2e1ec4e3b1c9f5be62a86d25df57e1d61ce3a62 : Aaron Bannert <aaron@apache.org> : Wed Oct 31 18
+commit a2e1ec4e3b1c9f5be62a86d25df57e1d61ce3a62
+Author: Aaron Bannert <aaron@apache.org>
+Date:   Wed Oct 31 18:21:53 2001 +0000
+
+    Fix a big memory leak bug related to arbitrarily large header lines.
+    The core input filter would happily consume all the data you gave it
+    in a header line, looking for that one LF. This patch limits that
+    "getline" functionality to HUGE_STRING_LEN (8192 bytes).
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@91711 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a367240bcaff8e13af8388c091723c401286002a : Brian Havard <bjh@apache.org> : Mon Aug 20 16
+commit a367240bcaff8e13af8388c091723c401286002a
+Author: Brian Havard <bjh@apache.org>
+Date:   Mon Aug 20 16:10:57 2001 +0000
+
+    Catch exceptions in worker threads so a segfault doesn't kill all active
+    connections in the process. When this occurs, a graceful shutdown of the
+    child is initiated so any leaked resources & hosed memory is disposed of ASAP.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@90400 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ce0b029d3dc46512ae7fec271d4ca536fe22257b : Greg Ames <gregames@apache.org> : Wed Jul 18 21
+commit ce0b029d3dc46512ae7fec271d4ca536fe22257b
+Author: Greg Ames <gregames@apache.org>
+Date:   Wed Jul 18 21:16:40 2001 +0000
+
+    fix memory leak of apr_sockaddr_t and apr_socket_t in ap_mpm_pod_signal,
+    called by perform_idle_server_maintenance.
+    
+    allocate & init one apr_sockaddr_t for the dummy connect at pod open time.
+    use a temporary subpool for the apr_socket_t
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@89612 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d5062b59b2f51d10522c0975db96242f7ff60a77 : Ryan Bloom <rbb@apache.org> : Wed May 24 00
+commit d5062b59b2f51d10522c0975db96242f7ff60a77
+Author: Ryan Bloom <rbb@apache.org>
+Date:   Wed May 24 00:42:01 2000 +0000
+
+    Fix a memory leak with ap_wait_or_timeout.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@85286 13f79535-47bb-0310-9956-ffa450edef68
+
+
+64c8c474a07a75b67dc6a8c2ade4b269a69ab8d8 : Ryan Bloom <rbb@apache.org> : Tue Jan 4 19
+commit 64c8c474a07a75b67dc6a8c2ade4b269a69ab8d8
+Author: Ryan Bloom <rbb@apache.org>
+Date:   Tue Jan 4 19:01:04 2000 +0000
+
+    Initialize all ap_file_t's to NULL.  This allows ap_open and ap_stat to
+    work together without causing memory leaks.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@84393 13f79535-47bb-0310-9956-ffa450edef68
+
+
+52e281f722638a97a34b6958693e6890a6bc528a : Ken Coar <coar@apache.org> : Fri Aug 6 17
+commit 52e281f722638a97a34b6958693e6890a6bc528a
+Author: Ken Coar <coar@apache.org>
+Date:   Fri Aug 6 17:52:37 1999 +0000
+
+    	Add notes about memory leaks found by David Harris.  It's
+    	unclear (to me, at least) how severe they are, but the
+    	module counters are involved and long-running servers with regularly
+    	scheduled restarts *could* be vulnerable..?
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@83594 13f79535-47bb-0310-9956-ffa450edef68
+
+
+cff4f54881a9b8ea0d68ce53cb29947d14dd53fd : dgaudet <dgaudet@apache.org> : Fri Aug 6 16
+commit cff4f54881a9b8ea0d68ce53cb29947d14dd53fd
+Author: dgaudet <dgaudet@apache.org>
+Date:   Fri Aug 6 16:21:33 1999 +0000
+
+    Fix a memory leak where the module counts were getting messed
+    up across restarts.
+    
+    Submitted by:	David Harris <dharris@drh.net>
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@83593 13f79535-47bb-0310-9956-ffa450edef68
+
+
+581cb9021c878a700f44648fa78764891ad4f582 : dgaudet <dgaudet@apache.org> : Tue Apr 20 17
+commit 581cb9021c878a700f44648fa78764891ad4f582
+Author: dgaudet <dgaudet@apache.org>
+Date:   Tue Apr 20 17:03:27 1999 +0000
+
+    fix memory leak exacerbated by certain configurations
+    
+    PR:		4225
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@83062 13f79535-47bb-0310-9956-ffa450edef68
+
+
+35791ec84def3a75055406feaec0460da5ad0168 : dgaudet <dgaudet@apache.org> : Wed May 6 06
+commit 35791ec84def3a75055406feaec0460da5ad0168
+Author: dgaudet <dgaudet@apache.org>
+Date:   Wed May 6 06:09:20 1998 +0000
+
+    psprintf:
+    
+    fix a memory leak -- need to block alarms the whole time
+    the block is being "abused"... easier to do that than it is to massage
+    p->last each time we have to get a new block.
+    
+    fix a bug in psprintf_flush, it wouldn't copy properly when moving to
+    a new block
+    
+    fix compile errors when compiling with ALLOC_USE_MALLOC
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@81149 13f79535-47bb-0310-9956-ffa450edef68
+
+
+b36cf9faaf9d27ba4c8df358efa9dd87f3dbec4d : dgaudet <dgaudet@apache.org> : Wed Feb 4 21
+commit b36cf9faaf9d27ba4c8df358efa9dd87f3dbec4d
+Author: dgaudet <dgaudet@apache.org>
+Date:   Wed Feb 4 21:23:33 1998 +0000
+
+    Igor found a memory leak -- we're allocating the initial request_rec in
+    the connection pool rather than creating a new pool first.  So each
+    request on a keepalive connection would waste sizeof(request_rec).
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@80113 13f79535-47bb-0310-9956-ffa450edef68
+
+
+-- OVERFLOWS
+
+9eff14ed53b6768ada5bc6d4089201e2620e6b31 : Eric Covener <covener@apache.org> : Mon Mar 2 18
+commit 9eff14ed53b6768ada5bc6d4089201e2620e6b31
+Author: Eric Covener <covener@apache.org>
+Date:   Mon Mar 2 18:24:25 2015 +0000
+
+    propose stack overflow in lua websockets
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1663389 13f79535-47bb-0310-9956-ffa450edef68
+
+
+c2c923c332e9a9582a7a38be832647dae5720e78 : Yann Ylavic <ylavic@apache.org> : Mon Nov 17 16
+commit c2c923c332e9a9582a7a38be832647dae5720e78
+Author: Yann Ylavic <ylavic@apache.org>
+Date:   Mon Nov 17 16:31:06 2014 +0000
+
+    mpm_prefork: follow up to r1635521.
+    Avoid oddity on bucket_make_child_record overflow.
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1640184 13f79535-47bb-0310-9956-ffa450edef68
+
+
+2e10f7017df25c4db0e88693c6f33e00d8618527 : Jim Jagielski <jim@apache.org> : Tue Nov 11 11
+commit 2e10f7017df25c4db0e88693c6f33e00d8618527
+Author: Jim Jagielski <jim@apache.org>
+Date:   Tue Nov 11 11:44:52 2014 +0000
+
+    Merge r1622450 from trunk:
+    
+    ab: increase request and response header size to 8192 bytes,
+    fix potential buffer-overflow in Server: header handling.
+    
+    Submitted by: jkaluza
+    Reviewed/backported by: jim
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1638069 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6c7f38c24bc62b1d12de6b4dba9af8c459cda49f : Jan Kaluža <jkaluza@apache.org> : Thu Sep 4 10
+commit 6c7f38c24bc62b1d12de6b4dba9af8c459cda49f
+Author: Jan Kaluža <jkaluza@apache.org>
+Date:   Thu Sep 4 10:52:24 2014 +0000
+
+    ab: increase request and response header size to 8192 bytes,
+    fix potential buffer-overflow in Server: header handling.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1622450 13f79535-47bb-0310-9956-ffa450edef68
+
+
+823f671813c3bd83af6b7b58026b78465679428d : Jan Kaluža <jkaluza@apache.org> : Thu Aug 14 12
+commit 823f671813c3bd83af6b7b58026b78465679428d
+Author: Jan Kaluža <jkaluza@apache.org>
+Date:   Thu Aug 14 12:15:31 2014 +0000
+
+    * support/ab.c: Fix crash caused by integer overflow when printing stats with
+    lot of requests (for example -n 500000000).
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1617913 13f79535-47bb-0310-9956-ffa450edef68
+
+
+9a08d99637f30aca0f86d2a99dd379244db9a3d9 : Joe Orton <jorton@apache.org> : Mon Jul 14 20
+commit 9a08d99637f30aca0f86d2a99dd379244db9a3d9
+Author: Joe Orton <jorton@apache.org>
+Date:   Mon Jul 14 20:34:32 2014 +0000
+
+    Merge 1610491 from trunk:
+    
+    SECURITY (CVE-2014-0226): Fix a race condition in scoreboard handling,
+    which could lead to a heap buffer overflow.  Thanks to Marek Kroemeke
+    working with HP's Zero Day Initiative for reporting this.
+    
+    * include/scoreboard.h: Add ap_copy_scoreboard_worker.
+    
+    * server/scoreboard.c (ap_copy_scoreboard_worker): New function.
+    
+    * modules/generators/mod_status.c (status_handler): Use it.
+    
+    Reviewed by: trawick, jorton, covener
+    Submitted by: jorton, trawick, covener
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@1610515 13f79535-47bb-0310-9956-ffa450edef68
+
+
+fb57ea4298fe871f1fc08fab007eb82856241fc8 : Joe Orton <jorton@apache.org> : Mon Jul 14 19
+commit fb57ea4298fe871f1fc08fab007eb82856241fc8
+Author: Joe Orton <jorton@apache.org>
+Date:   Mon Jul 14 19:55:04 2014 +0000
+
+    Merge 1610491 from trunk:
+    
+    SECURITY (CVE-2014-0226): Fix a race condition in scoreboard handling,
+    which could lead to a heap buffer overflow.  Thanks to Marek Kroemeke
+    working with HP's Zero Day Initiative for reporting this.
+    
+    * include/scoreboard.h: Add ap_copy_scoreboard_worker.
+    
+    * server/scoreboard.c (ap_copy_scoreboard_worker): New function.
+    
+    * modules/generators/mod_status.c (status_handler): Use it.
+    
+    * modules/lua/lua_request.c (lua_ap_scoreboard_worker): Likewise.
+    
+    Reviewed by: trawick, jorton, covener, jim
+    Submitted by: jorton, covener
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1610499 13f79535-47bb-0310-9956-ffa450edef68
+
+
+b47236794b0209190934d019cab39c41e6e4c52b : Joe Orton <jorton@apache.org> : Mon Jul 14 19
+commit b47236794b0209190934d019cab39c41e6e4c52b
+Author: Joe Orton <jorton@apache.org>
+Date:   Mon Jul 14 19:26:00 2014 +0000
+
+    SECURITY (CVE-2014-0226): Fix a race condition in scoreboard handling,
+    which could lead to a heap buffer overflow.  Thanks to Marek Kroemeke
+    working with HP's Zero Day Initiative for reporting this.
+    
+    * include/scoreboard.h: Add ap_copy_scoreboard_worker.
+    
+    * server/scoreboard.c (ap_copy_scoreboard_worker): New function.
+    
+    * modules/generators/mod_status.c (status_handler): Use it.
+    
+    * modules/lua/lua_request.c (lua_ap_scoreboard_worker): Likewise.
+    
+    Reviewed by: trawick, jorton, covener, jim
+    Submitted by: jorton, covener
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1610491 13f79535-47bb-0310-9956-ffa450edef68
+
+
+246fab2ada85c85001780f2cb38f76461cbfb926 : Jeff Trawick <trawick@apache.org> : Mon Aug 19 11
+commit 246fab2ada85c85001780f2cb38f76461cbfb926
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Mon Aug 19 11:41:14 2013 +0000
+
+    ab: Fix potential buffer overflows when processing the T and X
+    command-line options.
+    
+    PR: 55360
+    
+    Submitted by: Mike Rumph <mike.rumph oracle.com>
+    Reviewed by: trawick, jim, druggeri
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1515370 13f79535-47bb-0310-9956-ffa450edef68
+
+
+56c81bc3a599d6e98a30251bb95f90076e816bd1 : Jeff Trawick <trawick@apache.org> : Sun Aug 18 00
+commit 56c81bc3a599d6e98a30251bb95f90076e816bd1
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Sun Aug 18 00:42:49 2013 +0000
+
+    promote previously-approved ab buffer overflow fix
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1515051 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e044715e72dde3cee7e7fb15260bc77b20aa86b2 : Jeff Trawick <trawick@apache.org> : Mon Aug 5 20
+commit e044715e72dde3cee7e7fb15260bc77b20aa86b2
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Mon Aug 5 20:24:39 2013 +0000
+
+    ab: Fix potential buffer overflows when processing the T and X
+        command-line options.
+    
+    PR: 55360
+    Submitted by: Mike Rumph <mike.rumph oracle.com>
+    Reviewed by: trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1510707 13f79535-47bb-0310-9956-ffa450edef68
+
+
+c9686885bc4eb151c03b6e0790f51e647c042926 : Eric Covener <covener@apache.org> : Thu Jun 27 16
+commit c9686885bc4eb151c03b6e0790f51e647c042926
+Author: Eric Covener <covener@apache.org>
+Date:   Thu Jun 27 16:29:37 2013 +0000
+
+      * core: Limit ap_pregsub() to 64MB, add ap_pregsub_ex() for longer strings.
+        The default limit can be adjusted at compile time using AP_PREGSUB_MAXLEN.
+        mod_setenvif: Log error on substitution overflow.
+    
+    
+    Submitted by: trawick
+    Reviewed by: trawic, wrowe, covener
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@1497429 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ca22651be2a6ae1e73758a5dcbba3db3db2d9b08 : Rainer Jung <rjung@apache.org> : Wed Jun 5 14
+commit ca22651be2a6ae1e73758a5dcbba3db3db2d9b08
+Author: Rainer Jung <rjung@apache.org>
+Date:   Wed Jun 5 14:47:30 2013 +0000
+
+    htdigest: Fix buffer overflow when reading digest
+    password file with very long lines.
+    
+    PR 54893.
+    
+    Backport of r1475878 from trunk resp.
+    r1476089 from 2.4.x resp. r1476242
+    from 2.2.x.
+    
+    Proposed/Backported by: rjung
+    Reviewed by: minfrin, wrowe
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x@1489893 13f79535-47bb-0310-9956-ffa450edef68
+
+
+64addc4576d23366854b1e1ccf513ad67226eb0c : Rainer Jung <rjung@apache.org> : Fri Apr 26 14
+commit 64addc4576d23366854b1e1ccf513ad67226eb0c
+Author: Rainer Jung <rjung@apache.org>
+Date:   Fri Apr 26 14:58:20 2013 +0000
+
+    htdigest: Fix buffer overflow when reading digest
+    password file with very long lines.
+    
+    PR 54893.
+    
+    Backport of r1475878 from trunk resp.
+    r1476089 from 2.4.x.
+    
+    Proposed/Backported by: rjung
+    Reviewed by: humbedooh, rpluem
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@1476242 13f79535-47bb-0310-9956-ffa450edef68
+
+
+8f42c3c41a009556fce1918b9a6bac88f74b229f : Rainer Jung <rjung@apache.org> : Fri Apr 26 07
+commit 8f42c3c41a009556fce1918b9a6bac88f74b229f
+Author: Rainer Jung <rjung@apache.org>
+Date:   Fri Apr 26 07:42:01 2013 +0000
+
+    htdigest: Fix buffer overflow when reading digest
+    password file with very long lines.
+    
+    PR 54893.
+    
+    Backport of r1475878 from trunk.
+    
+    Proposed/Backported by: rjung
+    Reviewed by: humbedooh, covener
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1476089 13f79535-47bb-0310-9956-ffa450edef68
+
+
+0548ec7610f98228a3607fde86b2a4c82121f7fd : Rainer Jung <rjung@apache.org> : Thu Apr 25 18
+commit 0548ec7610f98228a3607fde86b2a4c82121f7fd
+Author: Rainer Jung <rjung@apache.org>
+Date:   Thu Apr 25 18:02:48 2013 +0000
+
+    htdigest: Fix buffer overflow when reading digest
+    password file with very long lines.
+    
+    PR 54893.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1475878 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a16a5cec70e1acd2a3632d838eeb5cb906c87e09 : Daniel Gruno <humbedooh@apache.org> : Wed Feb 27 01
+commit a16a5cec70e1acd2a3632d838eeb5cb906c87e09
+Author: Daniel Gruno <humbedooh@apache.org>
+Date:   Wed Feb 27 01:09:13 2013 +0000
+
+    backport overflow css fix
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1450566 13f79535-47bb-0310-9956-ffa450edef68
+
+
+68eb929d5789d69d7c75ce9066c0906e4d113eb9 : Daniel Gruno <humbedooh@apache.org> : Wed Feb 27 01
+commit 68eb929d5789d69d7c75ce9066c0906e4d113eb9
+Author: Daniel Gruno <humbedooh@apache.org>
+Date:   Wed Feb 27 01:07:01 2013 +0000
+
+    better handling of overflow
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1450565 13f79535-47bb-0310-9956-ffa450edef68
+
+
+0b30eedd9f4733456653281d138fea8d71866055 : Daniel Gruno <humbedooh@apache.org> : Wed Feb 27 01
+commit 0b30eedd9f4733456653281d138fea8d71866055
+Author: Daniel Gruno <humbedooh@apache.org>
+Date:   Wed Feb 27 01:05:28 2013 +0000
+
+    hopefully fixing the <pre> overflow bug as reported by mike rumph
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1450563 13f79535-47bb-0310-9956-ffa450edef68
+
+
+287abea8c2343687ec7b72c6e903675c0d6f8225 : Rainer Jung <rjung@apache.org> : Wed Oct 3 16
+commit 287abea8c2343687ec7b72c6e903675c0d6f8225
+Author: Rainer Jung <rjung@apache.org>
+Date:   Wed Oct 3 16:18:10 2012 +0000
+
+    Merge r1198940 from trunk resp. r1227280 from 2.2.x:
+    
+    Fix integer overflow in ap_pregsub. This can be triggered e.g.
+    with mod_setenvif via a malicious .htaccess
+    
+    CVE-2011-3607
+    http://www.halfdog.net/Security/2011/ApacheModSetEnvIfIntegerOverflow/
+    
+    Submitted by: sf
+    Reviewed/backported by: rjung
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x@1393580 13f79535-47bb-0310-9956-ffa450edef68
+
+
+5b03afca82977fa946644f09a64947740f199c78 : Jim Jagielski <jim@apache.org> : Sun Sep 30 15
+commit 5b03afca82977fa946644f09a64947740f199c78
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sun Sep 30 15:42:25 2012 +0000
+
+    Merge r1198940 from trunk:
+    
+    Fix integer overflow in ap_pregsub. This can be triggered e.g.
+    with mod_setenvif via a malicious .htaccess
+    
+    CVE-2011-3607
+    http://www.halfdog.net/Security/2011/ApacheModSetEnvIfIntegerOverflow/
+    
+    Submitted by: sf
+    Reviewed/backported by: jim
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x@1392042 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ee2b9cbfe4fc76f586390d08f8accd2aa14e66f7 : Stefan Fritsch <sf@apache.org> : Sat Jun 2 22
+commit ee2b9cbfe4fc76f586390d08f8accd2aa14e66f7
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Sat Jun 2 22:28:26 2012 +0000
+
+    Avoid buffer overflow if one protocol string is too long, but at least
+    one is not.
+    
+    Also add log messages numbers and avoid useless string dup.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1345599 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ad07312a12648be3b99ab298cc73004d88192fb6 : Jim Jagielski <jim@apache.org> : Sun Jan 8 01
+commit ad07312a12648be3b99ab298cc73004d88192fb6
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sun Jan 8 01:40:36 2012 +0000
+
+    Merge r1228766 from trunk:
+    
+    optimize this... Do strlen() ONLY if we need to check
+    for overflow.
+    Reviewed/backported by: jim
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1228767 13f79535-47bb-0310-9956-ffa450edef68
+
+
+05eec762db2a2bb261c5c2614e08c91e92672482 : Jim Jagielski <jim@apache.org> : Sun Jan 8 01
+commit 05eec762db2a2bb261c5c2614e08c91e92672482
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sun Jan 8 01:40:01 2012 +0000
+
+    optimize this... Do strlen() ONLY if we need to check
+    for overflow.
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1228766 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ffcd2b1a24a1eeb94cb460e41875c442738ece54 : Stefan Fritsch <sf@apache.org> : Wed Jan 4 19
+commit ffcd2b1a24a1eeb94cb460e41875c442738ece54
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Wed Jan 4 19:45:22 2012 +0000
+
+    Merge fix for CVE-2011-3607:
+    
+    Fix integer overflow in ap_pregsub()
+    
+    Trunk fix: r1198940
+    Submitted by: Stefan Fritsch, Greg Ames
+    Reviewed by: Stefan Fritsch, Greg Ames, Eric Covener
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@1227280 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d265c519032088ae939290c53f91207c115897b1 : Stefan Fritsch <sf@apache.org> : Mon Nov 7 21
+commit d265c519032088ae939290c53f91207c115897b1
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Mon Nov 7 21:13:40 2011 +0000
+
+    Fix integer overflow in ap_pregsub. This can be triggered e.g.
+    with mod_setenvif via a malicious .htaccess
+    
+    CVE-2011-3607
+    http://www.halfdog.net/Security/2011/ApacheModSetEnvIfIntegerOverflow/
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1198940 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ccb83f4e5a4689dff2b9a09fe42bf20c659b9270 : Richard Bowen <rbowen@apache.org> : Fri Apr 8 14
+commit ccb83f4e5a4689dff2b9a09fe42bf20c659b9270
+Author: Richard Bowen <rbowen@apache.org>
+Date:   Fri Apr 8 14:16:04 2011 +0000
+
+    Remove unnecessary .* as mentioned in
+    http://stackoverflow.com/questions/5587148/regex-patterns-in-apache-rewritecond-and-friends-full-or-partial-match
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@1090257 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a2116f33270e835d721645ce2ff791a03b3347d7 : Richard Bowen <rbowen@apache.org> : Fri Apr 8 14
+commit a2116f33270e835d721645ce2ff791a03b3347d7
+Author: Richard Bowen <rbowen@apache.org>
+Date:   Fri Apr 8 14:15:17 2011 +0000
+
+    Remove unnecessary .* from regex, as noted in
+    http://stackoverflow.com/questions/5587148/regex-patterns-in-apache-rewritecond-and-friends-full-or-partial-match
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1090255 13f79535-47bb-0310-9956-ffa450edef68
+
+
+7873d360966ca97cca9f932dbc5ea7afe9701e8f : Stefan Fritsch <sf@apache.org> : Sat Nov 20 20
+commit 7873d360966ca97cca9f932dbc5ea7afe9701e8f
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Sat Nov 20 20:26:37 2010 +0000
+
+    Check input lenght to avoid potential overflows
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@1037321 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d4c63dbfed617e6fdaee10ba31023fb47fa8b582 : Jeff Trawick <trawick@apache.org> : Wed Sep 22 01
+commit d4c63dbfed617e6fdaee10ba31023fb47fa8b582
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Wed Sep 22 01:35:42 2010 +0000
+
+    Backport trunk revs 826506, 826520, 826528, 987498
+    
+    sync htdigest with trunk to fix overflows and pick up other minor tweaks
+    
+    Reviewed by: poirier, rpluem
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@999717 13f79535-47bb-0310-9956-ffa450edef68
+
+
+704020047eadf33fd9e54bd87a3d79b52923ee74 : Daniel Earl Poirier <poirier@apache.org> : Thu Sep 2 13
+commit 704020047eadf33fd9e54bd87a3d79b52923ee74
+Author: Daniel Earl Poirier <poirier@apache.org>
+Date:   Thu Sep 2 13:58:21 2010 +0000
+
+    Vote to backport htdigest overflow fixes
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@991938 13f79535-47bb-0310-9956-ffa450edef68
+
+
+470c9badca0045db8062c305aa080385dad20610 : Jim Jagielski <jim@apache.org> : Sat Aug 21 16
+commit 470c9badca0045db8062c305aa080385dad20610
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sat Aug 21 16:16:18 2010 +0000
+
+       * rotatelogs: Fix possible buffer overflow if admin configures a
+         mongo log file path.
+         Trunk already has a fix.
+         2.2.x patch: http://people.apache.org/~trawick/rotatelogs.overflow.txt
+         +1: trawick, rpluem, lars, jim
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@987780 13f79535-47bb-0310-9956-ffa450edef68
+
+
+79d9a93821dcb29946c3e452c8598d64ea97a8f1 : Jeff Trawick <trawick@apache.org> : Fri Aug 20 14
+commit 79d9a93821dcb29946c3e452c8598d64ea97a8f1
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Fri Aug 20 14:21:31 2010 +0000
+
+    fix silly rotatelogs buffer overflow?
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@987519 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e4d1738ae83cbb707dd48625da775c98816ad59b : Jeff Trawick <trawick@apache.org> : Thu Aug 19 22
+commit e4d1738ae83cbb707dd48625da775c98816ad59b
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Thu Aug 19 22:35:21 2010 +0000
+
+    Fortify complains about an overflow of pad[], which would
+    require a mongo argv[0].  Get the vprintf formatter to handle
+    the padding and avoid creating the padding altogether.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@987339 13f79535-47bb-0310-9956-ffa450edef68
+
+
+53ba8d4c4c82525e056427e557154944b5c6e665 : Rainer Jung <rjung@apache.org> : Sun Feb 14 21
+commit 53ba8d4c4c82525e056427e557154944b5c6e665
+Author: Rainer Jung <rjung@apache.org>
+Date:   Sun Feb 14 21:36:03 2010 +0000
+
+    Limit sscanf format to the number of chars actually
+    needed and buffer size provided to prevent buffer overflow.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@910079 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a5eab2dc0ef413589bf0caf767c3b1ef980a85f8 : Colm MacCarthaigh <colm@apache.org> : Thu Jan 7 10
+commit a5eab2dc0ef413589bf0caf767c3b1ef980a85f8
+Author: Colm MacCarthaigh <colm@apache.org>
+Date:   Thu Jan 7 10:28:00 2010 +0000
+
+    Commit fix for CVE-2010-0010, an integer overflow on platforms where
+    sizeof(int) < sizeof(long) due to inappapriate casting;
+    
+        * Change "MIN( (int) a, (int) b)" to "(int) MIN(a, b)". As 'a' is the buffer
+          size, it will be smaller than any long which overflows an int.
+    
+        * More generally - change ap_bread and ap_bwrite to defend against a negative
+          length argument in general. Return -1 if one is passed.
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@896842 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1c271959f82bd453adfd02a75e4702e6eee4aefd : Stefan Fritsch <sf@apache.org> : Sun Oct 18 20
+commit 1c271959f82bd453adfd02a75e4702e6eee4aefd
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Sun Oct 18 20:39:05 2009 +0000
+
+    Fix some more overflows spotted by Ruediger Pluem
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@826520 13f79535-47bb-0310-9956-ffa450edef68
+
+
+4bedda4b449040ca5aaac90a5e3b65788faa3746 : Stefan Fritsch <sf@apache.org> : Sun Oct 18 19
+commit 4bedda4b449040ca5aaac90a5e3b65788faa3746
+Author: Stefan Fritsch <sf@apache.org>
+Date:   Sun Oct 18 19:35:42 2009 +0000
+
+    htdigest: Fix possible overflow in command line processing. htdigest is not
+    supposed to be suid save, therefore not treated as a security issue.
+    
+    CVE-2005-1344
+    Submitted by: Adam Conrad
+    Reviewed by: Stefan Fritsch
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@826506 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6666c0543393440abe8815bb9ca2ea186f492703 : Graham Leggett <minfrin@apache.org> : Mon Sep 14 21
+commit 6666c0543393440abe8815bb9ca2ea186f492703
+Author: Graham Leggett <minfrin@apache.org>
+Date:   Mon Sep 14 21:00:19 2009 +0000
+
+    Backport from trunk:
+    htdbm: Fix possible buffer overflow if dbm database has very
+    long values.
+    PR: 30586
+    Submitted by: Dan Poirier
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@814852 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ee39fa8b16f6a8fd057a6ea85fba242d41ef772b : Daniel Earl Poirier <poirier@apache.org> : Fri Sep 11 13
+commit ee39fa8b16f6a8fd057a6ea85fba242d41ef772b
+Author: Daniel Earl Poirier <poirier@apache.org>
+Date:   Fri Sep 11 13:20:29 2009 +0000
+
+    Propose backport of PR 30586, fix potential buffer overflow in htdbm.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@813821 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f8a8f3c5316182076bf3cb1b5349c177248e7781 : Daniel Earl Poirier <poirier@apache.org> : Fri Jul 24 17
+commit f8a8f3c5316182076bf3cb1b5349c177248e7781
+Author: Daniel Earl Poirier <poirier@apache.org>
+Date:   Fri Jul 24 17:15:29 2009 +0000
+
+    htdbm: Fix possible buffer overflow if dbm database has very
+    long values.  PR 30586 [Dan Poirier]
+    
+    PR 30586
+    Reported by: Ulf Harnhammar, Swedish IT Incident Centre
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@797563 13f79535-47bb-0310-9956-ffa450edef68
+
+
+cd7ef5918b8b26d0ba0330d8bd7de03157fff4f7 : Joe Orton <jorton@apache.org> : Fri Dec 12 13
+commit cd7ef5918b8b26d0ba0330d8bd7de03157fff4f7
+Author: Joe Orton <jorton@apache.org>
+Date:   Fri Dec 12 13:48:09 2008 +0000
+
+    * modules/cache/mod_socache_memcache.c (socache_mc_init): Remove references
+      to SSL in log messages.
+      (socache_mc_retrieve): Use 'data' not 'der'; correctly return an error
+      for the overflow case.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@726008 13f79535-47bb-0310-9956-ffa450edef68
+
+
+fe00fa95b6529598802bd86890dd4e47b92d0da2 : Joe Orton <jorton@apache.org> : Fri Dec 12 13
+commit fe00fa95b6529598802bd86890dd4e47b92d0da2
+Author: Joe Orton <jorton@apache.org>
+Date:   Fri Dec 12 13:37:59 2008 +0000
+
+    * modules/cache/mod_socache_memcache.c (socache_mc_create): Fail if
+      no argument is given.
+      (socache_mc_init): Increment the taglen field.
+      (socache_mc_id2key): Renamed from mc_session_id2sz and catch key
+      name overflow, per rpluem's review.
+      (socache_mc_store, socache_mc_retrieve, socache_mc_remove):
+      Adjust for new id2key interface.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@726007 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a3ed4f623f385296b474bf89edd8571af9d20475 : Paul Querna <pquerna@apache.org> : Wed Oct 29 08
+commit a3ed4f623f385296b474bf89edd8571af9d20475
+Author: Paul Querna <pquerna@apache.org>
+Date:   Wed Oct 29 08:39:26 2008 +0000
+
+    * include/http_core.h
+      (core_dir_config): Fix warning: overflow in implicit constant conversion,
+        generated by core.c line 117, which sets content_md5 to '2', which is too big
+        for a signed value -- but it looks like this was really meant to be unsigned.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@708828 13f79535-47bb-0310-9956-ffa450edef68
+
+
+9bda0997712a9d463ea77b4841a0c990d4d782e4 : Jim Jagielski <jim@apache.org> : Thu Apr 17 14
+commit 9bda0997712a9d463ea77b4841a0c990d4d782e4
+Author: Jim Jagielski <jim@apache.org>
+Date:   Thu Apr 17 14:04:49 2008 +0000
+
+    Merge r617890 from trunk:
+    
+    * Use a 64 bit unsigned int instead of a signed long to count the bytes
+      transferred to avoid integer overflows.
+    
+    PR: 44346
+    
+    Submitted by: rpluem
+    Reviewed by: jim
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@649114 13f79535-47bb-0310-9956-ffa450edef68
+
+
+09230f46782f772fd8bafa52bc430e7f5938ec9e : Ruediger Pluem <rpluem@apache.org> : Sat Feb 2 20
+commit 09230f46782f772fd8bafa52bc430e7f5938ec9e
+Author: Ruediger Pluem <rpluem@apache.org>
+Date:   Sat Feb 2 20:36:18 2008 +0000
+
+    * Use a 64 bit unsigned int instead of a signed long to count the bytes
+      transferred to avoid integer overflows.
+    
+    PR: 44346
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@617890 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6f8567121a23ae6e320615c8362becd234e0d21a : Jim Jagielski <jim@apache.org> : Sat Dec 8 19
+commit 6f8567121a23ae6e320615c8362becd234e0d21a
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sat Dec 8 19:33:47 2007 +0000
+
+    Merge r589461, r602491 from trunk:
+    
+    Prevent 1-byte overflow on 8192 boundary (see PR 43310)
+    
+    
+    Alternate fix... profiling indicates that the string
+    termination is completely unneeded and superflous. In
+    which case, the original allocation size is sufficient
+    since nothing external worries about a NULL nor
+    looks for it.
+    
+    Reviewed by: jim
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.2.x@602536 13f79535-47bb-0310-9956-ffa450edef68
+
+
+bbb7b5a69d2c25a88c94e330d3a022d53a41e070 : Jim Jagielski <jim@apache.org> : Mon Oct 29 01
+commit bbb7b5a69d2c25a88c94e330d3a022d53a41e070
+Author: Jim Jagielski <jim@apache.org>
+Date:   Mon Oct 29 01:25:16 2007 +0000
+
+    Prevent 1-byte overflow on 8192 boundary (see PR 43310)
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@589461 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a2028002729cbc7ff3e40535d2d2e29990c18301 : Jean-Frederic Clere <jfclere@apache.org> : Wed Aug 1 12
+commit a2028002729cbc7ff3e40535d2d2e29990c18301
+Author: Jean-Frederic Clere <jfclere@apache.org>
+Date:   Wed Aug 1 12:20:34 2007 +0000
+
+    create the brigate outside ap_proxygetline and reuse it.
+    correct the overflow handling. (returning APR_ENOSPC was
+    changing the behaviour).
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@561778 13f79535-47bb-0310-9956-ffa450edef68
+
+
+afc7b3d09fd01a12cafa3a5e3b9193b91b242afe : Nick Kew <niq@apache.org> : Wed Aug 1 00
+commit afc7b3d09fd01a12cafa3a5e3b9193b91b242afe
+Author: Nick Kew <niq@apache.org>
+Date:   Wed Aug 1 00:58:20 2007 +0000
+
+    Fix buffer overflow in date handling
+    PR 41144 (Davi Arnaut)
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@561616 13f79535-47bb-0310-9956-ffa450edef68
+
+
+95239cc5e05d1d386537be3405ce23f378313fa5 : William A. Rowe Jr <wrowe@apache.org> : Mon Jun 26 17
+commit 95239cc5e05d1d386537be3405ce23f378313fa5
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Mon Jun 26 17:41:28 2006 +0000
+
+      Make the range test legible; in the process, uncover and close
+      a bounds overflow condition.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@417252 13f79535-47bb-0310-9956-ffa450edef68
+
+
+31c31ef57df49e3ada37d73698de40a3261e3310 : Joe Orton <jorton@apache.org> : Wed Sep 21 08
+commit 31c31ef57df49e3ada37d73698de40a3261e3310
+Author: Joe Orton <jorton@apache.org>
+Date:   Wed Sep 21 08:51:11 2005 +0000
+
+    Merge r233493 from trunk:
+    
+    * srclib/pcre/pcre.c (read_repeat_counts): Check for integer overflow.
+    
+    Obtained from: pcre 6.2 upstream
+    Reviewed by: jorton, nd, wrowe
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x@290658 13f79535-47bb-0310-9956-ffa450edef68
+
+
+929a32abd3bc4fe48a1c269cde93c851003f9663 : Joe Orton <jorton@apache.org> : Fri Aug 19 15
+commit 929a32abd3bc4fe48a1c269cde93c851003f9663
+Author: Joe Orton <jorton@apache.org>
+Date:   Fri Aug 19 15:56:36 2005 +0000
+
+    Backport patch from pcre 6.2 to fix integer overflows in quantifier
+    parsing:
+    
+    * srclib/pcre/pcre.c (read_repeat_counts): Check for integer overflow.
+    
+    Obtained from: pcre 6.2 upstream
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@233493 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f72c6a1dd509f56793eba025ba764fab52943824 : Jeff Trawick <trawick@apache.org> : Wed Jun 22 20
+commit f72c6a1dd509f56793eba025ba764fab52943824
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Wed Jun 22 20:54:28 2005 +0000
+
+    mod_cgid: Fix buffer overflow processing ScriptSock directive.
+    
+    Submitted by:        Steve Kemp <steve steve.org.uk>
+    Reviewed/tweaked by: trawick
+    
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@192995 13f79535-47bb-0310-9956-ffa450edef68
+
+
+eeae7b53d88461458fdf17491f95fbc2d375aacc : Greg Ames <gregames@apache.org> : Fri Dec 3 05
+commit eeae7b53d88461458fdf17491f95fbc2d375aacc
+Author: Greg Ames <gregames@apache.org>
+Date:   Fri Dec 3 05:28:00 2004 +0000
+
+    fix child process aborts with
+      assertion "!((queue)->nelts == (queue)->bounds)" failed
+    due to worker queue overflows. The listener/event thread
+    needs to block when all worker threads are busy.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@109631 13f79535-47bb-0310-9956-ffa450edef68
+
+
+2ec8995dec87ff8b9900e97c9a2ec7afdd4e004b : Joe Orton <jorton@apache.org> : Wed Sep 15 11
+commit 2ec8995dec87ff8b9900e97c9a2ec7afdd4e004b
+Author: Joe Orton <jorton@apache.org>
+Date:   Wed Sep 15 11:50:43 2004 +0000
+
+    Backport from HEAD:
+    
+    * server/util.c (ap_resolve_env): Rewrite to avoid buffer overflows.
+    
+    Submitted by: Andr�� Malo
+    Reviewed by: jorton, mjc
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@105131 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e29f8e261960e178d08c4e0a2f82058c0835e512 : Joe Orton <jorton@apache.org> : Wed Sep 15 11
+commit e29f8e261960e178d08c4e0a2f82058c0835e512
+Author: Joe Orton <jorton@apache.org>
+Date:   Wed Sep 15 11:44:05 2004 +0000
+
+    * server/util.c (ap_resolve_env): Rewrite to avoid buffer overflows.
+    
+    Submitted by: Andr�� Malo
+    Reviewed by: jorton, mjc
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@105130 13f79535-47bb-0310-9956-ffa450edef68
+
+
+5fa564e9c3c2b3e4997fdfa8ab224cec74728504 : Joe Orton <jorton@apache.org> : Sat Sep 11 09
+commit 5fa564e9c3c2b3e4997fdfa8ab224cec74728504
+Author: Joe Orton <jorton@apache.org>
+Date:   Sat Sep 11 09:57:12 2004 +0000
+
+    Fix format string warnings in proxy_ajp on 64-bit platforms:
+    
+    * modules/proxy/ajp_header.c (ajp_send_data_msg): Use
+    APR_SIZE_T_FMT.
+    
+    * modules/proxy/ajp_link.c (ajp_ilink_receive): Don't pass
+    \n to ap_log_error; do use APR_SIZE_T_FMT.
+    
+    * modules/proxy/ajp_msg.c (ajp_msg_dump, ajp_msg_check_header,
+    ajp_msg_copy): Use APR_SIZE_T_FMT.
+    (ajp_log_overflow): New function.
+    (ajp_msg_{append,peek,get}_*): Use it.
+    
+    * modules/proxy/proxy_ajp.c (ap_proxy_ajp_request): Use
+    APR_SIZE_T_FMT.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@105071 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a1634706ec21cae01c1702fb0fe1729fcdcc4c51 : William A. Rowe Jr <wrowe@apache.org> : Tue Aug 17 16
+commit a1634706ec21cae01c1702fb0fe1729fcdcc4c51
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Tue Aug 17 16:34:51 2004 +0000
+
+      Eliminate several unused variables, observe a file size -> cache entry size
+      overflow, and reorder a few headers so we compile clean.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@104688 13f79535-47bb-0310-9956-ffa450edef68
+
+
+ae26418e569c429fa4005a68eb1267eee364c37e : Andre Malo <nd@apache.org> : Sun Jul 4 22
+commit ae26418e569c429fa4005a68eb1267eee364c37e
+Author: Andre Malo <nd@apache.org>
+Date:   Sun Jul 4 22:39:06 2004 +0000
+
+    badly encoded urls could cause a null byte skipping (read buffer overflow).
+    (e.g. % as last character).
+    avoid that.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@104168 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1210f177491bc797dc7f95081caedbce58b4b256 : Mark J. Cox <mjc@apache.org> : Fri Jun 11 07
+commit 1210f177491bc797dc7f95081caedbce58b4b256
+Author: Mark J. Cox <mjc@apache.org>
+Date:   Fri Jun 11 07:54:38 2004 +0000
+
+    Receiving a negative content length from a remote server can cause
+    a buffer overflow in later code; reject connection if we receive an invalid
+    header.  CAN-2004-0492
+    PR:
+    Obtained from:
+    Submitted by: Mark Cox
+    Reviewed by: Joe Orton, Bill Stoddard, Jim Jagielski
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@103896 13f79535-47bb-0310-9956-ffa450edef68
+
+
+41f59653b76b8998ffd613c65e4cfc1eb8dd171c : Joe Orton <jorton@apache.org> : Mon Jun 7 10
+commit 41f59653b76b8998ffd613c65e4cfc1eb8dd171c
+Author: Joe Orton <jorton@apache.org>
+Date:   Mon Jun 7 10:18:37 2004 +0000
+
+    Backport from HEAD:
+    
+      * modules/ssl/ssl_engine_kernel.c (ssl_hook_UserCheck): Fix buffer
+      overflow in FakeBasicAuth code if client's subject DN exceeds 6K in
+      length (CVE CAN-2004-0488); switch to using apr-util base64 encoder
+      functions.
+    
+      * modules/ssl/ssl_engine_init.c (ssl_init_Engine): Log the OpenSSL
+      error stack contents if engine load/init fails.
+    
+      * modules/ssl/ssl_engine_log.c (ssl_log_ssl_error): Use %lu to print
+      an unsigned long.
+    
+      * modules/ssl/ssl_engine_log.c (ssl_log_annotate, ssl_log_annotation,
+      ssl_log_ssl_error): const-ify annotation strings and simplify
+      ssl_log_annotation.
+    
+    Reviewed by: Andr�� Malo, Jeff Trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@103867 13f79535-47bb-0310-9956-ffa450edef68
+
+
+cac1ec32751ce924dee93c4b9188e9ec9366e73c : Joe Orton <jorton@apache.org> : Tue May 25 12
+commit cac1ec32751ce924dee93c4b9188e9ec9366e73c
+Author: Joe Orton <jorton@apache.org>
+Date:   Tue May 25 12:09:01 2004 +0000
+
+    * modules/ssl/ssl_engine_kernel.c (ssl_hook_UserCheck): Fix buffer
+    overflow in FakeBasicAuth code if client's subject DN exceeds 6K in
+    length (CVE CAN-2004-0488); switch to using apr-util base64 encoder
+    functions.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk/modules/ssl@103754 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d8f71ba6b7c20cad59faa66c1a9bc93f947e651f : Joe Orton <jorton@apache.org> : Tue May 25 12
+commit d8f71ba6b7c20cad59faa66c1a9bc93f947e651f
+Author: Joe Orton <jorton@apache.org>
+Date:   Tue May 25 12:09:01 2004 +0000
+
+    * modules/ssl/ssl_engine_kernel.c (ssl_hook_UserCheck): Fix buffer
+    overflow in FakeBasicAuth code if client's subject DN exceeds 6K in
+    length (CVE CAN-2004-0488); switch to using apr-util base64 encoder
+    functions.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@103754 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6e8f9817b9ffa581ef0c45659af2b1a8338a05db : Thom May <thommay@apache.org> : Tue May 13 15
+commit 6e8f9817b9ffa581ef0c45659af2b1a8338a05db
+Author: Thom May <thommay@apache.org>
+Date:   Tue May 13 15:39:08 2003 +0000
+
+    Backport htdigest buffer overflow fixes from 2.1
+    Reviewed by: Andre Malo, Jeff Trawick
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/APACHE_2_0_BRANCH@99783 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6f5204f2a595a01d41abd6560a7a0604e1929631 : Thom May <thommay@apache.org> : Thu May 1 13
+commit 6f5204f2a595a01d41abd6560a7a0604e1929631
+Author: Thom May <thommay@apache.org>
+Date:   Thu May 1 13:45:38 2003 +0000
+
+    Forward port a fix for a pair of potential buffer overflows in htdigest from 1.3
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@99680 13f79535-47bb-0310-9956-ffa450edef68
+
+
+50954577dc5eeddad14f55ccbc87e1928f2ca8fc : Thom May <thommay@apache.org> : Wed Apr 30 11
+commit 50954577dc5eeddad14f55ccbc87e1928f2ca8fc
+Author: Thom May <thommay@apache.org>
+Date:   Wed Apr 30 11:43:49 2003 +0000
+
+    Fix a pair of potential buffer overflows in htdigest
+    
+    Obtained from: Martin Schulze <joey@infodrom.org>
+    Reviewed by: William Rowe, Sander Striker, David Reid
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@99659 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d5a6dc2cc23a0e0623f3aebc562d83218f5de70a : Andre Malo <nd@apache.org> : Sun Feb 23 00
+commit d5a6dc2cc23a0e0623f3aebc562d83218f5de70a
+Author: Andre Malo <nd@apache.org>
+Date:   Sun Feb 23 00:05:32 2003 +0000
+
+    uh, oh. Fix possible 1-byte buffer overflow.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@98769 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f71ac4c36d17342fbe024213a2559ca34affbac3 : William A. Rowe Jr <wrowe@apache.org> : Sat Oct 12 16
+commit f71ac4c36d17342fbe024213a2559ca34affbac3
+Author: William A. Rowe Jr <wrowe@apache.org>
+Date:   Sat Oct 12 16:12:14 2002 +0000
+
+      Some good casts - mem_cache cannot overflow with LARGEFILE sized objects.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@97189 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1bc4e041a27dd2984d8978469d1323ed272e9ccf : Jim Jagielski <jim@apache.org> : Sat Sep 28 23
+commit 1bc4e041a27dd2984d8978469d1323ed272e9ccf
+Author: Jim Jagielski <jim@apache.org>
+Date:   Sat Sep 28 23:40:20 2002 +0000
+
+    ab.c was using strncat incorrectly as well as not checking for possible
+    buffer overflow.
+    PR:
+    Obtained from:
+    Submitted by:
+    Reviewed by:
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@97007 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e6cb949501003c112cfcec7c60b0ce3fa0e79d96 : Brian Pane <brianp@apache.org> : Sun Sep 1 21
+commit e6cb949501003c112cfcec7c60b0ce3fa0e79d96
+Author: Brian Pane <brianp@apache.org>
+Date:   Sun Sep 1 21:11:17 2002 +0000
+
+    Eliminated some fixed-size buffers that didn't have proper overflow checks
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@96611 13f79535-47bb-0310-9956-ffa450edef68
+
+
+664e3aac6ddc9935e36e2e1259585b1bb7914f65 : Bill Stoddard <stoddard@apache.org> : Wed Aug 21 13
+commit 664e3aac6ddc9935e36e2e1259585b1bb7914f65
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Wed Aug 21 13:33:07 2002 +0000
+
+    Win32: Fix one byte overflow in ap_get_win32_interpreter when the CGI script
+    has no '\r' or '\n' in the first 1023 bytes.
+    
+    Reported by: Aaron Campbell
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@96464 13f79535-47bb-0310-9956-ffa450edef68
+
+
+d8e059b391e584af957300d59bff37f16d47644f : Aaron Bannert <aaron@apache.org> : Wed May 29 06
+commit d8e059b391e584af957300d59bff37f16d47644f
+Author: Aaron Bannert <aaron@apache.org>
+Date:   Wed May 29 06:42:58 2002 +0000
+
+    Properly detect overflow when reading the hex chunk lines.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@95342 13f79535-47bb-0310-9956-ffa450edef68
+
+
+9bd73bf6409e7b0cf5bd15150cd89d442ca3a35e : Justin Erenkrantz <jerenkrantz@apache.org> : Tue May 28 23
+commit 9bd73bf6409e7b0cf5bd15150cd89d442ca3a35e
+Author: Justin Erenkrantz <jerenkrantz@apache.org>
+Date:   Tue May 28 23:38:31 2002 +0000
+
+    Correctly return 413 when an invalid chunk size is given on input.
+    
+    - If get_chunk_size() returns a negative number, that probably implies
+      an overflow.  So, create a 413 error and pass it to the output filters.
+    - Modify ap_discard_request_body() to return OK quickly if we're a subreq
+      or our status code implies that we will be dropping the connection.
+    - Modify ap_die() so that if the new status implies that we will drop
+      the connection, that we correctly indicate that we can not keepalive
+      this connection.  (Without this, the error is returned, but the connection
+      is not closed.)
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@95331 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6d04eed40982ae64cbab037b007aafcae244a243 : Bill Stoddard <stoddard@apache.org> : Mon May 6 17
+commit 6d04eed40982ae64cbab037b007aafcae244a243
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Mon May 6 17:23:49 2002 +0000
+
+    Protect from buffer overflow when populating a HEAP based cache object.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@94965 13f79535-47bb-0310-9956-ffa450edef68
+
+
+2272922051b3f1525ea9e211ce5bfe217a33f868 : Bill Stoddard <stoddard@apache.org> : Mon Mar 4 17
+commit 2272922051b3f1525ea9e211ce5bfe217a33f868
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Mon Mar 4 17:13:08 2002 +0000
+
+    Bail on computing the amount of bytes in a brigade if any of the buckets
+    have indeterminate length (e.g., a pipe bucket). Passing an invalid length
+    into mod_mem_cache can cause it to overflow its cache buffer.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@93698 13f79535-47bb-0310-9956-ffa450edef68
+
+
+62aef5b8162ceb91a2069e507e8d193c9742231e : Brian Pane <brianp@apache.org> : Sun Jan 13 21
+commit 62aef5b8162ceb91a2069e507e8d193c9742231e
+Author: Brian Pane <brianp@apache.org>
+Date:   Sun Jan 13 21:30:14 2002 +0000
+
+    A modification to reduce the memory usage of the server:
+    Reduced the initial size of the r->headers_in and r->subprocess_env
+    tables...this saves us 600 bytes per request, which (based on tests
+    I just ran) helps keep r->pool from overflowing its initial 8KB
+    allocation and having to alloc another 8KB block.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@92843 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6a1c5bf7c016a6804d745fac771dd2700f10b39e : Justin Erenkrantz <jerenkrantz@apache.org> : Sat Oct 20 18
+commit 6a1c5bf7c016a6804d745fac771dd2700f10b39e
+Author: Justin Erenkrantz <jerenkrantz@apache.org>
+Date:   Sat Oct 20 18:27:15 2001 +0000
+
+    Oh, don't you love buffer overflows?
+    We need to allocate storage space for the terminating NULL AND the extra /
+    we may tack on to the string at some point.
+    
+    How in the hell the stars were aligned for this to corrupt newv via the
+    strcat at line 580 is unknown.
+    
+    Resolves segfault seen on daedalus.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@91607 13f79535-47bb-0310-9956-ffa450edef68
+
+
+36f360a8bb83551830cb3367116a3fa4b9b2d409 : Jeff Trawick <trawick@apache.org> : Wed Sep 19 18
+commit 36f360a8bb83551830cb3367116a3fa4b9b2d409
+Author: Jeff Trawick <trawick@apache.org>
+Date:   Wed Sep 19 18:47:31 2001 +0000
+
+    if we're gonna trash the connection due to a queue overflow, at the
+    very least we should close the socket and write a log message (mostly
+    to aid debugging, as this is a showstopper problem)
+    
+    this is no fix; there is a design issue to consider; hopefully this
+    will
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@91089 13f79535-47bb-0310-9956-ffa450edef68
+
+
+fb7cc17a4c5fcfa98e3eb370959a08f9bb7e9079 : Allan K. Edwards <ake@apache.org> : Fri Sep 1 14
+commit fb7cc17a4c5fcfa98e3eb370959a08f9bb7e9079
+Author: Allan K. Edwards <ake@apache.org>
+Date:   Fri Sep 1 14:47:20 2000 +0000
+
+    Fix default Timeout & KeepaliveTimeout. Still need to limit directive
+    values to prevent integer microsecond overflow.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/trunk@86168 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6a4413cdc51085da60905c5dfe446e7666de9a7a : Bill Stoddard <stoddard@apache.org> : Fri Mar 19 23
+commit 6a4413cdc51085da60905c5dfe446e7666de9a7a
+Author: Bill Stoddard <stoddard@apache.org>
+Date:   Fri Mar 19 23:18:01 1999 +0000
+
+    Fix Win32 CGI buffer overflow
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@82945 13f79535-47bb-0310-9956-ffa450edef68
+
+
+44584659d0a4b7d989a9e116e1bbcae26b0f9c02 : Ralf S. Engelschall <rse@apache.org> : Wed Mar 10 12
+commit 44584659d0a4b7d989a9e116e1bbcae26b0f9c02
+Author: Ralf S. Engelschall <rse@apache.org>
+Date:   Wed Mar 10 12:11:57 1999 +0000
+
+    Fix a bug in the calculation of the buffer size for the line continuation
+    facility in Apache's configuration files which could lead to a buffer overflow
+    situation.
+    
+    Submitted by: Thomas Devanneaux <Thomas.Devanneaux@enst.fr>
+    Reviewed by: Ralf S. Engelschall
+    PR: 3617
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@82889 13f79535-47bb-0310-9956-ffa450edef68
+
+
+eb92acc84db1d4f84cb7a11ee70705395db42d2b : Ralf S. Engelschall <rse@apache.org> : Wed Mar 10 11
+commit eb92acc84db1d4f84cb7a11ee70705395db42d2b
+Author: Ralf S. Engelschall <rse@apache.org>
+Date:   Wed Mar 10 11:06:10 1999 +0000
+
+    Link the shared core bootstrap program (``SHARED_CORE'') also against libap.a
+    and use it's ap_snprintf() instead of sprintf() to avoid possible buffer
+    overflows.
+    
+    Hint given by: John Bley <jbb6@acpub.duke.edu>
+    Submitted by: Ralf S. Engelschall
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@82885 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a763becca49e71d78b335277d7ac49b39ca3d8fe : Ralf S. Engelschall <rse@apache.org> : Thu Sep 10 09
+commit a763becca49e71d78b335277d7ac49b39ca3d8fe
+Author: Ralf S. Engelschall <rse@apache.org>
+Date:   Thu Sep 10 09:23:59 1998 +0000
+
+    Fix possible buffer overflow situation in suexec.c.
+    
+    PS: The PR#2790 provides a few more fixes for problematic
+        things in suexec.c. Because we have to be very carefully here, other
+        should review them, too. That's why I commit only some of the fixes from
+        this patch.
+    
+        The other problem we _really_ have to fix is the docroot-check at line
+        428. But here the patch from the PR submitter seems to introduce a new
+        problem: It accesses cwd[dlen] which can be out of memory bounds. Here
+        memory bounds have to checked first.
+    
+        So, I would appreciate when someothers look at PR#2790, please.  At least
+        the docroot-check _has_ to be fixed by us! But correctly, i.e. without
+        introducing new problems, of course ;_)
+    
+    Submitted by: Jeff Stewart <jws@purdue.edu>
+    Reviewed by: Ralf S. Engelschall
+    PR: 2790
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@82028 13f79535-47bb-0310-9956-ffa450edef68
+
+
+075a98ba908232ec5c1a35422f64bc338d4f0438 : Martin Kraemer <martin@apache.org> : Wed May 27 15
+commit 075a98ba908232ec5c1a35422f64bc338d4f0438
+Author: Martin Kraemer <martin@apache.org>
+Date:   Wed May 27 15:29:30 1998 +0000
+
+    [SECURITY] A possible buffer overflow in the ftp proxy code was fixed.
+    (Large FTP responses could overflow a buffer)
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@81372 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f4f26f475e0189f0d9e4fc2d8e2f1f0bb4ac48b6 : Ben Laurie <ben@apache.org> : Sat May 9 15
+commit f4f26f475e0189f0d9e4fc2d8e2f1f0bb4ac48b6
+Author: Ben Laurie <ben@apache.org>
+Date:   Sat May 9 15:00:50 1998 +0000
+
+    Check for buffer overflows.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@81217 13f79535-47bb-0310-9956-ffa450edef68
+
+
+6dda298548914f510a1b0ede2e62622012d33ede : Ralf S. Engelschall <rse@apache.org> : Thu Mar 5 07
+commit 6dda298548914f510a1b0ede2e62622012d33ede
+Author: Ralf S. Engelschall <rse@apache.org>
+Date:   Thu Mar 5 07:50:31 1998 +0000
+
+    Make sure the returned value of rand() is not greater then RAND_MAX on systems
+    like SunOS where we guessed the RAND_MAX value. This the way Ben requested but
+    without the "+1" because this actually leaded to an overflow warning under
+    compiletime and is not really needed because this is random number generating
+    functions where it doesn't count because of the additional bounding checks.
+    I've tested it now under FreeBSD 2.1.5 _and_ SunOS 4.1.3 and it both correctly
+    gives numbers between 1 and N when run with l=1 and h=N. Nothing more is
+    needed....
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@80406 13f79535-47bb-0310-9956-ffa450edef68
+
+
+1671e3a184b8098923f9ccb28cd101f3ee608a08 : dgaudet <dgaudet@apache.org> : Tue Jan 20 01
+commit 1671e3a184b8098923f9ccb28cd101f3ee608a08
+Author: dgaudet <dgaudet@apache.org>
+Date:   Tue Jan 20 01:54:02 1998 +0000
+
+    note win32 buffer overflow possibilities
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@79917 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e287d520a820a7cbe8feacf62e145cd517be6eea : dgaudet <dgaudet@apache.org> : Tue Jan 20 01
+commit e287d520a820a7cbe8feacf62e145cd517be6eea
+Author: dgaudet <dgaudet@apache.org>
+Date:   Tue Jan 20 01:44:42 1998 +0000
+
+    SECURITY: Fix a possible buffer overflow in logresolve.  This is
+    only an issue on systems without a MAXDNAME define or where the
+    resolver returns domain names longer than MAXDNAME.
+    
+    PR:
+    Obtained from:
+    Submitted by:
+    Reviewed by:    Martin Kraemer, Mark J Cox, Dean Gaudet, Randy Terbush
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@79914 13f79535-47bb-0310-9956-ffa450edef68
+
+
+8595d19b2673522ad378cf1617e9b94e638d6e3c : Ben Laurie <ben@apache.org> : Sun Dec 14 14
+commit 8595d19b2673522ad378cf1617e9b94e638d6e3c
+Author: Ben Laurie <ben@apache.org>
+Date:   Sun Dec 14 14:53:47 1997 +0000
+
+    Fix buffer overflow problem.
+    PR: 1378
+    Submitted by:	malcolm@mgdev.demon.co.uk
+    Reviewed by:	Ben Laurie
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@79700 13f79535-47bb-0310-9956-ffa450edef68
+
+
+79c8b3ba930271e41fa9aa3b7b59bcb8df6d8884 : Roy T. Fielding <fielding@apache.org> : Sun Oct 5 07
+commit 79c8b3ba930271e41fa9aa3b7b59bcb8df6d8884
+Author: Roy T. Fielding <fielding@apache.org>
+Date:   Sun Oct 5 07:47:46 1997 +0000
+
+    Reduce what is written by aplog_error() by excluding filename if it
+    is NULL, line number if it is "-", and errno if the new APLOG_NOERRNO bit
+    is set in level parameter.  Do it all with a lot less string copying --
+    use snprintf incrementally to build up the entire buffer.
+    When server_conf is NULL use stderr, since that is necessary to do some
+    things during startup and other odd cases (i.e. SEGV).
+    Fixed a buffer overflow with syslog stuff using sprintf().
+    
+    Submitted by:	Ken Coar and Dean Gaudet
+    Reviewed by:	Roy Fielding
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@79331 13f79535-47bb-0310-9956-ffa450edef68
+
+
+a59e6ddaa11c6f951ab348b1dd1d5c22f361cd26 : Marc Slemko <marc@apache.org> : Sat Jul 12 20
+commit a59e6ddaa11c6f951ab348b1dd1d5c22f361cd26
+Author: Marc Slemko <marc@apache.org>
+Date:   Sat Jul 12 20:20:35 1997 +0000
+
+    General mod_mime_magic cleanup.
+    
+    The fixes include:
+    
+    	- change DEBUG define to MIME_MAGIC_DEBUG to avoid namespace
+    	  collisions.
+    	- change fprintf(stderr, ...) into log_printf
+    	- remove '\n's from log_printf calls
+    	- couple of possible buffer overflow cleanups
+    	- minor spelling cleanup
+    
+    Reviewed by:	Ian Kluft, Jim Jagielski
+    Submitted by:
+    Obtained from:
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@78599 13f79535-47bb-0310-9956-ffa450edef68
+
+
+16b25dbfaf5a187b773ec7ae65e7ad0dc9b98504 : Roy T. Fielding <fielding@apache.org> : Fri Mar 7 14
+commit 16b25dbfaf5a187b773ec7ae65e7ad0dc9b98504
+Author: Roy T. Fielding <fielding@apache.org>
+Date:   Fri Mar 7 14:43:52 1997 +0000
+
+    Log an error message if we get a request header that is too long,
+    since it may indicate a buffer overflow attack.
+    
+    Submitted by: Marc Slemko
+    Reviewed by: Roy Fielding, Chuck Murcko, Dean Gaudet, Jim Jagielski
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77710 13f79535-47bb-0310-9956-ffa450edef68
+
+
+553ba576f767fcdeae0856cbef129569c98f9fa1 : Marc Slemko <marc@apache.org> : Thu Feb 6 05
+commit 553ba576f767fcdeae0856cbef129569c98f9fa1
+Author: Marc Slemko <marc@apache.org>
+Date:   Thu Feb 6 05:16:56 1997 +0000
+
+    Bug fix for buffer overflow patches.
+    
+    Submitted by: lawrence@pacific.net.sg
+    Reviewed by: Marc Slemko, Ralf Engelschall
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77565 13f79535-47bb-0310-9956-ffa450edef68
+
+
+dbafef17dd1a6f697b4a12758af0b1b838160fa9 : Marc Slemko <marc@apache.org> : Wed Jan 29 23
+commit dbafef17dd1a6f697b4a12758af0b1b838160fa9
+Author: Marc Slemko <marc@apache.org>
+Date:   Wed Jan 29 23:51:37 1997 +0000
+
+    Fix mod_rewrite truncation error introduced by buffer overflow
+    patches.  Closes PR#133.
+    
+    Reviewed by: Randy Terbush
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77531 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e1e85cc32348d1b2aff8aa6ef6e876817a4765e8 : Marc Slemko <marc@apache.org> : Tue Jan 28 01
+commit e1e85cc32348d1b2aff8aa6ef6e876817a4765e8
+Author: Marc Slemko <marc@apache.org>
+Date:   Tue Jan 28 01:03:06 1997 +0000
+
+    Fix output corruption bug introduced by buffer overflow fixes.
+    
+    Reviewed by: Randy Terbush, Marc Slemko, Rasmus Lerdorf
+    Submitted by: Dean Gaudet
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77522 13f79535-47bb-0310-9956-ffa450edef68
+
+
+e8b602234e9a3e53b72165cdbc1948c31a9eaf07 : Jim Jagielski <jim@apache.org> : Mon Jan 20 04
+commit e8b602234e9a3e53b72165cdbc1948c31a9eaf07
+Author: Jim Jagielski <jim@apache.org>
+Date:   Mon Jan 20 04:28:34 1997 +0000
+
+    Change from sprintf() to snprintf() to avoid
+    and possible prevent buffer overflows
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77459 13f79535-47bb-0310-9956-ffa450edef68
+
+
+f7a077bb665315dbf77651881aa42997b40182c5 : Randy Terbush <randy@apache.org> : Sun Jan 12 00
+commit f7a077bb665315dbf77651881aa42997b40182c5
+Author: Randy Terbush <randy@apache.org>
+Date:   Sun Jan 12 00:45:54 1997 +0000
+
+    Fix a buffer overflow problem which could allow unauthorized access.
+    Reviewed by: Marc Slemko, Randy Terbush, Ben Laurie
+    Submitted by: Alfred Huger <ahuger@secnet.com>
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3@77419 13f79535-47bb-0310-9956-ffa450edef68
+
+
+c1922586335b7ece88a48ed99bbbe6b7879d0c28 : Ben Laurie <ben@apache.org> : Sat Dec 28 18
+commit c1922586335b7ece88a48ed99bbbe6b7879d0c28
+Author: Ben Laurie <ben@apache.org>
+Date:   Sat Dec 28 18:16:10 1996 +0000
+
+    Make create_argv() safe from overflows.
+    
+    
+    git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/1.3.x@77365 13f79535-47bb-0310-9956-ffa450edef68
+
+
+
+

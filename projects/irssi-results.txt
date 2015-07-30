@@ -1,0 +1,371 @@
+git clone https://github.com/irssi/irssi.git
+
+commit 875adf35a0f2da089662da42dd1cf44474527064
+Type: memory leak
+File: src/fe-text/lastlog.c
+PC: true
+
+
+commit 66c9e22622300ee09a3f886404b628b20f57e1c6
+Type: memory leak
+File: src/core/expandos.c
+PC: true
+
+
+commit 49c8ba40584ef17cd089d3bb3d6dd44f7c059828
+Type: memory leak
+File: src/fe-common/core/fe-recode.c
+PC: HAVE_GLIB2
+
+commit 418136656df8a2a002a74bd3f665717abfb11d65
+Type: memory leak
+File: src/irc/core/bans.c
+PC: true
+
+commit e159d8b2f05a57f1e8fa35595f4899b56e06503c
+Type: memory leak
+File: src/irc/dcc/dcc-get.c
+PC: true
+
+
+commit bd8712dde1b4d9ad2ee261811bf41163e28f02cd
+Type: memory leak
+File: src/fe-common/core/fe-recode.c
+PC: HAVE_GLIB2
+
+
+commit bd8712dde1b4d9ad2ee261811bf41163e28f02cd
+Type: memory leak
+File: src/core/servers-reconnect.c
+PC: true
+
+commit bd8712dde1b4d9ad2ee261811bf41163e28f02cd
+Type: memory leak
+File: src/fe-common/core/fe-ignore.c
+PC: true
+
+commit bd8712dde1b4d9ad2ee261811bf41163e28f02cd
+Type: memory leak
+File: src/irc/notifylist/notify-commands.c
+PC: true
+
+commit 2e81e13842a26e0e94fffd8a8fb41e64c65c501c
+Type: memory leak
+File: src/core/commands.c
+PC: true
+
+
+commit 19e800cf236bc8258b9a19a0685dac383f9f82ec
+Type: memory leak
+File: src/irc/core/channel-events.c
+PC: true
+
+commit 19e800cf236bc8258b9a19a0685dac383f9f82ec
+Type: memory leak
+File: src/core/channels.c
+PC: true
+
+commit 5f81451df63acf5a809b5a551bc1b1e3e63ccfa0
+Type: memory leak
+File: src/irc/proxy/dump.c
+PC: true
+
+
+commit 8ea717b67609a7ddaa6481e49fc638a4b40e84e8
+Type: memory leak
+File: src/core/recode.c
+PC: HAVE_GLIB2
+
+
+
+commit 1121a3fcb7c360eaa345d17891e0a243082d4f71
+Type: memory leak
+File: src/core/network-openssl.c
+PC: G_CAN_INLINE
+
+
+commit f181dca67d62e1bf68eb703e97bf0f9f6190c892
+Type: memory leak
+File: src/fe-text/gui-readline.c
+PC: true
+
+
+commit 747d0f19ca54053601a61f00f331a174daa3afb9
+Type: memory leak
+File: src/irc/core/irc-servers.c
+PC: true
+
+commit 747d0f19ca54053601a61f00f331a174daa3afb9
+Type: memory leak
+File: src/irc/core/servers-redirect.c
+PC: true
+
+
+commit d74d284463d4aa490b789f9be45a3e478929b0f7
+Type: memory leak
+File: src/core/channels.c
+PC: true
+
+
+commit 117f27eb923c54bfc468e0e3ca61c4c403784544
+Type: memory leak
+File: src/fe-text/textbuffer-view.c
+PC: true
+
+
+
+commit 3f59c180824b4ce3d9018d42de1b400e5fea635f
+Type: memory leak
+File: src/irc/core/netsplit.c
+PC: true
+
+
+commit 5bab99f096fa7497785a98e0538fcb367b93ddbf
+Type: memory leak
+File: src/fe-text/statusbar.c
+PC: true
+
+commit 5bab99f096fa7497785a98e0538fcb367b93ddbf
+Type: memory leak
+File: src/irc/core/channels-query.c
+PC: true
+
+
+
+
+commit 53d5c92cf494866296ae8082804dddcdef656797
+Type: memory leak
+File: src/core/args.c
+PC: true
+
+commit 53d5c92cf494866296ae8082804dddcdef656797
+Type: memory leak
+File: src/core/servers.c
+PC: true
+
+commit 2752599e7a806f028a5ba572a8678d1801b93fbb
+Type: memory leak
+File: src/fe-text/gui-readline.c
+PC: true
+
+
+commit 559a5be42f860109a81a68070b43dd9b93f40e9c
+Type: memory leak
+File: src/fe-common/core/hilight-text.c
+PC: true
+
+
+commit 002960765fc40db35f29b8a844aabd43389737ff
+Type: memory leak
+File: src/fe-common/core/fe-windows.c
+PC: true
+
+
+commit f167516d23badb13fa99b8aba1b7bb784f24386b
+Type: memory leak
+File: src/core/modules.c
+PC: HAVE_GMODULE
+
+
+commit 95fb3f5623f606b71c6e7d3bcd2527f23345f330
+Type: memory leak
+File: src/irc/flood/autoignore.c
+PC: true
+
+
+commit 60df6d7be8c54d0336e5d116e44b450d0f412fc6
+Type: memory leak
+File: src/fe-common/core/chat-completion.c
+PC: true
+
+commit 131825ea0e3465c1d88e776990b972ee15abe208
+Type: memory leak
+File: src/fe-common/core/window-commands.c
+PC: true
+
+commit 8dab451d18a7b866a927eec880bdc0f92af3deaf
+Type: memory leak
+File: src/lib-config/get.c
+PC: true
+
+commit c451c94c6838223e7476104b3c52924eff9b9924
+Type: memory leak
+File: src/irc/core/massjoin.c
+PC: true
+
+
+commit 627d288a49fcfce3f06901d7c710eeae459654c1
+Type: memory leak
+File: src/fe-common/irc/completion.c
+PC: true
+
+
+commit 80c03f457223d7403b1a59daac265e3dab80535c
+Type: memory leak
+File: src/fe-common/core/window-commands.c
+PC: true
+
+
+commit ae25925a1fdceeddff25076b5ff557e14f1aa4cb
+Type: memory leak
+File: src/irc/flood/flood.c
+PC: true
+
+commit 3876cd9417a4820f2010c39ebf6e7bb95cd9c937
+Type: segmentation fault
+File: src/fe-common/core/windows-layout.c
+PC: true
+
+
+
+commit ec83dd762ada05170a9c80c6582c4754c66f9f0d
+Type: segmentation fault
+File: src/core/network-openssl.c
+PC: HAVE_OPENSSL
+
+commit ec83dd762ada05170a9c80c6582c4754c66f9f0d
+Type: segmentation fault
+File: src/core/network.c
+PC: true
+
+
+commit df69be65d42cdcdd4fc2025042de72f5792e372d
+Type: segmentation fault
+File: src/irc/dcc/dcc.c
+PC: true
+
+commit f9345a7d3c48e33807906c34b92e8a759df26116
+Type: segmentation fault
+File: src/fe-text/terminfo-core.c
+PC: !HAVE_TERMINFO
+
+
+commit 5b2d189ab5e5d618a99598e23ef91acceddbd239
+Type: uninitialized variable
+File: src/core/modules-load.c
+PC: HAVE_GMODULE
+
+
+commit daf6adc0b098fdae473e8276cab88ebec6a3ae09
+Type: uninitialized variable
+File: src/core/settings.c
+PC: true
+
+commit daf6adc0b098fdae473e8276cab88ebec6a3ae09
+Type: uninitialized variable
+File: src/core/special-vars.c
+PC: true
+
+commit daf6adc0b098fdae473e8276cab88ebec6a3ae09
+Type: uninitialized variable
+File: src/irc/core/servers-redirect.c
+PC: true
+
+
+-- OVERFLOW
+
+71442509d092e900c46997b6f4d2fcddfc876251 : Timo Sirainen <cras@irssi.org> : Tue Nov 5 13
+commit 71442509d092e900c46997b6f4d2fcddfc876251
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Tue Nov 5 13:10:58 2002 +0000
+
+    Fixed some "buffer overflow" alerts when playing with buggy /EVAL values.
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2984 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+9405dc2ce83d7d22ce72a43cab6844afa36d4c84 : Timo Sirainen <cras@irssi.org> : Mon May 6 04
+commit 9405dc2ce83d7d22ce72a43cab6844afa36d4c84
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Mon May 6 04:58:47 2002 +0000
+
+    fixed buffer overflow - happened at least when hitting ^A after writing
+    enough text to input line. usually didn't crash..
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2755 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+7b1d5ed41aeb7d6dc99655281771f1436dfa5a22 : Timo Sirainen <cras@irssi.org> : Wed Mar 13 00
+commit 7b1d5ed41aeb7d6dc99655281771f1436dfa5a22
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Wed Mar 13 00:40:12 2002 +0000
+
+    added some debugging code to irssi_bless_iobject() - can it really be an
+    overflow? :)
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2590 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+649a962b99b2859e58be33b043baa89eed40f02c : Timo Sirainen <cras@irssi.org> : Mon Feb 4 21
+commit 649a962b99b2859e58be33b043baa89eed40f02c
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Mon Feb 4 21:26:03 2002 +0000
+
+    Ahem.. my little kludge had a buffer overflow :)
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2392 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+0ffcbdc9b4d7bf247a6ee0f7884f0648072f94d5 : Timo Sirainen <cras@irssi.org> : Mon Nov 19 20
+commit 0ffcbdc9b4d7bf247a6ee0f7884f0648072f94d5
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Mon Nov 19 20:30:19 2001 +0000
+
+    Removed memory debugging code. It's a lot easier to check for buffer
+    overflows with electric fence and memory leaks with memprof.
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2095 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+9833844f38ccbb3a2679c99b4d9a6f9c2e1e5f8d : Timo Sirainen <cras@irssi.org> : Thu Nov 1 22
+commit 9833844f38ccbb3a2679c99b4d9a6f9c2e1e5f8d
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Thu Nov 1 22:30:45 2001 +0000
+
+    Buffer overflow fix (read-only, might have caused some crashes).
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1953 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+f81291622fee669a481ed25a15e27dddf3cbaf23 : Timo Sirainen <cras@irssi.org> : Wed Jul 25 19
+commit f81291622fee669a481ed25a15e27dddf3cbaf23
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Wed Jul 25 19:16:21 2001 +0000
+
+    buffer overflow fix
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1647 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+0530039b9f5bd4eadc1a4f4dda202d3bd32908ee : Timo Sirainen <cras@irssi.org> : Sun Mar 4 09
+commit 0530039b9f5bd4eadc1a4f4dda202d3bd32908ee
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Sun Mar 4 09:04:53 2001 +0000
+
+    /SET names_max_width - buffer overflowed if it was too small..
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1349 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+93173356bb2a48aebd185e689eeb3ca5f2e31a02 : Timo Sirainen <cras@irssi.org> : Mon May 29 16
+commit 93173356bb2a48aebd185e689eeb3ca5f2e31a02
+Author: Timo Sirainen <cras@irssi.org>
+Date:   Mon May 29 16:37:00 2000 +0000
+
+    --with-modules=xxx builds now specified extra modules to irssi binary.
+    memdebug (if enabled) doesn't now by default check for buffer overflows
+    since it's a huge slowup.
+    
+    
+    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@250 dbcabf3a-b0e7-0310-adc4-f8d773084564
+
+
+

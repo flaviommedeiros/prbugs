@@ -1,0 +1,14 @@
+git clone https://github.com/LuaDist/lua.git
+
+commit 8264a494b9c0a665150fd6e55891a178fa00551b
+Type: uninitialized variable
+File: src/loadlib_rel.c
+PC: __CYGWIN__....
+
+
+commit 8264a494b9c0a665150fd6e55891a178fa00551b
+Type: resource leak
+File: src/loadlib_rel.c
+PC: __CYGWIN__....
+
+

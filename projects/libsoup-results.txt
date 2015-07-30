@@ -1,0 +1,745 @@
+git clone https://github.com/GNOME/libsoup.git
+
+--OVERFLOWS
+
+551a954a4aad81432c4c2e97b2df08a77ea4ee37 : Xavier Claessens <xavier.claessens@collabora.com> : Mon Jun 15 17
+commit 551a954a4aad81432c4c2e97b2df08a77ea4ee37
+Author: Xavier Claessens <xavier.claessens@collabora.com>
+Date:   Mon Jun 15 17:19:19 2015 -0400
+
+    xmlrpc: Add support for nonstandard <i8>
+    
+    uint32 can overflow a int32 so it is serialized as <i8>.
+    uint64 can overflow a int64 so it still can't be serialized.
+    
+    For maximum flexibility on the parser side we accept all types
+    as long as the value is in range.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=746495
+
+
+d0388e6efac759ae13a7812ae1114c056fafe1e8 : Jens Georg <mail@jensge.org> : Sat Jun 25 12
+commit d0388e6efac759ae13a7812ae1114c056fafe1e8
+Author: Jens Georg <mail@jensge.org>
+Date:   Sat Jun 25 12:54:44 2011 +0200
+
+    soup-message-io.c: Fix integer overflow on 32bit
+    
+    Fixes a bug serving large files, eg, in Rygel.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=638468
+
+
+3ed4ea046fdc4c41c8191225c7da05a04e5a4245 : Dan Winship <danw@gnome.org> : Fri Mar 11 06
+commit 3ed4ea046fdc4c41c8191225c7da05a04e5a4245
+Author: Dan Winship <danw@gnome.org>
+Date:   Fri Mar 11 06:52:56 2011 -0500
+
+    SoupCookieJar: catch overflows when parsing very distant dates
+    
+    Our APIs use an int for max_age, which meant that when reading a
+    cookie file/db written by another program on a 64-bit architecture, a
+    very large max_age would overflow. Fix things up to avoid that. Since
+    we can't change the APIs to use a long for max_age, this means that we
+    will end up expiring the cookie "early" (eg, in 20 years rather than
+    50).
+    
+    Based on a patch from Mark Starovoytov
+    https://bugzilla.gnome.org/show_bug.cgi?id=643462
+
+
+f0bc0865c7ab104cb6ab91b05aa49308e43f7265 : Ettore Perazzoli <ettore@src.gnome.org> : Wed Feb 13 22
+commit f0bc0865c7ab104cb6ab91b05aa49308e43f7265
+Author: Ettore Perazzoli <ettore@src.gnome.org>
+Date:   Wed Feb 13 22:48:02 2002 +0000
+
+    Set `decodelen' to be 5 bytes less than the challenge's length to avoid
+    
+    * src/libsoup/soup-ntlm.c (soup_ntlm_response): Set `decodelen' to
+    be 5 bytes less than the challenge's length to avoid overflowing
+    the input buffer.
+
+
+06bb60dc2108ceb8f212dc3d81a587eeb7c57a99 : alex <alex> : Tue Jan 23 07
+commit 06bb60dc2108ceb8f212dc3d81a587eeb7c57a99
+Author: alex <alex>
+Date:   Tue Jan 23 07:31:21 2001 +0000
+
+    check environment for SOUP_NO_ASYNC_CONNECT, and if set use syncronous
+    
+    * soup-context.c (soup_context_get_connection): check environment for SOUP_NO_ASYNC_CONNECT, and if set use syncronous name lookup and connect. Use this when debugging.
+    
+    * soup-queue.c (soup_read_chunk): fix buffer overflow.
+    
+    * soup-queue.c (soup_queue_read_async): set header_len to include trailing \r\n\r\n as this makes more sense.
+    
+    * soup-serializer.[ch] (soup_serializer_get_xml_doc): allows getting at the serializer's internal xml tree.
+    
+    * soup.h: install soup-serializer.h.
+
+
+-- uNINIT VARS
+
+e4bf420dabb264e60b77c45da6376ea27a8bbfa1 : Philip Withnall <philip.withnall@collabora.co.uk> : Mon Apr 27 11
+commit e4bf420dabb264e60b77c45da6376ea27a8bbfa1
+Author: Philip Withnall <philip.withnall@collabora.co.uk>
+Date:   Mon Apr 27 11:09:29 2015 +0100
+
+    tests: Set default values for some variables
+    
+    This eliminates a compiler warning about potentially using uninitialised
+    variables. It’s not actually possible for this happen (the variables are
+    only used on conditional paths with the same conditions as those where
+    they were previously set), but it’s easy enough to make this change to
+    shut the compiler up.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=748514
+
+
+060b86b7d13cff079fb51548971b72bf9065a01e : Dan Winship <danw@src.gnome.org> : Sat Apr 5 13
+commit 060b86b7d13cff079fb51548971b72bf9065a01e
+Author: Dan Winship <danw@src.gnome.org>
+Date:   Sat Apr 5 13:56:22 2008 +0000
+
+    	Misc fixes noticed by "sparse" or by running gcc with additional
+    	-W flags
+    
+    	* libsoup/soup-auth-manager-ntlm.c (ntlm_authorize_post): fix a
+    	potentially uninitialized variable. (Grumble. gcc needs
+    	-Wdo-optimization-so-you-can-generate-code-flow-related-warnings-
+    	but-then-emit-unoptimized-code-for-ease-of-debugging)
+    
+    	* libsoup/soup-gnutls.c (soup_gnutls_channel_funcs): make this
+    	static
+    
+    	* libsoup/soup-uri.c (uri_decoded_copy, uri_normalized_copy): add
+    	"static". (This doesn't change the generated code; the prototype
+    	was already declared static and so gcc was treating the function
+    	as static even though the main declaration *wasn't* declared
+    	static. I'm not sure if this is a bug in gcc or an oddity of the
+    	spec, but it's confusing, so...)
+    
+    	* libsoup/soup-xmlrpc.c (soup_xmlrpc_build_method_response):
+    	s/FALSE/NULL/
+    
+    	* libsoup/soup-xmlrpc.h: add G_GNUC_PRINTF to
+    	soup_xmlrpc_build_format
+    
+    	* tests/*.c: misc minor fixes, mostly involving missing "const"s
+    	and "static"s to get better warnings, and then remove some unused
+    	variables.
+    
+    	* tests/continue-test.c (do_message): fix a crash when the test
+    	fails
+    
+    	* tests/test-utils.h (debug_printf): add G_GNUC_PRINTF to
+    	prototype
+    
+    svn path=/trunk/; revision=1123
+
+
+9f2cb1e4fc74658efb5e8cc7126472dcc3c4dfe8 : Dan Winship <danw@src.gnome.org> : Mon Nov 18 15
+commit 9f2cb1e4fc74658efb5e8cc7126472dcc3c4dfe8
+Author: Dan Winship <danw@src.gnome.org>
+Date:   Mon Nov 18 15:26:19 2002 +0000
+
+    Don't use s6_addr32 since it's apparently non-portable. Use s6_addr
+    
+    	* libsoup/soup-address.c (soup_address_hash): Don't use s6_addr32
+    	since it's apparently non-portable. Use s6_addr instead.
+    	(soup_gethostbyaddr): fix a sometimes-uninitialized variable.
+    
+    	* libsoup/soup-message.c (soup_message_get_request_header, etc):
+    	Remove long-deprecated API.
+    
+    	* libsoup/soup-socket.c (soup_socket_connect): remove unused
+    	variable.
+    
+    	* libsoup/soup-openssl.c (soup_openssl_read): Use gsize.
+    	* libsoup/soup-server.c (cgi_read): Likewise
+    	* libsoup/soup-socks.c (soup_socks_write, soup_socks_read):
+    	Likewise.
+    	* libsoup/soup-ssl-proxy.c (soup_ssl_proxy_readwrite): Likewise.
+    	* libsoup/soup-transfer.c (soup_transfer_read_cb,
+    	soup_transfer_write_cb): Likewise.
+
+
+--SEGFAULTS
+
+f4ca9a57535683db8c5d4599d53e5fb61fce806d : Simon McVittie <simon.mcvittie@collabora.co.uk> : Wed Feb 8 10
+commit f4ca9a57535683db8c5d4599d53e5fb61fce806d
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   Wed Feb 8 10:05:02 2012 +0000
+
+    soup_form_decode_multipart: check that msg really is a non-NULL message
+    
+    If it wasn't, the next line would segfault anyway.
+    
+    Bug: https://bugzilla.gnome.org/show_bug.cgi?id=669479
+    Signed-off-by: Simon McVittie <simon.mcvittie@collabora.co.uk>
+    Reviewed-by: Dan Winship <danw@gnome.org>
+
+
+cbeeb7a0f7f0e8b16f2d382157496f9100218dea : Dan Winship <danw@gnome.org> : Wed Jun 29 10
+commit cbeeb7a0f7f0e8b16f2d382157496f9100218dea
+Author: Dan Winship <danw@gnome.org>
+Date:   Wed Jun 29 10:04:06 2011 -0400
+
+    SoupServer: fix to not allow smuggling ".." into path
+    
+    When SoupServer:raw-paths was set (the default), it was possible to
+    sneak ".." segments into the path passed to the SoupServerHandler,
+    which could then end up tricking some handlers into retrieving
+    arbitrary files from the filesystem. Fix that.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=653258
+
+
+51eb8798c3965b49f3010db82009d36429f28514 : Dan Winship <danw@gnome.org> : Wed Jun 29 10
+commit 51eb8798c3965b49f3010db82009d36429f28514
+Author: Dan Winship <danw@gnome.org>
+Date:   Wed Jun 29 10:04:06 2011 -0400
+
+    SoupServer: fix to not allow smuggling ".." into path
+    
+    When SoupServer:raw-paths was set (the default), it was possible to
+    sneak ".." segments into the path passed to the SoupServerHandler,
+    which could then end up tricking some handlers into retrieving
+    arbitrary files from the filesystem. Fix that.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=653258
+
+
+a7834a0529ad849f993ab2f528172ce7d982f76b : Joe Shaw <joe@ximian.com> : Wed Jul 24 18
+commit a7834a0529ad849f993ab2f528172ce7d982f76b
+Author: Joe Shaw <joe@ximian.com>
+Date:   Wed Jul 24 18:40:48 2002 +0000
+
+    Check the server mode and set up a client or server handshake
+    
+    2002-07-24  Joe Shaw  <joe@ximian.com>
+    
+    	* src/libsoup/soup-nss.c: Check the server mode and set up a
+    	client or server handshake appropriately.
+    
+    	* src/libsoup/soup-server.c (destroy_message): If we're supposed
+    	to close the connection, go ahead and close it.
+    	(message_new): Set the method to NULL, or else we'll segfault
+    	later.
+    	(conn_accept): Call soup_ssl_get_server_iochannel() instead.
+    
+    	* src/libsoup/soup-ssl.c (soup_ssl_get_iochannel_real): Added.
+    	Does all of the heavy lifting from soup_ssl_get_iochannel().
+    	Takes an argument for the SSL handshake type (client or server).
+    	Set IS_SERVER env var for the proxy if we are in server mode.
+    	When checking for the HUP, also get G_IO_ERR and G_IO_NVAL.
+    	Remove an extraneous ref.
+    	(soup_ssl_get_iochannel): Just a wrapper around the above for the
+    	client.
+    	(soup_ssl_get_server_iochannel): Added.  A server-mode wrapper
+    	around the above.
+    
+    	* src/soup-ssl-proxy/soup-openssl.c: Add a server mode global.
+    	(soup_openssl_write): if result is 0, return a G_IO_STATUS_EOF.
+    	(soup_openssl_get_iochannel): If we're in server mode, call
+    	SSL_accept() and SSL_connect() if we're in client mode.
+    	(soup_openssl_init): If we're in server mode, set it on the SSL
+    	context.
+    
+    	* src/soup-ssl-proxy/soup-ssl-proxy.c (main): If SOUP_PROXY_DELAY
+    	is set, sleep for 20 seconds so we can attach gdb to it.  Listen
+    	for G_IO_PRI messages as well.
+
+
+9616db71fb8c77efe25f525b2a0442d8db326fa0 : Alex Graveley <alex@ximian.com> : Sat Dec 1 22
+commit 9616db71fb8c77efe25f525b2a0442d8db326fa0
+Author: Alex Graveley <alex@ximian.com>
+Date:   Sat Dec 1 22:31:07 2001 +0000
+
+    Pull the SoupServerAuth from soup-server.h to here.
+    
+    2001-12-01  Alex Graveley  <alex@ximian.com>
+    
+    	* src/libsoup/soup-server-auth.h: Pull the SoupServerAuth from
+    	soup-server.h to here.
+    
+    	* tests/cgi-test.c:
+    	* tests/mod-server-test.c:
+    	* tests/server-test.c: Update for new server api. Add a handler
+    	that sets the errorphrase, add some response headers, and prints
+    	the request body, uri, and headers in the response.
+    
+    	* src/soup-httpd/soup-httpd.c: Update for new server api, remove
+    	module reloading, which trivializes the server code.
+    
+    	* src/libsoup-apache/soup-apache.c: Update for new server api.
+    
+    	* src/libsoup/soup-uri.c (soup_uri_copy): Copy element by element,
+    	don't stringify/unstringify.
+    
+    	* src/libsoup/soup-uri.h: Remove query_elems from SoupUri.
+    
+    	* src/libsoup/soup-transfer.c (soup_transfer_write): Take an
+    	encoding argument to allow chunked writes, and a write_chunk_cb to
+    	allow new data to be written. Use a secondary buffer to make
+    	writes (and especially chunked writes) larger, and also simplify
+    	the code.
+    	(write_chunk_sep): Impl.
+    	(write_chunk): Impl.
+    
+    	* src/libsoup/soup-socket.c (soup_socket_connect_inetaddr_cb):
+    	Free state before issuing failure callback.  Add FIXME, as this
+    	shouldn't be needed but avoids a segfault.
+    
+    	* src/libsoup/soup-socket-unix.c: Formatting.
+    
+    	* src/libsoup/soup-server.c: Reimplement to support server push
+    	through SoupServerMessage, CGI support, and persistent
+    	connections. Modules are now passed a SoupServer during init,
+    	instead of having well-known global server objects -- these have
+    	been removed.
+    
+    	* src/libsoup/soup-queue.c (start_request): Update for new
+    	transfer_write interface, passing content length as the encoding
+    	and a NULL write_chunk_cb.
+    
+    	* src/libsoup/soup-private.h: Add server, server_sock, and
+    	server_msg to _SoupMessagePrivate.  Gut _SoupServer.
+    
+    	* src/libsoup/soup-message.c (soup_message_requeue): Cleanup
+    	boolean eval.
+    
+    	* src/libsoup/soup-headers.c (soup_headers_parse_response): Wrap
+    	at 80.
+    
+    	* src/libsoup/soup-dav-server.[ch]: Update for new server handler
+    	interface.
+    
+    	* configure.in: Check for sys/ioctl.h and sys/filio.h
+
+
+7409fe9fc46bd46552dab894d64a7aa421d9ddff : Alex Graveley <alex@ximian.com> : Tue Aug 28 17
+commit 7409fe9fc46bd46552dab894d64a7aa421d9ddff
+Author: Alex Graveley <alex@ximian.com>
+Date:   Tue Aug 28 17:58:05 2001 +0000
+
+    Perform deep unix magic in order to identify if we are running in a
+    
+    2001-08-28  Alex Graveley  <alex@ximian.com>
+    
+    	* src/soup-core/soup-socket.c (soup_address_new): Perform deep
+    	unix magic in order to identify if we are running in a
+    	debugger. This is needed because gdb causes segfaults in child
+    	processes that load shlibs due to breakpoints being left over in
+    	the new unwatched process. Now, gethostbyname() loads shared libs
+    	to do name resolution on many unixes, which would cause soup to be
+    	hard to use and otherwise suck when run inside a debugger. So now
+    	everything works perfectly both inside and outside of gdb.
+    	(soup_address_new_cb): Resolve the hostname syncronously if we are
+    	inside a debugger.
+
+
+31cd3abc7c53d5e021942d79ea633b51eed4335f : Alex Graveley <alex@ximian.com> : Thu Aug 23 10
+commit 31cd3abc7c53d5e021942d79ea633b51eed4335f
+Author: Alex Graveley <alex@ximian.com>
+Date:   Thu Aug 23 10:17:02 2001 +0000
+
+    Fix under-allocation. (ntlm_parse): Comment out the NTLM host/domain
+    
+    2001-08-23  Alex Graveley  <alex@ximian.com>
+    
+    	* src/soup-core/soup-auth.c (ntlm_new): Fix under-allocation.
+    	(ntlm_parse): Comment out the NTLM host/domain parsing code, as it
+    	segfaults for some reason. Not that this matters as IIS seems to
+    	competely ignore these parts of the NTLM message :) There is also
+    	some memory corruption in soup-ntlm.c causing segfaults after the
+    	message-finished callback returns.
+
+--RESOURCE LEAKS
+
+9e48e3d13ecdea7be01618fbbee7ce419e3f9231 : Carlos Garcia Campos <cgarcia@igalia.com> : Mon Sep 29 17
+commit 9e48e3d13ecdea7be01618fbbee7ce419e3f9231
+Author: Carlos Garcia Campos <cgarcia@igalia.com>
+Date:   Mon Sep 29 17:51:28 2014 +0200
+
+    cache: Clean up leaked resources when loading the cache
+    
+    When soup_cache_dump() is not called for some reason, like a crash in
+    the application, the new cached resources are not referenced by the
+    index and then leaked in the cache directory. soup_cache_load() removes
+    all the resources found in the cache directory and not referenced by
+    the cached index.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=667682
+
+
+d9bcaac69203e8f6501a3a60aae350a0cfc342bb : Dan Winship <danw@gnome.org> : Fri Jul 10 13
+commit d9bcaac69203e8f6501a3a60aae350a0cfc342bb
+Author: Dan Winship <danw@gnome.org>
+Date:   Fri Jul 10 13:11:07 2009 -0400
+
+    Miscellaneous content-sniffing fixes
+    
+    Remove the should_sniff_content flag; if there is a sniffer, we always
+    sniff.
+    
+    Clean up soup-message-io a bit to require fewer special cases, and fix
+    a few potential leaks/crashes where it wasn't dealing with
+    IF_CANCELLED_OR_PAUSED correctly. (Although this looks like a large
+    patch, it actually results in a much smaller diff relative to 2.26.
+    
+    Fix tests/sniffing-test to do chunked encoding correctly, make sure to
+    return data in chunks that are smaller than the sniffing buffer size,
+    and make resources/mbox larger than the sniffing buffer size so it
+    takes multiple reads to get enough data (when using chunked encoding).
+    Also add tests for empty response bodies (from Gustavo).
+    
+    http://bugzilla.gnome.org/show_bug.cgi?id=587907
+
+
+-- MEMLEAK
+
+45605fe6fffe391f47dcbe9bff4ef7ea3e4cc4c7 : Joseph Artsimovich <joseph.artsimovich@youview.com> : Wed Apr 9 17
+commit 45605fe6fffe391f47dcbe9bff4ef7ea3e4cc4c7
+Author: Joseph Artsimovich <joseph.artsimovich@youview.com>
+Date:   Wed Apr 9 17:30:35 2014 +0100
+
+    Fix a memory leak in soup_cookie_jar_delete_cookie()
+    
+    A memory leak would happen when asked to delete a matching cookie from
+    a cookie jar that doesn't contain any matching cookies.
+
+
+b038f13190b59c27b96a5f82501b838df058940c : Richard Röjfors <richard.rojfors@gmail.com> : Tue May 21 09
+commit b038f13190b59c27b96a5f82501b838df058940c
+Author: Richard Röjfors <richard.rojfors@gmail.com>
+Date:   Tue May 21 09:51:17 2013 -0300
+
+    soup-socket: fix a memory leak
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=700472
+
+
+53da10780a2728cdd77bbae47ec5755efd929ff5 : Dan Winship <danw@gnome.org> : Wed May 15 08
+commit 53da10780a2728cdd77bbae47ec5755efd929ff5
+Author: Dan Winship <danw@gnome.org>
+Date:   Wed May 15 08:32:44 2013 -0400
+
+    tests: fix a memory leak
+
+
+6666b3cd99a4931bd28b622918c121f92cf33b52 : Xan Lopez <xan@igalia.com> : Tue Mar 26 16
+commit 6666b3cd99a4931bd28b622918c121f92cf33b52
+Author: Xan Lopez <xan@igalia.com>
+Date:   Tue Mar 26 16:20:38 2013 +0100
+
+    soup-session: fix memory leak
+    
+    Do not steal the stream from the GTask, otherwise its destruction
+    method will never run and it will be leaked.
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=696594
+
+
+4eed2047493d1956184d9310e1b1b3b28472763d : Sudarsana Nagineni <sudarsana.nagineni@intel.com> : Tue Dec 18 00
+commit 4eed2047493d1956184d9310e1b1b3b28472763d
+Author: Sudarsana Nagineni <sudarsana.nagineni@intel.com>
+Date:   Tue Dec 18 00:11:13 2012 +0200
+
+    soup-cache: Fix a memory leak.
+    
+    The GFileInfo returned by g_file_enumerator_next_file() must be freed with g_object_unref().
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=690382
+
+
+db084cb64d226afc8489386c7e3f45e6f584e43c : Dan Winship <danw@gnome.org> : Tue Dec 11 17
+commit db084cb64d226afc8489386c7e3f45e6f584e43c
+Author: Dan Winship <danw@gnome.org>
+Date:   Tue Dec 11 17:34:06 2012 +0100
+
+    tests: fix memory leaks
+
+
+61855e656b42f31beae89b03f333ed941a5c154b : Xan Lopez <xlopez@igalia.com> : Wed Jun 29 21
+commit 61855e656b42f31beae89b03f333ed941a5c154b
+Author: Xan Lopez <xlopez@igalia.com>
+Date:   Wed Jun 29 21:25:27 2011 +0200
+
+    soup-cache: plug memory leak
+
+
+e411c8e7d3b9e6a2c68c3fa9d12539afa887bb8e : Milan Crha <mcrha@redhat.com> : Fri Jun 3 07
+commit e411c8e7d3b9e6a2c68c3fa9d12539afa887bb8e
+Author: Milan Crha <mcrha@redhat.com>
+Date:   Fri Jun 3 07:59:01 2011 +0200
+
+    Fix few memory leaks
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=651643
+
+
+779660dae3a679f0f23b503c1315f5e651895dd9 : Milan Crha <mcrha@redhat.com> : Fri Jun 3 07
+commit 779660dae3a679f0f23b503c1315f5e651895dd9
+Author: Milan Crha <mcrha@redhat.com>
+Date:   Fri Jun 3 07:55:57 2011 +0200
+
+    Fix few memory leaks
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=651643
+
+
+5613f4c7ef6450b700c60be48972a5c150272e74 : Dan Winship <danw@gnome.org> : Mon Mar 28 14
+commit 5613f4c7ef6450b700c60be48972a5c150272e74
+Author: Dan Winship <danw@gnome.org>
+Date:   Mon Mar 28 14:59:00 2011 -0400
+
+    Fix memory leaks, update libsoup.supp
+
+
+00561929c2a61bd204f98ba0dcd2925219534104 : Jonathon Jongsma <jonathon@quotidian.org> : Tue Dec 7 23
+commit 00561929c2a61bd204f98ba0dcd2925219534104
+Author: Jonathon Jongsma <jonathon@quotidian.org>
+Date:   Tue Dec 7 23:09:31 2010 -0600
+
+    Fix leak when processing the set cookie header
+    
+    Valgrind trace:
+    ==4617== 401 (96 direct, 305 indirect) bytes in 2 blocks are definitely lost in loss record 15,500 of 16,590
+    ==4617==    at 0x4C244E8: malloc (vg_replace_malloc.c:236)
+    ==4617==    by 0x103D73AA: g_malloc (gmem.c:164)
+    ==4617==    by 0x103F0EB4: g_slice_alloc (gslice.c:842)
+    ==4617==    by 0x103F0F0C: g_slice_alloc0 (gslice.c:854)
+    ==4617==    by 0xE1CCD04: parse_one_cookie (soup-cookie.c:218)
+    ==4617==    by 0xE1CD2B3: soup_cookies_from_response (soup-cookie.c:763)
+    ==4617==    by 0xE1CE332: process_set_cookie_header (soup-cookie-jar.c:562)
+    ==4617==    by 0xFB4AC36: g_cclosure_marshal_VOID__VOID (gmarshal.c:79)
+    ==4617==    by 0xFB2F59E: g_closure_invoke (gclosure.c:766)
+    ==4617==    by 0xFB4A2B1: signal_emit_unlocked_R (gsignal.c:3252)
+    ==4617==    by 0xFB490EE: g_signal_emit_valist (gsignal.c:2983)
+    ==4617==    by 0xFB4966C: g_signal_emit (gsignal.c:3040)
+    ==4617==    by 0xE1DA0DF: io_read (soup-message-io.c:903)
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=636741
+
+
+d1e5df3d746de7b5765a3a5bfd0e1a1c1a2fe3e0 : Dan Winship <danw@src.gnome.org> : Wed Nov 21 03
+commit d1e5df3d746de7b5765a3a5bfd0e1a1c1a2fe3e0
+Author: Dan Winship <danw@src.gnome.org>
+Date:   Wed Nov 21 03:51:24 2007 +0000
+
+    don't leak the SoupAddress.
+    
+    	* libsoup/soup-connection.c (soup_connection_connect_async): don't
+    	leak the SoupAddress.
+    
+    	* libsoup/soup-dns.c (soup_dns_lookup_resolve_async): fix a leak
+    	when re-looking up an address
+    
+    	* libsoup/soup-session.c (soup_session_abort): close all
+    	connections in addition to cancelling messages (needed because
+    	connections currently end up holding a ref on their session,
+    	preventing them from being destroyed).
+    
+    	* tests/auth-test.c:
+    	* tests/ntlm-test.c:
+    	* tests/proxy-test.c:
+    	* tests/pull-api.c:
+    	* tests/ssl-test.c:
+    	* tests/xmlrpc-test.c: clean up more memory on exit, to help find
+    	leaks in the library
+    
+    	* tests/libsoup.supp: add a zillion new suppressions so we
+    	can use --leak-resolution=med
+    
+    svn path=/trunk/; revision=953
+
+
+d705d0589f6d348c1a12b9444bb5faf9edcf0509 : Dan Winship <danw@src.gnome.org> : Mon Nov 20 21
+commit d705d0589f6d348c1a12b9444bb5faf9edcf0509
+Author: Dan Winship <danw@src.gnome.org>
+Date:   Mon Nov 20 21:47:04 2006 +0000
+
+    	Patch from Andrew W. Nosenko:
+    
+    	* libsoup/soup-message-client-io.c (parse_response_headers): Avoid
+    	memory leak when parse_response_headers() is called on a message
+    	that has a 'reason_phrase' already for some reason.
+    
+    	* libsoup/soup-gnutls.c (soup_gnutls_free): Avoid memory leak:
+    	hostname was not freed.
+    	(soup_ssl_wrap_iochannel): Avoid memory leak: SoupGNUTLSChannel
+    	'chan' was not freed in case of initialization error. Avoid double
+    	close of the "real" (plain, non-ssl) channel FD.
+    
+    	* libsoup/soup-socket.c (soup_socket_start_proxy_ssl): Avoid
+    	memory leak: the "real" (plain, non-ssl) GIOChannel was never
+    	"finally" unreffed (one more *_ref() than *_unref()) in case of
+    	ssl-wrapping.
+
+
+7013f30f5afe621bd3e5ce5a93b84b039824c57c : Dan Winship <danw@src.gnome.org> : Tue Aug 12 17
+commit 7013f30f5afe621bd3e5ce5a93b84b039824c57c
+Author: Dan Winship <danw@src.gnome.org>
+Date:   Tue Aug 12 17:13:53 2003 +0000
+
+    add gobject-2.0 to the PKG_CHECK_MODULES call
+    
+    	* configure.in (GLIB): add gobject-2.0 to the PKG_CHECK_MODULES
+    	call
+    
+    	* libsoup/soup-address.c: Make this a GObject.
+    	(soup_address_ref, soup_address_unref): Gone.
+    	(soup_address_copy): Gone. Wasn't being used anyway.
+    
+    	* libsoup/soup-dns.c: Move all of the DNS code and caching stuff
+    	here from soup-address.c, so that soup-address doesn't need to
+    	worry about trying to cache zero-ref addresses.
+    
+    	* libsoup/soup-socket.c: Make this a GObject. Use "guint"
+    	consistently for port numbers.
+    	(soup_socket_ref, soup_socket_unref): Gone.
+    
+    	* libsoup/soup-private.h: Change the SoupSocket definition to be
+    	SoupSocketPrivate. (Still need to keep this here since soup-server
+    	pokes around in its internals.)
+    	(SOUP_MAKE_TYPE): Copied from gal's E_MAKE_TYPE.
+    
+    	* libsoup/soup-server.c (read_done_cb, write_done_cb): Unref the
+    	reader/writer rather than leaking them.
+    
+    	* libsoup/*: Use GObject methods for socket/address refcounting
+    
+    	* tests/auth-test.c (main)
+    	* tests/timeserver.c (main): Call g_type_init.
+    
+    	* tests/get.c (main): Call g_type_init.
+    	(get_url, got_url): Fix some bugs that could make -r mode get into
+    	infinite loops downloading the same files over and over. Plug some
+    	memory leaks to make this more useful for valgrinding libsoup.
+    
+    	* tests/simple-httpd.c (main): Call g_type_init. Set up a signal
+    	handler for SIGINT so we can exit cleanly, since valgrind won't
+    	give a leak report if you don't. Plug a few memory leaks.
+    
+    	* tests/simple-proxy.c (main): Likewise
+
+
+79de41a4f7031f80584e1f247f2e5be0f3ed1685 : Joe Shaw <joe@ximian.com> : Wed Aug 7 22
+commit 79de41a4f7031f80584e1f247f2e5be0f3ed1685
+Author: Joe Shaw <joe@ximian.com>
+Date:   Wed Aug 7 22:19:31 2002 +0000
+
+    Fix a memory leak. (soup_auth_new_digest): Fix a memory leak.
+    
+    2002-08-07  Joe Shaw  <joe@ximian.com>
+    
+    	* src/libsoup/soup-auth.c (digest_auth_func): Fix a memory leak.
+    	(soup_auth_new_digest): Fix a memory leak.
+
+
+6d19f3e68a0d0383d723adfccf5fa06c7c09c9fa : Alex Graveley <alex@ximian.com> : Mon Apr 23 07
+commit 6d19f3e68a0d0383d723adfccf5fa06c7c09c9fa
+Author: Alex Graveley <alex@ximian.com>
+Date:   Mon Apr 23 07:57:45 2001 +0000
+
+    SoupSocketConnectFn no longer takes a SoupAddress argument, as it can be
+    
+    2001-04-23  Alex Graveley  <alex@ximian.com>
+    
+    	* src/soup-core/soup-socket.h: SoupSocketConnectFn no longer takes
+    	a SoupAddress argument, as it can be fetched from the SoupSocket
+    	correctly now.
+    
+    	* src/soup-core/soup-socket.c: lots of rewrites. Cache existing
+    	SoupAddresses to avoid duplicate lookups. Handles multiple
+    	simultaneous requests for the same address. Add syncronous
+    	versions of calls which just run the main loop until completion or
+    	request. Make SoupContext use a SoupAddress instead of sockaddr.
+    
+    	* src/soup-core/soup-uri.h: Add query_elems to SoupUri. Contains a
+    	list of query string elements, as delimited by a
+    	'&'. SoupUri.protocol is now a SoupProtocol.
+    
+    	* src/soup-core/soup-uri.c (soup_uri_new): convert uri_string
+    	protocol to SoupProtocol equivalent.
+    
+    	* src/soup-core/soup-private.h: remove protocol from
+    	SoupContext. Use a SoupAddress instead of a sockaddr in SoupSocket.
+    
+    	* src/soup-core/soup-misc.c (soup_load_config_internal): kill
+    	tiny (8 byte) mem leak.
+    
+    	* src/soup-core/soup-message.h: add SoupOwnership
+    	SOUP_BUFFER_STATIC.
+    	add SoupErrorCode SOUP_ERROR_CANT_AUTHENTICATE.
+    
+    	* src/soup-core/soup-context.h: move SoupProtocol to soup-uri.h.
+    
+    	* src/soup-core/soup-context.c (soup_context_new):
+    	removed. Protocol is now held only in uri.
+    	(soup_context_from_uri): added.
+    	(soup_context_get): just calls soup_context_from_uri() after
+    	creating uri.
+    	(soup_context_unref): don't evaluate a post-decremented refcount.
+    	(soup_context_connect_cb): no longer take a SoupAddress arg.
+    	(soup_context_get_protocol): removed, use uri.
+    
+    	* src/soup-core/soup-apache.c (soup_apache_message_create): use
+    	SOUP_BUFFER_STATIC for request buffer.
+    
+    	* src/soup-core/md5-utils.c: initial commit. MD5 encryption.
+    
+    	* src/soup-core/soup-digest.c: initial commit. no worky.
+    
+    	* src/soup-core/Makefile.am (libsoup_la_SOURCES): add md5-utils.h,
+    	md5-utils.c, soup-digest.h, soup-digest.c.
+    
+    	* tests/stress-test.c (main): handle ugly refcount bug causing
+    	extra unrefs of the context.
+
+
+882f9191d08eb6eb64f98bf0cb2a45325f2f48de : Alex Graveley <alex@ximian.com> : Fri Mar 9 18
+commit 882f9191d08eb6eb64f98bf0cb2a45325f2f48de
+Author: Alex Graveley <alex@ximian.com>
+Date:   Fri Mar 9 18:28:00 2001 +0000
+
+    demonstrate correct behavior here by unref'ing the context after message
+    
+    2001-03-09  Alex Graveley  <alex@ximian.com>
+    
+    	* tests/simple-test.c (main): demonstrate correct behavior here by
+    	unref'ing the context after message creation.
+    
+    	* tests/stress-test.c (main): ditto.
+    
+    	* src/soup-core/soup-queue.c (soup_queue_message): set
+    	req->priv->recv_buf = NULL here, as the media continues to barrate
+    	dangling pointers.
+    
+    	* src/soup-core/soup-server.h: make SoupServerAuthorizeFn typedef
+    	const correct
+    
+    	* src/soup-core/soup-server.c (soup_server_authorize): make const
+    	correct.
+    
+    	* src/soup-core/soup-message.c (soup_message_cleanup): don't free
+    	response phrase. Don't set req->priv->recv_buf = NULL here, as
+    	leaking memory continues to be considered "bad".
+    
+    	* src/soup-core/soup-headers.c (soup_headers_parse_response):
+    	don't alloc status_phrase, just point into buffer.
+    
+    	* src/soup-core/soup-cgi.c (soup_cgi_read_cb): deal with response
+    	phrase now being const.
+    
+    	* src/soup-core/soup-apache.c (soup_apache_message_create): action
+    	is already strdup'd in soup_message_new (). response_phrase
+    	is now a const string. Remove unneeded content-type header.
+    	(soup_apache_read_request): slight reorg, also use ap_palloc()
+    	instead of ap_calloc().
+    	(soup_apache_handler): initial authentication handling, only basic
+    	auth at this point.
+
+
+

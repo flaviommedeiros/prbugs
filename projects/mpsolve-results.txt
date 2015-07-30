@@ -1,0 +1,165 @@
+commit c6e915460ff6752d65cf258e1f36f521949d91d8
+Type: memory leak
+File: src/libmps/secsolve/standard-regeneration-driver.c
+PC: true
+
+commit 916dab50a94b7744094dd41d77a0de0a99ac2a92
+Type: memory leak
+File: src/libmps/unisolve/main.c
+PC: DISABLE_DEBUG
+
+
+commit 7ab21f9d3400ce9b7bc3ba522629ca9763d7dfeb
+Type: memory leak
+File: src/libmps/monomial-parser.c
+PC: true
+
+
+commit 7ea36236d4c04e0c3fa5ec863d227014747c5231
+Type: memory leak
+File: src/libmps/secular-newton.c
+PC: true
+
+
+commit d9a02b98d58b22ac7b1c039801a62f9e2265ace3
+Type: memory leak
+File: src/libmps/secular-regeneration.c
+PC: true
+
+commit 4ce08afbc1c96b14b4053f9d668308a1a3fb8869
+Type: memory leak
+File: src/mps_defaults.c
+PC: true
+
+
+commit d042d26e68f5800f75ebd9933adcedf78fdcd0f3
+Type: memory leak
+File: src/mps_threading.c
+PC: true
+
+commit 5054b31ec319deac82b7eb83d55e66a45f9da15a
+Type: segmentation fault
+File: src/libmps/starting.c
+PC: true
+
+commit 9651354ec763ff0b93dac62f521fe8085f2afbf5
+Type: segmentation fault
+File: src/libmps/secular-newton.c
+PC: true
+
+-- OVERFLOWS
+
+9916a0300a3fbf4f7884f522c46d7016436e3ae4 : Leonardo Robol <leo@robol.it> : Wed Apr 16 11
+commit 9916a0300a3fbf4f7884f522c46d7016436e3ae4
+Author: Leonardo Robol <leo@robol.it>
+Date:   Wed Apr 16 11:49:54 2014 +0200
+
+    Added a mps_regenerate function to Octave and improve the computation of the
+    determinant for Hessenberg matrices to prevent underflow / overflow.
+
+
+7dfcf020e051c28df7e23045774d30df44c24768 : Leonardo Robol <leo@robol.it> : Thu Apr 5 16
+commit 7dfcf020e051c28df7e23045774d30df44c24768
+Author: Leonardo Robol <leo@robol.it>
+Date:   Thu Apr 5 16:23:20 2012 +0200
+
+    Aggiunto check per eventuali overflow in mps_secular_fnewton().
+
+
+79b8b4256f4dea3607ff109e9c3344a0b02b1327 : Leonardo Robol <leo@robol.it> : Thu Dec 8 14
+commit 79b8b4256f4dea3607ff109e9c3344a0b02b1327
+Author: Leonardo Robol <leo@robol.it>
+Date:   Thu Dec 8 14:56:19 2011 +0100
+
+    Rimesso DBL_MAX come raggio iniziale per evitare overflow.
+
+
+a97bce3aee959f3d88428359516b42127362f5e8 : Leonardo Robol <leo@robol.it> : Sun Nov 20 18
+commit a97bce3aee959f3d88428359516b42127362f5e8
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sun Nov 20 18:01:32 2011 +0100
+
+    Aggiunti check su overflow nei DPE.
+
+
+e73f66e0731504fa00d5a0bcd006785aea67c59f : Leonardo Robol <leo@robol.it> : Sat Nov 19 20
+commit e73f66e0731504fa00d5a0bcd006785aea67c59f
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sat Nov 19 20:49:21 2011 +0100
+
+    Corretta parte della gestione degli overflow in DPE. Ancora da rivedere.
+
+
+d015aecb2e6b672590ce32d712a745bcf4817f71 : Leonardo Robol <leo@robol.it> : Mon Nov 7 18
+commit d015aecb2e6b672590ce32d712a745bcf4817f71
+Author: Leonardo Robol <leo@robol.it>
+Date:   Mon Nov 7 18:32:27 2011 +0100
+
+    Aggiunte alcune modifiche che fixano parecchi problemi di determinazione
+    dei cluster determinati da overflow in DPE.
+
+
+53649cbfb113a4ffbdd00110649b5cd4f0a0121e : Leonardo Robol <leo@robol.it> : Sat Oct 8 17
+commit 53649cbfb113a4ffbdd00110649b5cd4f0a0121e
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sat Oct 8 17:00:40 2011 +0200
+
+    Aggiunto check sul condizionamento anche in floating point, prima di settare i raggi
+    con Gerschgorin.
+    
+    Modificati i tipi DPE in modo da evitare overflow (almeno nei casi dove
+    dava problemi).
+
+
+68cea40ee4b4bcaebb1abce306f90021c12af548 : Leonardo Robol <leo@robol.it> : Thu Sep 1 16
+commit 68cea40ee4b4bcaebb1abce306f90021c12af548
+Author: Leonardo Robol <leo@robol.it>
+Date:   Thu Sep 1 16:41:45 2011 +0200
+
+    Reso più razionale il passaggio a DPE nel caso di overflow (si risparmiano
+    un po' di operazioni inutili).
+
+
+d8abc2dc3c74d3e37257acf8890c0fb8e3546d27 : Leonardo Robol <leo@robol.it> : Sat Jul 23 15
+commit d8abc2dc3c74d3e37257acf8890c0fb8e3546d27
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sat Jul 23 15:43:05 2011 +0200
+
+     * Qualche fix per evitare overflow nei raggi in DPE.
+
+
+a14d4e0f5342320b13d4dad53add130617b14fcb : Leonardo Robol <leo@robol.it> : Sun Jul 17 15
+commit a14d4e0f5342320b13d4dad53add130617b14fcb
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sun Jul 17 15:04:48 2011 +0200
+
+    Aggiunto passaggio automatico ai DPE dai floating point nel caso
+    tipo Fortune se si incontrano situazioni di overflow.
+
+
+f59b083b0ed03fe802ae11ba76af49cded621369 : Leonardo Robol <leo@robol.it> : Sun Jul 17 12
+commit f59b083b0ed03fe802ae11ba76af49cded621369
+Author: Leonardo Robol <leo@robol.it>
+Date:   Sun Jul 17 12:11:12 2011 +0200
+
+    Workaround per evitare overflow in aritmetica DPE, da rivedere.
+
+
+fdd95981548b4128c6cda052fb98fe8d70e4c8c2 : Leonardo Robol <leo@robol.it> : Mon May 30 21
+commit fdd95981548b4128c6cda052fb98fe8d70e4c8c2
+Author: Leonardo Robol <leo@robol.it>
+Date:   Mon May 30 21:09:56 2011 +0200
+
+    Modifiche in tentativo di debuggare mandelbrot.c.
+    Sembra che il problema siano gli overflow in fnewton.
+
+
+fcb219ab9320f8f5c2294665f214b357c5079f34 : Leonardo Robol <leo@robol.it> : Tue May 17 13
+commit fcb219ab9320f8f5c2294665f214b357c5079f34
+Author: Leonardo Robol <leo@robol.it>
+Date:   Tue May 17 13:56:02 2011 +0200
+
+    Corretto overflow in mps_secular_fnewton, c'è da fare lo stesso
+    cambiamento in mps_secular_dnewton.
+
+

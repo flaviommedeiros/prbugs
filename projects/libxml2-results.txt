@@ -1,0 +1,1669 @@
+git clone git://git.gnome.org/libxml2
+
+500c54ef326b62b8126e2d98d3a50f1a30dc5292 : Bart De Schuymer <deschuyb@b-virtual.org> : Thu Oct 16 12
+commit 500c54ef326b62b8126e2d98d3a50f1a30dc5292
+Author: Bart De Schuymer <deschuyb@b-virtual.org>
+Date:   Thu Oct 16 12:17:20 2014 +0800
+
+    fix memory leak xml header encoding field with XML_PARSE_IGNORE_ENC
+    
+    When the xml parser encounters an xml encoding in an xml header while
+    configured with option XML_PARSE_IGNORE_ENC, it fails to free memory
+    allocated for storing the encoding.
+    The patch below fixes this.
+    How to reproduce:
+    1. Change doc/examples/parse4.c to add xmlCtxtUseOptions(ctxt,
+    XML_PARSE_IGNORE_ENC); after the call to xmlCreatePushParserCtxt.
+    2. Rebuild
+    3. run the following command from the top libxml2 directory:
+    LD_LIBRARY_PATH=.libs/ valgrind --leak-check=full
+    ./doc/examples/.libs/parse4 ./test.xml , where test.xml contains
+    following
+    input:
+    <?xml version="1.0" encoding="UTF-81" ?><hi/>
+    valgrind will report:
+    ==1964== 10 bytes in 1 blocks are definitely lost in loss record 1 of 1
+    ==1964==    at 0x4C272DB: malloc (in
+    /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+    ==1964==    by 0x4E88497: xmlParseEncName (parser.c:10224)
+    ==1964==    by 0x4E888FE: xmlParseEncodingDecl (parser.c:10295)
+    ==1964==    by 0x4E89630: xmlParseXMLDecl (parser.c:10534)
+    ==1964==    by 0x4E8B737: xmlParseTryOrFinish (parser.c:11293)
+    ==1964==    by 0x4E8E775: xmlParseChunk (parser.c:12283)
+    
+    Signed-off-by: Bart De Schuymer <bart at amplidata com>
+
+
+d72cb06de95a100058315bc0c3359d7c46583113 : Gaurav Gupta <g.gupta@samsung.com> : Mon Oct 6 19
+commit d72cb06de95a100058315bc0c3359d7c46583113
+Author: Gaurav Gupta <g.gupta@samsung.com>
+Date:   Mon Oct 6 19:28:29 2014 +0800
+
+    Leak of struct addrinfo in xmlNanoFTPConnect()
+    
+    For https://bugzilla.gnome.org/show_bug.cgi?id=732352
+    
+    in case of error condition in IPv6 support, the early return here
+    doesn't call freeaddrinfo(result), thus leaking memory.
+
+
+5777ae75ee0382149971a5bc2094f9d14e7e11f8 : Philip Withnall <philip.withnall@collabora.co.uk> : Fri Jun 20 21
+commit 5777ae75ee0382149971a5bc2094f9d14e7e11f8
+Author: Philip Withnall <philip.withnall@collabora.co.uk>
+Date:   Fri Jun 20 21:15:16 2014 +0100
+
+    runtest: Fix a memory leak on parse failure
+    
+    Coverity issue: #60439
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=731990
+
+
+7746f2f60982889cd836fc23022e426f5a02d883 : Philip Withnall <philip.withnall@collabora.co.uk> : Fri Jun 20 21
+commit 7746f2f60982889cd836fc23022e426f5a02d883
+Author: Philip Withnall <philip.withnall@collabora.co.uk>
+Date:   Fri Jun 20 21:05:33 2014 +0100
+
+    xmlcatalog: Fix a memory leak on quit
+    
+    Coverity issue: #60442
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=731990
+
+
+9f3cdef08a5d45c82c71bf740a54e2bc5d07f3ec : Daniel Veillard <veillard@redhat.com> : Tue May 15 09
+commit 9f3cdef08a5d45c82c71bf740a54e2bc5d07f3ec
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Tue May 15 09:38:13 2012 +0800
+
+    Fix a memory leak in the xzlib code
+    
+    The freeing function wasn't called due to a bogus #ifdef surrounding
+    value. Also switch the code to use the normal libxml2 allocation and
+    freeing routines.
+
+
+24464be6390bc61a0f0e17890fbfc9c581434e29 : Lin Yi-Li <record.nctu.cis91@gmail.com> : Thu May 10 16
+commit 24464be6390bc61a0f0e17890fbfc9c581434e29
+Author: Lin Yi-Li <record.nctu.cis91@gmail.com>
+Date:   Thu May 10 16:14:55 2012 +0800
+
+    Avoid memory leak if xmlParserInputBufferCreateIO fails
+    
+    For https://bugzilla.gnome.org/show_bug.cgi?id=643949
+    
+    In case of error on an IO creation input the given context
+    is terminated with the given close function, except if the
+    error happened in xmlParserInputBufferCreateIO. This can
+    lead to a resource leak which is fixed by this patch.
+
+
+729601f15772c19778062b98bd0716d8f5c2af3b : Martin <gzlist@googlemail.com> : Mon Oct 12 22
+commit 729601f15772c19778062b98bd0716d8f5c2af3b
+Author: Martin <gzlist@googlemail.com>
+Date:   Mon Oct 12 22:42:26 2009 +0200
+
+    Fix memory leak in xmlXPathEvalExpression()
+    
+    * xpath.c: plug some leaks when parsing misformed XPath expressions
+    * python/tests/xpathleak.py: expand the regression tests for those
+
+
+410d2c4e90c8892fa69ca40161d5eddf55875f3a : Rob Richards <rrichards@cdatazone.org> : Thu Sep 24 11
+commit 410d2c4e90c8892fa69ca40161d5eddf55875f3a
+Author: Rob Richards <rrichards@cdatazone.org>
+Date:   Thu Sep 24 11:00:16 2009 -0400
+
+    Fix memory leak when doc is NULL
+    * xmlschemas.c: fix memory leak when doc is NULL
+
+
+44d1eff028ad103a3f33699d0d62b0468664c103 : MOD <mrmodbox@gmail.com> : Wed Sep 9 19
+commit 44d1eff028ad103a3f33699d0d62b0468664c103
+Author: MOD <mrmodbox@gmail.com>
+Date:   Wed Sep 9 19:03:13 2009 +0200
+
+    594514 memory leaks - duplicate initialization
+    
+    * globals.c: xmlInitGlobals() might be called multiple times, leaking
+      the xmlThrDefMutex value
+
+
+bf2ebff0f11e4a3fbf2176c3deb00b8c7cecc5e4 : Daniel Veillard <veillard@src.gnome.org> : Sun Jan 18 14
+commit bf2ebff0f11e4a3fbf2176c3deb00b8c7cecc5e4
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Jan 18 14:57:04 2009 +0000
+
+    patch from Daniel Zimmermann fixing a memory leak in an edge case, solves
+    
+    * threads.c: patch from Daniel Zimmermann fixing a memory leak
+      in an edge case, solves #562230
+    Daniel
+    
+    svn path=/trunk/; revision=3809
+
+
+09459bf1078992a5dea8c1bbef4919b90bc25218 : Daniel Veillard <veillard@src.gnome.org> : Wed Jul 30 12
+commit 09459bf1078992a5dea8c1bbef4919b90bc25218
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Jul 30 12:58:11 2008 +0000
+
+    add xmlMemDisplayLast to help debug incremental memory leaks, and some
+    
+    * include/libxml/xmlmemory.h xmlmemory.c: add xmlMemDisplayLast to
+      help debug incremental memory leaks, and some cleanups
+    * runxmlconf.c: use that new call and avoid ever touching the
+      system catalog in the regression tests
+    Daniel
+    
+    svn path=/trunk/; revision=3760
+
+
+37d2d16c89d8d681f766d47a45217557b21d9084 : Daniel Veillard <veillard@src.gnome.org> : Fri Mar 14 10
+commit 37d2d16c89d8d681f766d47a45217557b21d9084
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Mar 14 10:54:00 2008 +0000
+
+    patch from Vasily Chekalkin fixes memory leaks, should fix 512647 Daniel
+    
+    * parser.c xinclude.c: patch from Vasily Chekalkin fixes memory
+      leaks, should fix 512647
+    Daniel
+    
+    svn path=/trunk/; revision=3706
+
+
+c707d0b76563946c7b74ae78a249d0242acd0832 : Daniel Veillard <veillard@src.gnome.org> : Thu Jan 24 14
+commit c707d0b76563946c7b74ae78a249d0242acd0832
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Jan 24 14:48:54 2008 +0000
+
+    fix a memeory leak in internal subset parsing with a fix from Ashwin add
+    
+    * parser.c: fix a memeory leak in internal subset parsing with
+      a fix from Ashwin
+    * test/errors/content1.xml result/errors/content1.xml*:
+      add test to regressions
+    Daniel
+    
+    svn path=/trunk/; revision=3680
+
+
+a3d230513c3f28dc475ee09ffd6787762da07d56 : Daniel Veillard <veillard@src.gnome.org> : Tue Jan 9 21
+commit a3d230513c3f28dc475ee09ffd6787762da07d56
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jan 9 21:24:34 2007 +0000
+
+    fix a memory leak in the python string handling when SAX event are passed
+    
+    * python/libxml.c: fix a memory leak in the python string handling
+      when SAX event are passed back to the python handlers
+    Daniel
+    
+    svn path=/trunk/; revision=3573
+
+
+8af1f0bb83cfc3f57fd5637dcfce28c95eb99638 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Wed Jun 28 17
+commit 8af1f0bb83cfc3f57fd5637dcfce28c95eb99638
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Wed Jun 28 17:13:19 2006 +0000
+
+    Fix a memory leak which occurred when using
+    
+    * xpath.c: Fix a memory leak which occurred when using
+      xmlXPathCompiledEvalToBoolean().
+
+
+1b2be101e8c7c6c0b65d9961a302885aead9bc22 : Aleksey Sanin <aleksey@src.gnome.org> : Wed May 31 20
+commit 1b2be101e8c7c6c0b65d9961a302885aead9bc22
+Author: Aleksey Sanin <aleksey@src.gnome.org>
+Date:   Wed May 31 20:53:43 2006 +0000
+
+    fixed memory leak in xpath error reporting
+    
+    * xpath.c: fixed memory leak in xpath error reporting
+
+
+a72484438f798d821fcd65ef26ddd25f2380c5c7 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon May 29 16
+commit a72484438f798d821fcd65ef26ddd25f2380c5c7
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon May 29 16:15:36 2006 +0000
+
+    Added an XPath object cache. It sits on an xmlXPathContext and need to be
+    
+    * xpath.c include/libxml/xpath.h: Added an XPath object cache.
+      It sits on an xmlXPathContext and need to be explicitely
+      activated (or deactivated again) with
+      xmlXPathContextSetObjectCache(). The cache consists of 5
+      lists for node-set, string, number, boolean and misc XPath
+      objects. Internally the xpath.c module will use object-
+      deposition and -acquisition functions which will try to reuse
+      as many XPath objects as possible, and fallback to normal
+      free/create behaviour if no cache is available or if the cache
+      is full.
+    * runsuite.c: Adjusted to deactivate the cache for XML Schema
+      tests if a cache-creation is turned on by default for the whole
+      library, e.g. for testing purposes of the cache. It is
+      deactivated here in order to avoid confusion of the memory leak
+      detection in runsuite.c.
+
+
+6ed2eb47fcf485283c6dc2dbd0ba0270f22a23b6 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Tue May 16 15
+commit 6ed2eb47fcf485283c6dc2dbd0ba0270f22a23b6
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Tue May 16 15:13:37 2006 +0000
+
+    Applied patch from Rob Richards, fixing a potential memory leak in
+    
+    * xpath.c: Applied patch from Rob Richards, fixing a potential
+      memory leak in xmlXPathTryStreamCompile(), when a list of
+      namespaces was assigned to the XPath compilation context;
+      here a new namespace list was created and passed to
+      xmlPatterncompile(); but this list was not freed afterwards.
+      Additionally we avoid now in xmlXPathTryStreamCompile() to
+      compile the expression, if it has a colon - indicating
+      prefixed name tests - and no namespace list was given. The
+      streaming XPath mechanism needs a namespace list at
+      compilation time (unlike normal XPath, where we can bind
+      namespace names to prefixes at execution time).
+    * pattern.c: Enhanced to use a string dict for local-names,
+      ns-prefixes and and namespace-names.
+      Fixed xmlStreamPushInternal() not to use string-pointer
+      comparison if a dict is available; this won't work, since
+      one does not know it the given strings originate from the
+      same dict - and they normally don't do, since e.g.
+      namespaces are hold on xmlNs->href. I think this would be
+      worth an investigation: if we can add a @doc field to xmlNs
+      and put the @href in to a additionan namespace dict hold
+      in xmlDoc. Daniel will surely not like this idea :-) But
+      evaluation of tons of elements/attributes in namespaces
+      with xmlStrEqual() isn't the way we should go forever.
+
+
+bc4cc9da776d09be8a3f2af39b13360c07d74bcd : Daniel Veillard <veillard@src.gnome.org> : Mon Dec 12 13
+commit bc4cc9da776d09be8a3f2af39b13360c07d74bcd
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Dec 12 13:26:56 2005 +0000
+
+    Gary Coady pointed a memory leak in xmlTextReaderReadInnerXml() applied
+    
+    * xmlreader.c: Gary Coady pointed a memory leak in
+      xmlTextReaderReadInnerXml() applied patch fixing #323864
+    Daniel
+
+
+940ab0c67628bee90b60e3e80362e2425f248bd7 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Wed Oct 19 17
+commit 940ab0c67628bee90b60e3e80362e2425f248bd7
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Wed Oct 19 17:00:53 2005 +0000
+
+    Fixed a potential memory leak in xmlSchemaCheckCSelectorXPath() when an
+    
+    * xmlschemas.c: Fixed a potential memory leak in
+      xmlSchemaCheckCSelectorXPath() when an internal error occurs.
+      Fixed setting of ctxt->err to the given error code in
+      the parsing error functions.
+    * pattern.c: Added internal xmlCompileIDCXPathPath() as a
+      starting point for IDC XPath compilation; this and some other
+      tiny changes fixes issues regarding whitespace in the
+      expressions and IDC selector/field relevant restrictions of
+      the subset of XPath. Fixed a missing blocking of attributes
+      in xmlStreamPushInternal().
+
+
+ee8e8ae963511bc896ea9f289cca5cad08ffe995 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon Oct 17 14
+commit ee8e8ae963511bc896ea9f289cca5cad08ffe995
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon Oct 17 14:15:37 2005 +0000
+
+    Fixed a memory leak in xmlSchemaContentModelDump(). Added output of local
+    
+    * xmlschemas.c: Fixed a memory leak in
+      xmlSchemaContentModelDump(). Added output of local types
+      in xmlSchemaElementDump(). Tiny cosmetical changes to the
+      dump output.
+
+
+004b5463eb8c98814f822ae953e717419cd40d99 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon Aug 8 12
+commit 004b5463eb8c98814f822ae953e717419cd40d99
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon Aug 8 12:43:09 2005 +0000
+
+    Fixed a memory leak: xmlSchemaFreeAnnot() was only freeing the first
+    
+    * xmlschemas.c: Fixed a memory leak: xmlSchemaFreeAnnot() was
+      only freeing the first annotation in the list.
+
+
+c935253fb7e328ac47c899e7e55ce9908054aeaa : Daniel Veillard <veillard@src.gnome.org> : Mon Jul 4 14
+commit c935253fb7e328ac47c899e7e55ce9908054aeaa
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Jul 4 14:25:34 2005 +0000
+
+    cleanups, logfile and portability fixed a memory leak Daniel
+    
+    * runsuite.c runtest.c: cleanups, logfile and portability
+    * xmllint.c: fixed a memory leak
+    Daniel
+
+
+d6e347e865b473f06fd431be926183c77596194a : William M. Brack <wbrack@src.gnome.org> : Fri Apr 15 01
+commit d6e347e865b473f06fd431be926183c77596194a
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Fri Apr 15 01:34:41 2005 +0000
+
+    Applied Daniel's fix for memory leak in dtd prefix (bug 300550). minor
+    
+    * valid.c: Applied Daniel's fix for memory leak in dtd
+      prefix (bug 300550).
+    * xpath.c: minor change to comment only
+
+
+016d92e30bd673eeddef2d7a741c7c6fb7f0cc23 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Fri Apr 8 20
+commit 016d92e30bd673eeddef2d7a741c7c6fb7f0cc23
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Fri Apr 8 20:08:40 2005 +0000
+
+    Added substitution group constraints; changed the build of the
+    
+    * xmlschemas.c: Added substitution group constraints; changed
+      the build of the pre-computed substitution groups. Channeled
+      errors during xsi assembling of schemas to the validation
+      context. Fixed a big memory leak, which occured when using
+      IDCs: the precomputed value of attributes was not freed if
+      the attribute did not resolve to an IDC field (discovered
+      with the help of Randy J. Ray's schema, posted to the
+      xmlschema-dev maling list).
+
+
+25c90c589b256f0925f081198c1525134a491e31 : Daniel Veillard <veillard@src.gnome.org> : Wed Mar 2 10
+commit 25c90c589b256f0925f081198c1525134a491e31
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Mar 2 10:47:41 2005 +0000
+
+    try to fix a problem with valgrind. applied memory leak fix from Brent
+    
+    * Makefile.am doc/examples/Makefile.am python/tests/Makefile.am
+      xstc/Makefile.am: try to fix a problem with valgrind.
+    * python/generator.py python/libxml.c python/tests/Makefile.am
+      python/tests/tstmem.py: applied memory leak fix from Brent Hendricks
+      c.f. bug #165349
+    Daniel
+
+
+7eca35fbaef6bd06074c4b978d381303609fcb0b : Daniel Veillard <veillard@src.gnome.org> : Mon Nov 29 13
+commit 7eca35fbaef6bd06074c4b978d381303609fcb0b
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Nov 29 13:08:03 2004 +0000
+
+    fixed a memory leak on errors in some circumstances #159812 Daniel
+    
+    * xpath.c: fixed a memory leak on errors in some circumstances #159812
+    Daniel
+
+
+876a6db193661509baf40eb5e6f8955235ea9454 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Thu Sep 16 11
+commit 876a6db193661509baf40eb5e6f8955235ea9454
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Thu Sep 16 11:31:52 2004 +0000
+
+    Simpified attribute wildcard creation and assignment to get rid of memory
+    
+    * xmlschemas.c include/libxml/schemasInternals.h
+      test/schemas/bug152470_1.* result/schemas/bug152470_1_1*:
+      Simpified attribute wildcard creation and assignment to get rid
+      of memory leaks.
+      Restructured the validation process.
+      Restructured and expanded parsing of <attributeGroup>.
+      Added initial handing of xsi:type.
+      Advanced handling of xsi:nil (should work now for simple types).
+      Added construction of schemata using xsi:schemaLocation and
+      xsi:noNamespaceSchemaLocation; this is not enabled, since
+      no corresponding API exists yet.
+      Moved the content model to complex type components.
+      Resolution of types for attributes will look for simple types
+      only (incl. all the built-in simple types).
+      Extended parsing of 'anyAttribute'.
+      Fixed content-type type for complex types if derived from
+      'anyType' using the short-hand form (see bug # 152470,
+      submitted by Thilo Jeremias).
+    * include/libxml/xmlschematypes.h: Cleaned up some comments.
+    * xstc/xstc.py: Workaround to accomodate case insensitive
+      test definitions in ms-test.def.xml.
+    * result/schemas/deter0_0_0.err result/schemas/ns0_0_2.err
+      result/schemas/ns0_1_2.err: Adapted.
+
+
+4c3bb7d8a20c5262882af7fcd41afe3b3d482f12 : MDT 2004 John Fleck <jfleck@inkstain.net> : Wed Aug 25 02
+commit 4c3bb7d8a20c5262882af7fcd41afe3b3d482f12
+Author: MDT 2004 John Fleck <jfleck@inkstain.net>
+Date:   Wed Aug 25 02:51:27 2004 +0000
+
+    doc/tutorial/xmltutorial.xml, xmltutorial.pdf, *.html fix Xpath memory
+    
+    
+    Tue Aug 24 20:49:15 MDT 2004 John Fleck <jfleck@inkstain.net>
+    
+    	* doc/tutorial/xmltutorial.xml, xmltutorial.pdf, *.html
+    	fix Xpath memory leak (thanks to sKaBoy and William Brack)
+
+
+18a04f2a3c4d1803ac4f2e55da288ffd7bf9cf3b : William M. Brack <wbrack@src.gnome.org> : Tue Aug 3 16
+commit 18a04f2a3c4d1803ac4f2e55da288ffd7bf9cf3b
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Tue Aug 3 16:42:37 2004 +0000
+
+    fixed problem with memory leak on text nodes in DTD (bug 148965) with
+    
+    * tree.c: fixed problem with memory leak on text nodes in DTD
+      (bug 148965) with patch provided by Darrell Kindred
+
+
+e2161a699bbd1b58fa90eb43fc94637cbbc29bc8 : Daniel Veillard <veillard@src.gnome.org> : Thu Apr 29 17
+commit e2161a699bbd1b58fa90eb43fc94637cbbc29bc8
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Apr 29 17:14:25 2004 +0000
+
+    fix a nasty problem with reading over the end fix a reported memory leak
+    
+    * xmlreader.c: fix a nasty problem with reading over the end
+    * xmlsave.c: fix a reported memory leak apparently
+    Daniel
+
+
+6dc91962d072fd434fec4673e9e4f2201a99df86 : Daniel Veillard <veillard@src.gnome.org> : Mon Mar 22 19
+commit 6dc91962d072fd434fec4673e9e4f2201a99df86
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Mar 22 19:10:02 2004 +0000
+
+    remove a memory leak on schemas type facets. reduce verbosity incorporated
+    
+    * relaxng.c: remove a memory leak on schemas type facets.
+    * check-relaxng-test-suite.py check-relaxng-test-suite2.py
+      check-xsddata-test-suite.py: reduce verbosity
+    * configure.in Makefile.am: incorporated the Python regressions
+      tests for Relax-NG and Schemas Datatype to "make tests"
+    Daniel
+
+
+a59ddb5ea4f34aa3f6e478c5c3bdf0a3054c7b12 : William M. Brack <wbrack@src.gnome.org> : Wed Feb 25 08
+commit a59ddb5ea4f34aa3f6e478c5c3bdf0a3054c7b12
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Wed Feb 25 08:12:32 2004 +0000
+
+    fixed a memory leak (xmlXPathLangFunction) reported on the list by Mike
+    
+    * xpath.c: fixed a memory leak (xmlXPathLangFunction) reported
+      on the list by Mike Hommey
+
+
+4773df2a58be83e1b9b1b55840371acf37386820 : Daniel Veillard <veillard@src.gnome.org> : Fri Jan 23 13
+commit 4773df2a58be83e1b9b1b55840371acf37386820
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Jan 23 13:15:13 2004 +0000
+
+    added io1.c an example ox xmlIO usage and io1.res test result, fixed a
+    
+    * doc/examples/*: added io1.c an example ox xmlIO usage and io1.res
+      test result, fixed a awful lot of memory leaks showing up in
+      testWriter.c, changed the examples and the Makefiles to test
+      memory leaks.
+    * xmlwriter.c: fixed a memory leak
+    * Makefile.am: run the doc/examples regression tests as part of
+      make tests
+    * xpath.c include/libxml/xpath.h: added xmlXPathCtxtCompile() to
+      compile an XPath expression within a context, currently the goal
+      is to be able to reuse the XSLT stylesheet dictionnary, but this
+      opens the door to others possible optimizations.
+    * dict.c include/libxml/dict.h: added xmlDictCreateSub() which allows
+      to build a new dictionnary based on another read-only dictionnary.
+      This is needed for XSLT to keep the stylesheet dictionnary read-only
+      while being able to reuse the strings for the transformation
+      dictionnary.
+    * xinclude.c: fixed a dictionnar reference counting problem occuring
+      when document parsing failed.
+    * testSAX.c: adding option --repeat for timing 100times the parsing
+    * doc/* : rebuilt all the docs
+    Daniel
+
+
+20c5e7878d462bfd93aa4eede7f1f5faabd377fe : Daniel Veillard <veillard@src.gnome.org> : Wed Jan 21 09
+commit 20c5e7878d462bfd93aa4eede7f1f5faabd377fe
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Jan 21 09:57:31 2004 +0000
+
+    applied patch from Alfred Mickautsch fixing a memory leak reported on the
+    
+    * xmlwriter.c: applied patch from Alfred Mickautsch fixing a memory
+      leak reported on the list.
+    Daniel
+
+
+65765284fbd757189f4a0be5734a4589a12838c6 : Daniel Veillard <veillard@src.gnome.org> : Thu Jan 8 16
+commit 65765284fbd757189f4a0be5734a4589a12838c6
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Jan 8 16:59:30 2004 +0000
+
+    removed a memory leak remaining from the switch to a dictionnary for
+    
+    * xmlschemas.c: removed a memory leak remaining from the switch
+      to a dictionnary for string allocations c.f. #130891
+    Daniel
+
+
+72ee48d55f9002544d011826e2897b5054b7e32c : William M. Brack <wbrack@src.gnome.org> : Tue Dec 30 08
+commit 72ee48d55f9002544d011826e2897b5054b7e32c
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Tue Dec 30 08:30:19 2003 +0000
+
+    Fixed memory leak reported by Dave Beckett Removed spurious comment
+    
+    * parser.c, xmlmemory.c, include/libxml/xmlmemory.h: Fixed
+      memory leak reported by Dave Beckett
+    * xmlschemas.c: Removed spurious comment reported on the mailing
+      list
+    * xinclude.c, xpath.c, xpointer.c, libxml/include/xpointer.h:
+      Further work on Bug 129967 concerning xpointer range handling
+      and range-to function; much better, but still not complete
+
+
+a6874ca47c524d54ba6dc7297ced4e9a48c06b37 : Daniel Veillard <veillard@src.gnome.org> : Tue Jul 29 16
+commit a6874ca47c524d54ba6dc7297ced4e9a48c06b37
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jul 29 16:47:24 2003 +0000
+
+    applied Peter Jacobi encoding cleanup patch, and also avoided a possible
+    
+    * parser.c parserInternals.c tree.c: applied Peter Jacobi encoding
+      cleanup patch, and also avoided a possible memory leak
+    Daniel
+
+
+9deb242b558cbcff45165866e0634a1962404885 : Daniel Veillard <veillard@src.gnome.org> : Mon Jul 28 20
+commit 9deb242b558cbcff45165866e0634a1962404885
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Jul 28 20:40:59 2003 +0000
+
+    applied a change suggested by Sean Griffin in bug #118494 about a memory
+    
+    * xpath.c: applied a change suggested by Sean Griffin in bug
+      #118494 about a memory leak in EXSLT
+    Daniel
+
+
+104caa3df07909fab4fa001c91c97cf8b80b74ca : Daniel Veillard <veillard@src.gnome.org> : Tue May 13 22
+commit 104caa3df07909fab4fa001c91c97cf8b80b74ca
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue May 13 22:54:05 2003 +0000
+
+    oops last commit introduced a memory leak. Daniel
+    
+    * HTMLparser.c: oops last commit introduced a memory leak.
+    Daniel
+
+
+80b19092f24410a6b869abf519227686e8f207ca : Daniel Veillard <veillard@src.gnome.org> : Fri Mar 28 13
+commit 80b19092f24410a6b869abf519227686e8f207ca
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Mar 28 13:29:53 2003 +0000
+
+    implemented comparisons for Schemas values. fixed some bugs in duration
+    
+    * relaxng.c: implemented comparisons for Schemas values.
+    * xmlschemastypes.c include/libxml/xmlschemastypes.h: fixed
+      some bugs in duration handling, comparisons for durations
+      and decimals, removed all memory leaks pointed out by James
+      testsuite. Current status is now
+      found 238 test schemas: 197 success 41 failures
+      found 1035 test instances: 803 success 130 failures
+    Daniel
+
+
+91a1325beb87de8fde190157a545504632c169fe : Daniel Veillard <veillard@src.gnome.org> : Thu Mar 27 23
+commit 91a1325beb87de8fde190157a545504632c169fe
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Mar 27 23:44:43 2003 +0000
+
+    fixed bugs and memory leaks in the W3C XML Schemas code implemented
+    
+    * xmlschemas.c include/libxml/xmlschemas.h: fixed bugs and memory
+      leaks in the W3C XML Schemas code
+    * xmlschemastypes.c: implemented nonPositiveInteger
+    * test/schemas/length2_0.xsd result/schemas/length2_0_0.err:
+      fixed the test and result.
+    Daniel
+
+
+3ebc7d43f73d67c54cc0ec1d3ca0aa1e4115f519 : Daniel Veillard <veillard@src.gnome.org> : Mon Feb 24 17
+commit 3ebc7d43f73d67c54cc0ec1d3ca0aa1e4115f519
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Feb 24 17:17:58 2003 +0000
+
+    fixed xmlSetProp and al. when the node passed is not an element. fixed
+    
+    * tree.c: fixed xmlSetProp and al. when the node passed is not an
+      element.
+    * relaxng.c: fixed bugs 7.3 (though not complete) and memory leaks
+      found 373 test schemas: 369 success 4 failures
+      found 529 test instances: 525 success 4 failures
+    * check-relaxng-test-suite.py: added memory debug reporting
+    Daniel
+
+
+8bf70b956ade0c2ae0d97e21422c1f222d2f4d79 : Daniel Veillard <veillard@src.gnome.org> : Tue Jan 7 23
+commit 8bf70b956ade0c2ae0d97e21422c1f222d2f4d79
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jan 7 23:14:24 2003 +0000
+
+    fuck, I introduced a memory leak on external parsed entities in 2.5.0 :-(
+    
+    * SAX.c: fuck, I introduced a memory leak on external parsed
+      entities in 2.5.0 :-(
+    Daniel
+
+
+bd9afb529069415baf1f32d907f035de19dae788 : Daniel Veillard <veillard@src.gnome.org> : Wed Sep 25 22
+commit bd9afb529069415baf1f32d907f035de19dae788
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Sep 25 22:25:35 2002 +0000
+
+    improving some documentation comments found and fixed a mem leak with
+    
+    * tree.c: improving some documentation comments
+    * xmlregexp.c: found and fixed a mem leak with python regression tests
+    * doc/*: rebuilt the doc and the API XML file including the
+      xmlregexp.h xmlautomata.h and xmlunicode.h headers
+    * python/generator.py python/libxml2class.txt python/libxml_wrap.h
+      python/types.c: added access to the XML Schemas regexps from
+      python
+    * python/tests/Makefile.am python/tests/regexp.py: added a
+      simple regexp bindings test
+    Daniel
+
+
+19aa70245a694b3e8ae39da27a8c3deb8d32f405 : Daniel Veillard <veillard@src.gnome.org> : Thu Sep 5 11
+commit 19aa70245a694b3e8ae39da27a8c3deb8d32f405
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Sep 5 11:14:19 2002 +0000
+
+    memory leak reporting was broken after a change of the preprocessor symbol
+    
+    * xmllint.c: memory leak reporting was broken after a change
+      of the preprocessor symbol used to activate it.
+    Daniel
+
+
+42766c0eea0fa40c7b721fa4c9cf56b4c484b4c7 : Daniel Veillard <veillard@src.gnome.org> : Thu Aug 22 20
+commit 42766c0eea0fa40c7b721fa4c9cf56b4c484b4c7
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Aug 22 20:52:17 2002 +0000
+
+    possible mem leak patch from Jason Adams integrated xf:escape-uri() from
+    
+    * xpath.c: possible mem leak patch from Jason Adams
+    * xpath.c: integrated xf:escape-uri() from Wesley Terpstra
+      in the XQuery namespace
+    * configure.in: preparing 2.4.24
+    * doc/*.html: updated the web pages
+    * python/generator.py: closing bug #85258 by generating conditional
+      compile check to avoid linking to routines not configured in.
+    Daniel
+
+
+ea4272a199ff749f33f80a30325d108bfd49182e : Aleksey Sanin <aleksey@src.gnome.org> : Fri Aug 2 23
+commit ea4272a199ff749f33f80a30325d108bfd49182e
+Author: Aleksey Sanin <aleksey@src.gnome.org>
+Date:   Fri Aug 2 23:50:03 2002 +0000
+
+    fixed memory leak in c14n code
+    
+    * c14n.c: fixed memory leak in c14n code
+
+
+fdc9156a753e839386d9f82b7a962f9779de862c : Daniel Veillard <veillard@src.gnome.org> : Mon Jul 1 21
+commit fdc9156a753e839386d9f82b7a962f9779de862c
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Jul 1 21:52:03 2002 +0000
+
+    applied patch from Richard Jinks for the namespace axis + fixed a memory
+    
+    * xpath.c: applied patch from Richard Jinks for the namespace
+      axis + fixed a memory error.
+    * parser.c parserInternals.c: applied patches from Peter Jacobi
+      removing ctxt->token for good.
+    * xmlschemas.c xmlschemastypes.c: fixed a few memory leaks
+      popped out by the regression tests.
+    * Makefile.am: patch for threads makefile from Gary Pennington
+    Daniel
+
+
+8d24cc189845663509623fbd6b5106cc01266994 : Daniel Veillard <veillard@src.gnome.org> : Tue Mar 5 15
+commit 8d24cc189845663509623fbd6b5106cc01266994
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Mar 5 15:41:29 2002 +0000
+
+    make sure SAX endDocument is always called as this could result in a
+    
+    * parser.c: make sure SAX endDocument is always called as
+      this could result in a Python memory leak otherwise (it's
+      used to decrement ref-counting)
+    * python/generator.py python/libxml.c python/libxml.py
+      python/libxml2-python-api.xml python/libxml2class.txt
+      python/tests/error.py python/tests/xpath.py: implemented
+      the suggestions made by Gary Benson and extended the tests
+      to match it.
+    Daniel
+
+
+4e1b26cfeba7f5fad4f8bd12fb5ce7029f930b79 : Daniel Veillard <veillard@src.gnome.org> : Sun Feb 3 20
+commit 4e1b26cfeba7f5fad4f8bd12fb5ce7029f930b79
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Feb 3 20:13:06 2002 +0000
+
+    change a small bit in the way valididy error messages get initialized
+    
+    * parserInternals.c: change a small bit in the way valididy
+      error messages get initialized
+    * python/TODO python/libxml.c python/libxml2-python-api.xml
+      python/libxml2class.txt python/libxml_wrap.h python/types.c:
+      added some memory debugging to track leaks at the libxml2 level
+    * python/tests/*.py: changed all tests to check for leaks,
+      there is just one left in XPath extension registrations.
+    daniel
+
+
+80e183917f7b2bc5cfb000d6a68db886ef79f914 : Daniel Veillard <veillard@src.gnome.org> : Wed Aug 22 00
+commit 80e183917f7b2bc5cfb000d6a68db886ef79f914
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Aug 22 00:57:39 2001 +0000
+
+    xmlSAXParseDoc() fixing a memleak on ctxt->sax, fixed the fix, cleaned up
+    
+    * parser.c: xmlSAXParseDoc() fixing a memleak on ctxt->sax,
+      fixed the fix, cleaned up a few other occurences, I hope
+      it's okay now.
+    Daniel
+
+
+b3b4b07cf9a8653b66a9d6817aabb82e109aaf0a : Daniel Veillard <veillard@src.gnome.org> : Wed Aug 22 00
+commit b3b4b07cf9a8653b66a9d6817aabb82e109aaf0a
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Aug 22 00:36:20 2001 +0000
+
+    xmlSAXParseDoc() fixing a memleak on ctxt->sax Daniel
+    
+    * parser.c: xmlSAXParseDoc() fixing a memleak on ctxt->sax
+    Daniel
+
+
+4dd9346df228ff478e8cbe38bee270d56a609676 : Daniel Veillard <veillard@src.gnome.org> : Mon Apr 2 15
+commit 4dd9346df228ff478e8cbe38bee270d56a609676
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Apr 2 15:16:19 2001 +0000
+
+    Small fixes: - xpath.c: fixed a memleak when comparing nodesets -
+    
+    Small fixes:
+    - xpath.c: fixed a memleak when comparing nodesets
+    - HTMLtree.c: don't invent the HTML doctype if not available (XSLT)
+    - tree.c: added a TODO
+    Daniel
+
+
+9e7160d45a18bfa26d708e22ba991f7670d0128b : Daniel Veillard <veillard@src.gnome.org> : Sun Mar 18 23
+commit 9e7160d45a18bfa26d708e22ba991f7670d0128b
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Mar 18 23:17:47 2001 +0000
+
+    Completely changed the way the XPath evaluation is done, likely to break
+    stuff like libxslt right now:
+    - Makefile.am: detect XPath memleaks in regreson tests
+    - error.c: fixed and error w.r.t. error reporting still using
+      stderr
+    - hash.c: added new line at end of file
+    - tree.h: minor cleanup
+    - xpath.[ch] xpointer.[ch]: Major changes ! Separated XPath
+      expression parsing from evaluation, resulted in a number of
+      changes internally, and in XPointer. Likely to break stuff
+      using xpathInternals.h but should remain binary compatible,
+      new interfaces will be added.
+    Daniel
+
+
+bbd51d512bdffad6d54fb45cbbb9843e787f448a : Daniel Veillard <veillard@src.gnome.org> : Sat Feb 24 03
+commit bbd51d512bdffad6d54fb45cbbb9843e787f448a
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sat Feb 24 03:07:03 2001 +0000
+
+    - xpath.c: found a memleak and fixed a nasty bug
+    Daniel
+
+
+bf43275dd1e31ee7542c37f1f7ce21e0ee9218ee : Daniel Veillard <veillard@src.gnome.org> : Sun Nov 12 15
+commit bf43275dd1e31ee7542c37f1f7ce21e0ee9218ee
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Nov 12 15:56:56 2000 +0000
+
+    Bug fixes new Xinclude tests:
+    - nanoftp.c: fixed gcc 2.95 new warnings
+    - SAX.c: fixed a stupid bug
+    - tree.c: fixed a formatting problem when round-tripping
+      from/to memory
+    - xinclude.c: chased memleak, fixed a base problem
+    - xpointer.c: added xmlXPtrBuildRangeNodeList(), finished ?
+      xmlXPtrBuildNodeList()
+    - TODO: updated
+    - Makefile.am test/XInclude/docs test/XInclude/ents result/XInclude:
+      adding a first small set of regression tests for XInclude
+    Daniel
+
+
+32bc74ef98c7bd6172327fb03f68766f6ee4b6a2 : Daniel Veillard <veillard@src.gnome.org> : Fri Jul 14 14
+commit 32bc74ef98c7bd6172327fb03f68766f6ee4b6a2
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Jul 14 14:49:25 2000 +0000
+
+    - doc/encoding.html doc/xml.html: added I18N doc
+    - encoding.[ch] HTMLtree.[ch] parser.c HTMLparser.c: I18N encoding
+      improvements, both parser and filters, added ASCII & HTML,
+      fixed the ISO-Latin-1 one
+    - xmllint.c testHTML.c: added/made visible --encode
+    - debugXML.c : cleanup
+    - most .c files: applied patches due to warning on Windows and
+      when using Sun Pro cc compiler
+    - xpath.c : cleanup memleaks
+    - nanoftp.c : added a TESTING preprocessor flag for standalong
+      compile so that people can report bugs more easilly
+    - nanohttp.c : ditched socklen_t which was a portability mess
+      and replaced it with unsigned int.
+    - tree.[ch]: added xmlHasProp()
+    - TODO: updated
+    - test/ : added more test for entities, NS, encoding, HTML, wap
+    - configure.in: preparing for 2.2.0 release
+    Daniel
+
+
+365e13be6c7faa99d2797b973e39b3491ab7c18a : Daniel Veillard <veillard@src.gnome.org> : Sun Jul 2 07
+commit 365e13be6c7faa99d2797b973e39b3491ab7c18a
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Jul 2 07:56:37 2000 +0000
+
+    Work on character encoding support for the HTML parser
+    Fixed some autoopen/autoclose probs for the HTML parser
+    Fixed a potential memleak in the encoding stuff
+    Daniel.
+
+
+5e5c62351f88ed07e3a67cf3735bf3ae290eb03d : Daniel Veillard <veillard@src.gnome.org> : Wed Dec 29 12
+commit 5e5c62351f88ed07e3a67cf3735bf3ae290eb03d
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Dec 29 12:49:06 1999 +0000
+
+    - Push mode for the HTML parser (new calls)
+    - Improved the memory debugger to provide content informations
+    - cleanups, last known mem leak killed
+    Daniel
+
+
+294cbca511657df4b7afa49550b855d9c4a6b1f6 : Daniel Veillard <veillard@src.gnome.org> : Fri Dec 3 13
+commit 294cbca511657df4b7afa49550b855d9c4a6b1f6
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Dec 3 13:19:09 1999 +0000
+
+    Closing #3908 and #3937 and a memory leak in the SAX API
+    added SAX.h mostly useful for the doc generation
+    Regenerated all the docs,
+    Daniel
+
+
+c08a2c6fd41773f55853c5d93a67a932c61511e9 : Daniel Veillard <veillard@src.gnome.org> : Wed Sep 8 21
+commit c08a2c6fd41773f55853c5d93a67a932c61511e9
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Sep 8 21:35:25 1999 +0000
+
+    Bug fixes, improvement on ID/IDREF support, 1.6.2, no memleaks, Daniel
+
+
+6454aec23de4875fb66fd735618858c9b0b2a008 : Daniel Veillard <veillard@src.gnome.org> : Thu Sep 2 22
+commit 6454aec23de4875fb66fd735618858c9b0b2a008
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Sep 2 22:04:43 1999 +0000
+
+    Added memory debug wrappers, killed all detected memory leaks, Daniel
+
+
+commit 24464be6390bc61a0f0e17890fbfc9c581434e29
+Type: resource leak
+File: HTMLparser.c
+PC: LIBXML_HTML_ENABLED
+
+commit 24464be6390bc61a0f0e17890fbfc9c581434e29
+Type: resource leak
+File: parser.c
+PC: true
+
+commit 24464be6390bc61a0f0e17890fbfc9c581434e29
+Type: resource leak
+File: xmlreader.c
+PC: LIBXML_READER_ENABLED
+
+
+03c6723043775122313f107695066e5744189a08 : Nick Wellnhofer <wellnhofer@aevum.de> : Fri Dec 20 00
+commit 03c6723043775122313f107695066e5744189a08
+Author: Nick Wellnhofer <wellnhofer@aevum.de>
+Date:   Fri Dec 20 00:01:53 2013 +0100
+
+    Handling of XPath function arguments in error case
+    
+    The XPath engine tries to guarantee that every XPath function can pop
+    'nargs' non-NULL values off the stack. libxslt, for example, relies on
+    this assumption. But the check isn't thorough enough if there are errors
+    during the evaluation of arguments. This can lead to segfaults:
+    
+    https://mail.gnome.org/archives/xslt/2013-December/msg00005.html
+    
+    This commit makes the handling of function arguments more robust.
+    
+    * Bail out early when evaluation of XPath function arguments fails.
+    * Make sure that there are 'nargs' arguments in the current call frame.
+
+
+a9016c492788eb4792c42b52df0c72b46136787d : Alexey Neyman <stilor@att.net> : Mon Feb 25 16
+commit a9016c492788eb4792c42b52df0c72b46136787d
+Author: Alexey Neyman <stilor@att.net>
+Date:   Mon Feb 25 16:07:09 2013 +0800
+
+    Fix a few problems with setEntityLoader
+    
+    1. Setting entity loader does not increment the refcount on the Python object
+    passed in. This works only if the object is not deleted. For example, the
+    following code results in segmentation fault in Python interpreter when
+    attempting to process any document:
+    
+    [[[
+    def register_entity_loader():
+        def entity_loader(URL, ID, ctxt):
+            ...
+        libxml2.setEntityLoader(entity_loader
+    
+    register_entity_loader()
+    ]]]
+    
+    2. setEntityLoader() does not verify if the passed object is callable. If it
+    is not, current implementation attempts to call it anyway and failing that,
+    silently moves on to default entity loader. Attached patch makes
+    setEntityLoader raise ValueError exception if non-callable object is
+    passed.
+    
+    3. In debug mode, pythonExternalEntityLoader() outputs the result object to
+    stderr, while the messages before and after the object (description + newline)
+    go to stdout. Attached patch makes them all go to stdout.
+
+
+28f5e1a2d6d9c1742b7daa305501bbe01a5753ab : Daniel Veillard <veillard@redhat.com> : Tue Sep 4 11
+commit 28f5e1a2d6d9c1742b7daa305501bbe01a5753ab
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Tue Sep 4 11:18:39 2012 +0800
+
+    Fix potential crash on entities errors
+    
+    Related to https://bugs.launchpad.net/lxml/+bug/502959
+    
+    Basically the core of the issue is that if an entity references another
+    entity, then in case we are replacing entities content, we should always
+    do so by copying the referenced content as long as the reference is
+    done within the entity. Otherwise, if for some reason there is a later
+    parsing error that entity content may be freed.
+    
+    Complex scenario exposed by command:
+    thinkpad:~/XML/diveintopython-5.4/xml -> valgrind --db-attach=yes
+    ../../xmllint --loaddtd --noout --noent diveintopython.xml
+    
+      Document references &a;
+      a references &b;
+      we references b content directly in by linking in the a content
+      a has an error further down
+      we free a, freeing the chunk from b
+      Document references &b; after &a;
+      we try to copy b content, but it was freed already => segfault
+    
+    * parser.c: never reference directly entity content without copying if
+      we aren't in the document main entity
+
+
+40851d0c5975a8fde9498f72f3f5d96ad3194dc5 : Daniel Veillard <veillard@redhat.com> : Fri Aug 17 20
+commit 40851d0c5975a8fde9498f72f3f5d96ad3194dc5
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Fri Aug 17 20:34:05 2012 +0800
+
+    Fix a segfault on XSD validation on pattern error
+    
+    As reported by Sven <sven@e7o.de>:
+    The following pattern will cause a segmentation fault in my
+    Apache (using PHP5 to validate a XML against a XSD):
+    
+    <xs:pattern value="(.*)|"/>
+    
+    Fix a cascade of error handling failures which led to the
+    crash in that scenario.
+
+
+e6f05099e8de3c89201aa92c5d6f0286b9299522 : Mike Hommey <mh@glandium.org> : Fri Oct 15 19
+commit e6f05099e8de3c89201aa92c5d6f0286b9299522
+Author: Mike Hommey <mh@glandium.org>
+Date:   Fri Oct 15 19:50:03 2010 +0200
+
+    Fix a potential segfault due to weak symbols on pthreads
+    
+    In xmlInitParser, both __xmlGlobalInitMutexLock and xmlInitGlobals are
+    called before xmlInitThreads, and both use pthread symbols.
+    __xmlGlobalInitMutexLock does so directly, without checking if the symbol
+    exists, and xmlInitGlobals calls xmlNewMutex, which correctly depends on
+    libxml_is_threaded... except libxml_is_threaded is still -1 by then...
+    And again, when releasing the global mutex in __xmlGlobalInitMutexUnlock,
+    the pthread function is called directly.
+    
+    The patch changes the initialization order and make sure the functions
+    are available before calling them
+
+
+7cb3fa9d51a0a57d1e538854e4be84db82b75098 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Tue Jun 6 15
+commit 7cb3fa9d51a0a57d1e538854e4be84db82b75098
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Tue Jun 6 15:27:46 2006 +0000
+
+    Fixed self-invented a segfault in xmlXPathCtxtCompile(), when the
+    
+    * xpath.c: Fixed self-invented a segfault in xmlXPathCtxtCompile(),
+      when the expression was not valid and @comp was NULL and I
+      tried to do the d-o-s rewrite.
+
+
+5bb0c08d2f2107f4f859a7ebfd05b94d461ff1d6 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Tue Dec 20 10
+commit 5bb0c08d2f2107f4f859a7ebfd05b94d461ff1d6
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Tue Dec 20 10:48:33 2005 +0000
+
+    Fixed a segfault during text concatenation when validating a node tree:
+    
+    * xmlschemas.c xmlstring.c: Fixed a segfault during
+      text concatenation when validating a node tree:
+      xmlStrncat was called with a @len of -1; but unlike
+      xmlStrncatNew, it does not calculate the length
+      automatically in such a case (reported by Judy Hay
+      on the mailing list).
+      Updated the descriptions of the involved string
+      functions to note this.
+
+
+215406f089423345e2d5147e63fe7ec74fa540ab : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Wed Dec 7 12
+commit 215406f089423345e2d5147e63fe7ec74fa540ab
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Wed Dec 7 12:14:09 2005 +0000
+
+    Fixed a segfault: the instance document was still tried to be validated,
+    
+    * xmlschemas.c: Fixed a segfault: the instance document was
+      still tried to be validated, if the schema, dynamically
+      acquired using XSI was invalid, thus mangled. The
+      validation will stop (or rather won't validate) now in
+      such a case. The schema parser error code will be set
+      on the validion context now; this is somehow not nice,
+      but it assures that the validation context indicates an
+      error in there was a parser error.
+
+
+f39e8d1f05a7198f66403767b5cb5a700d3fa759 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Wed Nov 30 11
+commit f39e8d1f05a7198f66403767b5cb5a700d3fa759
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Wed Nov 30 11:03:24 2005 +0000
+
+    Fixed bubbling of duplicate IDC nodes: the parent's list of duplicates was
+    
+    * xmlschemas.c: Fixed bubbling of duplicate IDC nodes: the
+      parent's list of duplicates was filled with NULLs instead
+      of the nodes under certain conditions. This lead to a
+      segfault when the list's entries were accessed.
+
+
+65c2f1d78acaea8cde6578eaef0c0051f31369f9 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon Oct 17 12
+commit 65c2f1d78acaea8cde6578eaef0c0051f31369f9
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon Oct 17 12:39:58 2005 +0000
+
+    Silenced intel compiler warnings (reported by Kjartan Maraas, bug
+    
+    * tree.c pattern.c: Silenced intel compiler warnings (reported
+      by Kjartan Maraas, bug #318517).
+    * xmlschemas.c: The above changes in pattern.c revealed an
+      inconsistency wrt IDCs: we now _only_ pop XPath states, if
+      we really pushed them beforehand; this was previously not
+      checked for the case when we discover an element node to be
+      invalid wrt the content model.
+      Fixed segfault in xmlSchemaGetEffectiveValueConstraint().
+
+
+942d6c7b4f6f0fbc5855a00891961a940963aa93 : Daniel Veillard <veillard@src.gnome.org> : Sun May 8 11
+commit 942d6c7b4f6f0fbc5855a00891961a940963aa93
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun May 8 11:39:56 2005 +0000
+
+    fixed #169630 segfault in xmlMemDisplay Daniel
+    
+    * xmlmemory.c: fixed #169630 segfault in xmlMemDisplay
+    Daniel
+
+
+53b5e0526f9cbda18541fbc53a21822620fa4f8e : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Thu Mar 24 11
+commit 53b5e0526f9cbda18541fbc53a21822620fa4f8e
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Thu Mar 24 11:05:13 2005 +0000
+
+    Fixed call to a facet error report: the type of the error was wrong,
+    
+    * xmlschemas.c: Fixed call to a facet error report: the type of
+      the error was wrong, resulting in a segfault (bug #171220, reported
+      by GUY Fabrice).
+
+
+b34ad1b67653657ff42c8e3e5f83dc4706ceabc6 : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon Mar 21 20
+commit b34ad1b67653657ff42c8e3e5f83dc4706ceabc6
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon Mar 21 20:10:31 2005 +0000
+
+    Fixed a segfault, which occured during bubbling of IDC nodes (bug #170779
+    
+    * xmlschemas.c: Fixed a segfault, which occured during bubbling
+      of IDC nodes (bug #170779 and #170778, reported by GUY Fabrice):
+      a variable was missed to be reset in a loop. Deactivated bubbling,
+      if not referenced by a keyref.
+
+
+87250a97a38ee047249061d56bee74e74408138c : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Fri Jan 28 15
+commit 87250a97a38ee047249061d56bee74e74408138c
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Fri Jan 28 15:59:53 2005 +0000
+
+    Corrected an ambigious symbol-space for local attribute declarations.
+    
+    * xmlschemas.c: Corrected an ambigious symbol-space for
+      local attribute declarations. IFDEFed more IDC code to
+      surpress compiler warnings.
+    
+    
+    * xmlschemas.c: tiny enhancement for content model error reports
+      (#157190, #143948). Removed abbreviations: CT, ST and WC
+      (#157190, reported by Frans  Englich).
+    * result/schemas/all* result/schemas/any3_0_0.err
+      result/schemas/choice*
+      result/schemas/cos-st-restricts-1-2-err_0_0.err
+      result/schemas/derivation-ok-extension-err_0_0.err
+      result/schemas/derivation-ok-extension_0_0.err
+      result/schemas/derivation-ok-restriction-2-1-1_0_0.err
+      result/schemas/derivation-ok-restriction-4-1-err_0_0.err
+      result/schemas/deter0_0_0.err result/schemas/extension1_0_2.err
+      result/schemas/facet-unionST-err1_0_0.err
+      result/schemas/hexbinary_0_1.err
+      result/schemas/list* result/schemas/restriction-attr1_0_0.err
+      result/schemas/vdv-first4_0_1.err result/schemas/vdv-first4_0_2.err:
+      Adapted output.
+      xmlSchemaTypeFixup; this ensures facets of inherited types to be
+      checked prior to facets of derived types - which caused a seg
+      fault otherwise (bug #158216, reported by Frans Englich).
+
+
+b884124c34c5ed35f51108092a16801ad2a671ad : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Mon Nov 15 12
+commit b884124c34c5ed35f51108092a16801ad2a671ad
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Mon Nov 15 12:11:56 2004 +0000
+
+    Moved execution of xmlSchemaCheckDefaults to xmlSchemaTypeFixup; this
+    
+    * xmlschemas.c: Moved execution of xmlSchemaCheckDefaults to
+      xmlSchemaTypeFixup; this ensures facets of inherited types to be checked
+      prior to facets of derived types - which caused a seg fault otherwise
+      (bug #158216, reported by Frans Englich).
+
+
+13dfa87e91a32c347c5c9c655252609f552e9424 : William M. Brack <wbrack@src.gnome.org> : Sat Sep 18 04
+commit 13dfa87e91a32c347c5c9c655252609f552e9424
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Sat Sep 18 04:52:08 2004 +0000
+
+    added the routine xmlNanoHTTPContentLength to the external API
+    
+    * nanohttp.c, include/libxml/nanohttp.h: added the routine
+      xmlNanoHTTPContentLength to the external API (bug151968).
+    * parser.c: fixed unnecessary internal error message (bug152060);
+      also changed call to strncmp over to xmlStrncmp.
+    * encoding.c: fixed compilation warning (bug152307).
+    * tree.c: fixed segfault in xmlCopyPropList (bug152368); fixed
+      a couple of compilation warnings.
+    * HTMLtree.c, debugXML.c, xmlmemory.c: fixed a few compilation
+      warnings; no change to logic.
+
+
+383434b2f70423f49dfc95e562a7f3d53950ea4b : Kasimier T. Buchcik <kbuchcik@src.gnome.org> : Fri Sep 3 18
+commit 383434b2f70423f49dfc95e562a7f3d53950ea4b
+Author: Kasimier T. Buchcik <kbuchcik@src.gnome.org>
+Date:   Fri Sep 3 18:55:35 2004 +0000
+
+    Fixed a seg fault in xmlGetQNameProp: a format argument was missing. Fixed
+    
+    * xmlschemas.c include/libxml/schemasInternals.h
+      include/libxml/xmlerror.h: Fixed a seg fault in xmlGetQNameProp:
+      a format argument was missing.
+      Fixed wrong assignment of the owner of a wildcard in
+      xmlSchemaBuildAttributeValidation (in the shorthandform of
+      <complexType>; this caused a seg fault, due to a double-free
+      of the wildcard.
+      Added a check for circular attribute group references.
+      Added a check for circular model group definition references.
+      Fixed a dublicate xmlParserErrors enum value - see bug #151738.
+
+
+c68d78d25a17e65d172ccc1ac24d609c7c1d5cde : William M. Brack <wbrack@src.gnome.org> : Fri Jul 16 10
+commit c68d78d25a17e65d172ccc1ac24d609c7c1d5cde
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Fri Jul 16 10:39:30 2004 +0000
+
+    added a check on the argument for some classes (e.g. xmlDoc and xmlNode)
+    
+    * python/generator.py: added a check on the argument for some
+      classes (e.g. xmlDoc and xmlNode) to prevent a segfault (as
+      reported on the list).  Further enhancement should be done
+      to auto-create the appropriate object.
+    * python/libxml.c: minor fix for a warning message; added a
+      routine, currently not used, to report the description of a
+      PyCObject.
+    * python/libxml2class.txt: regenerated
+
+
+ee1d6926f36a4740ed4ae7f2318f5491db44c252 : Daniel Veillard <veillard@src.gnome.org> : Sun Apr 18 14
+commit ee1d6926f36a4740ed4ae7f2318f5491db44c252
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Sun Apr 18 14:58:57 2004 +0000
+
+    keep the ChangeLog compressed fix a segfault when using Close() test for
+    
+    * libxml.spec.in: keep the ChangeLog compressed
+    * xmlreader.c: fix a segfault when using Close()
+    * python/tests/Makefile.am python/tests/reader8.py: test for
+      the Close() reader API.
+    Daniel
+
+
+cb35f01d948e8d8ef8d25a85181a148a75130887 : Daniel Veillard <veillard@src.gnome.org> : Fri Feb 20 08
+commit cb35f01d948e8d8ef8d25a85181a148a75130887
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Fri Feb 20 08:18:58 2004 +0000
+
+    xmlAttrSerializeTxtContent don't segfault if NULL is passed. adding an old
+    
+    * tree.c: xmlAttrSerializeTxtContent don't segfault if NULL
+      is passed.
+    * test/att7 result//att7*: adding an old regression test
+      laying around on my laptop
+    Daniel
+
+
+9887395b556af391306245b52487c215337c4054 : William M. Brack <wbrack@src.gnome.org> : Fri Dec 26 06
+commit 9887395b556af391306245b52487c215337c4054
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Fri Dec 26 06:03:14 2003 +0000
+
+    fixed problem causing segfault on validation error condition (reported on
+    
+    * xmlregexp.c: fixed problem causing segfault on validation error
+      condition (reported on mailing list)
+
+
+9ca682f5274819e420553417eb4e778ee31d99d1 : William M. Brack <wbrack@src.gnome.org> : Sun Oct 19 10
+commit 9ca682f5274819e420553417eb4e778ee31d99d1
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Sun Oct 19 10:01:59 2003 +0000
+
+    fixed segfault when input file not present changed output formatting of
+    
+    * xmlIO.c: fixed segfault when input file not present
+    * tree.c: changed output formatting of XML_CDATA_SECTION
+      (bug 120917)
+
+
+34ba38793669da505d735e76794253b23dec447c : Daniel Veillard <veillard@src.gnome.org> : Tue Jul 15 13
+commit 34ba38793669da505d735e76794253b23dec447c
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jul 15 13:34:05 2003 +0000
+
+    removed some warnings by casting xmlChar to unsigned int and a couple of
+    
+    * DOCBparser.c HTMLparser.c entities.c parser.c relaxng.c
+      xmlschemas.c xpath.c: removed some warnings by casting xmlChar
+      to unsigned int and a couple of others.
+    * xmlschemastypes.c: fixes a segfault on empty hexBinary strings
+    Daniel
+
+
+01992e044630e9bd74aff638e181c52fb294c266 : Daniel Veillard <veillard@src.gnome.org> : Wed Oct 9 10
+commit 01992e044630e9bd74aff638e181c52fb294c266
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Oct 9 10:20:30 2002 +0000
+
+    Joe Marcus Clarke reported a segfault on FBsd this was due to
+    
+    * valid.c: Joe Marcus Clarke reported a segfault on FBsd
+      this was due to uninitialized parts of the validation context
+    Daniel
+
+
+38d80e25adef864df9187dc5d4d056cba3996565 : Daniel Veillard <veillard@src.gnome.org> : Tue Jun 11 07
+commit 38d80e25adef864df9187dc5d4d056cba3996565
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jun 11 07:24:56 2002 +0000
+
+    Babak Vahedipour-Kunze reported that openTag in xmlParseElement was likely
+    
+    * parser.c: Babak Vahedipour-Kunze reported that openTag in
+      xmlParseElement was likely to have been deallocated at the
+      time of the report, possibly leading to segfault. Just report
+      the tag name now.
+    Daniel
+
+
+73c6e53aff56602b6d2a4437018456344274f110 : Daniel Veillard <veillard@src.gnome.org> : Tue Jan 8 13
+commit 73c6e53aff56602b6d2a4437018456344274f110
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Jan 8 13:15:33 2002 +0000
+
+    Paul Keogh pointed out a possibility of segfault on repeted
+    
+    * encoding.c: Paul Keogh pointed out a possibility of segfault
+      on repeted xmlAddEncodingAlias() / xmlCleanupEncodingAlias().
+      Closes bug # 68238
+    Daniel
+
+
+635ef72a94db9f647dcff11d33f50115564ce091 : Daniel Veillard <veillard@src.gnome.org> : Mon Oct 29 11
+commit 635ef72a94db9f647dcff11d33f50115564ce091
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Oct 29 11:48:19 2001 +0000
+
+    apply fixes to close #63271 and avoid segfaults when the error routine
+    
+    * parser.c globals.c DOCBparser.c HTMLparser.c error.c:
+      apply fixes to close #63271 and avoid segfaults when
+      the error routine gets callbed before xmlInitParser()
+      get called.
+    * nanoftp.c error.c: Applied patches from Justin Fletcher
+      correcting some xmlGenericError misuses.
+    Daniel
+
+
+3e5bb8e54e1132cc3814be122bd711ee59232241 : Daniel Veillard <veillard@src.gnome.org> : Wed Jun 27 16
+commit 3e5bb8e54e1132cc3814be122bd711ee59232241
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Wed Jun 27 16:34:34 2001 +0000
+
+    - Makefile.am: added --push regression tests
+    - parserInternals.c: the XML parser segfaulted in --push mode
+    Daniel
+
+
+7533cc8fda1f29a6b7f77202d249c8ff18cbda4f : Daniel Veillard <veillard@src.gnome.org> : Tue Apr 24 15
+commit 7533cc8fda1f29a6b7f77202d249c8ff18cbda4f
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Apr 24 15:52:00 2001 +0000
+
+    Good old cycle: new release, new bug reports, new fixes ...
+    - HTMLtree.c HTMLtree.h : closing #53402 i.e. output of
+      PIs when using xsl:output
+    - valid.c: closing #53537 some case generate segfaults if there
+      is validity errors
+    Daniel
+
+
+1255ab77803cdd9b90bd5baa2dc85f2c3e8115ec : Daniel Veillard <veillard@src.gnome.org> : Mon Aug 14 15
+commit 1255ab77803cdd9b90bd5baa2dc85f2c3e8115ec
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Aug 14 15:13:33 2000 +0000
+
+    Patch from Dave Yearke <yearke@eng.buffalo.edu>:
+    - testHTML.c: fix core dump on Solaris 2.x systems
+    - HTMLparser.c: fix segfault if ctxt->sax->characters() is NULL
+    - result/HTML/*.sax: previous bug fix lead to new results
+    Daniel
+
+
+commit ed35d3d7c3c28b46c012fdd26d40da374a06c8ed
+Type: uninitialized variable
+File: parser.c
+PC: !LIBXML_SAX1_ENABLED
+
+
+commit 8bda20f73c908fc08b40ad7a1d1df2c35a8d362d
+Type: uninitialized variable
+File: xpath.c
+PC: true
+
+commit 465a000b1080427bd62d89a925409b7db78616ac
+Type: uninitialized variable
+File: valid.c
+PC: true
+
+
+commit 621636042b200e70c410f3112e89bc0f8b6203c0
+Type: uninitialized variable
+File: relaxng.c
+PC: true
+
+
+commit 61b33d5733ccf61ade1aa1562fea27e6a6a8aad9
+Type: uninitialized variable
+File: valid.c
+PC: true
+
+
+-- OVERFLOWS
+
+9b987f8c98763ee569bde90b5268b43474ca106c : Christopher Swenson <chris@caswenson.com> : Fri Feb 27 14
+commit 9b987f8c98763ee569bde90b5268b43474ca106c
+Author: Christopher Swenson <chris@caswenson.com>
+Date:   Fri Feb 27 14:55:49 2015 +0800
+
+    Fix timsort invariant loop re: Envisage article
+    
+    See http://envisage-project.eu/proving-android-java-and-python-sorting-algorithm-is-broken-and-how-to-fix-it/
+    
+    We use a "runLen" array of size 128, so it should be nearly impossible
+    to have our implementation overflow.
+    
+    But in any case, the fix is relatively simple -- checking two extra
+    conditions in the invariant calculation.
+    
+    I also took this opportunity to remove some redundancy in the
+    left/right merge logic in the invariant loop.
+
+
+292a9f293decfcd1de8870d93866bf450f3f555f : Daniel Veillard <veillard@redhat.com> : Mon Oct 6 18
+commit 292a9f293decfcd1de8870d93866bf450f3f555f
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Mon Oct 6 18:51:04 2014 +0800
+
+    Possible overflow in HTMLParser.c
+    
+    For https://bugzilla.gnome.org/show_bug.cgi?id=720615
+    
+    make sure that the encoding string passed is of reasonable size
+
+
+4ba5d3176938d3435ddc7347cdc904658e2999ee : Philip Withnall <philip.withnall@collabora.co.uk> : Fri Jun 20 21
+commit 4ba5d3176938d3435ddc7347cdc904658e2999ee
+Author: Philip Withnall <philip.withnall@collabora.co.uk>
+Date:   Fri Jun 20 21:37:21 2014 +0100
+
+    xmlschemastypes: Fix potential array overflow
+    
+    The year and month need validating before being put into the
+    MAX_DAYINMONTH macro.
+    
+    Coverity issue: #60436
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=731990
+
+
+de0cc20c29cb3f056062925395e0f68d2250a46f : Daniel Veillard <veillard@redhat.com> : Tue Feb 12 16
+commit de0cc20c29cb3f056062925395e0f68d2250a46f
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Tue Feb 12 16:55:34 2013 +0800
+
+    Fix some buffer conversion issues
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=690202
+    
+    Buffer overflow errors originating from xmlBufGetInputBase in 2.9.0
+    The pointers from the context input were not properly reset after
+    that call which can do reallocations.
+
+
+18e1f1f1180c4d48ed52bf995b3c700c2cefb492 : Daniel Veillard <veillard@redhat.com> : Mon Aug 6 10
+commit 18e1f1f1180c4d48ed52bf995b3c700c2cefb492
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Mon Aug 6 10:16:41 2012 +0800
+
+    Improvements for old buffer compatibility
+    
+    Now tree.h exports LIBXML2_NEW_BUFFER macro indicating that the
+    API uses the new buffers, important to keep code working with
+    both versions.
+    * tree.h buf.h: also export xmlBufContent(), xmlBufEnd(), and xmlBufUse()
+              to help port the old code
+    * buf.c: make sure the compatibility counters are updated on
+              buffer usage, to keep proper working of application compiled
+    	  against the old structures, but take care of int overflow
+
+
+bbcf1275fec28915b170db31fa9ea9bed0ea39a4 : Daniel Veillard <veillard@redhat.com> : Thu Nov 10 23
+commit bbcf1275fec28915b170db31fa9ea9bed0ea39a4
+Author: Daniel Veillard <veillard@redhat.com>
+Date:   Thu Nov 10 23:23:10 2011 +0800
+
+    Fix a schema type duration comparison overflow
+    
+    https://bugzilla.gnome.org/show_bug.cgi?id=653724
+    
+    Based on the fix suggested by Nick Pope <nick@nickpope.me.uk>
+    but just changing the casts to avoid using long long type
+
+
+1dc9feb00fd3bce5967304dcb388ea3ba7e964e6 : Daniel Veillard <veillard@src.gnome.org> : Mon Nov 17 15
+commit 1dc9feb00fd3bce5967304dcb388ea3ba7e964e6
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Mon Nov 17 15:59:21 2008 +0000
+
+    fix for CVE-2008-4226, a memory overflow when building gigantic text
+    
+    * SAX2.c parser.c: fix for CVE-2008-4226, a memory overflow
+      when building gigantic text nodes, and a bit of cleanup
+      to better handled out of memory problem in that code.
+    * tree.c: fix for CVE-2008-4225, lack of testing leads to
+      a busy loop test assuming one have enough core memory.
+    Daniel
+    
+    svn path=/trunk/; revision=3803
+
+
+3d426663629a53180f3f54282ba27f3d070eef24 : William M. Brack <wbrack@src.gnome.org> : Tue Apr 19 14
+commit 3d426663629a53180f3f54282ba27f3d070eef24
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Tue Apr 19 14:40:28 2005 +0000
+
+    Added some code to avoid integer overflow for ceil, floor and round
+    
+    * xpath.c: Added some code to avoid integer overflow for
+      ceil, floor and round functions (bug 301162)
+
+
+030a7a1729163b52e7f107394a0289a3e03f6c12 : William M. Brack <wbrack@src.gnome.org> : Tue Feb 10 12
+commit 030a7a1729163b52e7f107394a0289a3e03f6c12
+Author: William M. Brack <wbrack@src.gnome.org>
+Date:   Tue Feb 10 12:48:57 2004 +0000
+
+    applied patch supplied by Christophe Dubach to fix problem with
+    
+    * encoding.c: applied patch supplied by Christophe Dubach
+      to fix problem with --with-minimum configuration
+      (bug 133773)
+    * nanoftp.c: fixed potential buffer overflow problem,
+      similar to fix just applied to nanohttp.c.
+
+
+537769a65fb49d9ce9effa1b7eb2f36d1f2de263 : Igor Zlatkovic <igor@src.gnome.org> : Mon Feb 9 17
+commit 537769a65fb49d9ce9effa1b7eb2f36d1f2de263
+Author: Igor Zlatkovic <igor@src.gnome.org>
+Date:   Mon Feb 9 17:40:31 2004 +0000
+
+    fixed the fix for the buffer overflow, thanks William :-)
+
+
+377043562b8cb1cc2e6bbe985a82798af7605dfe : Igor Zlatkovic <igor@src.gnome.org> : Mon Feb 9 14
+commit 377043562b8cb1cc2e6bbe985a82798af7605dfe
+Author: Igor Zlatkovic <igor@src.gnome.org>
+Date:   Mon Feb 9 14:32:17 2004 +0000
+
+    fixed buffer overflow reported by Yuuich Teranishi
+
+
+8339128106b72f98adc1c4aff002fae44579da58 : Daniel Veillard <veillard@src.gnome.org> : Thu Mar 6 21
+commit 8339128106b72f98adc1c4aff002fae44579da58
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Thu Mar 6 21:37:30 2003 +0000
+
+    fix bug #107764 , possibility of buffer overflow in xmlValidDebug() Daniel
+    
+    * valid.c: fix bug #107764 , possibility of buffer overflow
+      in xmlValidDebug()
+    Daniel
+
+
+49cc97565fbe2928388a1e437c44429097a504ae : Aleksey Sanin <aleksey@src.gnome.org> : Fri Jun 14 17
+commit 49cc97565fbe2928388a1e437c44429097a504ae
+Author: Aleksey Sanin <aleksey@src.gnome.org>
+Date:   Fri Jun 14 17:07:10 2002 +0000
+
+    replaced sprintf() with snprintf() to prevent possible buffer overflow
+    
+    * DOCBparser.c HTMLparser.c debugXML.c encoding.c
+    nanoftp.c nanohttp.c parser.c tree.c uri.c xmlIO.c
+    xmllint.c xpath.c: replaced sprintf() with snprintf()
+    to prevent possible buffer overflow (the bug was pointed
+    out by Anju Premachandran)
+
+
+87bfeb50e53157d0882a0f1eda120a3abc504eac : Daniel Veillard <veillard@src.gnome.org> : Tue Mar 20 11
+commit 87bfeb50e53157d0882a0f1eda120a3abc504eac
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Mar 20 11:38:20 2001 +0000
+
+    Fixing the bug in the libxml1 branch too:
+    - parser.c: fixing bug 52299 strange condition leading
+      to a parser crash due to a buffer overflow
+    - result/attrib.xml test/attrib.xml:
+      added the specific test case
+    Daniel
+
+
+0b6b55b076211ca2fbce4d2abfac7ff57cef4fe5 : Daniel Veillard <veillard@src.gnome.org> : Tue Mar 20 11
+commit 0b6b55b076211ca2fbce4d2abfac7ff57cef4fe5
+Author: Daniel Veillard <veillard@src.gnome.org>
+Date:   Tue Mar 20 11:27:34 2001 +0000
+
+    Someone found a bug hiding in a corner, caught it !
+    - parser.c: fixing bug 52299 strange condition leading
+      to a parser crash due to a buffer overflow
+    - result/noent/attrib.xml result/attrib.xml test/attrib.xml:
+      added the specific test case
+    Daniel
+
+
+
+

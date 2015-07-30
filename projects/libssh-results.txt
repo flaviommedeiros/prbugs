@@ -1,0 +1,1211 @@
+
+
+
+commit 4bb790fb5de3d64097cae77955a96260d11ae3db
+Type: uninitialized variable
+File: libssh/keys.c
+PC: true
+
+
+commit 2a10019f82b9db58d7821ef93febc42b54042c92
+Type: uninitialized variable
+File: libssh/sftp.c
+PC: WITH_SFTP
+
+
+commit fadbe80c4389185f80b3d5a8814510f957a6ca8a
+Type: null deference
+File: src/options.c
+PC: !_MSC_VER
+
+
+commit 59a179950150d0305d6189ce9c126a9a0c5f6ab4
+Type: segmentation fault
+File: src/log.c
+PC: true
+
+
+commit 22e88581346acfe0360cf6efebba3ed0c2842d01
+Type: segmentation fault
+File: src/agent.c
+PC: _WIN32
+
+
+commit ee47cab5483bce22efc8415effb9e122963ee668
+Type: segmentation fault
+File: src/packet.c
+PC: true
+
+
+commit a65029da5d62138002328eec0eb1be991c1d5431
+Type: segmentation fault
+File: src/messages.c
+PC: true
+
+commit 494fb26b01a387334ff3ac2a93cb6999e8609879
+Type: segmentation fault
+File: src/options.c
+PC: !_MSC_VER
+
+commit c5782b7486060b170bea36110a2dab77ec1545dc
+Type: segmentation fault
+File: src/session.c
+PC: true
+
+
+commit dc8103925c2efc8bc321c092c8eb8d453081c69d
+Type: segmentation fault
+File: src/packet.c
+PC: true
+
+
+commit 3622ac83f678f10ab1daf858984e40eef7fb3b17
+Type: segmentation fault
+File: src/legacy.c
+PC: true
+
+
+commit 1b10b175fcd5c6f205168434cc5f6aca51b1d298
+Type: segmentation fault
+File: src/dh.c
+PC: HAVE_ECDH
+
+
+commit b5db04003da54badc86fd279b9c7f6f8d613af39
+Type: segmentation fault
+File: src/auth.c
+PC: true
+
+
+commit 9c9199e05fadfb4d44ac80b23adbc67d95bd7541
+Type: segmentation fault
+File: src/pki.c
+PC: true
+
+
+commit a56c925da9be128e6c29c2dd7a6031366d6370eb
+Type: segmentation fault
+File: src/auth.c
+PC: true
+
+
+commit 833cc00014f35d4c0fcf7086529a84f2500947b1
+Type: segmentation fault
+File: src/socket.c
+PC: true
+
+
+commit b6e712e934a45981b3a12cb67b48df006402a4d7
+Type: segmentation fault
+File: src/auth.c
+PC: WITH_SERVER
+
+
+commit 7d2064c2894fc298cc8923cae657200900b032e5
+Type: segmentation fault
+File: src/socket.c
+PC: true
+
+commit 1e827a8e818cf800d5574a2c2cbd97dfae243638
+Type: segmentation fault
+File: src/getpass.c
+PC: _WIN32
+
+
+commit ec12da273e0cf1989674d271864785cc89c6e9de
+Type: segmentation fault
+File: tests/client/torture_knownhosts.c
+PC: true
+
+
+commit 89f031192764698e662235af93d4d04898319c25
+Type: segmentation fault
+File: libssh/misc.c
+PC: _WIN32
+
+
+commit 6063a8d09c8f1b9235f511fb61e9fbffcaefdcd8
+Type: segmentation fault
+File: libssh/keyfiles.c
+PC: true
+
+
+commit bf376b6d4fd4dad7ced0e49bedc76cc2a0d797f1
+Type: segmentation fault
+File: libssh/server.c
+PC: true
+
+commit 9450a3c9874137d316b78a11d5ae21b887b9f1b2
+Type: segmentation fault
+File: libssh/sftp.c
+PC: WITH_SFTP
+
+
+commit a8ce546f69e1d1d2425cdd3358b2083b0a6cebcb
+Type: segmentation fault
+File: libssh/client.c
+PC: true
+
+
+commit 6e56d1dfb20c705930770a96f6d84730a4f58a14
+Type: segmentation fault
+File: libssh/auth.c
+PC: true
+
+
+commit 85a5eb94998763c43149b97b81f0a4b4904c6da8
+Type: segmentation fault
+File: libssh/client.c
+PC: true
+
+commit 387348968842dce1fd5da139fc858866c10830e2
+Type: segmentation fault
+File: libssh/channels.c
+PC: true
+
+
+commit 5b1c21593cbea0c4dc2ec4437d25c06f4d125787
+Type: segmentation fault
+File: libssh/auth.c
+PC: true
+
+
+commit a1802f1c327062ea1ca522af0340def4149dc257
+Type: segmentation fault
+File: libssh/auth.c
+PC: true
+
+commit d20ae18b00e8926df925167a2a63234f654e3817
+Type: segmentation fault
+File: libssh/keys.c
+PC: HAVE_LIBGCRYPT
+
+
+
+commit 98f78e11025bc7e0de3ea5ddb4b58404cba472c2
+Type: segmentation fault
+File: libssh/buffer.c
+PC: true
+
+
+commit 8758b1260bc48fd908cc4fda227bea86bc8ddfc8
+Type: segmentation fault
+File: libssh/string.c
+PC: true
+
+commit 35221f967ef5e9801c2496a7f10ced1408f9cd20
+Type: segmentation fault
+File: libssh/sftp.c
+PC: NO_SFTP
+
+commit 35221f967ef5e9801c2496a7f10ced1408f9cd20
+Type: segmentation fault
+File: libssh/server.c
+PC: true
+
+commit 6f8b5ed679876427c4b2ff17b60a7fa3cbd02a54
+Type: resource leak
+File: src/pki.c
+PC: true
+
+
+commit 33e95792ce607dc600534ae6434d656728cbf415
+Type: resource leak
+File: src/pki_crypto.c
+PC: HAVE_OPENSSL_ECC
+
+
+commit a38c56370c25da2e3bb67e38306b264cd1361e56
+Type: resource leak
+File: tests/torture.c
+PC: _WIN32
+
+
+commit 1c30c2a510c60549d61515f49445b1683ff07f21
+Type: resource leak
+File: src/pki.c
+PC: true
+
+
+commit 57afe7816764a771c32c0bdae71603d0e4ef7bf3
+Type: resource leak
+File: tests/unittests/torture_server_x11.c
+PC: true
+
+
+commit b1a3f4ee33a300ae446eccb024f472e54ac9361a
+Type: resource leak
+File: src/pki_container_openssh.c
+PC: true
+
+
+commit 5236358a48c28710545f86ab3c4c346bb05140e8
+Type: resource leak
+File: src/messages.c
+PC: true
+
+
+commit d6fe9dc22023a389123e242ec4942f38bbfadfba
+Type: resource leak
+File: tests/unittests/torture_pki_ed25519.c
+PC: true
+
+commit da91ca43c0e4b53d8a0d9c2ca36cd097bfedbabb
+Type: resource leak
+File: src/connect.c
+PC: true
+
+
+commit 15d71a8c51b93efd169cb2779ba442abdbcd1f5f
+Type: resource leak
+File: src/sftp.c
+PC: WITH_SFTP
+
+commit 5d75090d9fe23c6ef27560de47fc141fc769c6cd
+Type: resource leak
+File: src/pki_crypto.c
+PC: HAVE_OPENSSL_ECC
+
+
+
+commit 5fa4721c6eb1f6f507b94a2e1972177c2f41141b
+Type: resource leak
+File: src/auth.c
+PC: !_WIN32
+
+
+commit 6961dd79ad22b55a8dfc77dd829a3d207077952f
+Type: resource leak
+File: tests/unittests/torture_buffer.c
+PC: true
+
+
+commit 8f21f879d3ea6e79c10c6f61b3ccf1954295b5e5
+Type: resource leak
+File: src/session.c
+PC: true
+
+
+commit 7bd5e4101c2c2cdc34a22cfe19fe5290992408e2
+Type: resource leak
+File: src/pki.c
+PC: HAVE_LIBCRYPTO
+
+
+commit 6a0787a366ea598dff6ae09172b28522456a8606
+Type: resource leak
+File: src/pki_crypto.c
+PC: HAVE_OPENSSL_ECC
+
+
+
+commit a633deb9854238a1c0ccd05c516b526f327545e8
+Type: resource leak
+File: src/channels.c
+PC: true
+
+
+
+commit 6a74677cefd704cd1295d3678d08b111fa380bee
+Type: resource leak
+File: tests/unittests/torture_pki.c
+PC: true
+
+
+
+commit 2c66eeaf75093b8c5babd114b7737b4daaa34b26
+Type: resource leak
+File: src/pki.c
+PC: true
+
+
+
+
+commit ecb01e05a27006205c63b8bf30c2518b6be9796d
+Type: resource leak
+File: src/curve25519.c
+PC: WITH_SERVER && HAVE_CURVE25519
+
+
+commit 1ee687ea6fd7f591f899af029c8c1b382c703dad
+Type: resource leak
+File: src/curve25519.c
+PC: HAVE_CURVE25519
+
+
+
+commit 6ea111fd8a703e701e645fdb182920c8f3ff0d9b
+Type: resource leak
+File: src/dh.c
+PC: true
+
+
+commit 3cfd8a126b46fcf8bf5592b44b5f3c067fcd1959
+Type: resource leak
+File: src/connect.c
+PC: true
+
+
+
+commit 447ee309b03ce2885deeb4b5d88083b359b21890
+Type: resource leak
+File: src/poll.c
+PC: true
+
+
+
+commit 61084b76f67cafd8a40616d8e61b179a91acad02
+Type: resource leak
+File: examples/samplesshd-tty.c
+PC: true
+
+
+commit e1280ce153b1b7396bc1c9290d810868ad23c4f4
+Type: resource leak
+File: src/gssapi.c
+PC: true
+
+
+commit 2106db3efa7cdca259bec93ada489f0dd6d763f0
+Type: resource leak
+File: tests/client/torture_session.c
+PC: true
+
+
+commit 0138c9fd59a3fdf63791db6dd65aa2ff2abcb176
+Type: resource leak
+File: src/gssapi.c
+PC: true
+
+
+commit 36e4c2e5bcbdfcfcdf4c7b1df9b6b51be05b7b56
+Type: resource leak
+File: src/messages.c
+PC: WITH_SERVER
+
+commit aed9d7a84da4fb4c9e0934475655811416684902
+Type: resource leak
+File: src/agent.c
+PC: _WIN32
+
+
+commit de4cb811a0fd9ee7e0e56161fdecfe2ba5ce415f
+Type: resource leak
+File: examples/samplesshd-tty.c
+PC: true
+
+
+
+commit 8a4364a99bb4c367c13dd54328c30d61ec6b3624
+Type: resource leak
+File: src/ecdh.c
+PC: WITH_SERVER
+
+
+commit 01493b8d471c018613bc4684fbc80a1d4dd3d079
+Type: resource leak
+File: tests/unittests/torture_buffer.c
+PC: true
+
+
+commit de9bc1fa41155f30257b73a8bc8b55ce496fbb62
+Type: resource leak
+File: src/string.c
+PC: true
+
+
+commit 0bf2dd81e6ed6bcba06b6c03eb18dd6226167088
+Type: resource leak
+File: src/messages.c
+PC: true
+
+
+commit 802e4133cb58ac2519604abc92de08b4bf525635
+Type: resource leak
+File: src/session.c
+PC: true
+
+
+commit dde3deb9ea1656277452b8108000c982195af415
+Type: resource leak
+File: src/channels.c
+PC: true
+
+
+commit 66045054f46c50add4099ead6d87c3345987eab8
+Type: resource leak
+File: src/auth.c
+PC: true
+
+
+commit 4e7736444f6eabbd1b0e8b7068b1bb587066c8ac
+Type: resource leak
+File: src/server.c
+PC: true
+
+commit 02953019283fca8069bb7a3a4a11c7bedd2941fc
+Type: resource leak
+File: src/known_hosts.c
+PC: true
+
+commit a6e7d1f255bd1ac5df3366c985487fc1e13d33a3
+Type: resource leak
+File: src/agent.c
+PC: _WIN32
+
+
+commit 5f0f334d1c8922396949b2822a6e1bebb9c42b7c
+Type: resource leak
+File: src/pki_crypto.c
+PC: HAVE_OPENSSL_ECC
+
+
+commit b219d1890c624d918ba658445b991735f8b804db
+Type: resource leak
+File: tests/unittests/torture_options.c
+PC: true
+
+
+commit dc8f0cddeef7323f7ff936e1db76449ed23e5675
+Type: resource leak
+File: src/getpass.c
+PC: true
+
+
+commit 0d029e7038d074a064e2870ec35441403301d099
+Type: resource leak
+File: src/misc.c
+PC: true
+
+
+
+
+fd2064d0b4cdafc35a3430e7528e32a6abf2d513 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 11
+commit fd2064d0b4cdafc35a3430e7528e32a6abf2d513
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Oct 5 11:01:55 2012 +0200
+
+    messages: Fix error path of ssh_packet_userauth_info_response.
+    
+    This fixes a memory leak on error.
+
+
+
+280ce3fe937c96899732814928c8ecfa9f9ae431 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
+commit 280ce3fe937c96899732814928c8ecfa9f9ae431
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Oct 5 10:49:43 2012 +0200
+
+    session: Fix a memory leak in ssh_new() on error.
+
+
+332f1a2a519508a6c7def7d4b645b5a3759ba13a : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
+commit 332f1a2a519508a6c7def7d4b645b5a3759ba13a
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Oct 5 10:46:08 2012 +0200
+
+    channels: Fix a memory leak in ssh_channel_select().
+
+
+cddfe602cc5ee7e7d925a0673570549e2f9fcd61 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
+commit cddfe602cc5ee7e7d925a0673570549e2f9fcd61
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Oct 5 10:55:29 2012 +0200
+
+    options: Fix a memory leak if we can't add an idenity.
+
+
+47226d9d448966d9d9bd8d1786d4b4427a787be9 : Andreas Schneider <asn@cryptomilk.org> : Sat Feb 4 20
+commit 47226d9d448966d9d9bd8d1786d4b4427a787be9
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Sat Feb 4 20:55:34 2012 +0100
+
+    sftp: Fix memory leak in sftp_free() on server.
+    
+    Thanks to Tom Judge for the report.
+
+
+commit a311ec32b1146a6fbf8561931f065e4c78ae7a10
+Type: memory leak
+File: src/ecdh.c
+PC: HAVE_ECDH
+
+
+commit 4223c8a1166d2d155fc824b2881724a92c39461d
+Type: memory leak
+File: src/ecdh.c
+PC: WITH_SERVER && HAVE_ECDH
+
+
+commit 6d3d5a446e6791fd2f102b4ae8774e8df2622dc7
+Type: memory leak
+File: src/known_hosts.c
+PC: true
+
+
+commit 8fb8ad01516623976431264f89aed40f274c0787
+File: src/agent.c
+Type: memory leak
+PC: _WIN32
+
+commit 8fb8ad01516623976431264f89aed40f274c0787
+Type: memory leak
+File: src/pki.c
+PC: true
+
+
+commit 93c4a8e42748ff2c4b67baf8afe497508f20f75e
+Type: memory leak
+File: src/pki_gcrypt.c
+PC: HAVE_LIBGCRYPT
+
+
+c8d06b6b1c1e1e2f51bc11effb1fcaf24c954acc : Andreas Schneider <asn@cryptomilk.org> : Sun Aug 21 12
+commit c8d06b6b1c1e1e2f51bc11effb1fcaf24c954acc
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Sun Aug 21 12:41:42 2011 +0200
+
+    tests: Fix memleak in torture_pki.
+
+
+c940918821db41909ac99b16483a7c853c1bafcd : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
+commit c940918821db41909ac99b16483a7c853c1bafcd
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Tue Aug 16 09:23:57 2011 +0200
+
+    pki: Fix memleak in privatekey_from_file().
+
+
+f7a7bf071dbd0a06aa4a59d6104060939bfaa8e3 : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
+commit f7a7bf071dbd0a06aa4a59d6104060939bfaa8e3
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Tue Aug 16 09:18:20 2011 +0200
+
+    torture: Fix memleak in pubkey base64 tests.
+
+
+c5028e76ad2fa5ba6cd8a6fcd9761458ef73dc93 : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
+commit c5028e76ad2fa5ba6cd8a6fcd9761458ef73dc93
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Tue Aug 16 09:15:29 2011 +0200
+
+    pki: Fix memleak in pki_import_pubkey_buffer().
+
+
+ce03d26e033e6b54e50a2c16ebabaf8ff57e2794 : Aris Adamantiadis <aris@0xbadc0de.be> : Tue Jun 14 22
+commit ce03d26e033e6b54e50a2c16ebabaf8ff57e2794
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Tue Jun 14 22:57:31 2011 +0200
+
+    Fix memory leak with session_id
+
+
+a3c28f2558481536c03dcfbc2d3b3a7c925b900f : Aris Adamantiadis <aris@0xbadc0de.be> : Mon Jun 13 14
+commit a3c28f2558481536c03dcfbc2d3b3a7c925b900f
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Mon Jun 13 14:06:30 2011 +0200
+
+    Fix memory leak
+
+
+c436e0702208b7c7603cbdeabd00a29a9af85c73 : Mark Riordan <mriordan@ipswitch.com> : Wed May 18 16
+commit c436e0702208b7c7603cbdeabd00a29a9af85c73
+Author: Mark Riordan <mriordan@ipswitch.com>
+Date:   Wed May 18 16:18:39 2011 -0500
+
+    Fix memory leak when compression is used
+    
+    Signed-off-by: Mark Riordan <mriordan@ipswitch.com>
+    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+    (cherry picked from commit dcea8db6b221ab812c66bfabd3c0a00aada78c96)
+
+
+dcea8db6b221ab812c66bfabd3c0a00aada78c96 : Mark Riordan <mriordan@ipswitch.com> : Wed May 18 16
+commit dcea8db6b221ab812c66bfabd3c0a00aada78c96
+Author: Mark Riordan <mriordan@ipswitch.com>
+Date:   Wed May 18 16:18:39 2011 -0500
+
+    Fix memory leak when compression is used
+    
+    Signed-off-by: Mark Riordan <mriordan@ipswitch.com>
+    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+
+
+34b05fd2dc7ead24386b24e9471fad729cb4189b : Aris Adamantiadis <aris@0xbadc0de.be> : Thu May 26 21
+commit 34b05fd2dc7ead24386b24e9471fad729cb4189b
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Thu May 26 21:33:36 2011 +0200
+
+    Fix memory leaks in pki and testcase
+
+
+2431c7d9250882f83a3b3ce97b7cb0dd04c48344 : Oliver Stöneberg <oliverst@online.de> : Tue Apr 26 15
+commit 2431c7d9250882f83a3b3ce97b7cb0dd04c48344
+Author: Oliver Stöneberg <oliverst@online.de>
+Date:   Tue Apr 26 15:56:00 2011 -0700
+
+    examples: Fixed memory leak in samplessh when using commands.
+    (cherry picked from commit c3849a3cfd4bb298c255c41bf2cbc5592e893d17)
+
+
+c3849a3cfd4bb298c255c41bf2cbc5592e893d17 : Oliver Stöneberg <oliverst@online.de> : Tue Apr 26 15
+commit c3849a3cfd4bb298c255c41bf2cbc5592e893d17
+Author: Oliver Stöneberg <oliverst@online.de>
+Date:   Tue Apr 26 15:56:00 2011 -0700
+
+    examples: Fixed memory leak in samplessh when using commands.
+
+
+91c9d86d4597ae5b3da40a33b1ba33c98066d573 : milo <milo@r0ot.me> : Mon Apr 18 17
+commit 91c9d86d4597ae5b3da40a33b1ba33c98066d573
+Author: milo <milo@r0ot.me>
+Date:   Mon Apr 18 17:49:54 2011 +0200
+
+    [keyfiles] Fix two memory leaks
+
+
+e096658df3b7b6a83a720babe2cdaee9b7329856 : Andreas Schneider <asn@cryptomilk.org> : Fri Apr 15 19
+commit e096658df3b7b6a83a720babe2cdaee9b7329856
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Apr 15 19:05:53 2011 +0200
+
+    examples: Fix some memory leaks.
+    (cherry picked from commit 644145a88caf0ff9cbfa16902c775b922578357b)
+
+
+644145a88caf0ff9cbfa16902c775b922578357b : Andreas Schneider <asn@cryptomilk.org> : Fri Apr 15 19
+commit 644145a88caf0ff9cbfa16902c775b922578357b
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Fri Apr 15 19:05:53 2011 +0200
+
+    examples: Fix some memory leaks.
+
+
+42315772b2f3e9491295db107d2a85d97454649f : milo <milo@r0ot.me> : Thu Apr 14 13
+commit 42315772b2f3e9491295db107d2a85d97454649f
+Author: milo <milo@r0ot.me>
+Date:   Thu Apr 14 13:29:33 2011 +0200
+
+    Fix a memleak on event poll contexts
+
+
+fdd1cb18d0d70965eb19ea9984449ee9a3cab932 : Andreas Schneider <asn@cryptomilk.org> : Sun Feb 13 11
+commit fdd1cb18d0d70965eb19ea9984449ee9a3cab932
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Sun Feb 13 11:03:24 2011 +0100
+
+    auth: Fixed a memory leak in kdbint auth.
+    
+    Milo please check!
+
+
+f5e2c94ae33fda1313a154d415de730c0600ea7b : Andreas Schneider <asn@cryptomilk.org> : Tue Feb 8 19
+commit f5e2c94ae33fda1313a154d415de730c0600ea7b
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Tue Feb 8 19:08:27 2011 +0100
+
+    torture: Fixed memory leak.
+
+
+8d7245f54bf9b4d2eadc068de76325a898d2a9bb : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
+commit 8d7245f54bf9b4d2eadc068de76325a898d2a9bb
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Thu Jan 6 14:31:54 2011 +0100
+
+    keys: Fixed memory leaks in session signing.
+    
+    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+
+
+0b1f8a2b0c407c1bd68ca049b54084f7850a6d47 : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
+commit 0b1f8a2b0c407c1bd68ca049b54084f7850a6d47
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Thu Jan 6 14:25:35 2011 +0100
+
+    dh: Fixed a memory leak in ssh_print_hexa.
+    
+    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+    (cherry picked from commit a016d356fac59e010bef036bb7696b311bbd642a)
+
+
+6b27966c9c998ff9f66722579d7d44f9e53d5737 : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
+commit 6b27966c9c998ff9f66722579d7d44f9e53d5737
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Thu Jan 6 14:31:54 2011 +0100
+
+    keys: Fixed memory leaks in session signing.
+    
+    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+
+
+a016d356fac59e010bef036bb7696b311bbd642a : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
+commit a016d356fac59e010bef036bb7696b311bbd642a
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Thu Jan 6 14:25:35 2011 +0100
+
+    dh: Fixed a memory leak in ssh_print_hexa.
+    
+    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+
+
+da3b2d68a3ec750186448eadf6e92a118dcd6ef1 : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 18
+commit da3b2d68a3ec750186448eadf6e92a118dcd6ef1
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Mon Dec 27 18:08:30 2010 +0100
+
+    misc: Fixed a possible memory leak.
+    (cherry picked from commit a0e98f585a36e0032545107dbd90c6adab40e09b)
+
+
+a0e98f585a36e0032545107dbd90c6adab40e09b : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 18
+commit a0e98f585a36e0032545107dbd90c6adab40e09b
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Mon Dec 27 18:08:30 2010 +0100
+
+    misc: Fixed a possible memory leak.
+
+
+4638b353d51c86cd44af41f6f4d4cb5626bab40d : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 17
+commit 4638b353d51c86cd44af41f6f4d4cb5626bab40d
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Mon Dec 27 17:52:24 2010 +0100
+
+    sftp: Fixed a memory leak in sftp_xstat.
+    
+    Thanks to dsc for the bug report.
+    (cherry picked from commit 7c728acd12947ecb3d910b5ca79f4d628b66e6c2)
+
+
+7c728acd12947ecb3d910b5ca79f4d628b66e6c2 : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 17
+commit 7c728acd12947ecb3d910b5ca79f4d628b66e6c2
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Mon Dec 27 17:52:24 2010 +0100
+
+    sftp: Fixed a memory leak in sftp_xstat.
+    
+    Thanks to dsc for the bug report.
+
+
+80408d5357956a8a2b438d102aa0953971e136f1 : Aris Adamantiadis <aris@0xbadc0de.be> : Sun Dec 19 12
+commit 80408d5357956a8a2b438d102aa0953971e136f1
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Sun Dec 19 12:37:21 2010 +0100
+
+    Fixed memory leak reported by valgrind
+
+
+fb24e68eddd1af2bbb6058f6dc0b84a72993599e : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
+commit fb24e68eddd1af2bbb6058f6dc0b84a72993599e
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Tue Sep 7 17:30:10 2010 +0200
+
+    session: Fixed a memory leak with session->bindaddr.
+    (cherry picked from commit 325cc4e39568831565fce816cfc3bb74a67ccb2c)
+
+
+b5f095d0b433728d312b16911bd54ebd76895407 : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
+commit b5f095d0b433728d312b16911bd54ebd76895407
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Tue Sep 7 17:26:07 2010 +0200
+
+    misc: Fixed a memory leak.
+    (cherry picked from commit c1604eff081514df3b6abb8c50c3acbab71d77ac)
+
+
+325cc4e39568831565fce816cfc3bb74a67ccb2c : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
+commit 325cc4e39568831565fce816cfc3bb74a67ccb2c
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Tue Sep 7 17:30:10 2010 +0200
+
+    session: Fixed a memory leak with session->bindaddr.
+
+
+c1604eff081514df3b6abb8c50c3acbab71d77ac : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
+commit c1604eff081514df3b6abb8c50c3acbab71d77ac
+Author: Andreas Schneider <asn@cynapses.org>
+Date:   Tue Sep 7 17:26:07 2010 +0200
+
+    misc: Fixed a memory leak.
+
+
+c53383a3160f3b33fbc60f3665cef5a617735f87 : Andreas Schneider <mail@cynapses.org> : Tue Apr 20 13
+commit c53383a3160f3b33fbc60f3665cef5a617735f87
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Tue Apr 20 13:29:50 2010 +0200
+
+    session: Fixed a memory leak.
+    
+    Thanks to Xi Wang for the patch.
+
+
+b7a7c816df48e7a66b452f5285f5cde3b3894a22 : Andreas Schneider <mail@cynapses.org> : Tue Apr 20 13
+commit b7a7c816df48e7a66b452f5285f5cde3b3894a22
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Tue Apr 20 13:28:12 2010 +0200
+
+    kex: Fixed a memory leak.
+    
+    Thanks to Xi Wang for the patch.
+
+
+4516e7bdcbec3fe38bb9f988f9fc9ba71589438e : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 16
+commit 4516e7bdcbec3fe38bb9f988f9fc9ba71589438e
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Sat Mar 13 16:59:26 2010 +0100
+
+    Fixed a memory leak in the torture_get_user_home_dir test.
+
+
+8fd6c8bc02f92525ec6fe2628d2fe8ea3a57f16b : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 16
+commit 8fd6c8bc02f92525ec6fe2628d2fe8ea3a57f16b
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Sat Mar 13 16:38:43 2010 +0100
+
+    Fixed a memory leak in keyfile torture test.
+
+
+ed1cba705c92ed648e0427ad0a99efeac3228ecc : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 14
+commit ed1cba705c92ed648e0427ad0a99efeac3228ecc
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Sat Mar 13 14:59:02 2010 +0100
+
+    Fixed a memory leak in ssh_try_publickey_from_file.
+
+
+38fda265e8974a4af877de4ec5fc5d90187b7023 : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 14
+commit 38fda265e8974a4af877de4ec5fc5d90187b7023
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Sat Mar 13 14:59:02 2010 +0100
+
+    Fixed a memory leak in ssh_try_publickey_from_file.
+
+
+ca9f42a20f4e10b003eafe0a6f1e78fc3f927797 : Aris Adamantiadis <aris@0xbadc0de.be> : Wed Nov 18 20
+commit ca9f42a20f4e10b003eafe0a6f1e78fc3f927797
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Wed Nov 18 20:53:06 2009 +0100
+
+    Fix another memleak
+    
+    Use buffer_free instead of SAFE_FREE
+
+
+d60b1ec1a2e13fd70d7f3d41ced5d08894fa1b52 : Andreas Schneider <mail@cynapses.org> : Wed Nov 18 10
+commit d60b1ec1a2e13fd70d7f3d41ced5d08894fa1b52
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Wed Nov 18 10:29:12 2009 +0100
+
+    Fixed a memory leak in channel_new() if we have an error.
+
+
+840cecbe0e68bc71c0afea4b3d79bd5702d403d0 : Andreas Schneider <mail@cynapses.org> : Thu Oct 22 18
+commit 840cecbe0e68bc71c0afea4b3d79bd5702d403d0
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Thu Oct 22 18:56:02 2009 +0200
+
+    Fix memory leaks in ssh_bind_options_set() if called twice.
+    
+    This fixes ticket #36.
+
+
+commit c70694c5948a2d62a3411927a226bac51eefd7d5
+Type: memory leak
+File: libssh/messages.c
+PC: true
+
+
+commit 18bce136178029b52cbc7097d85cc0e50da887d8
+Type: memory leak
+File: libssh/keyfiles.c
+PC: true
+
+
+commit aef947121778131a94de4540a56adc0d02b0f04a
+Type: memory leak
+File: libssh/scp.c
+PC: true
+
+
+commit e4422d6605c1d6e915c7b20cd3b000f4600fbe18
+Type: memory leak
+File: libssh/session.c
+PC: true
+
+
+commit 8724f97a1938a1c67e8bd89d653673e9cde79246
+Type: memory leak
+File: libssh/keyfiles.c
+PC: true
+
+
+commit 693c041ba9d219821fd0006b07823880ec0a2ea9
+Type: memory leak
+File: libssh/messages.c
+PC: true
+
+
+commit e2af94289f4aa328af9eddb48826cd6a54637e60
+Type: memory leak
+File: libssh/messages.c
+PC: true
+
+
+commit f402e8d113258d23e10cb2f31ed964bf535bd55a
+Type: memory leak
+File: libssh/keys.c
+PC: _WIN32
+
+
+commit 70b422d0fbc9c6c4fd4607ac9aabe51c5ec6554e
+Type: memory leak
+File: libssh/keys.c
+PC: true
+
+
+commit e85b16ae49578cc8501b98c323c7658533478e81
+Type: memory leak
+File: libssh/keys.c
+PC: true
+
+commit 44ab293f0b7d52de26380df9ec2ac88806d6aeff
+Type: memory leak
+File: libssh/keys.c
+PC: true
+
+
+commit bf4d29b96399f5b1ed8927156b746d8d2f647ba2
+Type: memory leak
+File: libssh/auth.c
+PC: _WIN32
+
+
+commit 25e80032bae82e2ed3628c69a5fff9afc6d77faf
+Type: memory leak
+File: libssh/dh.c
+PC: true
+
+
+commit fe2bc30984af5487c1871f80c31d2911ec70bc89
+Type: memory leak
+File: libssh/buffer.c
+PC: true
+
+
+commit 5a75c0fd78fa13d1a0eb8e1add643b581e71a315
+Type: memory leak
+File: libssh/agent.c
+PC: !_WIN32
+
+commit 4d203e8420b0be0a3cd327f0ab9dc688fed54026
+Type: memory leak
+File: libssh/options.c
+PC: true
+
+
+commit 1fd7a875beca36597e987729bd76928a9593cfd1
+Type: memory leak
+File: libssh/keyfiles.c
+PC: true
+
+
+commit d477025000c4d6717f9501cc8d382eed06fbe868
+Type: memory leak
+File: samplesshd.c
+PC: true
+
+commit d477025000c4d6717f9501cc8d382eed06fbe868
+Type: memory leak
+File: libssh/messages.c
+PC: true
+
+commit d477025000c4d6717f9501cc8d382eed06fbe868
+Type: memory leak
+File: libssh/server.c
+PC: true
+
+commit d477025000c4d6717f9501cc8d382eed06fbe868
+Type: memory leak
+File: libssh/wrapper.c
+PC: true
+
+
+commit 01470097c6ff22b3c1a8c4383ae08a2ad3ce0ff8
+Type: memory leak
+File: libssh/init.c
+PC: true
+
+
+-- OVERFLOWS
+
+cf05e653de569225775d6bf996ffefba9e8e6135 : Andreas Schneider <asn@cryptomilk.org> : Mon May 4 16
+commit cf05e653de569225775d6bf996ffefba9e8e6135
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Mon May 4 16:39:51 2015 +0200
+
+    external: Fix a possible buffer overrun in bcrypt_pbkdf
+    
+    CID: #1250106
+    
+    This fixes a 1 byte output overflow for large key length (not reachable
+    in libssh). Pulled from OpenBSD BCrypt PBKDF implementation.
+    
+    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+
+
+4de6a708ad29090d2de3d781c509c880d7cdd232 : Andreas Schneider <asn@cryptomilk.org> : Wed Jan 14 11
+commit 4de6a708ad29090d2de3d781c509c880d7cdd232
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Wed Jan 14 11:16:59 2015 +0100
+
+    sftp: Fix a possible integer overflow.
+    
+    CID: #1238630
+    
+    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+    Reviewed-by: Aris Adamantiadis <aris@0xbadc0de.be>
+    (cherry picked from commit af0dd3fb0208bf7bded0533020682c65b94544eb)
+
+
+af0dd3fb0208bf7bded0533020682c65b94544eb : Andreas Schneider <asn@cryptomilk.org> : Wed Jan 14 11
+commit af0dd3fb0208bf7bded0533020682c65b94544eb
+Author: Andreas Schneider <asn@cryptomilk.org>
+Date:   Wed Jan 14 11:16:59 2015 +0100
+
+    sftp: Fix a possible integer overflow.
+    
+    CID: #1238630
+    
+    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
+    Reviewed-by: Aris Adamantiadis <aris@0xbadc0de.be>
+
+
+ad5f306884eee6c83437defe082d57e6ca4da69a : Xi Wang <xi.wang@gmail.com> : Mon Nov 28 04
+commit ad5f306884eee6c83437defe082d57e6ca4da69a
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Mon Nov 28 04:42:54 2011 -0500
+
+    CVE-2012-4562: Fix multiple integer overflows in buffer-related functions.
+
+
+5ffb8c7cde24fd5a7a1749b4d2b9b08ea893bddc : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit 5ffb8c7cde24fd5a7a1749b4d2b9b08ea893bddc
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:02:57 2011 -0500
+
+    CVE-2012-4562: Fix possible integer overflows.
+
+
+efaebad323dd5a609f7383df8687c70a426a7d53 : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit efaebad323dd5a609f7383df8687c70a426a7d53
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:02:06 2011 -0500
+
+    CVE-2012-4562: Fix possible integer overflow in ssh_get_hexa().
+    
+    No exploit known, but it is better to check the string length.
+
+
+e3d9501b31a11b427afe1cc1cba5208adc2c3c39 : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit e3d9501b31a11b427afe1cc1cba5208adc2c3c39
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:02:57 2011 -0500
+
+    CVE-2012-4562: Fix possible string related integer overflows.
+
+
+db81310d719878cc04b23e4033fbe19fa0b1f8a3 : Xi Wang <xi.wang@gmail.com> : Mon Nov 28 04
+commit db81310d719878cc04b23e4033fbe19fa0b1f8a3
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Mon Nov 28 04:42:54 2011 -0500
+
+    CVE-2012-4562: Fix multiple integer overflows in buffer-related functions.
+
+
+8489521c0d7a9d1336b23a4a64e5df2d0f3ba57a : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit 8489521c0d7a9d1336b23a4a64e5df2d0f3ba57a
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:02:06 2011 -0500
+
+    CVE-2012-4562: Fix possible integer overflow in ssh_get_hexa().
+    
+    No exploit known, but it is better to check the string length.
+
+
+cab00c3bfcc88e7321fb9670956758cdee50f49c : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit cab00c3bfcc88e7321fb9670956758cdee50f49c
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:01:18 2011 -0500
+
+    pki: Fix integer overflow in ssh_pki_import_privkey_file().
+    
+    If the file size is ULONG_MAX, the call to malloc() may allocate a
+    small buffer, leading to a memory corruption.
+
+
+d404ad71525a5cad91d030e20c5346470b20e46d : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
+commit d404ad71525a5cad91d030e20c5346470b20e46d
+Author: Xi Wang <xi.wang@gmail.com>
+Date:   Fri Nov 25 23:00:13 2011 -0500
+
+    channels: Fix integer overflow in generate_cookie().
+    
+    Since the type of rnd[i] is signed char, (rnd[i] >> 4), which is
+    considered as arithmetic shift by gcc, could be negative, leading
+    to out-of-bounds read.
+
+
+3a77f2aebe7161125f5bad10a7c6a9a71ff471a5 : Aris Adamantiadis <aris@0xbadc0de.be> : Fri Apr 15 09
+commit 3a77f2aebe7161125f5bad10a7c6a9a71ff471a5
+Author: Aris Adamantiadis <aris@0xbadc0de.be>
+Date:   Fri Apr 15 09:11:09 2011 +0200
+
+    [pki] Fix buffer overflow in pki
+
+
+6a3d31acb7af06b72b1c81d53f7f3cf7ff7ba9f1 : Andreas Schneider <mail@cynapses.org> : Mon Sep 14 18
+commit 6a3d31acb7af06b72b1c81d53f7f3cf7ff7ba9f1
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Mon Sep 14 18:34:53 2009 +0200
+
+    Fix a possible stack overflow in agent code.
+
+
+7cd327a79580cb3f11bed867ea3dafb72c62069d : Andreas Schneider <mail@cynapses.org> : Mon Sep 14 18
+commit 7cd327a79580cb3f11bed867ea3dafb72c62069d
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Mon Sep 14 18:34:53 2009 +0200
+
+    Fix a possible stack overflow in agent code.
+
+
+add2aa5f45af2d381a1638cdd0d5fcacc1fdd8f9 : Andreas Schneider <mail@cynapses.org> : Tue Sep 8 11
+commit add2aa5f45af2d381a1638cdd0d5fcacc1fdd8f9
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Tue Sep 8 11:36:06 2009 +0200
+
+    Fix an integer overflow in buffer_get_data().
+    
+    Thanks to Orange Labs for the report.
+
+
+8344598910e96899c16011559f2e9f8f26c4d24d : Andreas Schneider <mail@cynapses.org> : Thu Sep 3 17
+commit 8344598910e96899c16011559f2e9f8f26c4d24d
+Author: Andreas Schneider <mail@cynapses.org>
+Date:   Thu Sep 3 17:11:42 2009 +0200
+
+    Fix an integer overflow in buffer_get_data().
+    
+    Thanks to Orange Labs for the report.
+
+
+3ad559cc231bf6afb1eeb333a854a64c50400e2c : milo <milo.sshiva@gmail.com> : Fri Aug 7 12
+commit 3ad559cc231bf6afb1eeb333a854a64c50400e2c
+Author: milo <milo.sshiva@gmail.com>
+Date:   Fri Aug 7 12:13:29 2009 +0200
+
+    Fix buffer overflow in generate_cookie()
+    
+    Signed-off-by: Andreas Schneider <mail@cynapses.org>
+
+
+
