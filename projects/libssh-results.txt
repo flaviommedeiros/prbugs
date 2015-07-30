@@ -1,4 +1,4 @@
-
+git clone git://git.libssh.org/projects/libssh.git
 
 
 commit 4bb790fb5de3d64097cae77955a96260d11ae3db
