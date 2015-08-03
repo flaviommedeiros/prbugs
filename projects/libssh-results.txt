@@ -1121,91 +1121,47 @@ Date:   Mon Nov 28 04:42:54 2011 -0500
     CVE-2012-4562: Fix multiple integer overflows in buffer-related functions.
 
 
-8489521c0d7a9d1336b23a4a64e5df2d0f3ba57a : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit 8489521c0d7a9d1336b23a4a64e5df2d0f3ba57a
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:02:06 2011 -0500
+Type: buffer overflow
+File: src/dh.c
+PC: true
 
-    CVE-2012-4562: Fix possible integer overflow in ssh_get_hexa().
-    
-    No exploit known, but it is better to check the string length.
-
-
-cab00c3bfcc88e7321fb9670956758cdee50f49c : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit cab00c3bfcc88e7321fb9670956758cdee50f49c
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:01:18 2011 -0500
+Type: buffer overflow
+File: src/pki.c
+PC: true
 
-    pki: Fix integer overflow in ssh_pki_import_privkey_file().
-    
-    If the file size is ULONG_MAX, the call to malloc() may allocate a
-    small buffer, leading to a memory corruption.
-
-
-d404ad71525a5cad91d030e20c5346470b20e46d : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit d404ad71525a5cad91d030e20c5346470b20e46d
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:00:13 2011 -0500
+Type: buffer overflow
+File: src/channels.c
+PC: true
 
-    channels: Fix integer overflow in generate_cookie().
-    
-    Since the type of rnd[i] is signed char, (rnd[i] >> 4), which is
-    considered as arithmetic shift by gcc, could be negative, leading
-    to out-of-bounds read.
-
-
-3a77f2aebe7161125f5bad10a7c6a9a71ff471a5 : Aris Adamantiadis <aris@0xbadc0de.be> : Fri Apr 15 09
 commit 3a77f2aebe7161125f5bad10a7c6a9a71ff471a5
-Author: Aris Adamantiadis <aris@0xbadc0de.be>
-Date:   Fri Apr 15 09:11:09 2011 +0200
+Type: buffer overflow
+File: src/pki.c
+PC: true      
 
-    [pki] Fix buffer overflow in pki
-
-
-6a3d31acb7af06b72b1c81d53f7f3cf7ff7ba9f1 : Andreas Schneider <mail@cynapses.org> : Mon Sep 14 18
 commit 6a3d31acb7af06b72b1c81d53f7f3cf7ff7ba9f1
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Mon Sep 14 18:34:53 2009 +0200
-
-    Fix a possible stack overflow in agent code.
-
-
-7cd327a79580cb3f11bed867ea3dafb72c62069d : Andreas Schneider <mail@cynapses.org> : Mon Sep 14 18
+Type: buffer overflow
+File: libssh/agent.c
+PC: !_WIN32
+    
 commit 7cd327a79580cb3f11bed867ea3dafb72c62069d
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Mon Sep 14 18:34:53 2009 +0200
+Type: buffer overflow
+File: libssh/agent.c
+PC: !_WIN32
 
-    Fix a possible stack overflow in agent code.
-
-
-add2aa5f45af2d381a1638cdd0d5fcacc1fdd8f9 : Andreas Schneider <mail@cynapses.org> : Tue Sep 8 11
 commit add2aa5f45af2d381a1638cdd0d5fcacc1fdd8f9
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Tue Sep 8 11:36:06 2009 +0200
+Type: buffer overflow
+File: libssh/buffer.c
+PC: true
 
-    Fix an integer overflow in buffer_get_data().
-    
-    Thanks to Orange Labs for the report.
-
-
-8344598910e96899c16011559f2e9f8f26c4d24d : Andreas Schneider <mail@cynapses.org> : Thu Sep 3 17
 commit 8344598910e96899c16011559f2e9f8f26c4d24d
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Thu Sep 3 17:11:42 2009 +0200
+Type: buffer overflow
+File: libssh/buffer.c
+PC: true
 
-    Fix an integer overflow in buffer_get_data().
-    
-    Thanks to Orange Labs for the report.
-
-
-3ad559cc231bf6afb1eeb333a854a64c50400e2c : milo <milo.sshiva@gmail.com> : Fri Aug 7 12
 commit 3ad559cc231bf6afb1eeb333a854a64c50400e2c
-Author: milo <milo.sshiva@gmail.com>
-Date:   Fri Aug 7 12:13:29 2009 +0200
-
-    Fix buffer overflow in generate_cookie()
-    
-    Signed-off-by: Andreas Schneider <mail@cynapses.org>
-
-//começar pelo fim
-
+Type: buffer overflow
+File: libssh/channels.c
+PC: true
