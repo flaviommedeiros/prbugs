@@ -1037,88 +1037,45 @@ PC: true
 
 -- OVERFLOWS
 
-cf05e653de569225775d6bf996ffefba9e8e6135 : Andreas Schneider <asn@cryptomilk.org> : Mon May 4 16
 commit cf05e653de569225775d6bf996ffefba9e8e6135
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Mon May 4 16:39:51 2015 +0200
+Type: buffer overflow
+File: src/external/bcrypt_pbkdf.c
+PC: !HAVE_BCRYPT_PBKDF
 
-    external: Fix a possible buffer overrun in bcrypt_pbkdf
-    
-    CID: #1250106
-    
-    This fixes a 1 byte output overflow for large key length (not reachable
-    in libssh). Pulled from OpenBSD BCrypt PBKDF implementation.
-    
-    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
-
-
-4de6a708ad29090d2de3d781c509c880d7cdd232 : Andreas Schneider <asn@cryptomilk.org> : Wed Jan 14 11
 commit 4de6a708ad29090d2de3d781c509c880d7cdd232
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Wed Jan 14 11:16:59 2015 +0100
+Type: buffer overflow
+File: src/sftp.c
+PC: WITH_SFTP
 
-    sftp: Fix a possible integer overflow.
-    
-    CID: #1238630
-    
-    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
-    Reviewed-by: Aris Adamantiadis <aris@0xbadc0de.be>
-    (cherry picked from commit af0dd3fb0208bf7bded0533020682c65b94544eb)
-
-
-af0dd3fb0208bf7bded0533020682c65b94544eb : Andreas Schneider <asn@cryptomilk.org> : Wed Jan 14 11
 commit af0dd3fb0208bf7bded0533020682c65b94544eb
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Wed Jan 14 11:16:59 2015 +0100
+Type: buffer overflow
+File: src/sftp.c
+PC: WITH_SFTP
 
-    sftp: Fix a possible integer overflow.
-    
-    CID: #1238630
-    
-    Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
-    Reviewed-by: Aris Adamantiadis <aris@0xbadc0de.be>
-
-
-ad5f306884eee6c83437defe082d57e6ca4da69a : Xi Wang <xi.wang@gmail.com> : Mon Nov 28 04
 commit ad5f306884eee6c83437defe082d57e6ca4da69a
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Mon Nov 28 04:42:54 2011 -0500
+Type: buffer overflow
+File: src/buffer.c
+PC: true
 
-    CVE-2012-4562: Fix multiple integer overflows in buffer-related functions.
-
-
-5ffb8c7cde24fd5a7a1749b4d2b9b08ea893bddc : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit 5ffb8c7cde24fd5a7a1749b4d2b9b08ea893bddc
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:02:57 2011 -0500
+Type: buffer overflow
+File: src/string.c
+PC: true
 
-    CVE-2012-4562: Fix possible integer overflows.
-
-
-efaebad323dd5a609f7383df8687c70a426a7d53 : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit efaebad323dd5a609f7383df8687c70a426a7d53
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:02:06 2011 -0500
+Type: buffer overflow
+File: src/dh.c
+PC: true
 
-    CVE-2012-4562: Fix possible integer overflow in ssh_get_hexa().
-    
-    No exploit known, but it is better to check the string length.
-
-
-e3d9501b31a11b427afe1cc1cba5208adc2c3c39 : Xi Wang <xi.wang@gmail.com> : Fri Nov 25 23
 commit e3d9501b31a11b427afe1cc1cba5208adc2c3c39
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Fri Nov 25 23:02:57 2011 -0500
+Type: buffer overflow
+File: src/string.c
+PC: true
 
-    CVE-2012-4562: Fix possible string related integer overflows.
-
-
-db81310d719878cc04b23e4033fbe19fa0b1f8a3 : Xi Wang <xi.wang@gmail.com> : Mon Nov 28 04
 commit db81310d719878cc04b23e4033fbe19fa0b1f8a3
-Author: Xi Wang <xi.wang@gmail.com>
-Date:   Mon Nov 28 04:42:54 2011 -0500
-
-    CVE-2012-4562: Fix multiple integer overflows in buffer-related functions.
+Type: buffer overflow
+File: src/buffer.c
+PC: true
 
 
 commit 8489521c0d7a9d1336b23a4a64e5df2d0f3ba57a
