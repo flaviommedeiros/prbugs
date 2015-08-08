@@ -811,6 +811,7 @@ Date:   Tue Sep 7 17:26:07 2010 +0200
     misc: Fixed a memory leak.
     (cherry picked from commit c1604eff081514df3b6abb8c50c3acbab71d77ac)
 
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
 325cc4e39568831565fce816cfc3bb74a67ccb2c : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
 commit 325cc4e39568831565fce816cfc3bb74a67ccb2c
@@ -818,66 +819,49 @@ Author: Andreas Schneider <asn@cynapses.org>
 Date:   Tue Sep 7 17:30:10 2010 +0200
 
     session: Fixed a memory leak with session->bindaddr.
+    
 
 
-c1604eff081514df3b6abb8c50c3acbab71d77ac : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
 commit c1604eff081514df3b6abb8c50c3acbab71d77ac
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Tue Sep 7 17:26:07 2010 +0200
+Type: memory leak
+File: src/misc.c
+PC: true
+    
 
-    misc: Fixed a memory leak.
-
-
-c53383a3160f3b33fbc60f3665cef5a617735f87 : Andreas Schneider <mail@cynapses.org> : Tue Apr 20 13
 commit c53383a3160f3b33fbc60f3665cef5a617735f87
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Tue Apr 20 13:29:50 2010 +0200
+Type: memory leak
+File: libssh/session.c
+PC: true
+  
 
-    session: Fixed a memory leak.
-    
-    Thanks to Xi Wang for the patch.
-
-
-b7a7c816df48e7a66b452f5285f5cde3b3894a22 : Andreas Schneider <mail@cynapses.org> : Tue Apr 20 13
 commit b7a7c816df48e7a66b452f5285f5cde3b3894a22
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Tue Apr 20 13:28:12 2010 +0200
+Type: memory leak
+File: libssh/kex.c
+PC: WITH_SSH1
+  
 
-    kex: Fixed a memory leak.
-    
-    Thanks to Xi Wang for the patch.
-
-
-4516e7bdcbec3fe38bb9f988f9fc9ba71589438e : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 16
 commit 4516e7bdcbec3fe38bb9f988f9fc9ba71589438e
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Sat Mar 13 16:59:26 2010 +0100
+Type: memory leak
+File: tests/unittests/torture_misc.c
+PC: true
 
-    Fixed a memory leak in the torture_get_user_home_dir test.
 
-
-8fd6c8bc02f92525ec6fe2628d2fe8ea3a57f16b : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 16
 commit 8fd6c8bc02f92525ec6fe2628d2fe8ea3a57f16b
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Sat Mar 13 16:38:43 2010 +0100
+Type: memory leak
+File: tests/unittests/torture_keyfiles.c
+PC: true
 
-    Fixed a memory leak in keyfile torture test.
 
-
-ed1cba705c92ed648e0427ad0a99efeac3228ecc : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 14
 commit ed1cba705c92ed648e0427ad0a99efeac3228ecc
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Sat Mar 13 14:59:02 2010 +0100
+Type: memory leak
+File: libssh/keyfiles.c
+PC: true
 
-    Fixed a memory leak in ssh_try_publickey_from_file.
 
-
-38fda265e8974a4af877de4ec5fc5d90187b7023 : Andreas Schneider <mail@cynapses.org> : Sat Mar 13 14
 commit 38fda265e8974a4af877de4ec5fc5d90187b7023
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Sat Mar 13 14:59:02 2010 +0100
-
-    Fixed a memory leak in ssh_try_publickey_from_file.
+Type: memory leak
+File: libssh/keyfiles.c
+PC: true
 
 
 ca9f42a20f4e10b003eafe0a6f1e78fc3f927797 : Aris Adamantiadis <aris@0xbadc0de.be> : Wed Nov 18 20
@@ -890,23 +874,16 @@ Date:   Wed Nov 18 20:53:06 2009 +0100
     Use buffer_free instead of SAFE_FREE
 
 
-d60b1ec1a2e13fd70d7f3d41ced5d08894fa1b52 : Andreas Schneider <mail@cynapses.org> : Wed Nov 18 10
+
 commit d60b1ec1a2e13fd70d7f3d41ced5d08894fa1b52
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Wed Nov 18 10:29:12 2009 +0100
+Type: memory leak
+File: libssh/channels.c
+PC: true
 
-    Fixed a memory leak in channel_new() if we have an error.
-
-
-840cecbe0e68bc71c0afea4b3d79bd5702d403d0 : Andreas Schneider <mail@cynapses.org> : Thu Oct 22 18
 commit 840cecbe0e68bc71c0afea4b3d79bd5702d403d0
-Author: Andreas Schneider <mail@cynapses.org>
-Date:   Thu Oct 22 18:56:02 2009 +0200
-
-    Fix memory leaks in ssh_bind_options_set() if called twice.
-    
-    This fixes ticket #36.
-
+Type: memory leak
+File: libssh/options.c
+PC: WITH_SERVER
 
 commit c70694c5948a2d62a3411927a226bac51eefd7d5
 Type: memory leak
