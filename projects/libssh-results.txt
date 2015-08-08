@@ -639,29 +639,24 @@ Date:   Thu May 26 21:33:36 2011 +0200
     Fix memory leaks in pki and testcase
 
 
-2431c7d9250882f83a3b3ce97b7cb0dd04c48344 : Oliver Stöneberg <oliverst@online.de> : Tue Apr 26 15
+---------------------------avaliados at� aqui de baixo para cima------------------------------
+
 commit 2431c7d9250882f83a3b3ce97b7cb0dd04c48344
-Author: Oliver Stöneberg <oliverst@online.de>
-Date:   Tue Apr 26 15:56:00 2011 -0700
-
-    examples: Fixed memory leak in samplessh when using commands.
-    (cherry picked from commit c3849a3cfd4bb298c255c41bf2cbc5592e893d17)
+Type: memory leak
+File: examples/sample.c
+PC: true
 
 
-c3849a3cfd4bb298c255c41bf2cbc5592e893d17 : Oliver Stöneberg <oliverst@online.de> : Tue Apr 26 15
 commit c3849a3cfd4bb298c255c41bf2cbc5592e893d17
-Author: Oliver Stöneberg <oliverst@online.de>
-Date:   Tue Apr 26 15:56:00 2011 -0700
+Type: memory leak
+File: examples/sample.c
+PC: true
 
-    examples: Fixed memory leak in samplessh when using commands.
 
-
-91c9d86d4597ae5b3da40a33b1ba33c98066d573 : milo <milo@r0ot.me> : Mon Apr 18 17
 commit 91c9d86d4597ae5b3da40a33b1ba33c98066d573
-Author: milo <milo@r0ot.me>
-Date:   Mon Apr 18 17:49:54 2011 +0200
-
-    [keyfiles] Fix two memory leaks
+Type: memory leak
+File: src/keyfiles.c
+PC: true
 
 
 e096658df3b7b6a83a720babe2cdaee9b7329856 : Andreas Schneider <asn@cryptomilk.org> : Fri Apr 15 19
@@ -681,117 +676,73 @@ Date:   Fri Apr 15 19:05:53 2011 +0200
     examples: Fix some memory leaks.
 
 
-42315772b2f3e9491295db107d2a85d97454649f : milo <milo@r0ot.me> : Thu Apr 14 13
 commit 42315772b2f3e9491295db107d2a85d97454649f
-Author: milo <milo@r0ot.me>
-Date:   Thu Apr 14 13:29:33 2011 +0200
+Type: memory leak
+File: src/poll.c
+PC: true
 
-    Fix a memleak on event poll contexts
 
-
-fdd1cb18d0d70965eb19ea9984449ee9a3cab932 : Andreas Schneider <asn@cryptomilk.org> : Sun Feb 13 11
 commit fdd1cb18d0d70965eb19ea9984449ee9a3cab932
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Sun Feb 13 11:03:24 2011 +0100
-
-    auth: Fixed a memory leak in kdbint auth.
-    
-    Milo please check!
+Type: memory leak
+File: src/auth.c
+PC: true
 
 
-f5e2c94ae33fda1313a154d415de730c0600ea7b : Andreas Schneider <asn@cryptomilk.org> : Tue Feb 8 19
 commit f5e2c94ae33fda1313a154d415de730c0600ea7b
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Tue Feb 8 19:08:27 2011 +0100
+Type: memory leak
+File: tests/torture.c
+PC: true
 
-    torture: Fixed memory leak.
 
-
-8d7245f54bf9b4d2eadc068de76325a898d2a9bb : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
 commit 8d7245f54bf9b4d2eadc068de76325a898d2a9bb
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Thu Jan 6 14:31:54 2011 +0100
-
-    keys: Fixed memory leaks in session signing.
-    
-    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+Type: memory leak
+File: libssh/keys.c
+PC: true
 
 
-0b1f8a2b0c407c1bd68ca049b54084f7850a6d47 : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
 commit 0b1f8a2b0c407c1bd68ca049b54084f7850a6d47
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Thu Jan 6 14:25:35 2011 +0100
-
-    dh: Fixed a memory leak in ssh_print_hexa.
-    
-    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
-    (cherry picked from commit a016d356fac59e010bef036bb7696b311bbd642a)
+Type: memory leak
+File: libssh/dh.c
+PC: true
 
 
-6b27966c9c998ff9f66722579d7d44f9e53d5737 : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
 commit 6b27966c9c998ff9f66722579d7d44f9e53d5737
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Thu Jan 6 14:31:54 2011 +0100
-
-    keys: Fixed memory leaks in session signing.
-    
-    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
+Type: memory leak
+File: src/keys.c
+PC: true
 
 
-a016d356fac59e010bef036bb7696b311bbd642a : Andreas Schneider <asn@cynapses.org> : Thu Jan 6 14
 commit a016d356fac59e010bef036bb7696b311bbd642a
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Thu Jan 6 14:25:35 2011 +0100
+Type: memory leak
+File: src/dh.c
+PC: true
 
-    dh: Fixed a memory leak in ssh_print_hexa.
-    
-    Found by cppcheck - http://test.libssh.org/cppcheck-analyzer/
-
-
-da3b2d68a3ec750186448eadf6e92a118dcd6ef1 : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 18
 commit da3b2d68a3ec750186448eadf6e92a118dcd6ef1
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Mon Dec 27 18:08:30 2010 +0100
-
-    misc: Fixed a possible memory leak.
-    (cherry picked from commit a0e98f585a36e0032545107dbd90c6adab40e09b)
+Type: memory leak
+File: libssh/misc.c
+PC: true
 
 
-a0e98f585a36e0032545107dbd90c6adab40e09b : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 18
 commit a0e98f585a36e0032545107dbd90c6adab40e09b
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Mon Dec 27 18:08:30 2010 +0100
+Type: memory leak
+File: src/misc.c
+PC: true
 
-    misc: Fixed a possible memory leak.
 
-
-4638b353d51c86cd44af41f6f4d4cb5626bab40d : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 17
 commit 4638b353d51c86cd44af41f6f4d4cb5626bab40d
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Mon Dec 27 17:52:24 2010 +0100
+Type: memory leak
+File: libssh/sftp.c
+PC: WITH_SFTP
 
-    sftp: Fixed a memory leak in sftp_xstat.
-    
-    Thanks to dsc for the bug report.
-    (cherry picked from commit 7c728acd12947ecb3d910b5ca79f4d628b66e6c2)
-
-
-7c728acd12947ecb3d910b5ca79f4d628b66e6c2 : Andreas Schneider <asn@cynapses.org> : Mon Dec 27 17
 commit 7c728acd12947ecb3d910b5ca79f4d628b66e6c2
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Mon Dec 27 17:52:24 2010 +0100
+Type: memory leak
+File: src/sftp.c
+PC: WITH_SFTP
 
-    sftp: Fixed a memory leak in sftp_xstat.
-    
-    Thanks to dsc for the bug report.
-
-
-80408d5357956a8a2b438d102aa0953971e136f1 : Aris Adamantiadis <aris@0xbadc0de.be> : Sun Dec 19 12
 commit 80408d5357956a8a2b438d102aa0953971e136f1
-Author: Aris Adamantiadis <aris@0xbadc0de.be>
-Date:   Sun Dec 19 12:37:21 2010 +0100
-
-    Fixed memory leak reported by valgrind
+Type: memory leak
+File: tests/unittests/torture_rand.c
+PC: true
 
 
 fb24e68eddd1af2bbb6058f6dc0b84a72993599e : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
@@ -803,15 +754,11 @@ Date:   Tue Sep 7 17:30:10 2010 +0200
     (cherry picked from commit 325cc4e39568831565fce816cfc3bb74a67ccb2c)
 
 
-b5f095d0b433728d312b16911bd54ebd76895407 : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
 commit b5f095d0b433728d312b16911bd54ebd76895407
-Author: Andreas Schneider <asn@cynapses.org>
-Date:   Tue Sep 7 17:26:07 2010 +0200
+Type: memory leak
+File: libssh/misc.c
+PC: true
 
-    misc: Fixed a memory leak.
-    (cherry picked from commit c1604eff081514df3b6abb8c50c3acbab71d77ac)
-
----------------------------avaliados at� aqui de baixo para cima------------------------------
 
 325cc4e39568831565fce816cfc3bb74a67ccb2c : Andreas Schneider <asn@cynapses.org> : Tue Sep 7 17
 commit 325cc4e39568831565fce816cfc3bb74a67ccb2c
