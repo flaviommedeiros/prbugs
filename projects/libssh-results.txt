@@ -1,5 +1,5 @@
 git clone git://git.libssh.org/projects/libssh.git
-
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
 commit 4bb790fb5de3d64097cae77955a96260d11ae3db
 Type: uninitialized variable
@@ -478,8 +478,6 @@ File: src/misc.c
 PC: true
 
 
-
-
 fd2064d0b4cdafc35a3430e7528e32a6abf2d513 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 11
 commit fd2064d0b4cdafc35a3430e7528e32a6abf2d513
 Author: Andreas Schneider <asn@cryptomilk.org>
@@ -490,21 +488,16 @@ Date:   Fri Oct 5 11:01:55 2012 +0200
     This fixes a memory leak on error.
 
 
-
-280ce3fe937c96899732814928c8ecfa9f9ae431 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
 commit 280ce3fe937c96899732814928c8ecfa9f9ae431
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Fri Oct 5 10:49:43 2012 +0200
+Type: memory leak
+File: src/session.c
+PC: true
 
-    session: Fix a memory leak in ssh_new() on error.
 
-
-332f1a2a519508a6c7def7d4b645b5a3759ba13a : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
 commit 332f1a2a519508a6c7def7d4b645b5a3759ba13a
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Fri Oct 5 10:46:08 2012 +0200
-
-    channels: Fix a memory leak in ssh_channel_select().
+Type: memory leak
+File: src/channels.c
+PC: true
 
 
 cddfe602cc5ee7e7d925a0673570549e2f9fcd61 : Andreas Schneider <asn@cryptomilk.org> : Fri Oct 5 10
@@ -515,14 +508,11 @@ Date:   Fri Oct 5 10:55:29 2012 +0200
     options: Fix a memory leak if we can't add an idenity.
 
 
-47226d9d448966d9d9bd8d1786d4b4427a787be9 : Andreas Schneider <asn@cryptomilk.org> : Sat Feb 4 20
-commit 47226d9d448966d9d9bd8d1786d4b4427a787be9
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Sat Feb 4 20:55:34 2012 +0100
 
-    sftp: Fix memory leak in sftp_free() on server.
-    
-    Thanks to Tom Judge for the report.
+commit 47226d9d448966d9d9bd8d1786d4b4427a787be9
+Type: memory leak
+File: src/sftp.c
+PC: WITH_SFTP
 
 
 commit a311ec32b1146a6fbf8561931f065e4c78ae7a10
@@ -560,44 +550,34 @@ File: src/pki_gcrypt.c
 PC: HAVE_LIBGCRYPT
 
 
-c8d06b6b1c1e1e2f51bc11effb1fcaf24c954acc : Andreas Schneider <asn@cryptomilk.org> : Sun Aug 21 12
 commit c8d06b6b1c1e1e2f51bc11effb1fcaf24c954acc
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Sun Aug 21 12:41:42 2011 +0200
+Type: memory leak
+File: tests/unittests/torture_pki.c
+PC: true
 
-    tests: Fix memleak in torture_pki.
 
-
-c940918821db41909ac99b16483a7c853c1bafcd : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
 commit c940918821db41909ac99b16483a7c853c1bafcd
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Tue Aug 16 09:23:57 2011 +0200
+Type: memory leak
+File: src/legacy.c
+PC: true
 
-    pki: Fix memleak in privatekey_from_file().
 
-
-f7a7bf071dbd0a06aa4a59d6104060939bfaa8e3 : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
 commit f7a7bf071dbd0a06aa4a59d6104060939bfaa8e3
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Tue Aug 16 09:18:20 2011 +0200
+Type: memory leak
+File: tests/unittests/torture_pki.c
+PC: true
 
-    torture: Fix memleak in pubkey base64 tests.
-
-
-c5028e76ad2fa5ba6cd8a6fcd9761458ef73dc93 : Andreas Schneider <asn@cryptomilk.org> : Tue Aug 16 09
+    
 commit c5028e76ad2fa5ba6cd8a6fcd9761458ef73dc93
-Author: Andreas Schneider <asn@cryptomilk.org>
-Date:   Tue Aug 16 09:15:29 2011 +0200
+Type: memory leak
+File: src/pki.c
+PC: true
 
-    pki: Fix memleak in pki_import_pubkey_buffer().
 
-
-ce03d26e033e6b54e50a2c16ebabaf8ff57e2794 : Aris Adamantiadis <aris@0xbadc0de.be> : Tue Jun 14 22
 commit ce03d26e033e6b54e50a2c16ebabaf8ff57e2794
-Author: Aris Adamantiadis <aris@0xbadc0de.be>
-Date:   Tue Jun 14 22:57:31 2011 +0200
-
-    Fix memory leak with session_id
+Type: memory leak
+File: src/wrapper.c
+PC: true
 
 
 a3c28f2558481536c03dcfbc2d3b3a7c925b900f : Aris Adamantiadis <aris@0xbadc0de.be> : Mon Jun 13 14
@@ -638,8 +618,6 @@ Date:   Thu May 26 21:33:36 2011 +0200
 
     Fix memory leaks in pki and testcase
 
-
----------------------------avaliados até aqui de baixo para cima------------------------------
 
 commit 2431c7d9250882f83a3b3ce97b7cb0dd04c48344
 Type: memory leak
