@@ -1,4 +1,5 @@
 git clone git://git.savannah.gnu.org/gzip.git
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
 commit a3db5806d012082b9e25cc36d09f19cd736a468f
 Type: integer overflow
