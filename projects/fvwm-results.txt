@@ -1639,34 +1639,26 @@ Date:   Sun Aug 29 23:37:06 1999 +0000
     * Reactivated accidentally #ifdef'ed code in menus.c.
 
 
-92292c11eb7408acb69858c844b43d324b2f5cb8 : domivogt <domivogt> : Fri May 7 10
-commit 92292c11eb7408acb69858c844b43d324b2f5cb8
-Author: domivogt <domivogt>
-Date:   Fri May 7 10:04:30 1999 +0000
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
-    * added missing fvwm_make_browse_menu.sh
-    * fixed memory leak in menus
-    * fixed broken pointer type in menus
-
-
-86d75a33f6d8a21803e75e63c1053ed777ca671b : hippo <hippo> : Fri Mar 12 15
-commit 86d75a33f6d8a21803e75e63c1053ed777ca671b
-Author: hippo <hippo>
-Date:   Fri Mar 12 15:49:42 1999 +0000
-
-    Fixed a memory leak
-
-
-6a9722dc8cb4ae974c311144254e6a1ea022817b : domivogt <domivogt> : Tue Jan 5 17
-commit 6a9722dc8cb4ae974c311144254e6a1ea022817b
-Author: domivogt <domivogt>
-Date:   Tue Jan 5 17:27:27 1999 +0000
-
-    * FvwmButtons/parse.c (ParseOptions): fixed memory leak (item[3] not
-    freed).
     
-    * fvwm/menus.c (FPopupMenu): force menus on screen if making them non
-    overlapping moves them partially off screen.
+commit 92292c11eb7408acb69858c844b43d324b2f5cb8
+Type: memory leak
+File: fvwm/menus.c, utils/fvwm_make_browse_menu.sh, ChangeLog
+PC: true    
+    
+
+commit 86d75a33f6d8a21803e75e63c1053ed777ca671b
+Type: memory leak
+File: libs/Graphics.c
+PC: true
+
+
+commit 6a9722dc8cb4ae974c311144254e6a1ea022817b
+Type: memory leak
+File: modules/FvwmButtons/parse.c
+PC: true
+
 
 
 ad529030251f889c4beb0752bc7365fd9ea518a7 : domivogt <domivogt> : Wed Dec 30 18
@@ -1797,26 +1789,17 @@ Date:   Thu Dec 10 02:04:12 1998 +0000
     so let fvwm2 leak rather than coredump :(
 
 
-eb822ce8e047c8c5db0fd21ab0824c28ebb4d7bd : domivogt <domivogt> : Tue Dec 8 14
+
 commit eb822ce8e047c8c5db0fd21ab0824c28ebb4d7bd
-Author: domivogt <domivogt>
-Date:   Tue Dec 8 14:28:33 1998 +0000
-
-    updated distribution list
-    removed SetEnv memory leak 'fix'
+Type: memory leak
+File: archive/announcement-2.2, fvwm/builtins.c
+PC: true
 
 
-5af45c8b2dc756ff6fb99bbf1dd49ceb2f7b22d1 : domivogt <domivogt> : Sun Dec 6 21
 commit 5af45c8b2dc756ff6fb99bbf1dd49ceb2f7b22d1
-Author: domivogt <domivogt>
-Date:   Sun Dec 6 21:48:23 1998 +0000
-
-    fixed memory leak in ReadButtonFace (?)
-    fixed memory leak in SetEnv
-    * fvwm/windows.c (do_windowList): DestroyMenu called as soon as
-    possible (might cause problems with WindowList as doubleclick action).
-    x_pager.c: removed unnecessary ifdef, fixed mouse-button-3 bug with multiple
-    desktops, changed mouse button 3 behaviour
+Type: memory leak
+File: fvwm/builtins.c, fvwm/windows.c, modules/ChangeLog, modules/FvwmPager/FvwmPager.1, modules/FvwmPager/x_pager.c, ChangeLog
+PC: MINI_ICONS&&PIXMAP_BUTTONS
 
 
 5a513cac104c71fd8aa7dba4b7d56ed51a677c41 : psmith <psmith> : Wed Dec 2 22
@@ -1918,20 +1901,16 @@ Date:   Tue Nov 10 09:21:21 1998 +0000
     more memory leak fixes and other bugfixes
 
 
-0e79fd00ddc566cb1b80792a18bd1549701012d7 : psmith <psmith> : Sun Nov 8 05
 commit 0e79fd00ddc566cb1b80792a18bd1549701012d7
-Author: psmith <psmith>
-Date:   Sun Nov 8 05:31:53 1998 +0000
+Type: memory leak
+File: fvwm/icons.c
+PC: XPM
 
-    Fix memory leak: free pixmap after use.
 
-
-dfa1a0b8ccdca5b7ac01248c2766b3427f114fe5 : domivogt <domivogt> : Sat Nov 7 15
 commit dfa1a0b8ccdca5b7ac01248c2766b3427f114fe5
-Author: domivogt <domivogt>
-Date:   Sat Nov 7 15:15:43 1998 +0000
-
-    memory leak fixes
+Type: memory leak
+File: fvwm/functions.c, fvwm/fvwm2.1, fvwm/modconf.c
+PC: true
 
 
 6e3101705f64da1c3531e0256561481afee30f5b : domivogt <domivogt> : Sat Nov 7 15
@@ -1950,12 +1929,10 @@ Date:   Sat Nov 7 15:05:00 1998 +0000
     memory leak fixes
 
 
-1134e10b623762f6da297fb857814a1b194a6980 : domivogt <domivogt> : Sat Nov 7 15
 commit 1134e10b623762f6da297fb857814a1b194a6980
-Author: domivogt <domivogt>
-Date:   Sat Nov 7 15:00:54 1998 +0000
-
-    memory leak fixes
+Type: memory leak
+File: fvwm/menus.c
+PC: true
 
 
 0adae230d4b985bad383867c7d4f6b4f0ba8692e : psmith <psmith> : Fri Nov 6 23
@@ -1969,6 +1946,4 @@ Date:   Fri Nov 6 23:26:51 1998 +0000
       - Cleaned up some configure issues.
       - Added new DB() macros for unified debugging output.
       - Rewrote most of the module packet generation code in fvwm2.
-
-
 
