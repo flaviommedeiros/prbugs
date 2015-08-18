@@ -1536,6 +1536,7 @@ Date:   Tue Nov 21 13:22:07 2000 +0000
 
     * Another bunch of memory leak and free memory read/free fixes.
 
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
 a0d531061597014275b0ca64b9cc2d3b534c8d61 : olicha <olicha> : Mon Oct 16 19
 commit a0d531061597014275b0ca64b9cc2d3b534c8d61
@@ -1546,46 +1547,34 @@ Date:   Mon Oct 16 19:55:04 2000 +0000
     * ItemDraw support a single clic
 
 
-43ab134a784cb832fc878e6fffa5b2974171a37d : olicha <olicha> : Fri Oct 6 13
 commit 43ab134a784cb832fc878e6fffa5b2974171a37d
-Author: olicha <olicha>
-Date:   Fri Oct 6 13:46:03 2000 +0000
+Type: memory leak
+File: fvwm/cursor.c, ChangeLog
+PC: true
 
-    More memory leaks fix in setBusyCursor
 
-
-659c8d026e89e79076a7a1c294983c76df6ca8b0 : olicha <olicha> : Mon Oct 2 19
 commit 659c8d026e89e79076a7a1c294983c76df6ca8b0
-Author: olicha <olicha>
-Date:   Mon Oct 2 19:32:52 2000 +0000
+Type: memory leak
+File: modules/FvwmScript/FvwmScript.c, modules/FvwmScript/Instructions.c, modules/FvwmScript/Widgets/List.c
+PC: true
 
-    Fixed memory leaks in FvwmScript
 
-
-b9a878ed97d0260dc298f106ec62684b04ea483c : domivogt <domivogt> : Tue Jul 4 01
 commit b9a878ed97d0260dc298f106ec62684b04ea483c
-Author: domivogt <domivogt>
-Date:   Tue Jul 4 01:43:07 2000 +0000
-
-    * Fixed one stacking order problem.
-    * Fixed memory leak.
-    * Removed unused variables in FvwmCommand.c.
+Type: memory leak
+File: fvwm/stack.c, fvwm/stack.h, modules/FvwmCommand/FvwmCommand.c, modules/ChangeLog, ChangeLog
+PC: !_STACK_H
 
 
-16209774ac4672dcae2b677c18da38632c11f272 : domivogt <domivogt> : Wed Feb 2 09
 commit 16209774ac4672dcae2b677c18da38632c11f272
-Author: domivogt <domivogt>
-Date:   Wed Feb 2 09:11:51 2000 +0000
+Type: memory leak
+File: fvwm/functions.c, ChangeLog
+PC: true
 
-    * Fixed memory leak.
 
-
-d879bce46f6aba841c62afd97a7d314a5ccf0d75 : domivogt <domivogt> : Wed Feb 2 09
 commit d879bce46f6aba841c62afd97a7d314a5ccf0d75
-Author: domivogt <domivogt>
-Date:   Wed Feb 2 09:02:51 2000 +0000
-
-    * Fixed style memory leak.
+Type: memory leak
+File: fvwm/style.c, ChangeLog
+PC: true
 
 
 952c10b7238a6d0693685a7a1882f7ab25fd7518 : domivogt <domivogt> : Sun Jan 2 05
@@ -1602,24 +1591,19 @@ Date:   Sun Jan 2 05:18:48 2000 +0000
     * Signature of PlaceWindow() changed to return True or False only.
 
 
-874520946faf77b9c80356147eb3cf77953bcbff : hippo <hippo> : Fri Oct 22 14
+
+
 commit 874520946faf77b9c80356147eb3cf77953bcbff
-Author: hippo <hippo>
-Date:   Fri Oct 22 14:27:37 1999 +0000
+Type: memory leak
+File: libs/Graphics.c
+PC: true 
 
-    Fixed memory leak
 
 
-fa6515366b1c89db6b832bac5f94f68f2d4d0607 : domivogt <domivogt> : Thu Sep 30 23
 commit fa6515366b1c89db6b832bac5f94f68f2d4d0607
-Author: domivogt <domivogt>
-Date:   Thu Sep 30 23:57:21 1999 +0000
-
-    * Styles are merged if adjacent in the list of styles (saves a lot of time
-    when creating windows).
-    * Fixed several style propagation problems.
-    * Last style set still wins.
-    * Styles can be merged without leaking memory.
+Type: memory leak
+File: fvwm/fvwm.h, fvwm/menus.c, fvwm/style.c, fvwm/style.h, ChangeLog.
+PC: !_STYLE_, MINI_ICONS, USEDECOR    
 
 
 83ad7a01e555593463924d3e22a2b5bc8bed2263 : domivogt <domivogt> : Sun Aug 29 23
@@ -1639,7 +1623,6 @@ Date:   Sun Aug 29 23:37:06 1999 +0000
     * Reactivated accidentally #ifdef'ed code in menus.c.
 
 
----------------------------avaliados até aqui de baixo para cima------------------------------
 
     
 commit 92292c11eb7408acb69858c844b43d324b2f5cb8
