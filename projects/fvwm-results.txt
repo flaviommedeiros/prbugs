@@ -1477,32 +1477,26 @@ Author: olicha <olicha>
 Date:   Wed Jan 9 15:48:15 2002 +0000
 
     * Fixed a memory leak in CMD_Style
+    
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
-
-fbc109dd8e9df29534b0fec8c80b9935ab690fb1 : olicha <olicha> : Wed Jan 9 15
 commit fbc109dd8e9df29534b0fec8c80b9935ab690fb1
-Author: olicha <olicha>
-Date:   Wed Jan 9 15:44:28 2002 +0000
-
-    * Fixed a memory leak in CMD_Style
-    * Fixed transparent animated menu with HilightBackOff
+Type: memory leak
+File: ChangeLog, fvwm/menus.c, fvwm/style.c
+PC: true
 
 
-0e8ece3eeba9aaef562c6d6f4d69b9ef6afdbbb8 : domivogt <domivogt> : Fri Mar 30 18
 commit 0e8ece3eeba9aaef562c6d6f4d69b9ef6afdbbb8
-Author: domivogt <domivogt>
-Date:   Fri Mar 30 18:27:31 2001 +0000
-
-    * Fixed menu animation crash and keyboard shortcut problems.
-    * Fixed IconMan memory leak.
+Type: memory leak
+File: ChangeLog, fvwm/menus.c, modules/ChangeLog, modules/FvwmIconMan/xmanager.c
+PC: true
 
 
-a64df81ee28106ad88592f7d011656f62bac78e2 : migo <migo> : Wed Jan 10 00
+
 commit a64df81ee28106ad88592f7d011656f62bac78e2
-Author: migo <migo>
-Date:   Wed Jan 10 00:01:20 2001 +0000
-
-    fixed FvwmGtk core dump caused by memory leak fixes
+Type: memory leak
+File: modules/ChangeLog, modules/FvwmGtk/expand.c
+PC: true
 
 
 b14d97076b895f673b24c75014d775c42956d605 : domivogt <domivogt> : Sat Nov 25 04
@@ -1517,16 +1511,10 @@ Date:   Sat Nov 25 04:07:49 2000 +0000
     * Distibution script builds .bz2 too.
     * Rewrote some focus stuff.
 
-
-c6cd66c6c41a5041d0873bf338e6762653be8f5c : dane <dane> : Wed Nov 22 13
 commit c6cd66c6c41a5041d0873bf338e6762653be8f5c
-Author: dane <dane>
-Date:   Wed Nov 22 13:28:22 2000 +0000
-
-    * FvwmForm/FvwmForm.c:
-    * FvwmForm/FvwmForm.h: Move string initialization into logic so memory leak
-    fixes work.
-    Resist temptation to move curly braces around.
+Type: memory leak
+File: modules/ChangeLog, modules/FvwmForm/FvwmForm.c, modules/FvwmForm/FvwmForm.h
+PC: IamTheMain
 
 
 bf42d6800540a61e26c9260072d06e6f428cf454 : domivogt <domivogt> : Tue Nov 21 13
@@ -1535,8 +1523,7 @@ Author: domivogt <domivogt>
 Date:   Tue Nov 21 13:22:07 2000 +0000
 
     * Another bunch of memory leak and free memory read/free fixes.
-
----------------------------avaliados até aqui de baixo para cima------------------------------
+    
 
 a0d531061597014275b0ca64b9cc2d3b534c8d61 : olicha <olicha> : Mon Oct 16 19
 commit a0d531061597014275b0ca64b9cc2d3b534c8d61
