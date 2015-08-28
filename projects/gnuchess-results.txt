@@ -2,36 +2,25 @@ git clone https://github.com/heisencoder/gnuchess.git
 
 -- SEGFAULT
 
-de6ba01da241c1ebf906ef7babed576da3b67267 : srw <srw> : Tue Jun 10 00
-commit de6ba01da241c1ebf906ef7babed576da3b67267
-Author: srw <srw>
-Date:   Tue Jun 10 00:26:24 2003 +0000
+---------------------------avaliados até aqui de baixo para cima------------------------------
 
-    Changes from Anil to clean up HashSize calculation, and fix
-    segfaults on large hashsizes.
+
+commit de6ba01da241c1ebf906ef7babed576da3b67267
+Type: segfault
+File: ChangeLog, src/cmd.c, src/common.h, src/hash.c, src/init.c
+PC: true
+
 
 
 -- OVERFLOWS
 
-1957cf8e983f46f355c65042c218896282f620cb : srw <srw> : Sat Jun 28 15
 commit 1957cf8e983f46f355c65042c218896282f620cb
-Author: srw <srw>
-Date:   Sat Jun 28 15:29:56 2003 +0000
-
-    Fix trailing slash buffer overflow problem.
-    epd.c required more work.
+Type: buffer overflows
+File: ChangeLog, src/epd.c
+PC: true
 
 
-a02971869f4d926c7350e9db909ae13d94e2139d : srw <srw> : Wed Feb 5 02
 commit a02971869f4d926c7350e9db909ae13d94e2139d
-Author: srw <srw>
-Date:   Wed Feb 5 02:50:49 2003 +0000
-
-    Move, name, and input line lengths are made consistent throughout program.
-    
-    This corrects a number of minor but apparently unexploitable buffer
-    overflows.
-    
-    RATS was used to identify code sections to inspect.
-
-
+Type: buffer overflows
+File: ChangeLog, src/common.h, src/epd.c, src/iterate.c, src/main.c, src/pgn.c, src/players.c
+PC: true

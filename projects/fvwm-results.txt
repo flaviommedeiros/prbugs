@@ -1460,25 +1460,20 @@ Date:   Mon Mar 25 22:43:36 2002 +0000
     * Fixed memory leak w/ vector lines.
 
 
-9d185fcb2aebfe64c08bd4d6bbdcc09296623682 : olicha <olicha> : Fri Jan 18 14
-commit 9d185fcb2aebfe64c08bd4d6bbdcc09296623682
-Author: olicha <olicha>
-Date:   Fri Jan 18 14:51:45 2002 +0000
-
-    * Remove FvwmBacker _XSETROOT_ID code: it caues memory leak
-    * Remove the documentations of the new xpmroot options
-    * There is  something that I do not understand with the "memory of the
-    background of the root window"
-
-
-479a964d7564b5268847a83e5816b3452a3022ac : olicha <olicha> : Wed Jan 9 15
-commit 479a964d7564b5268847a83e5816b3452a3022ac
-Author: olicha <olicha>
-Date:   Wed Jan 9 15:48:15 2002 +0000
-
-    * Fixed a memory leak in CMD_Style
-    
 ---------------------------avaliados até aqui de baixo para cima------------------------------
+
+
+commit 9d185fcb2aebfe64c08bd4d6bbdcc09296623682
+Type: memory leak
+File: modules/ChangeLog, modules/FvwmBacker/FvwmBacker.c, utils/ChangeLog, utils/xpmroot.1
+PC: true
+
+ 
+commit 479a964d7564b5268847a83e5816b3452a3022ac
+Type: memory leak
+File: ChangeLog, fvwm/style.c
+PC: true
+ 
 
 commit fbc109dd8e9df29534b0fec8c80b9935ab690fb1
 Type: memory leak

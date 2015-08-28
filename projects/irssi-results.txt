@@ -1,5 +1,7 @@
 git clone https://github.com/irssi/irssi.git
 
+---------------------------avaliados até aqui de baixo para cima------------------------------
+
 commit 875adf35a0f2da089662da42dd1cf44474527064
 Type: memory leak
 File: src/fe-text/lastlog.c
@@ -54,7 +56,6 @@ Type: memory leak
 File: src/core/commands.c
 PC: true
 
-
 commit 19e800cf236bc8258b9a19a0685dac383f9f82ec
 Type: memory leak
 File: src/irc/core/channel-events.c
@@ -70,13 +71,10 @@ Type: memory leak
 File: src/irc/proxy/dump.c
 PC: true
 
-
 commit 8ea717b67609a7ddaa6481e49fc638a4b40e84e8
 Type: memory leak
 File: src/core/recode.c
 PC: HAVE_GLIB2
-
-
 
 commit 1121a3fcb7c360eaa345d17891e0a243082d4f71
 Type: memory leak
@@ -129,9 +127,6 @@ commit 5bab99f096fa7497785a98e0538fcb367b93ddbf
 Type: memory leak
 File: src/irc/core/channels-query.c
 PC: true
-
-
-
 
 commit 53d5c92cf494866296ae8082804dddcdef656797
 Type: memory leak
@@ -264,95 +259,57 @@ PC: true
 
 -- OVERFLOW
 
-71442509d092e900c46997b6f4d2fcddfc876251 : Timo Sirainen <cras@irssi.org> : Tue Nov 5 13
 commit 71442509d092e900c46997b6f4d2fcddfc876251
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Tue Nov 5 13:10:58 2002 +0000
-
-    Fixed some "buffer overflow" alerts when playing with buggy /EVAL values.
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2984 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/core/special-vars.c
+PC: true
 
 
-9405dc2ce83d7d22ce72a43cab6844afa36d4c84 : Timo Sirainen <cras@irssi.org> : Mon May 6 04
 commit 9405dc2ce83d7d22ce72a43cab6844afa36d4c84
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Mon May 6 04:58:47 2002 +0000
-
-    fixed buffer overflow - happened at least when hitting ^A after writing
-    enough text to input line. usually didn't crash..
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2755 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/fe-text/term-terminfo.c
+PC: true
 
 
-7b1d5ed41aeb7d6dc99655281771f1436dfa5a22 : Timo Sirainen <cras@irssi.org> : Wed Mar 13 00
 commit 7b1d5ed41aeb7d6dc99655281771f1436dfa5a22
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Wed Mar 13 00:40:12 2002 +0000
-
-    added some debugging code to irssi_bless_iobject() - can it really be an
-    overflow? :)
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2590 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/perl/perl-common.c
+PC: true
 
 
-649a962b99b2859e58be33b043baa89eed40f02c : Timo Sirainen <cras@irssi.org> : Mon Feb 4 21
+
 commit 649a962b99b2859e58be33b043baa89eed40f02c
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Mon Feb 4 21:26:03 2002 +0000
-
-    Ahem.. my little kludge had a buffer overflow :)
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2392 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/lib-popt/popt.c
+PC: true
 
 
-0ffcbdc9b4d7bf247a6ee0f7884f0648072f94d5 : Timo Sirainen <cras@irssi.org> : Mon Nov 19 20
-commit 0ffcbdc9b4d7bf247a6ee0f7884f0648072f94d5
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Mon Nov 19 20:30:19 2001 +0000
 
-    Removed memory debugging code. It's a lot easier to check for buffer
-    overflows with electric fence and memory leaks with memprof.
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@2095 dbcabf3a-b0e7-0310-adc4-f8d773084564
-
-
-9833844f38ccbb3a2679c99b4d9a6f9c2e1e5f8d : Timo Sirainen <cras@irssi.org> : Thu Nov 1 22
 commit 9833844f38ccbb3a2679c99b4d9a6f9c2e1e5f8d
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Thu Nov 1 22:30:45 2001 +0000
-
-    Buffer overflow fix (read-only, might have caused some crashes).
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1953 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/core/memdebug.c, src/core/memdebug.h, src/fe-text/irssi.c, src/lib-config/parse.c
+PC: MEM_DEBUG
 
 
-f81291622fee669a481ed25a15e27dddf3cbaf23 : Timo Sirainen <cras@irssi.org> : Wed Jul 25 19
+
+commit 9833844f38ccbb3a2679c99b4d9a6f9c2e1e5f8d
+Type: buffer overflow
+File: src/fe-common/core/themes.c
+PC: true
+
+
+
 commit f81291622fee669a481ed25a15e27dddf3cbaf23
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Wed Jul 25 19:16:21 2001 +0000
-
-    buffer overflow fix
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1647 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/fe-common/core/themes.c
+PC: true
 
 
-0530039b9f5bd4eadc1a4f4dda202d3bd32908ee : Timo Sirainen <cras@irssi.org> : Sun Mar 4 09
+
 commit 0530039b9f5bd4eadc1a4f4dda202d3bd32908ee
-Author: Timo Sirainen <cras@irssi.org>
-Date:   Sun Mar 4 09:04:53 2001 +0000
-
-    /SET names_max_width - buffer overflowed if it was too small..
-    
-    
-    git-svn-id: http://svn.irssi.org/repos/irssi/trunk@1349 dbcabf3a-b0e7-0310-adc4-f8d773084564
+Type: buffer overflow
+File: src/fe-common/core/fe-channels.c
+PC: true
 
 
 93173356bb2a48aebd185e689eeb3ca5f2e31a02 : Timo Sirainen <cras@irssi.org> : Mon May 29 16
