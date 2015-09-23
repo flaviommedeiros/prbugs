@@ -1,3 +1,4 @@
+---------------------------avaliados até aqui de baixo para cima------------------------------
 git clone git://github.com/b4winckler/vim.git
 
 commit 126d5646aa37808c41d18f98c29ef255870135f0
@@ -129,87 +130,55 @@ PC: true
 
 -- OVERFLOWS
 
-f78e7475ee15e8b928254fe6d74b2e99b588aead : Bram Moolenaar <bram@vim.org> : Wed Jan 14 19
 commit f78e7475ee15e8b928254fe6d74b2e99b588aead
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Wed Jan 14 19:00:38 2015 +0100
-
-    updated for version 7.4.578
-    Problem:    Using getcurpos() after "$" in an empty line returns a negative
-    	    number.
-    Solution:   Don't add one when this would overflow. (Hirohito Higashi)
+Type: overflow
+File: src/eval.c, src/version.c
+PC: true
 
 
-b8ccd3820858b3c33c7f0c8266ac7f3b83b8fec6 : Bram Moolenaar <bram@vim.org> : Sun Sep 8 16
 commit b8ccd3820858b3c33c7f0c8266ac7f3b83b8fec6
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Sun Sep 8 16:07:07 2013 +0200
-
-    updated for version 7.4.026
-    Problem:    Clang warning for int shift overflow.
-    Solution:   Use unsigned and cast back to int. (Dominique Pelle)
+Type: overflow
+File: src/misc2.c, src/version.c
+PC: defined(FEAT_SPELL) || defined(FEAT_PERSISTENT_UNDO) || defined(PROTO)
 
 
-6e74b81a936c65bcc84abf0e7798cc219a5a7d80 : Bram Moolenaar <bram@vim.org> : Sat Aug 10 12
 commit 6e74b81a936c65bcc84abf0e7798cc219a5a7d80
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Sat Aug 10 12:45:09 2013 +0200
-
-    updated for version 7.4b.022
-    Problem:    Not waiting for a character when the tick count overflows.
-    Solution:   Subtract the unsigned numbers and cast to int. (Ken Takata)
+Type: overflow
+File: src/os_win32.c, src/version.c
+PC: !FEAT_GUI_W32
 
 
-534d0306d8957ddd5cd8125ad4958bfff69bd3dd : Bram Moolenaar <bram@vim.org> : Wed Feb 13 14
 commit 534d0306d8957ddd5cd8125ad4958bfff69bd3dd
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Wed Feb 13 14:36:44 2013 +0100
-
-    updated for version 7.3.809
-    Problem:    The dosinst.c program has a buffer overflow. (Thomas Gwae)
-    Solution:   Ignore $VIMRUNTIME if it is too long.
+Type: overflow
+File: src/dosinst.c, src/version.c
+PC: WIN3264
 
 
-443ca7fa7e75e2daf17995d5f7edc95279c70727 : Bram Moolenaar <bram@vim.org> : Wed Nov 28 18
 commit 443ca7fa7e75e2daf17995d5f7edc95279c70727
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Wed Nov 28 18:22:11 2012 +0100
-
-    updated for version 7.3.739
-    Problem:    Computing number of lines may have an integer overflow.
-    Solution:   Check for MAXCOL explicitly. (Dominique Pelle)
+Type: overflow
+File: src/move.c, src/version.c
+PC: true
 
 
-0fa7326ee9daadf7c710a5f5de758c58688ccc13 : Bram Moolenaar <bram@vim.org> : Sun Oct 21 02
 commit 0fa7326ee9daadf7c710a5f5de758c58688ccc13
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Sun Oct 21 02:37:10 2012 +0200
-
-    updated for version 7.3.701
-    Problem:    MS-Windows: Crash with stack overflow when setting 'encoding'.
-    Solution:   Handle that loading the iconv library may be called recursively.
-    	    (Jiri Sedlak)
+Type: overflow
+File: src/os_win32.c, src/version.c
+PC: true
 
 
-d40b6dc0418aeec5082c38154e9778a20d569172 : Bram Moolenaar <bram@vim.org> : Tue Sep 18 18
 commit d40b6dc0418aeec5082c38154e9778a20d569172
-Author: Bram Moolenaar <bram@vim.org>
-Date:   Tue Sep 18 18:03:37 2012 +0200
-
-    updated for version 7.3.664
-    Problem:    Buffer overflow in unescaping text. (Raymond Ko)
-    Solution:   Limit check for multi-byte character to 4 bytes.
+Type: overflow
+File: src/mbyte.c, src/version.c
+PC: defined(FEAT_MBYTE) || defined(FEAT_POSTSCRIPT) || defined(PROTO)
 
 
-2a03b38e0046834ba4a183e991ffa1820611d182 : Bram Moolenaar <bram@zimbu.org> : Wed Feb 17 18
 commit 2a03b38e0046834ba4a183e991ffa1820611d182
-Author: Bram Moolenaar <bram@zimbu.org>
-Date:   Wed Feb 17 18:20:37 2010 +0100
-
-    updated for version 7.2.366
-    Problem:    CTRL-B doesn't go back to the first line of the buffer.
-    Solution:   Avoid an overflow when adding MAXCOL.
+Type: overflow
+File: src/move.c, src/version.c
+PC: true
 
 
-
-
+commit 9d185fcb2aebfe64c08bd4d6bbdcc09296623682
+Type: memory leak
+File: modules/ChangeLog, modules/FvwmBacker/FvwmBacker.c, utils/ChangeLog, utils/xpmroot.1
+PC: true
