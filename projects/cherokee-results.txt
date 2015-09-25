@@ -1,3 +1,6 @@
+git https://github.com/cherokee/webserver
+---------------------------avaliados até aqui de baixo para cima------------------------------
+
 commit 4863422680bc4252eb06c3acbf6560a191d62ed5
 Type: memory leak
 File: balancer.c
@@ -279,57 +282,31 @@ PC: true
 
 -- OVERFLOWS
 
-c4dff38dff6e6c79236367809c576cb845d865d8 : alobbs <alvaro@alobbs.com> : Sun May 22 21
+
 commit c4dff38dff6e6c79236367809c576cb845d865d8
-Author: alobbs <alvaro@alobbs.com>
-Date:   Sun May 22 21:59:46 2011 +0000
+Type: overflows
+File: cherokee/main.c
+PC: HAVE_POSIX_SHM
 
-    "Buffer overflow of 'interpreter' due to non null terminated string
-    'interpreter'" (klocwork.com Issue #68)
-    
-    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6688 5dc97367-97f1-0310-9951-d761b3857238
-
-
-da1fab1b44b9a2ccd7e2006a246e1771977c3366 : alobbs <alvaro@alobbs.com> : Sat May 21 14
 commit da1fab1b44b9a2ccd7e2006a246e1771977c3366
-Author: alobbs <alvaro@alobbs.com>
-Date:   Sat May 21 14:27:37 2011 +0000
-
-    "Buffer overflow, array index of 'd_name' may be out of bounds. Array
-    'd_name' of size 256 may use index value(s) -1" (klocwork.com Issue
-    
-    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6654 5dc97367-97f1-0310-9951-d761b3857238
+Type: overflows
+File: cherokee/config_reader.c
+PC: true
 
 
-7dc811dc3392215ad226143a89e8cd2a9bdd9f14 : alobbs <alvaro@alobbs.com> : Sat Feb 12 21
 commit 7dc811dc3392215ad226143a89e8cd2a9bdd9f14
-Author: alobbs <alvaro@alobbs.com>
-Date:   Sat Feb 12 21:23:49 2011 +0000
-
-    Milliseconds calculations overflowed on 32bit architectures. Thanks to
-    wimschuermann for the findings and patch! It fixes bug #1132:
-    http://bugs.cherokee-project.com/1132
-    
-    git-svn-id: svn://cherokee-project.com/cherokee/trunk@6287 5dc97367-97f1-0310-9951-d761b3857238
+Type: overflows
+File: cherokee/bogotime.c
+PC: true
 
 
-d5c1ca309b4df3fb3f8d5f0c7647e4d29f049057 : taher <taher@shihadeh.net> : Fri Dec 11 10
 commit d5c1ca309b4df3fb3f8d5f0c7647e4d29f049057
-Author: taher <taher@shihadeh.net>
-Date:   Fri Dec 11 10:20:22 2009 +0000
-
-    Minor change to prevent overflow of tab titles
-    
-    git-svn-id: svn://cherokee-project.com/cherokee/trunk@3971 5dc97367-97f1-0310-9951-d761b3857238
+Type: overflows
+File: po/admin/es.po
+PC: true
 
 
-59a473aee329f594fa68061aaacaffc2c8b9b05f : ADF <adefacc@tin.it> : Mon Jul 30 17
 commit 59a473aee329f594fa68061aaacaffc2c8b9b05f
-Author: ADF <adefacc@tin.it>
-Date:   Mon Jul 30 17:27:04 2007 +0000
-
-    fixed possible buffer overflows around cherokee_strfsize()
-    
-    git-svn-id: svn://cherokee-project.com/cherokee/trunk@865 5dc97367-97f1-0310-9951-d761b3857238
-
-
+Type: overflows
+File: cherokee/admin_server.c, cherokee/handler_remote_control.c, cherokee/handler_server_info.c, cherokee/util.c
+PC: true

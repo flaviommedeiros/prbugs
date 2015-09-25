@@ -1,3 +1,6 @@
+git https://github.com/GNOME/dia
+---------------------------avaliados até aqui de baixo para cima------------------------------
+
 commit 0752d3219e9d36746939f5dc0e0d595119025a3c
 Type: memory leak
 File: dia/lib/diaimportrenderer.c
@@ -272,33 +275,16 @@ PC: true
 
 -- OVERFLOWS
 
-38aa037eb73e86f7d8936646314e5a2d45d03746 : Hans Breuer <hans@breuer.org> : Sat Jul 12 10
 commit 38aa037eb73e86f7d8936646314e5a2d45d03746
-Author: Hans Breuer <hans@breuer.org>
-Date:   Sat Jul 12 10:21:42 2014 +0200
+Type: overflow
+File: lib/text.c
+PC: true
 
-    Avoid line number overflow in text_distance_from()
-
-
-67000b5a9ae05756f3f32655eaf8759818c4693c : Hans Breuer <hans@breuer.org> : Fri Mar 14 19
 commit 67000b5a9ae05756f3f32655eaf8759818c4693c
-Author: Hans Breuer <hans@breuer.org>
-Date:   Fri Mar 14 19:53:35 2014 +0100
-
-    Bug 710818 - Overflow safe wrappers for acos/asin (now really)
+Type: overflow
+File: lib/geometry.c, plug-ins/cairo/diacairo-renderer.c
+PC: true
     
-    acos() and asin() are only defined in a certain range. Implement some
-    range/overflow safe wrappers rather than potentially passing infinite
-    to other modules (e.g. cairo did assert() on it.)
-    
-    Additionally check for !isinf() in cairo plug-in (should not trigger
-    anymore).
-    
-    (cherry picked from commit 9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55)
-    
-    Conflicts:
-    	plug-ins/cairo/diacairo-renderer.c
-
 
 9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55 : Hans Breuer <hans@breuer.org> : Fri Mar 14 19
 commit 9a1f90855fb65ae1f129ccf5687bdf5ad3a37a55
@@ -332,7 +318,6 @@ Date:   Sun Nov 17 11:29:42 2013 +0100
     	lib/boundingbox.c
     	lib/geometry.c
 
-
 846a7ff5b5cb5d21f3c97d21f7a1890a0fcfb65b : Hans Breuer <hans@breuer.org> : Sun Nov 17 11
 commit 846a7ff5b5cb5d21f3c97d21f7a1890a0fcfb65b
 Author: Hans Breuer <hans@breuer.org>
@@ -345,16 +330,10 @@ Date:   Sun Nov 17 11:29:42 2013 +0100
     to other modules (e.g. cairo did assert() on it.)
 
 
-30a3526f20de63163240b48d875eb59817e67864 : Hans Breuer <hans@breuer.org> : Sat May 4 12
 commit 30a3526f20de63163240b48d875eb59817e67864
-Author: Hans Breuer <hans@breuer.org>
-Date:   Sat May 4 12:24:37 2013 +0200
-
-    [warningectomy] integer overflow in expression
-    
-    Checking for special directory entries was a bit too
-    complicated for my and gcc's taste. (IIRC the case
-    does not happen anymore with GDir anyway.)
+Type: overflow
+File: lib/plug-ins.c
+PC: true
 
 
 907980be99b781bf9a5f25da1490deb369814a1e : Hans Breuer <hans@breuer.org> : Sat Sep 22 16
@@ -371,20 +350,14 @@ Date:   Sat Sep 22 16:20:29 2012 +0200
     - create enum PropFlags for better documentation
 
 
-69f3c0bfb8f2f952f3f29c4b09aaf0474f62bf5e : Lars Clausen <lclausen@src.gnome.org> : Sun Nov 13 19
-commit 69f3c0bfb8f2f952f3f29c4b09aaf0474f62bf5e
-Author: Lars Clausen <lclausen@src.gnome.org>
-Date:   Sun Nov 13 19:18:49 2005 +0000
-
-    Fix of bug #321387: Buffer overflow (by 1:)
+commit 69f3c0bfb8f2f952f3f29c4b09aaf0474f62bf5e 
+Type: overflow
+File: app/display.c
+PC: true
 
 
-982a3fd47d4e7337b0e6f8a175422cea3e6e251c : Lars Clausen <lclausen@src.gnome.org> : Fri Dec 6 23
 commit 982a3fd47d4e7337b0e6f8a175422cea3e6e251c
-Author: Lars Clausen <lclausen@src.gnome.org>
-Date:   Fri Dec 6 23:07:33 2002 +0000
-
-    Line gaps out, buffer overflow in text.c
-
-
+Type: overflow
+File: objects/standard/line.c, lib/text.c
+PC: true
 
